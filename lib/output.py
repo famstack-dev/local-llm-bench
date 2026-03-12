@@ -37,6 +37,7 @@ RESULT FORMAT:
 """
 
 import json
+import os
 import platform
 import subprocess
 import time
@@ -67,8 +68,11 @@ def get_system_info():
       - cpu_cores_performance: 8 — P-cores (fast cores)
       - cpu_cores_efficiency: 2 — E-cores (background cores)
       - memory_gb: 64 — unified memory size (determines max model size)
+      - gpu_wired_limit_mb: 8192 — GPU wired memory limit (if changed from default)
       - os_version: "26.2" — macOS version
       - arch: "arm64" — architecture
+      - ollama.flash_attention: "1" — if OLLAMA_FLASH_ATTENTION is set
+      - ollama.kv_cache_type: "q4_0" — if OLLAMA_KV_CACHE_TYPE is set
 
     WHAT WE DON'T COLLECT:
       - hostname — identifies the user
@@ -135,27 +139,235 @@ def get_system_info():
         except (subprocess.SubprocessError, FileNotFoundError, ValueError):
             pass
 
+        # GPU wired memory limit — affects whether large models hit swap.
+        # Default is typically ~75% of physical memory. Users can raise it
+        # with: sudo sysctl iogpu.wired_limit_mb=8192
+        wired_limit = _sysctl("iogpu.wired_limit_mb")
+        if wired_limit:
+            try:
+                info["gpu_wired_limit_mb"] = int(wired_limit)
+            except ValueError:
+                pass
+
+    # Ollama environment settings that affect inference performance.
+    # These are set via: launchctl setenv OLLAMA_FLASH_ATTENTION 1
+    ollama_settings = {}
+    fa = os.environ.get("OLLAMA_FLASH_ATTENTION")
+    if fa:
+        ollama_settings["flash_attention"] = fa
+    kv = os.environ.get("OLLAMA_KV_CACHE_TYPE")
+    if kv:
+        ollama_settings["kv_cache_type"] = kv
+    if ollama_settings:
+        info["ollama"] = ollama_settings
+
     return info
+
+
+def make_chip_slug(system_info=None):
+    """
+    Generate a deterministic hardware slug from system info.
+
+    Examples:
+      "Apple M1 Max", 64GB, 24 GPU cores → "m1-max-64gb-24gpu"
+      "Apple M4 Pro", 48GB, 20 GPU cores → "m4-pro-48gb-20gpu"
+
+    Two machines with the same chip/memory/GPU get the same slug,
+    which is intentional — their numbers should be comparable.
+    """
+    if system_info is None:
+        system_info = get_system_info()
+
+    chip = system_info.get("chip", "unknown")
+    # "Apple M1 Max" → "m1-max"
+    chip_short = chip.lower().replace("apple ", "").replace(" ", "-")
+    mem = system_info.get("memory_gb", "")
+    gpu = system_info.get("gpu_cores", "")
+
+    parts = [chip_short]
+    if mem:
+        parts.append(f"{mem}gb")
+    if gpu:
+        parts.append(f"{gpu}gpu")
+    return "-".join(parts)
+
+
+def make_model_slug(model_name):
+    """
+    Normalize a model identifier into a filesystem-safe slug.
+
+    Examples:
+      "qwen3.5:35b-a3b"                        → "qwen3.5-35b-a3b"
+      "mlx-community/qwen3.5-35b-a3b"          → "qwen3.5-35b-a3b"
+      "lmstudio-community/qwen3.5-35b-a3b-gguf" → "qwen3.5-35b-a3b-gguf"
+    """
+    slug = model_name
+    # Strip common HuggingFace org prefixes
+    for prefix in ("mlx-community/", "lmstudio-community/", "bartowski/", "unsloth/"):
+        if slug.startswith(prefix):
+            slug = slug[len(prefix):]
+            break
+    # Ollama uses colon as separator (qwen3.5:35b-a3b)
+    slug = slug.replace(":", "-")
+    # Clean up any remaining slashes
+    slug = slug.replace("/", "-")
+    return slug.lower()
+
+
+def make_config_suffix():
+    """
+    Generate a suffix for Ollama tuning flags, if any are set.
+
+    Returns "" if no tuning flags are detected.
+    Returns something like "fa-kvq4" if flash attention + q4_0 KV cache are on.
+    """
+    parts = []
+    if os.environ.get("OLLAMA_FLASH_ATTENTION") == "1":
+        parts.append("fa")
+    kv = os.environ.get("OLLAMA_KV_CACHE_TYPE")
+    if kv:
+        parts.append(f"kv{kv.replace('_', '')}")
+    return "-".join(parts)
+
+
+def make_result_path(script_dir, model, scenario_name, backend, system_info=None):
+    """
+    Generate the output path for a benchmark result.
+
+    Structure: results/<model>/<scenario>/<chip-slug>_<backend>[_<config>].json
+
+    Examples:
+      results/qwen3.5-35b-a3b/ops-agent/m1-max-64gb-24gpu_ollama.json
+      results/qwen3.5-35b-a3b/ops-agent/m4-pro-48gb-20gpu_ollama_fa-kvq4.json
+      results/qwen3.5-35b-a3b/doc-summary/m1-max-64gb-24gpu_lmstudio.json
+    """
+    model_slug = make_model_slug(model)
+    chip_slug = make_chip_slug(system_info)
+    config = make_config_suffix()
+
+    filename = f"{chip_slug}_{backend}"
+    if config:
+        filename += f"_{config}"
+    filename += ".json"
+
+    return os.path.join(script_dir, "results", model_slug, scenario_name, filename)
+
+
+def results_to_markdown(meta, results, system_info):
+    """
+    Generate a markdown summary of benchmark results.
+
+    Saved alongside the JSON so results are readable on GitHub without
+    any tooling. Contributors can also paste this into their PR description.
+    """
+    valid = [r for r in results if "error" not in r]
+    if not valid:
+        return ""
+
+    # Header
+    chip = system_info.get("chip", "Unknown")
+    mem = system_info.get("memory_gb", "?")
+    gpu = system_info.get("gpu_cores", "?")
+    model_info = meta.get("model_info", {})
+    model_name = model_info.get("name", "unknown")
+    quant = model_info.get("quantization", "")
+    param_size = model_info.get("parameter_size", "")
+    backend = meta.get("backend", "unknown")
+    scenario = meta.get("scenario", "unknown")
+    mode = meta.get("mode", "conversation")
+    ts = system_info.get("timestamp", meta.get("timestamp", ""))
+
+    lines = []
+    lines.append(f"# {chip} / {mem}GB / {gpu} GPU cores")
+    lines.append("")
+
+    model_desc = model_name
+    if param_size:
+        model_desc += f" ({param_size}"
+        if quant:
+            model_desc += f", {quant}"
+        model_desc += ")"
+    lines.append(f"**Model:** {model_desc}  ")
+    lines.append(f"**Backend:** {backend}  ")
+    lines.append(f"**Scenario:** {scenario} ({mode})  ")
+
+    # Ollama tuning flags
+    ollama_info = system_info.get("ollama", {})
+    if ollama_info:
+        flags = []
+        if ollama_info.get("flash_attention"):
+            flags.append("flash_attention=1")
+        if ollama_info.get("kv_cache_type"):
+            flags.append(f"kv_cache={ollama_info['kv_cache_type']}")
+        if flags:
+            lines.append(f"**Ollama config:** {', '.join(flags)}  ")
+
+    wired = system_info.get("gpu_wired_limit_mb")
+    if wired and wired > 0:
+        lines.append(f"**GPU wired limit:** {wired} MB  ")
+
+    lines.append("")
+
+    # Turn-by-turn table
+    lines.append("| Turn | Context | Prefill | Gen | Gen tok/s | Effective tok/s | Total | Output |")
+    lines.append("|-----:|--------:|--------:|----:|----------:|----------------:|------:|-------:|")
+    for r in valid:
+        ctx = f"{r.get('ctx_tokens_est', 0):,}"
+        effective = r['output_tokens'] / r['total'] if r['total'] > 0 else 0
+        lines.append(
+            f"| {r['turn']} | {ctx} | {r['ttft']:.2f}s | {r['gen_time']:.2f}s "
+            f"| {r['gen_tps']:.1f} | **{effective:.1f}** | {r['total']:.2f}s | {r['output_tokens']} |"
+        )
+
+    # Summary
+    total_ttft = sum(r["ttft"] for r in valid)
+    total_gen = sum(r["gen_time"] for r in valid)
+    total_time = sum(r["total"] for r in valid)
+    total_output = sum(r["output_tokens"] for r in valid)
+    avg_tps = sum(r["gen_tps"] for r in valid) / len(valid)
+    avg_effective = total_output / total_time if total_time > 0 else 0
+
+    lines.append("")
+    lines.append(f"**Total prefill:** {total_ttft:.1f}s  ")
+    lines.append(f"**Total generation:** {total_gen:.1f}s  ")
+    lines.append(f"**Total time:** {total_time:.1f}s  ")
+    lines.append(f"**Avg generation tok/s:** {avg_tps:.1f}  ")
+    lines.append(f"**Avg effective tok/s:** {avg_effective:.1f}  ")
+
+    return "\n".join(lines) + "\n"
 
 
 def save_results(path, meta, results):
     """
-    Save benchmark results with a metadata envelope.
+    Save benchmark results as JSON + markdown.
+
+    Saves two files:
+      - <name>.json  — machine-readable, used by compare.py
+      - <name>.md    — human-readable, visible on GitHub
 
     Automatically adds timestamp and system specs to the metadata so results
     are self-documenting and shareable. No personal information is included —
     no hostname, no IP, no username. See get_system_info() for what we collect.
     """
+    system_info = get_system_info()
     envelope = {
         "meta": {
             **meta,
-            "system": get_system_info(),
+            "system": system_info,
             "timestamp": time.strftime("%Y-%m-%dT%H:%M:%S"),
         },
         "results": results,
     }
     with open(path, "w") as f:
         json.dump(envelope, f, indent=2)
+
+    # Save markdown alongside JSON
+    md_path = path.rsplit(".", 1)[0] + ".md"
+    md = results_to_markdown(meta, results, system_info)
+    if md:
+        with open(md_path, "w") as f:
+            f.write(md)
+
     return path
 
 
@@ -185,7 +397,7 @@ def print_turn_header(backend=None):
     The header adapts based on backend — Ollama gets an extra "PrEval" column
     showing how many prompt tokens were evaluated (from llama.cpp internals).
     """
-    h = f"{'Turn':>4}  {'Ctx':>8}  {'New':>6}  {'Prefill':>9}  {'Gen':>7}  {'Tok/s':>6}  {'Total':>7}  {'Out':>5}"
+    h = f"{'Turn':>4}  {'Ctx':>8}  {'New':>6}  {'Prefill':>9}  {'Gen':>7}  {'Tok/s':>6}  {'Eff t/s':>8}  {'Total':>7}  {'Out':>5}"
     if backend == "ollama":
         h += f"  {'PrEval':>7}"
     print(h)
@@ -206,10 +418,11 @@ def print_turn_row(r, backend=None):
     - Out: how many tokens the model produced
     - PrEval: prompt tokens evaluated by llama.cpp (Ollama only)
     """
+    effective = r['output_tokens'] / r['total'] if r['total'] > 0 else 0
     row = (
         f"{r['turn']:>4}  {r.get('ctx_tokens_est', 0):>8,}  {r.get('new_tokens_est', 0):>6,}  "
         f"{r['ttft']:>8.2f}s  {r['gen_time']:>6.2f}s  "
-        f"{r['gen_tps']:>5.1f}  {r['total']:>6.2f}s  "
+        f"{r['gen_tps']:>5.1f}  {effective:>7.1f}  {r['total']:>6.2f}s  "
         f"{r['output_tokens']:>5}"
     )
     if backend == "ollama":
@@ -236,9 +449,12 @@ def print_summary(results, label=""):
     total_ttft = sum(r["ttft"] for r in valid)
     total_gen = sum(r["gen_time"] for r in valid)
     total_time = sum(r["total"] for r in valid)
+    total_output = sum(r["output_tokens"] for r in valid)
     avg_tps = sum(r["gen_tps"] for r in valid) / len(valid)
+    avg_effective = total_output / total_time if total_time > 0 else 0
     prefix = f"  {label} " if label else "  "
-    print(f"{prefix}Total prefill:    {total_ttft:>7.1f}s")
-    print(f"{prefix}Total generation: {total_gen:>7.1f}s")
-    print(f"{prefix}Total time:       {total_time:>7.1f}s")
-    print(f"{prefix}Avg gen tok/s:    {avg_tps:>7.1f}")
+    print(f"{prefix}Total prefill:      {total_ttft:>7.1f}s")
+    print(f"{prefix}Total generation:   {total_gen:>7.1f}s")
+    print(f"{prefix}Total time:         {total_time:>7.1f}s")
+    print(f"{prefix}Avg gen tok/s:      {avg_tps:>7.1f}")
+    print(f"{prefix}Avg effective tok/s:{avg_effective:>7.1f}")

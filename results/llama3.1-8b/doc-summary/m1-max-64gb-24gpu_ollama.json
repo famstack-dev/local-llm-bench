@@ -1,0 +1,99 @@
+{
+  "meta": {
+    "scenario": "doc-summary",
+    "mode": "single-shot",
+    "label": "m1-max-64gb-24gpu ollama",
+    "backend": "ollama",
+    "model_info": {
+      "name": "llama3.1:8b",
+      "format": "gguf",
+      "family": "llama",
+      "parameter_size": "8.0B",
+      "quantization": "Q4_K_M"
+    },
+    "runs": 1,
+    "max_tokens": 150,
+    "cold": false,
+    "warm_up_time": 0.237,
+    "system": {
+      "os": "Darwin",
+      "os_version": "26.2",
+      "arch": "arm64",
+      "chip": "Apple M1 Max",
+      "memory_gb": 64,
+      "cpu_cores": 10,
+      "cpu_cores_performance": 8,
+      "cpu_cores_efficiency": 2,
+      "gpu_cores": 24,
+      "gpu_wired_limit_mb": 0
+    },
+    "timestamp": "2026-03-12T14:02:33"
+  },
+  "results": [
+    {
+      "turn": 1,
+      "run": 1,
+      "ctx_tokens_est": 425,
+      "new_tokens_est": 324,
+      "ttft": 1.487,
+      "gen_time": 1.612,
+      "gen_tps": 37.2,
+      "total": 3.099,
+      "output_tokens": 60,
+      "prompt_eval_count": 454,
+      "prompt_eval_duration_ms": 1394.9
+    },
+    {
+      "turn": 2,
+      "run": 1,
+      "ctx_tokens_est": 612,
+      "new_tokens_est": 512,
+      "ttft": 1.238,
+      "gen_time": 1.522,
+      "gen_tps": 37.5,
+      "total": 2.76,
+      "output_tokens": 57,
+      "prompt_eval_count": 503,
+      "prompt_eval_duration_ms": 1163.8
+    },
+    {
+      "turn": 3,
+      "run": 1,
+      "ctx_tokens_est": 535,
+      "new_tokens_est": 434,
+      "ttft": 1.422,
+      "gen_time": 1.636,
+      "gen_tps": 37.3,
+      "total": 3.058,
+      "output_tokens": 61,
+      "prompt_eval_count": 561,
+      "prompt_eval_duration_ms": 1345.6
+    },
+    {
+      "turn": 4,
+      "run": 1,
+      "ctx_tokens_est": 524,
+      "new_tokens_est": 423,
+      "ttft": 1.235,
+      "gen_time": 1.579,
+      "gen_tps": 37.4,
+      "total": 2.813,
+      "output_tokens": 59,
+      "prompt_eval_count": 524,
+      "prompt_eval_duration_ms": 1156.5
+    },
+    {
+      "turn": 5,
+      "run": 1,
+      "ctx_tokens_est": 1518,
+      "new_tokens_est": 1417,
+      "ttft": 4.227,
+      "gen_time": 2.168,
+      "gen_tps": 35.1,
+      "total": 6.395,
+      "output_tokens": 76,
+      "prompt_eval_count": 1508,
+      "prompt_eval_duration_ms": 4152.0
+    }
+  ]
+}

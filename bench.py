@@ -46,6 +46,7 @@ REQUIREMENTS:
 import argparse
 import json
 import os
+import subprocess
 import sys
 import time
 import urllib.request
@@ -55,7 +56,7 @@ import urllib.error
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from lib.backends import get_backend, get_model_info, DEFAULT_URLS
-from lib.output import save_results, print_turn_header, print_turn_row, print_summary
+from lib.output import save_results, make_result_path, make_chip_slug, print_turn_header, print_turn_row, print_summary
 
 
 # ── Install instructions shown when a backend isn't reachable ────────
@@ -98,13 +99,15 @@ INSTALL_HINTS = {
 
 def check_backend(backend, base_url, model):
     """
-    Verify that the inference backend is reachable before starting the benchmark.
+    Verify that the inference backend is reachable and the model is available.
 
-    This prevents the confusing experience of watching 8 turns all fail with
-    'Connection refused'. Instead, we fail fast with a clear message explaining
-    what's wrong and how to fix it.
+    Two checks:
+    1. Is the backend running? (HTTP health check)
+    2. Is the requested model loaded/available? (Ollama: /api/tags, LM Studio: /v1/models)
+
+    Fails fast with a clear message and the exact command to fix the problem.
     """
-    # Pick the right health-check URL for each backend
+    # ── Check 1: Is the backend reachable? ────────────────────────────
     if backend == "ollama":
         check_url = f"{base_url}/api/tags"
     else:
@@ -112,11 +115,34 @@ def check_backend(backend, base_url, model):
 
     try:
         resp = urllib.request.urlopen(check_url, timeout=5)
-        resp.read()
+        body = resp.read()
     except (urllib.error.URLError, OSError) as e:
         hint = INSTALL_HINTS[backend].format(url=base_url, model=model)
         print(f"Error: {hint}", file=sys.stderr)
         sys.exit(1)
+
+    # ── Check 2: Is the model available? ──────────────────────────────
+    if backend == "ollama":
+        try:
+            data = json.loads(body)
+            available = [m.get("name", "") for m in data.get("models", [])]
+            # Ollama model names can be "llama3.1:8b" or "llama3.1:latest"
+            # Match on the base name (before :) if no exact match
+            model_base = model.split(":")[0]
+            found = any(
+                m == model or m.startswith(model_base + ":")
+                for m in available
+            )
+            if not found:
+                print(f"Error: Model '{model}' is not available in Ollama.\n", file=sys.stderr)
+                if available:
+                    print(f"  Available models:", file=sys.stderr)
+                    for m in sorted(available):
+                        print(f"    - {m}", file=sys.stderr)
+                print(f"\n  To download it:\n    ollama pull {model}\n", file=sys.stderr)
+                sys.exit(1)
+        except (json.JSONDecodeError, KeyError):
+            pass  # Can't parse response, let the benchmark try anyway
 
 
 def warm_up(stream_fn, base_url, model, backend):
@@ -316,77 +342,51 @@ def run_scenario(scenario, stream_fn, base_url, model, runs=1, backend="ollama")
     return all_results
 
 
-def main():
-    parser = argparse.ArgumentParser(
-        description="LLM inference benchmark — measures TTFT + generation speed per turn"
+def find_all_scenarios(script_dir):
+    """Find all scenario JSON files in the scenarios/ directory."""
+    scenario_dir = os.path.join(script_dir, "scenarios")
+    if not os.path.isdir(scenario_dir):
+        return []
+    paths = sorted(
+        os.path.join(scenario_dir, f)
+        for f in os.listdir(scenario_dir)
+        if f.endswith(".json")
     )
-    parser.add_argument("--scenario", default="scenarios/ops-agent.json",
-                        help="Scenario JSON file (default: scenarios/ops-agent.json)")
-    parser.add_argument("--backend", choices=["ollama", "lmstudio", "llama-server"],
-                        default="ollama", help="Inference backend (default: ollama)")
-    parser.add_argument("--base-url", default=None,
-                        help="Override backend URL (default: auto from backend)")
-    parser.add_argument("--model", required=True,
-                        help="Model name/identifier as known by the backend")
-    parser.add_argument("--label", required=True,
-                        help="Human-readable label for this run (used in output and comparisons)")
-    parser.add_argument("--runs", type=int, default=1,
-                        help="Consecutive runs (default: 1). Use 2+ to test warm cache vs cold.")
-    parser.add_argument("--cold", action="store_true",
-                        help="Skip warm-up request (include model loading time in Turn 1)")
-    parser.add_argument("--output", default=None,
-                        help="Output JSON path (default: results/<scenario>/<label>.json)")
-    args = parser.parse_args()
+    return paths
 
-    # Resolve backend URL (use default if not specified)
-    base_url = args.base_url or DEFAULT_URLS[args.backend]
 
-    # Get the appropriate streaming function for this backend
-    stream_fn = get_backend(args.backend)
+def run_single(args, scenario_path, script_dir, stream_fn, base_url, warm_up_done):
+    """
+    Run a single scenario benchmark and save results.
 
-    # Load scenario data (resolve path relative to this script's directory)
-    script_dir = os.path.dirname(os.path.abspath(__file__))
-    scenario_path = args.scenario if os.path.isabs(args.scenario) else os.path.join(script_dir, args.scenario)
+    Returns the warm_up_time (so we only warm up once for --all).
+    """
     scenario = load_scenario(scenario_path)
 
-    # ── Pre-flight check ─────────────────────────────────────────────
-    # Verify the backend is reachable before starting. This catches
-    # "service not running" early instead of failing on every turn.
-    check_backend(args.backend, base_url, args.model)
-
-    # ── Warm up ──────────────────────────────────────────────────────
-    # By default, send a throwaway request to load the model into memory.
-    # This ensures Turn 1 TTFT measures prefill, not model loading.
-    # Use --cold to skip this and include model loading time.
+    # Warm up once (first scenario only)
     warm_up_time = None
-    if not args.cold:
+    if not args.cold and not warm_up_done:
         warm_up_time = warm_up(stream_fn, base_url, args.model, args.backend)
 
-    # Run the benchmark
     results = run_scenario(
         scenario, stream_fn, base_url, args.model,
         runs=args.runs, backend=args.backend,
     )
 
-    # ── Check for valid results ────────────────────────────────────────
-    # Don't save a junk file if every single turn failed — something is
-    # fundamentally wrong (model not loaded, wrong model name, etc.)
+    # Don't save if every turn failed
     valid = [r for r in results if "error" not in r]
     if not valid:
-        print(f"\nError: All {len(results)} turns failed. No results saved.", file=sys.stderr)
-        print(f"  Check that '{args.model}' is loaded in {args.backend}.", file=sys.stderr)
-        sys.exit(1)
+        print(f"\nError: All {len(results)} turns failed for {scenario['name']}. Skipping.", file=sys.stderr)
+        return warm_up_time
 
-    # Save results with metadata envelope
-    # Results go into results/<scenario>/<label>.json so each scenario
-    # gets its own directory. compare.py results/ops-agent/*.json works naturally.
-    label_slug = args.label.lower().replace(" ", "_")
-    outpath = args.output or os.path.join(script_dir, f"results/{scenario['name']}/{label_slug}.json")
+    # Save results
+    label = args.label or f"{make_chip_slug()} {args.backend}"
+    outpath = args.output or make_result_path(script_dir, args.model, scenario["name"], args.backend)
     os.makedirs(os.path.dirname(outpath), exist_ok=True)
     meta = {
         "scenario": scenario["name"],
         "mode": scenario.get("mode", "conversation"),
-        "label": args.label,
+        "label": label,
         "backend": args.backend,
         "model_info": get_model_info(args.backend, base_url, args.model),
         "runs": args.runs,
@@ -396,7 +396,100 @@ def main():
     if warm_up_time is not None:
         meta["warm_up_time"] = warm_up_time
     save_results(outpath, meta, results)
-    print(f"\nResults saved to {outpath}")
+    md_path = outpath.rsplit(".", 1)[0] + ".md"
+    print(f"\n  JSON: {outpath}")
+    print(f"  Table: {md_path}")
+    return warm_up_time
+
+
+def main():
+    parser = argparse.ArgumentParser(
+        description="LLM inference benchmark — measures TTFT + generation speed per turn"
+    )
+    parser.add_argument("--scenario", default=None,
+                        help="Run a single scenario JSON file. Default: runs ALL scenarios.")
+    parser.add_argument("--backend", choices=["ollama", "lmstudio", "llama-server"],
+                        default="ollama", help="Inference backend (default: ollama)")
+    parser.add_argument("--base-url", default=None,
+                        help="Override backend URL (default: auto from backend)")
+    parser.add_argument("--model", required=True,
+                        help="Model name/identifier as known by the backend")
+    parser.add_argument("--label", default=None,
+                        help="Human-readable label (default: auto-generated from hardware + backend)")
+    parser.add_argument("--runs", type=int, default=1,
+                        help="Consecutive runs (default: 1). Use 2+ to test warm cache vs cold.")
+    parser.add_argument("--cold", action="store_true",
+                        help="Skip warm-up request (include model loading time in Turn 1)")
+    parser.add_argument("--output", default=None,
+                        help="Output JSON path (default: auto-generated). Only used with --scenario.")
+    args = parser.parse_args()
+
+    # Resolve backend URL (use default if not specified)
+    base_url = args.base_url or DEFAULT_URLS[args.backend]
+
+    # Get the appropriate streaming function for this backend
+    stream_fn = get_backend(args.backend)
+
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+
+    # ── Pre-flight check ─────────────────────────────────────────────
+    check_backend(args.backend, base_url, args.model)
+
+    if args.scenario:
+        # Run a single scenario
+        scenario_path = args.scenario if os.path.isabs(args.scenario) else os.path.join(script_dir, args.scenario)
+        run_single(args, scenario_path, script_dir, stream_fn, base_url, warm_up_done=False)
+    else:
+        # Default: run all scenarios
+        scenarios = find_all_scenarios(script_dir)
+        if not scenarios:
+            print("Error: No scenario files found in scenarios/", file=sys.stderr)
+            sys.exit(1)
+        total = len(scenarios)
+        print(f"\n  Running all {total} scenarios...\n")
+        warm_up_done = False
+        for i, scenario_path in enumerate(scenarios, 1):
+            name = os.path.basename(scenario_path).replace(".json", "")
+            print(f"\n  [{i}/{total}] {name}")
+            warm_up_time = run_single(args, scenario_path, script_dir, stream_fn, base_url, warm_up_done)
+            if warm_up_time is not None:
+                warm_up_done = True
+        print(f"\n  All {total} scenarios complete.")
+
+        # ── Contribute prompt ─────────────────────────────────────────
+        chip_slug = make_chip_slug()
+        model_slug = make_result_path(script_dir, args.model, "", args.backend).split("/results/")[1].split("/")[0]
+        branch = f"results/{chip_slug}"
+
+        # Detect if this is a direct clone (no push access) or a fork
+        is_fork = False
+        try:
+            remote_url = subprocess.check_output(
+                ["git", "remote", "get-url", "origin"],
+                stderr=subprocess.DEVNULL, cwd=script_dir,
+            ).decode().strip()
+            is_fork = "famstack-dev/local-llm-bench" not in remote_url
+        except (subprocess.SubprocessError, FileNotFoundError):
+            pass
+
+        print(f"\n{'='*70}")
+        print(f"\n  Want to contribute your results?\n")
+
+        if not is_fork:
+            print(f"  You cloned the repo directly. Fork it first:\n")
+            print(f"  gh repo fork famstack-dev/local-llm-bench --clone=false")
+            print(f"  git remote set-url origin https://github.com/<you>/local-llm-bench.git\n")
+
+        print(f"  Then commit and open a PR:\n")
+        print(f"  git checkout -b {branch}")
+        print(f"  git add results/")
+        print(f"  git commit -m \"results: {chip_slug} {args.backend} {model_slug}\"")
+        print(f"  git push -u origin {branch}")
+        print(f"  gh pr create --title \"results: {chip_slug}\" \\")
+        print(f"    --body \"Benchmark results from {chip_slug} using {args.backend}\"")
+        print(f"\n  Your numbers will be added to the comparison table at")
+        print(f"  https://famstack.dev/guides/mlx-vs-gguf-apple-silicon")
+        print(f"\n{'='*70}\n")
 
 
 if __name__ == "__main__":

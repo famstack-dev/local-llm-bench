@@ -32,6 +32,17 @@ In an 8-turn agent conversation, the model with 53 tok/s loses to the model with
 [Response complete]
 ```
 
+**We measure both phases and report two speed metrics:**
+
+- **Generation tok/s** — what your UI shows. Output tokens / generation time. Stays roughly constant regardless of context size.
+- **Effective tok/s** — what you actually experience. Output tokens / total time (prefill + generation). Drops as context grows because prefill eats more of the wall clock.
+
+```
+effective tok/s = output_tokens / (prefill_time + generation_time)
+```
+
+At 8K tokens of context, a model reporting 57 tok/s generation speed can have an effective throughput of 3 tok/s. That gap is what this benchmark makes visible.
+
 **Scenario types:**
 - **Multi-turn conversations**: agent workflows, chat sessions, tool-calling chains. Context grows each turn, revealing prefill scaling behavior.
 - **Single-shot tasks**: document conversion, classification, summarization. One large input, one output. Pure prefill-vs-generation comparison.
@@ -47,34 +58,41 @@ In an 8-turn agent conversation, the model with 53 tok/s loses to the model with
 ### Run a Benchmark
 
 ```bash
-# Against Ollama (default)
-python3 bench.py --model qwen3.5:35b-a3b --label "Ollama GGUF"
+# Run all scenarios (default)
+python3 bench.py --model llama3.1:8b
+
+# Run a single scenario
+python3 bench.py --model llama3.1:8b --scenario scenarios/creative-writing.json
 
 # Against LM Studio (MLX model)
-python3 bench.py --backend lmstudio \
-  --model mlx-community/qwen3.5-35b-a3b --label "LM Studio MLX"
-
-# Against LM Studio (GGUF model via llama.cpp)
-python3 bench.py --backend lmstudio \
-  --model lmstudio-community/qwen3.5-35b-a3b-gguf --label "LM Studio GGUF"
+python3 bench.py --backend lmstudio --model mlx-community/qwen3.5-35b-a3b
 
 # Against raw llama-server (llama.cpp without Ollama)
-python3 bench.py --backend llama-server --base-url http://localhost:8090 \
-  --model qwen3.5:35b-a3b --label "llama-server"
+python3 bench.py --backend llama-server --base-url http://localhost:8090 --model qwen3.5:35b-a3b
 
 # Include model loading time in the measurement
-python3 bench.py --model qwen3.5:35b-a3b --label "Ollama cold" --cold
+python3 bench.py --model llama3.1:8b --cold
 ```
+
+Results are saved automatically with a path based on your hardware, model, and backend:
+
+```
+results/qwen3.5-35b-a3b/ops-agent/m1-max-64gb-24gpu_ollama.json
+```
+
+No `--label` or `--output` needed. The tool detects your chip, memory, GPU core count, and any Ollama tuning flags and builds the path for you.
 
 By default the benchmark warms up the model before starting, so Turn 1 measures actual prefill, not model loading. Use `--cold` to include loading time.
 
 ### Compare Results
 
 ```bash
-python3 compare.py results/ops-agent/ollama_gguf.json results/ops-agent/lmstudio_mlx.json
+# Compare across backends for one model
+python3 compare.py results/qwen3.5-35b-a3b/ops-agent/*.json
 
-# Or compare all runs for a scenario
-python3 compare.py results/ops-agent/*.json
+# Compare across hardware
+python3 compare.py results/qwen3.5-35b-a3b/ops-agent/m1-max*_ollama.json \
+                   results/qwen3.5-35b-a3b/ops-agent/m4-pro*_ollama.json
 ```
 
 Example output:
@@ -102,6 +120,52 @@ Example output:
   Winner (fastest total): LM Studio GGUF (131.2s)
   LM Studio MLX: +12.9s slower (9%)
 ```
+
+## Contribute Your Results
+
+We have one data point: an M1 Max. One data point is an anecdote. A table full of hardware is useful.
+
+**If you have any Apple Silicon Mac, we want your numbers.** M2 MacBook Air, M3 Pro MacBook Pro, M4 Mac Mini, M4 Max MacBook Pro. The benchmark takes five minutes and needs zero dependencies.
+
+### How to contribute
+
+```bash
+# 1. Fork and clone
+git clone https://github.com/<your-username>/local-llm-bench
+cd local-llm-bench
+
+# 2. Run all scenarios (picks up your hardware automatically)
+python3 bench.py --model llama3.1:8b
+
+# 3. Results land in the right place
+#    → results/llama3.1-8b/ops-agent/m4-pro-48gb-20gpu_ollama.json
+#    → results/llama3.1-8b/doc-summary/m4-pro-48gb-20gpu_ollama.json
+#    → results/llama3.1-8b/creative-writing/m4-pro-48gb-20gpu_ollama.json
+#    → results/llama3.1-8b/prefill-test/m4-pro-48gb-20gpu_ollama.json
+
+# 4. Commit and open a PR
+git checkout -b results/m4-pro
+git add results/
+git commit -m "results: M4 Pro 48GB Ollama llama3.1-8b"
+git push -u origin results/m4-pro
+gh pr create --title "results: M4 Pro 48GB" --body "Ran ops-agent scenario with Ollama"
+```
+
+The filename is generated from your hardware specs, so there are no merge conflicts between contributors. Run it with different backends or models and each gets its own file.
+
+**Bonus points:** Run with Ollama tuning flags and the tool auto-detects them:
+
+```bash
+sudo sysctl iogpu.wired_limit_mb=8192
+launchctl setenv OLLAMA_FLASH_ATTENTION 1
+launchctl setenv OLLAMA_KV_CACHE_TYPE "q4_0"
+
+# Restart Ollama, then:
+python3 bench.py --model qwen3.5:35b-a3b
+# → results/qwen3.5-35b-a3b/ops-agent/m1-max-64gb-24gpu_ollama_fa-kvq40.json
+```
+
+Your results will be added to the hardware comparison table on [famstack.dev](https://famstack.dev/guides/mlx-vs-gguf-apple-silicon).
 
 ## What You Can Compare
 
@@ -134,6 +198,7 @@ Scenarios are JSON files that define what to benchmark. Each scenario has a syst
 | [ops-agent.json](scenarios/ops-agent.json) | 8 | conversation | Server ops agent with tool calls. JSON payloads, log analysis, growing context |
 | [doc-summary.json](scenarios/doc-summary.json) | 5 | single-shot | Document classification. Short output from long input |
 | [prefill-test.json](scenarios/prefill-test.json) | 4 | single-shot | Prefill scaling. Same short reply at 655, 1.5K, 3K, and 8.5K context |
+| [creative-writing.json](scenarios/creative-writing.json) | 3 | single-shot | Long-form creative output (poems, fables). Short prompt, up to 2000 tokens output. Where high gen tok/s shines |
 
 ### Creating Your Own
 
@@ -163,18 +228,45 @@ For single-shot benchmarks, create a scenario with one turn and a large user mes
 
 ## Result Format
 
-Results are saved as JSON with a metadata envelope:
+Results are saved as JSON with a metadata envelope. The path encodes your hardware, model, and configuration:
+
+```
+results/<model>/<scenario>/<chip-slug>_<backend>[_<config>].json
+```
+
+Examples:
+```
+results/qwen3.5-35b-a3b/ops-agent/m1-max-64gb-24gpu_ollama.json
+results/qwen3.5-35b-a3b/ops-agent/m4-pro-48gb-20gpu_lmstudio.json
+results/qwen3.5-35b-a3b/ops-agent/m1-max-64gb-24gpu_ollama_fa-kvq40.json
+```
+
+Each file contains:
 
 ```json
 {
   "meta": {
     "scenario": "ops-agent",
-    "label": "Ollama GGUF",
+    "label": "m1-max-64gb-24gpu ollama",
     "backend": "ollama",
-    "model": "qwen3.5:35b-a3b",
-    "warm_up_time": 1.234,
-    "timestamp": "2026-03-09T14:30:00",
-    "hostname": "mac-merlin.local"
+    "model_info": {
+      "name": "qwen3.5:35b-a3b",
+      "family": "qwen3",
+      "parameter_size": "35.1B",
+      "quantization": "Q4_K_M"
+    },
+    "system": {
+      "chip": "Apple M1 Max",
+      "memory_gb": 64,
+      "gpu_cores": 24,
+      "cpu_cores": 10,
+      "gpu_wired_limit_mb": 0,
+      "ollama": {
+        "flash_attention": "1",
+        "kv_cache_type": "q4_0"
+      }
+    },
+    "timestamp": "2026-03-09T14:30:00"
   },
   "results": [
     {
@@ -190,7 +282,62 @@ Results are saved as JSON with a metadata envelope:
 }
 ```
 
-Results are grouped by scenario: `results/ops-agent/`, `results/doc-convert/`, etc. Share your JSON files to compare across machines.
+## Results
+
+Numbers show **effective tok/s** (generation tok/s in parentheses). Effective = what you actually experience. Generation = what the UI reports. Higher is better. Blank cells need your data.
+
+<!-- To regenerate: python3 results-table.py -->
+
+### llama3.1:8b (Q4_K_M) via Ollama
+
+| Hardware | ops-agent | doc-summary | prefill-test | creative-writing |
+|---|---:|---:|---:|---:|
+| M1 Max (64GB, 24 GPU) | **25.9** (32.5) | **17.3** (36.9) | **5.6** (29.4) | |
+| M1 Pro (32GB, 16 GPU) | | | | |
+| M2 Pro (32GB, 19 GPU) | | | | |
+| M2 Max (64GB, 38 GPU) | | | | |
+| M3 (16GB, 10 GPU) | | | | |
+| M3 Pro (36GB, 18 GPU) | | | | |
+| M3 Max (48GB, 40 GPU) | | | | |
+| M4 (16GB, 10 GPU) | | | | |
+| M4 Pro (24GB, 20 GPU) | | | | |
+| M4 Pro (48GB, 20 GPU) | | | | |
+| M4 Max (64GB, 40 GPU) | | | | |
+
+> **See your Mac in that table with empty cells?** Run `python3 bench.py --model llama3.1:8b` and [open a PR](#contribute-your-results). Takes just five minutes. No dependencies required.
+
+### Settings variations
+
+The default results above use Ollama with stock settings. These additional tables track how tuning flags affect performance on the same hardware.
+
+#### Flash attention + quantized KV cache
+
+```bash
+sudo sysctl iogpu.wired_limit_mb=8192
+launchctl setenv OLLAMA_FLASH_ATTENTION 1
+launchctl setenv OLLAMA_KV_CACHE_TYPE "q4_0"
+# Restart Ollama after setting env vars
+```
+
+| Hardware | Settings | ops-agent | doc-summary | prefill-test | creative-writing |
+|---|---|---:|---:|---:|---:|
+| M1 Max (64GB, 24 GPU) | fa + kv q4_0 | | | | |
+| M4 Pro (48GB, 20 GPU) | fa + kv q4_0 | | | | |
+
+#### Flash attention only
+
+```bash
+launchctl setenv OLLAMA_FLASH_ATTENTION 1
+```
+
+| Hardware | Settings | ops-agent | doc-summary | prefill-test | creative-writing |
+|---|---|---:|---:|---:|---:|
+| M1 Max (64GB, 24 GPU) | fa | | | | |
+
+<!-- Add more settings tables here as we test them. The benchmark auto-detects
+     OLLAMA_FLASH_ATTENTION and OLLAMA_KV_CACHE_TYPE and appends them to the
+     result filename (e.g. m1-max-64gb-24gpu_ollama_fa-kvq40.json), so results
+     from different configs never overwrite each other. -->
 
 ## Project Structure
 
@@ -198,17 +345,19 @@ Results are grouped by scenario: `results/ops-agent/`, `results/doc-convert/`, e
 local-llm-bench/
 ├── bench.py              # Main benchmark runner
 ├── compare.py            # Side-by-side comparison tool
+├── results-table.py      # Regenerate the results overview table
 ├── lib/
 │   ├── backends.py       # Backend adapters (Ollama, LM Studio, llama-server)
-│   └── output.py         # Result storage and display helpers
+│   └── output.py         # Result storage, slug generation, display helpers
 ├── scenarios/
 │   ├── ops-agent.json    # 8-turn server ops conversation with tool calls
 │   ├── doc-summary.json  # 5-turn document classification
-│   └── prefill-test.json # Prefill scaling at different context sizes
-├── results/              # Saved benchmark results, grouped by scenario
-│   ├── ops-agent/
-│   ├── doc-summary/
-│   └── prefill-test/
+│   ├── prefill-test.json # Prefill scaling at different context sizes
+│   └── creative-writing.json  # Long-form creative output (poems, fables)
+├── results/              # Saved benchmark results
+│   └── <model>/
+│       └── <scenario>/
+│           └── <chip>_<backend>[_<config>].json
 └── docs/
     ├── paper.md          # Full MLX vs GGUF analysis
     ├── part2-design.md   # Part 2 design (caching hypotheses)
@@ -222,12 +371,6 @@ All source files include detailed inline comments explaining what each section d
 We used this benchmark to investigate MLX vs GGUF performance and Ollama's prompt caching on Apple Silicon. The full analysis with data and methodology is published at **[famstack.dev](https://famstack.dev)**.
 
 Raw data and research notes are in [docs/](docs/).
-
-## Hardware Tested
-
-- Mac Studio M1 Max, 64GB unified memory
-
-We'd love to see results from other Apple Silicon Macs. Run the benchmark, share your result files, and help build a picture of local LLM performance across the Mac lineup.
 
 ## License
 

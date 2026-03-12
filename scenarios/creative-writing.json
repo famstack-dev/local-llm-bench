@@ -1,0 +1,19 @@
+{
+  "name": "creative-writing",
+  "mode": "single-shot",
+  "description": "Long-form creative output from short prompts. Tests generation speed over prefill. This is where high tok/s engines shine.",
+  "system_prompt": "You are a poet and storyteller. Write vivid, original work. No commentary, no preamble. Just the creative text.",
+  "max_tokens": 2000,
+  "temperature": 0.8,
+  "turns": [
+    {
+      "user": "Write a poem about a mass of servers humming in a dark basement, keeping a family's memories alive. At least 30 lines."
+    },
+    {
+      "user": "Write a short fable about a tortoise who built a tiny computer that was slower than the hare's gaming rig but never needed to rest."
+    },
+    {
+      "user": "Write a poem about the last photograph ever printed on paper, found in an attic a hundred years from now. At least 25 lines."
+    }
+  ]
+}
