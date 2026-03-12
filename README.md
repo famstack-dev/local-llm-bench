@@ -1,51 +1,107 @@
-# local-llm-bench: Scenario-Based LLM Benchmark for Apple Silicon
+# local-llm-bench
 
-- Compare engines, models, and quantizations across scenarios
-- Measure how context size impacts performance
-- See what you actually wait for, not just the tok/s counter
+Scenario-based LLM benchmark for Apple Silicon. Measures what you actually wait for, not just the generation tok/s counter. Built for the [MLX vs llama.cpp analysis on famstack.dev](https://famstack.dev/guides/mlx-vs-gguf-apple-silicon).
 
-Works on any Apple Silicon Mac (M1 through M5, MacBook Air to Mac Studio).
+## Results
 
-## The Problem
+Numbers show **effective tok/s** (generation tok/s in parentheses). Higher is better. Blank cells need your data.
 
-LLM interfaces report generation speed: *"53 tok/s"*. That sounds fast. But every response starts with a **prefill phase** where the model processes your entire conversation history before producing the first token. As your conversation grows, prefill grows too, and nobody shows you that number.
-
-In an 8-turn agent conversation, the model with 53 tok/s loses to the model with 28 tok/s because its prefill is 2x slower. **Generation speed alone is misleading.**
-
-**Read the full analysis: [MLX vs llama.cpp on Apple Silicon](https://famstack.dev/guides/mlx-vs-gguf-apple-silicon)**
-
-## What It Measures
-
-```
-[User sends message]
-     |
-     |  Prefill (Time To First Token)
-     |  ← Model processes entire conversation history
-     |  ← Grows with every turn (this is the hidden cost)
-     v
-[First token appears]
-     |
-     |  Generation (tok/s)
-     |  ← Model produces output tokens
-     |  ← Stays roughly constant
-     v
-[Response complete]
-```
-
-**We measure both phases and report two speed metrics:**
-
-- **Generation tok/s** — what your UI shows. Output tokens / generation time. Stays roughly constant regardless of context size.
-- **Effective tok/s** — what you actually experience. Output tokens / total time (prefill + generation). Drops as context grows because prefill eats more of the wall clock.
+**Effective tok/s** = output tokens / total time (prefill + generation). This is the speed you experience. Generation tok/s is the speed your UI reports. They diverge fast as context grows.
 
 ```
 effective tok/s = output_tokens / (prefill_time + generation_time)
 ```
 
-At 8K tokens of context, a model reporting 57 tok/s generation speed can have an effective throughput of 3 tok/s. That gap is what this benchmark makes visible.
+At 8K context, a model reporting 57 tok/s generation speed delivers 3 tok/s effective throughput. That gap is what this benchmark makes visible.
+
+<!-- To regenerate: python3 results-table.py -->
+
+### llama3.1:8b (Q4_K_M) via Ollama
+
+| Hardware | ops-agent | doc-summary | prefill-test | creative-writing |
+|---|---:|---:|---:|---:|
+| M1 Max (64GB, 24 GPU) | **25.9** (32.5) | **17.3** (36.9) | **5.6** (29.4) | |
+| M1 Pro (32GB, 16 GPU) | | | | |
+| M2 Pro (32GB, 19 GPU) | | | | |
+| M2 Max (64GB, 38 GPU) | | | | |
+| M3 (16GB, 10 GPU) | | | | |
+| M3 Pro (36GB, 18 GPU) | | | | |
+| M3 Max (48GB, 40 GPU) | | | | |
+| M4 (16GB, 10 GPU) | | | | |
+| M4 Pro (24GB, 20 GPU) | | | | |
+| M4 Pro (48GB, 20 GPU) | | | | |
+| M4 Max (64GB, 40 GPU) | | | | |
+
+> **See your Mac in that table with empty cells?** Run `python3 bench.py --model llama3.1:8b` and [open a PR](#contribute-your-results). Takes five minutes. No dependencies required.
+
+### Settings variations
+
+Default results above use Ollama with stock settings. These tables track how tuning flags affect performance on the same hardware.
+
+#### Flash attention + quantized KV cache
+
+```bash
+sudo sysctl iogpu.wired_limit_mb=8192
+launchctl setenv OLLAMA_FLASH_ATTENTION 1
+launchctl setenv OLLAMA_KV_CACHE_TYPE "q4_0"
+# Restart Ollama after setting env vars
+```
+
+| Hardware | Settings | ops-agent | doc-summary | prefill-test | creative-writing |
+|---|---|---:|---:|---:|---:|
+| M1 Max (64GB, 24 GPU) | fa + kv q4_0 | | | | |
+| M4 Pro (48GB, 20 GPU) | fa + kv q4_0 | | | | |
+
+#### Flash attention only
+
+```bash
+launchctl setenv OLLAMA_FLASH_ATTENTION 1
+```
+
+| Hardware | Settings | ops-agent | doc-summary | prefill-test | creative-writing |
+|---|---|---:|---:|---:|---:|
+| M1 Max (64GB, 24 GPU) | fa | | | | |
+
+<!-- Add more settings tables here as we test them. The benchmark auto-detects
+     OLLAMA_FLASH_ATTENTION and OLLAMA_KV_CACHE_TYPE and appends them to the
+     result filename (e.g. m1-max-64gb-24gpu_ollama_fa-kvq40.json), so results
+     from different configs never overwrite each other. -->
+
+## What You Can Compare
+
+- **MLX vs llama.cpp (GGUF)**: Which inference engine is faster for your workload? MLX has higher generation tok/s but slower prefill. The crossover depends on context length.
+- **Ollama vs raw llama-server**: How much overhead does Ollama add? Is its KV cache worth it?
+- **Models**: How does a 7B compare to a 35B MoE on your hardware? Where does memory bandwidth become the bottleneck?
+- **Quantizations**: Q4_K_M vs Q8_0 vs FP16. Real-world tradeoff, not synthetic.
+- **Your Mac vs others**: M2 MacBook Air vs M3 Pro MacBook Pro vs M4 Max Mac Studio. How much does the hardware matter?
+
+## How It Works
+
+LLM interfaces report generation speed: *"53 tok/s"*. Sounds fast. But every response starts with a **prefill phase** where the model processes your entire conversation history before producing the first token. As context grows, prefill grows. Nobody shows you that number.
+
+In an 8-turn agent conversation, the model with 53 tok/s generation speed loses to the model with 28 tok/s because its prefill takes 2x longer.
+
+```
+[User sends message]
+     |
+     |  Prefill (Time To First Token)
+     |  <- Model processes entire conversation history
+     |  <- Grows with every turn (the hidden cost)
+     v
+[First token appears]
+     |
+     |  Generation (tok/s)
+     |  <- Model produces output tokens
+     |  <- Stays roughly constant
+     v
+[Response complete]
+```
 
 **Scenario types:**
-- **Multi-turn conversations**: agent workflows, chat sessions, tool-calling chains. Context grows each turn, revealing prefill scaling behavior.
-- **Single-shot tasks**: document conversion, classification, summarization. One large input, one output. Pure prefill-vs-generation comparison.
+- **Multi-turn conversations**: agent workflows, tool-calling chains. Context grows each turn, revealing prefill scaling behavior.
+- **Single-shot tasks**: document conversion, classification. One large input, one output. Pure prefill-vs-generation comparison.
+
+**Full analysis: [MLX vs llama.cpp on Apple Silicon](https://famstack.dev/guides/mlx-vs-gguf-apple-silicon)**
 
 ## Quick Start
 
@@ -74,13 +130,13 @@ python3 bench.py --backend llama-server --base-url http://localhost:8090 --model
 python3 bench.py --model llama3.1:8b --cold
 ```
 
-Results are saved automatically with a path based on your hardware, model, and backend:
+Results are saved automatically based on your hardware, model, and backend:
 
 ```
 results/qwen3.5-35b-a3b/ops-agent/m1-max-64gb-24gpu_ollama.json
 ```
 
-No `--label` or `--output` needed. The tool detects your chip, memory, GPU core count, and any Ollama tuning flags and builds the path for you.
+No `--label` or `--output` needed. The tool detects your chip, memory, GPU core count, and any Ollama tuning flags.
 
 By default the benchmark warms up the model before starting, so Turn 1 measures actual prefill, not model loading. Use `--cold` to include loading time.
 
@@ -93,32 +149,6 @@ python3 compare.py results/qwen3.5-35b-a3b/ops-agent/*.json
 # Compare across hardware
 python3 compare.py results/qwen3.5-35b-a3b/ops-agent/m1-max*_ollama.json \
                    results/qwen3.5-35b-a3b/ops-agent/m4-pro*_ollama.json
-```
-
-Example output:
-
-```
-==========================================================================================
-  OPS-AGENT BENCHMARK COMPARISON
-==========================================================================================
-
-                     LM Studio GGUF     LM Studio MLX
-                     ───────────────── ─────────────────
-  Turn 1  Prefill             2.60s             3.33s
-               Gen             7.71s             5.54s
-             Total            10.31s             8.87s
-
-  Turn 8  Prefill            11.38s            19.40s    ← prefill dominates
-               Gen            10.63s             5.50s
-             Total            22.02s            24.91s
-──────────────────── ───────────────── ─────────────────
-    Total Prefill             54.4s            101.8s
-         Total Gen             76.8s             42.3s
-        Total Time            131.2s            144.0s
-     Avg Gen tok/s             28.2              54.2
-
-  Winner (fastest total): LM Studio GGUF (131.2s)
-  LM Studio MLX: +12.9s slower (9%)
 ```
 
 ## Contribute Your Results
@@ -138,20 +168,20 @@ cd local-llm-bench
 python3 bench.py --model llama3.1:8b
 
 # 3. Results land in the right place
-#    → results/llama3.1-8b/ops-agent/m4-pro-48gb-20gpu_ollama.json
-#    → results/llama3.1-8b/doc-summary/m4-pro-48gb-20gpu_ollama.json
-#    → results/llama3.1-8b/creative-writing/m4-pro-48gb-20gpu_ollama.json
-#    → results/llama3.1-8b/prefill-test/m4-pro-48gb-20gpu_ollama.json
+#    results/llama3.1-8b/ops-agent/m4-pro-48gb-20gpu_ollama.json
+#    results/llama3.1-8b/doc-summary/m4-pro-48gb-20gpu_ollama.json
+#    results/llama3.1-8b/creative-writing/m4-pro-48gb-20gpu_ollama.json
+#    results/llama3.1-8b/prefill-test/m4-pro-48gb-20gpu_ollama.json
 
 # 4. Commit and open a PR
 git checkout -b results/m4-pro
 git add results/
 git commit -m "results: M4 Pro 48GB Ollama llama3.1-8b"
 git push -u origin results/m4-pro
-gh pr create --title "results: M4 Pro 48GB" --body "Ran ops-agent scenario with Ollama"
+gh pr create --title "results: M4 Pro 48GB" --body "Ran all scenarios with Ollama"
 ```
 
-The filename is generated from your hardware specs, so there are no merge conflicts between contributors. Run it with different backends or models and each gets its own file.
+The filename is generated from your hardware specs, so there are no merge conflicts between contributors.
 
 **Bonus points:** Run with Ollama tuning flags and the tool auto-detects them:
 
@@ -162,20 +192,38 @@ launchctl setenv OLLAMA_KV_CACHE_TYPE "q4_0"
 
 # Restart Ollama, then:
 python3 bench.py --model qwen3.5:35b-a3b
-# → results/qwen3.5-35b-a3b/ops-agent/m1-max-64gb-24gpu_ollama_fa-kvq40.json
+# results/qwen3.5-35b-a3b/ops-agent/m1-max-64gb-24gpu_ollama_fa-kvq40.json
 ```
 
-Your results will be added to the hardware comparison table on [famstack.dev](https://famstack.dev/guides/mlx-vs-gguf-apple-silicon).
+## Tuning Flags
 
-## What You Can Compare
+These settings can significantly change benchmark results. The benchmark auto-detects Ollama flags and includes them in the result metadata and filename.
 
-This benchmark helps answer questions like:
+### Ollama
 
-- **MLX vs llama.cpp (GGUF)**: Which inference engine is faster for your workload? MLX has higher tok/s but slower prefill. The crossover depends on context length.
-- **Ollama vs raw llama-server**: How much overhead does Ollama add? Is its KV cache worth it?
-- **Different models**: How does a 7B model compare to a 35B MoE model on your hardware? Where does memory bandwidth become the bottleneck?
-- **Different quantizations**: Q4_K_M vs Q8_0 vs FP16. What's the real-world tradeoff?
-- **Your Mac vs others**: Share your result JSON files and compare across machines. Mac Mini M2 vs MacBook Pro M3 vs Mac Studio M4. How much does the hardware matter?
+| Flag | Default | How to set | What it does |
+|---|---|---|---|
+| `OLLAMA_FLASH_ATTENTION` | off | `launchctl setenv OLLAMA_FLASH_ATTENTION 1` | Enables flash attention in llama.cpp. Reduces memory usage during attention and speeds up prefill, especially at longer context. |
+| `OLLAMA_KV_CACHE_TYPE` | `f16` | `launchctl setenv OLLAMA_KV_CACHE_TYPE "q4_0"` | Quantizes the KV cache from fp16 to 4-bit. Cuts KV cache memory by ~4x, allowing longer conversations before performance drops. Slight quality trade-off at very high context. Options: `q8_0`, `q4_0`. |
+| `iogpu.wired_limit_mb` | auto | `sudo sysctl iogpu.wired_limit_mb=8192` | Raises the macOS GPU wired memory limit. Prevents large models from hitting swap by allowing more unified memory to be pinned for GPU use. Resets on reboot. |
+
+Restart Ollama after setting env vars (`brew services restart ollama` or `launchctl kickstart -k gui/$(id -u)/com.ollama.ollama`).
+
+### LM Studio (MLX engine)
+
+| Flag | Default | Where to change | What it does |
+|---|---|---|---|
+| Prefill chunk size | 512 | LM Studio settings or [manual patch](https://github.com/thornad/lmstudio-mlx-patch) | Controls how many tokens MLX processes per batch during prefill. The default 512 is conservative. Raising to 4096 can nearly double prefill speed. Diminishing returns above 4096. |
+
+Prefill chunk size benchmarks from [thornad/lmstudio-mlx-patch](https://github.com/thornad/lmstudio-mlx-patch):
+
+| Chunk size | Prefill speed | vs default |
+|---:|---:|---|
+| 512 (default) | 65 tok/s | baseline |
+| 1024 | 102 tok/s | +57% |
+| 2048 | 119 tok/s | +83% |
+| **4096** | **129 tok/s** | **+98%** |
+| 8192 | 128 tok/s | +97% (higher variance) |
 
 ## Supported Backends
 
@@ -189,7 +237,7 @@ Override any URL with `--base-url`.
 
 ## Scenarios
 
-Scenarios are JSON files that define what to benchmark. Each scenario has a system prompt and a sequence of turns that the benchmark replays against the model.
+Scenarios are JSON files that define what to benchmark. Each scenario has a system prompt and a sequence of turns replayed against the model.
 
 ### Included Scenarios
 
@@ -198,7 +246,7 @@ Scenarios are JSON files that define what to benchmark. Each scenario has a syst
 | [ops-agent.json](scenarios/ops-agent.json) | 8 | conversation | Server ops agent with tool calls. JSON payloads, log analysis, growing context |
 | [doc-summary.json](scenarios/doc-summary.json) | 5 | single-shot | Document classification. Short output from long input |
 | [prefill-test.json](scenarios/prefill-test.json) | 4 | single-shot | Prefill scaling. Same short reply at 655, 1.5K, 3K, and 8.5K context |
-| [creative-writing.json](scenarios/creative-writing.json) | 3 | single-shot | Long-form creative output (poems, fables). Short prompt, up to 2000 tokens output. Where high gen tok/s shines |
+| [creative-writing.json](scenarios/creative-writing.json) | 3 | single-shot | Long-form creative output (poems, fables). Short prompt, up to 2000 tokens output |
 
 ### Creating Your Own
 
@@ -223,8 +271,6 @@ Scenarios are JSON files that define what to benchmark. Each scenario has a syst
 ```
 
 Each turn has a `user` message. Optionally, `tool` and `tool_result` simulate the assistant calling a tool. This adds realistic context growth, just like agent frameworks do.
-
-For single-shot benchmarks, create a scenario with one turn and a large user message (e.g., a document to summarize or classify).
 
 ## Result Format
 
@@ -282,63 +328,6 @@ Each file contains:
 }
 ```
 
-## Results
-
-Numbers show **effective tok/s** (generation tok/s in parentheses). Effective = what you actually experience. Generation = what the UI reports. Higher is better. Blank cells need your data.
-
-<!-- To regenerate: python3 results-table.py -->
-
-### llama3.1:8b (Q4_K_M) via Ollama
-
-| Hardware | ops-agent | doc-summary | prefill-test | creative-writing |
-|---|---:|---:|---:|---:|
-| M1 Max (64GB, 24 GPU) | **25.9** (32.5) | **17.3** (36.9) | **5.6** (29.4) | |
-| M1 Pro (32GB, 16 GPU) | | | | |
-| M2 Pro (32GB, 19 GPU) | | | | |
-| M2 Max (64GB, 38 GPU) | | | | |
-| M3 (16GB, 10 GPU) | | | | |
-| M3 Pro (36GB, 18 GPU) | | | | |
-| M3 Max (48GB, 40 GPU) | | | | |
-| M4 (16GB, 10 GPU) | | | | |
-| M4 Pro (24GB, 20 GPU) | | | | |
-| M4 Pro (48GB, 20 GPU) | | | | |
-| M4 Max (64GB, 40 GPU) | | | | |
-
-> **See your Mac in that table with empty cells?** Run `python3 bench.py --model llama3.1:8b` and [open a PR](#contribute-your-results). Takes just five minutes. No dependencies required.
-
-### Settings variations
-
-The default results above use Ollama with stock settings. These additional tables track how tuning flags affect performance on the same hardware.
-
-#### Flash attention + quantized KV cache
-
-```bash
-sudo sysctl iogpu.wired_limit_mb=8192
-launchctl setenv OLLAMA_FLASH_ATTENTION 1
-launchctl setenv OLLAMA_KV_CACHE_TYPE "q4_0"
-# Restart Ollama after setting env vars
-```
-
-| Hardware | Settings | ops-agent | doc-summary | prefill-test | creative-writing |
-|---|---|---:|---:|---:|---:|
-| M1 Max (64GB, 24 GPU) | fa + kv q4_0 | | | | |
-| M4 Pro (48GB, 20 GPU) | fa + kv q4_0 | | | | |
-
-#### Flash attention only
-
-```bash
-launchctl setenv OLLAMA_FLASH_ATTENTION 1
-```
-
-| Hardware | Settings | ops-agent | doc-summary | prefill-test | creative-writing |
-|---|---|---:|---:|---:|---:|
-| M1 Max (64GB, 24 GPU) | fa | | | | |
-
-<!-- Add more settings tables here as we test them. The benchmark auto-detects
-     OLLAMA_FLASH_ATTENTION and OLLAMA_KV_CACHE_TYPE and appends them to the
-     result filename (e.g. m1-max-64gb-24gpu_ollama_fa-kvq40.json), so results
-     from different configs never overwrite each other. -->
-
 ## Project Structure
 
 ```
@@ -363,14 +352,6 @@ local-llm-bench/
     ├── part2-design.md   # Part 2 design (caching hypotheses)
     └── part2-findings.md # Part 2 results
 ```
-
-All source files include detailed inline comments explaining what each section does and why. Designed to be readable by non-Python developers.
-
-## Analysis & Findings
-
-We used this benchmark to investigate MLX vs GGUF performance and Ollama's prompt caching on Apple Silicon. The full analysis with data and methodology is published at **[famstack.dev](https://famstack.dev)**.
-
-Raw data and research notes are in [docs/](docs/).
 
 ## License
 
