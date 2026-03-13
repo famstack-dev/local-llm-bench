@@ -40,6 +40,7 @@ RETURN FORMAT:
 """
 
 import json
+import os
 import time
 import urllib.request
 
@@ -52,14 +53,16 @@ DEFAULT_URLS = {
     "ollama": "http://localhost:11434",
     "lmstudio": "http://localhost:1234",
     "llama-server": "http://localhost:8090",
+    "minimax": "https://api.minimax.io",
 }
 
 
-def stream_openai(base_url, model, messages, max_tokens=300, temperature=0.6, timeout=300):
+def stream_openai(base_url, model, messages, max_tokens=300, temperature=0.6, timeout=300, extra_headers=None):
     """
     Stream a chat completion via the OpenAI-compatible API.
 
-    Works with LM Studio and llama-server (both implement the OpenAI format).
+    Works with LM Studio, llama-server, and cloud APIs that implement
+    the OpenAI format (e.g. MiniMax).
 
     The OpenAI streaming format uses Server-Sent Events (SSE):
       data: {"choices": [{"delta": {"content": "Hello"}}]}
@@ -79,9 +82,12 @@ def stream_openai(base_url, model, messages, max_tokens=300, temperature=0.6, ti
         "max_tokens": max_tokens,    # Cap output length
         "temperature": temperature,  # Lower = more deterministic
     }
+    headers = {"Content-Type": "application/json"}
+    if extra_headers:
+        headers.update(extra_headers)
     req = urllib.request.Request(
         url, data=json.dumps(data).encode(),
-        headers={"Content-Type": "application/json"},
+        headers=headers,
     )
 
     # Start the clock when we send the request
@@ -241,6 +247,40 @@ def stream_ollama(base_url, model, messages, max_tokens=300, temperature=0.6, ti
     }
 
 
+def stream_minimax(base_url, model, messages, max_tokens=300, temperature=0.6, timeout=300):
+    """
+    Stream a chat completion via MiniMax's OpenAI-compatible API.
+
+    MiniMax exposes an OpenAI-compatible endpoint at https://api.minimax.io/v1.
+    The main differences from a local backend:
+      - Requires MINIMAX_API_KEY for authentication
+      - Temperature must be in (0.0, 1.0] — zero is rejected
+
+    Supported models:
+      - MiniMax-M2.5: Peak performance, 204K context
+      - MiniMax-M2.5-highspeed: Same quality, faster response
+
+    API docs: https://platform.minimax.io/docs/api-reference/text-openai-api
+    """
+    api_key = os.environ.get("MINIMAX_API_KEY", "")
+    if not api_key:
+        raise ValueError(
+            "MINIMAX_API_KEY environment variable is required.\n"
+            "  Get your key at https://platform.minimax.io/"
+        )
+
+    # MiniMax rejects temperature=0. Clamp to a small positive value.
+    if temperature <= 0:
+        temperature = 0.01
+    elif temperature > 1.0:
+        temperature = 1.0
+
+    return stream_openai(
+        base_url, model, messages, max_tokens, temperature, timeout,
+        extra_headers={"Authorization": f"Bearer {api_key}"},
+    )
+
+
 def get_model_info(backend, base_url, model):
     """
     Fetch model details from the backend, if available.
@@ -253,6 +293,16 @@ def get_model_info(backend, base_url, model):
     and llama-server, we return just the model name.
     """
     info = {"name": model}
+
+    if backend == "minimax":
+        # MiniMax model info is static — no discovery endpoint needed.
+        models = {
+            "MiniMax-M2.5": {"parameter_size": "unknown", "context_window": 204800},
+            "MiniMax-M2.5-highspeed": {"parameter_size": "unknown", "context_window": 204800},
+        }
+        if model in models:
+            info.update(models[model])
+        return info
 
     if backend == "ollama":
         try:
@@ -290,6 +340,7 @@ def get_backend(name):
         "ollama": stream_ollama,       # Native API with think:false + eval stats
         "lmstudio": stream_openai,     # OpenAI-compatible SSE
         "llama-server": stream_openai, # OpenAI-compatible SSE (raw llama.cpp)
+        "minimax": stream_minimax,     # MiniMax cloud API (OpenAI-compatible)
     }
     if name not in backends:
         raise ValueError(f"Unknown backend: {name}. Choose from: {', '.join(backends)}")

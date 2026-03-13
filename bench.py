@@ -94,6 +94,16 @@ INSTALL_HINTS = {
         "\n"
         "  Or use --base-url to point to a different llama-server instance."
     ),
+    "minimax": (
+        "MiniMax API is not accessible at {url}.\n"
+        "\n"
+        "  To fix:\n"
+        "    1. Get an API key at https://platform.minimax.io/\n"
+        "    2. Set:     export MINIMAX_API_KEY=your-key-here\n"
+        "    3. Verify:  curl -H 'Authorization: Bearer $MINIMAX_API_KEY' {url}/v1/models\n"
+        "\n"
+        "  Models: MiniMax-M2.5, MiniMax-M2.5-highspeed"
+    ),
 }
 
 
@@ -108,13 +118,25 @@ def check_backend(backend, base_url, model):
     Fails fast with a clear message and the exact command to fix the problem.
     """
     # ── Check 1: Is the backend reachable? ────────────────────────────
+    # Cloud backends (MiniMax) don't expose a /v1/models endpoint.
+    # We just verify the API key is set — the streaming call will fail
+    # with a clear error if the key is invalid.
+    if backend == "minimax":
+        api_key = os.environ.get("MINIMAX_API_KEY", "")
+        if not api_key:
+            print("Error: MINIMAX_API_KEY environment variable is required.\n"
+                  "  Get your key at https://platform.minimax.io/", file=sys.stderr)
+            sys.exit(1)
+        return  # Skip HTTP health check for cloud backends
+
     if backend == "ollama":
         check_url = f"{base_url}/api/tags"
     else:
         check_url = f"{base_url}/v1/models"
 
     try:
-        resp = urllib.request.urlopen(check_url, timeout=5)
+        req = urllib.request.Request(check_url)
+        resp = urllib.request.urlopen(req, timeout=10)
         body = resp.read()
     except (urllib.error.URLError, OSError) as e:
         hint = INSTALL_HINTS[backend].format(url=base_url, model=model)
@@ -408,7 +430,7 @@ def main():
     )
     parser.add_argument("--scenario", default=None,
                         help="Run a single scenario JSON file. Default: runs ALL scenarios.")
-    parser.add_argument("--backend", choices=["ollama", "lmstudio", "llama-server"],
+    parser.add_argument("--backend", choices=["ollama", "lmstudio", "llama-server", "minimax"],
                         default="ollama", help="Inference backend (default: ollama)")
     parser.add_argument("--base-url", default=None,
                         help="Override backend URL (default: auto from backend)")

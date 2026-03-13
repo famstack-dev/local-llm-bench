@@ -130,8 +130,8 @@ In an 8-turn agent conversation, the model with 53 tok/s generation speed loses 
 ### Requirements
 
 - Python 3.8+ (stdlib only, no pip install needed)
-- A running inference backend: [Ollama](https://ollama.com/), [LM Studio](https://lmstudio.ai/), or raw [llama-server](https://github.com/ggml-org/llama.cpp)
-- A model loaded in that backend
+- A running inference backend: [Ollama](https://ollama.com/), [LM Studio](https://lmstudio.ai/), raw [llama-server](https://github.com/ggml-org/llama.cpp), or [MiniMax](https://platform.minimax.io/) (cloud API)
+- A model loaded in that backend (or a `MINIMAX_API_KEY` for cloud)
 
 ### Run a Benchmark
 
@@ -147,6 +147,10 @@ python3 bench.py --backend lmstudio --model mlx-community/qwen3.5-35b-a3b
 
 # Against raw llama-server (llama.cpp without Ollama)
 python3 bench.py --backend llama-server --base-url http://localhost:8090 --model qwen3.5:35b-a3b
+
+# Against MiniMax cloud API (compare local vs cloud)
+export MINIMAX_API_KEY=your-key-here
+python3 bench.py --backend minimax --model MiniMax-M2.5
 
 # Include model loading time in the measurement
 python3 bench.py --model llama3.1:8b --cold
@@ -254,8 +258,30 @@ Prefill chunk size benchmarks from [thornad/lmstudio-mlx-patch](https://github.c
 | Ollama | `--backend ollama` | `http://localhost:11434` | llama.cpp (GGUF) with KV cache, model management |
 | LM Studio | `--backend lmstudio` | `http://localhost:1234` | MLX or llama.cpp depending on model format |
 | llama-server | `--backend llama-server` | `http://localhost:8090` | Raw llama.cpp (GGUF), no wrapper overhead |
+| MiniMax | `--backend minimax` | `https://api.minimax.io` | MiniMax cloud API (OpenAI-compatible) |
 
 Override any URL with `--base-url`.
+
+### MiniMax (Cloud API)
+
+[MiniMax](https://platform.minimax.io/) provides cloud-based LLM inference via an OpenAI-compatible API. This lets you compare local inference speed against cloud API latency on the same scenarios.
+
+```bash
+export MINIMAX_API_KEY=your-key-here
+
+# Run against MiniMax M2.5
+python3 bench.py --backend minimax --model MiniMax-M2.5
+
+# Run the faster variant
+python3 bench.py --backend minimax --model MiniMax-M2.5-highspeed
+```
+
+Available models:
+
+| Model | Context Window | Description |
+|---|---|---|
+| `MiniMax-M2.5` | 204K tokens | Peak performance, ultimate value |
+| `MiniMax-M2.5-highspeed` | 204K tokens | Same quality, faster response |
 
 ## Scenarios
 
@@ -358,7 +384,7 @@ local-llm-bench/
 ├── compare.py            # Side-by-side comparison tool
 ├── results-table.py      # Regenerate the results overview table
 ├── lib/
-│   ├── backends.py       # Backend adapters (Ollama, LM Studio, llama-server)
+│   ├── backends.py       # Backend adapters (Ollama, LM Studio, llama-server, MiniMax)
 │   └── output.py         # Result storage, slug generation, display helpers
 ├── scenarios/
 │   ├── ops-agent.json    # 8-turn server ops conversation with tool calls
