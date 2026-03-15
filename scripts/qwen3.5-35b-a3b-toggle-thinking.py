@@ -50,8 +50,15 @@ THINK_OFF_TAIL = """{%- if add_generation_prompt %}
 def find_template(custom_dir=None):
     """Find the chat template in the first available model directory."""
     if custom_dir:
-        template = Path(custom_dir) / MODEL / "chat_template.jinja"
-        return template if template.exists() else None
+        p = Path(custom_dir)
+        # Accept both the model dir itself and the parent models dir
+        direct = p / "chat_template.jinja"
+        if direct.exists():
+            return direct
+        nested = p / MODEL / "chat_template.jinja"
+        if nested.exists():
+            return nested
+        return None
     for model_dir in MODEL_DIRS:
         template = model_dir / MODEL / "chat_template.jinja"
         if template.exists():
