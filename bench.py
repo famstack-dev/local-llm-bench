@@ -622,7 +622,28 @@ def run_single(args, scenario_path, script_dir, stream_fn, base_url, warm_up_don
     md_path = outpath.rsplit(".", 1)[0] + ".md"
     print(f"\n  JSON: {outpath}")
     print(f"  Table: {md_path}")
-    return warm_up_time, ctx_checked
+
+    # Track saved files so we can clean up on abort
+    _saved_files.extend([outpath, md_path])
+
+    return warm_up_time
+
+
+# Files saved during the current run — cleaned up on Ctrl+C or errors
+_saved_files = []
+
+
+def _cleanup_saved_files():
+    """Remove result files from an incomplete run."""
+    for f in _saved_files:
+        try:
+            if os.path.exists(f):
+                os.remove(f)
+        except OSError:
+            pass
+    if _saved_files:
+        print(f"\n  Cleaned up {len(_saved_files)} result files from incomplete run.")
+        _saved_files.clear()
 
 
 def main():
@@ -753,13 +774,16 @@ def main():
         else:
             print(f"  Warning: --no-think ignored, no chat template found for {args.backend}/{args.model}",
                   file=sys.stderr)
-        if thinking_backup:
-            # Catch Ctrl+C and SIGTERM so we always restore
-            def _restore_on_signal(signum, frame):
-                restore_thinking(template_path, thinking_backup)
-                sys.exit(1)
-            signal.signal(signal.SIGINT, _restore_on_signal)
-            signal.signal(signal.SIGTERM, _restore_on_signal)
+    # ── Set up Ctrl+C / SIGTERM handler ─────────────────────────────
+    # Clean up result files and restore thinking template on abort.
+    def _abort_handler(signum, frame):
+        print("\n\n  Benchmark interrupted.")
+        _cleanup_saved_files()
+        if thinking_backup and template_path:
+            restore_thinking(template_path, thinking_backup)
+        sys.exit(1)
+    signal.signal(signal.SIGINT, _abort_handler)
+    signal.signal(signal.SIGTERM, _abort_handler)
 
     try:
         if args.scenario:
@@ -833,6 +857,13 @@ def main():
             print(f"\n  Your numbers will be added to the comparison table at")
             print(f"  https://famstack.dev/guides/mlx-vs-gguf-apple-silicon")
             print(f"\n{'='*70}\n")
+    except SystemExit:
+        # sys.exit() from error handlers — clean up partial results
+        _cleanup_saved_files()
+        raise
+    except Exception:
+        _cleanup_saved_files()
+        raise
     finally:
         # ── Always restore the original template ──────────────────────
         if template_path:
