@@ -1,3 +1,6 @@
 __pycache__/
 *.pyc
 .DS_Store
+
+# Model responses vary between runs — keep locally for quality comparison
+*_responses.md

@@ -547,6 +547,10 @@ def run_scenario(scenario, stream_fn, base_url, model, runs=1, backend="ollama")
                     print(f"\n  Turn {i+1} produced 0 output tokens.")
                     _print_context_error(ctx_tokens_est + max_tokens, backend)
 
+                # Save response text for quality comparison (not in JSON metrics)
+                result["_response"] = metrics["response"]
+                result["_user"] = turn["user"]
+
                 print_turn_row(result, backend)
                 results.append(result)
 
@@ -623,10 +627,40 @@ def run_single(args, scenario_path, script_dir, stream_fn, base_url, warm_up_don
     print(f"\n  JSON: {outpath}")
     print(f"  Table: {md_path}")
 
+    # Save model responses for quality comparison
+    responses_path = outpath.rsplit(".", 1)[0] + "_responses.md"
+    _save_responses(responses_path, scenario, results, label, args.model, backend_key)
+    print(f"  Responses: {responses_path}")
+
     # Track saved files so we can clean up on abort
-    _saved_files.extend([outpath, md_path])
+    _saved_files.extend([outpath, md_path, responses_path])
 
     return warm_up_time
+
+
+def _save_responses(path, scenario, results, label, model, backend):
+    """Save model responses to a readable markdown file for quality comparison."""
+    with open(path, "w") as f:
+        f.write(f"# {scenario['name']} — {model} via {backend}\n\n")
+        f.write(f"**Label:** {label}  \n")
+        f.write(f"**Mode:** {scenario.get('mode', 'conversation')}  \n\n")
+        f.write("---\n\n")
+
+        for r in results:
+            response = r.pop("_response", None)
+            user = r.pop("_user", None)
+            if response is None:
+                continue
+            turn = r.get("turn", "?")
+            run = r.get("run", 1)
+            tps = r.get("gen_tps", 0)
+            total = r.get("total", 0)
+
+            f.write(f"## Turn {turn} (run {run})\n\n")
+            f.write(f"**User:** {user}\n\n")
+            f.write(f"**Assistant** ({r.get('output_tokens', 0)} tokens, {tps} tok/s, {total:.1f}s total):\n\n")
+            f.write(f"{response}\n\n")
+            f.write("---\n\n")
 
 
 # Files saved during the current run — cleaned up on Ctrl+C or errors
