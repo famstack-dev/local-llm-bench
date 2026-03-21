@@ -1,18 +1,18 @@
 {
-  "name": "vision-ocr",
-  "description": "Document extraction with vision models. Tests OCR accuracy and speed on German documents: invoices, receipts, recipes, and technical drawings.",
+  "name": "vision-classify",
+  "description": "Document classification from images. Tests whether vision models can correctly identify document type, extract metadata, and return structured JSON. Targets the Paperless-ngx document processing use case.",
   "mode": "single-shot",
-  "system_prompt": "You are a document processing assistant. Extract all relevant information from the provided document image. Return a JSON object with these fields: type (invoice/receipt/recipe/floor_plan/other), date (as found in document), correspondent (sender or organization), title (short description), language, and for financial documents: total_amount and currency. Be precise with numbers and dates. Respond ONLY with the JSON object, no explanation.",
+  "system_prompt": "Classify this document image. Return ONLY a JSON object with these fields:\n- type: invoice, receipt, recipe, floor_plan, letter, contract, or other\n- date: date as it appears in the document, or null\n- correspondent: sender, author, or organization name\n- title: short descriptive title in the document's language\n- language: ISO 639-1 code (e.g. de, en, fr)\n- total_amount: total amount as string if financial document, or null\n- currency: EUR, USD, etc. or null\n\nBe precise with numbers and dates. Respond with JSON only.",
   "max_tokens": 500,
   "temperature": 0.1,
   "turns": [
     {
-      "user": "Extract all information from this document.",
+      "user": "Classify this document.",
       "image": "documents/rechnung.png",
       "expected": {
         "type": "invoice",
         "date": "20.11.2025",
-        "correspondent": "Bodenseeschifferpatent",
+        "correspondent": "Bodenseeschifferpatent Kat. A & D",
         "title": "Anzahlungsrechnung BSP Ausbildung",
         "language": "de",
         "total_amount": "480.00",
@@ -20,7 +20,7 @@
       }
     },
     {
-      "user": "Extract all information from this document.",
+      "user": "Classify this document.",
       "image": "documents/tankbeleg-esso.pdf",
       "expected": {
         "type": "receipt",
@@ -33,7 +33,7 @@
       }
     },
     {
-      "user": "Extract all information from this document.",
+      "user": "Classify this document.",
       "image": "documents/kassenbon-obst.pdf",
       "expected": {
         "type": "receipt",
@@ -46,7 +46,7 @@
       }
     },
     {
-      "user": "Extract all information from this document.",
+      "user": "Classify this document.",
       "image": "documents/kassenbon-kaeserei.pdf",
       "expected": {
         "type": "receipt",
@@ -59,7 +59,7 @@
       }
     },
     {
-      "user": "Extract all information from this document.",
+      "user": "Classify this document.",
       "image": "documents/rezept-kuchen.pdf",
       "expected": {
         "type": "recipe",
@@ -72,7 +72,7 @@
       }
     },
     {
-      "user": "Extract all information from this document.",
+      "user": "Classify this document.",
       "image": "documents/rezept-lasagne.pdf",
       "expected": {
         "type": "recipe",
@@ -85,7 +85,7 @@
       }
     },
     {
-      "user": "Extract all information from this document.",
+      "user": "Classify this document.",
       "image": "documents/grundriss-flaechen.png",
       "expected": {
         "type": "floor_plan",
@@ -98,13 +98,13 @@
       }
     },
     {
-      "user": "Extract all information from this document.",
+      "user": "Classify this document.",
       "image": "documents/rezept-fisch.pdf",
       "expected": {
         "type": "recipe",
         "date": null,
         "correspondent": null,
-        "title": "Pangasiusfilets",
+        "title": "Pangasiusfilets mit Spekulatiuskruste",
         "language": "de",
         "total_amount": null,
         "currency": null

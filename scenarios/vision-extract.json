@@ -1,0 +1,42 @@
+{
+  "name": "vision-extract",
+  "description": "Full text extraction from document images. Tests OCR quality on German documents: invoices, receipts, recipes, and technical documents. The model should produce clean, structured markdown.",
+  "mode": "single-shot",
+  "system_prompt": "Extract all visible text from this document image. Return it as clean, well-structured markdown. Preserve the document structure: use headings, tables, and lists where appropriate. Keep numbers, dates, and amounts exactly as they appear. Do not add commentary or interpretation.",
+  "max_tokens": 1500,
+  "temperature": 0.1,
+  "turns": [
+    {
+      "user": "Extract all text from this document.",
+      "image": "documents/rechnung.png"
+    },
+    {
+      "user": "Extract all text from this document.",
+      "image": "documents/tankbeleg-esso.pdf"
+    },
+    {
+      "user": "Extract all text from this document.",
+      "image": "documents/kassenbon-obst.pdf"
+    },
+    {
+      "user": "Extract all text from this document.",
+      "image": "documents/kassenbon-kaeserei.pdf"
+    },
+    {
+      "user": "Extract all text from this document.",
+      "image": "documents/rezept-kuchen.pdf"
+    },
+    {
+      "user": "Extract all text from this document.",
+      "image": "documents/rezept-lasagne.pdf"
+    },
+    {
+      "user": "Extract all text from this document.",
+      "image": "documents/grundriss-flaechen.png"
+    },
+    {
+      "user": "Extract all text from this document.",
+      "image": "documents/rezept-fisch.pdf"
+    }
+  ]
+}
