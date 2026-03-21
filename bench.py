@@ -47,12 +47,14 @@ REQUIREMENTS:
 """
 
 import argparse
+import base64
 import json
 import os
 import shutil
 import signal
 import subprocess
 import sys
+import tempfile
 import time
 import urllib.request
 import urllib.error
@@ -62,6 +64,52 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from lib.backends import get_backend, get_model_info, DEFAULT_URLS
 from lib.output import save_results, make_result_path, make_model_slug, make_chip_slug, print_turn_header, print_turn_row, print_summary
+
+
+# ── Vision / image support ────────────────────────────────────────────
+# Vision scenarios include an "image" field per turn that references a
+# file (PNG, JPG, or PDF). We encode it as base64 for the OpenAI vision
+# API. PDFs are converted to PNG on the fly using macOS sips.
+
+def load_image_as_base64(image_path):
+    """Load an image file and return a base64 data URL for the OpenAI vision API."""
+    if image_path.lower().endswith(".pdf"):
+        image_path = _convert_pdf_to_png(image_path)
+
+    ext = os.path.splitext(image_path)[1].lower()
+    mime = {"png": "image/png", "jpg": "image/jpeg", "jpeg": "image/jpeg"}.get(ext.lstrip("."), "image/png")
+
+    with open(image_path, "rb") as f:
+        b64 = base64.b64encode(f.read()).decode()
+    return f"data:{mime};base64,{b64}"
+
+
+def _convert_pdf_to_png(pdf_path):
+    """Convert a PDF to PNG using macOS sips. Returns the PNG path."""
+    png_path = os.path.join(tempfile.gettempdir(), "llm-bench-" + os.path.basename(pdf_path) + ".png")
+    if os.path.exists(png_path):
+        return png_path  # Already converted
+    try:
+        subprocess.run(
+            ["sips", "-s", "format", "png", pdf_path, "--out", png_path],
+            capture_output=True, check=True,
+        )
+    except (subprocess.SubprocessError, FileNotFoundError) as e:
+        print(f"  Warning: Could not convert PDF to PNG: {e}", file=sys.stderr)
+        print(f"  Install sips (macOS built-in) or pre-convert PDFs to PNG.", file=sys.stderr)
+        raise
+    return png_path
+
+
+def build_vision_message(text, image_data_url):
+    """Build an OpenAI vision-format message with text and image."""
+    return {
+        "role": "user",
+        "content": [
+            {"type": "text", "text": text},
+            {"type": "image_url", "image_url": {"url": image_data_url}},
+        ],
+    }
 
 
 # ── Thinking mode management for Qwen3.5 ─────────────────────────────
@@ -427,7 +475,9 @@ def load_scenario(path):
 
     with open(path) as f:
         try:
-            return json.load(f)
+            scenario = json.load(f)
+            scenario["_path"] = os.path.abspath(path)
+            return scenario
         except json.JSONDecodeError as e:
             print(f"Error: Invalid JSON in scenario file {path}: {e}", file=sys.stderr)
             sys.exit(1)
@@ -490,8 +540,20 @@ def run_scenario(scenario, stream_fn, base_url, model, runs=1, backend="ollama")
                 prev_ctx_chars = len(scenario["system_prompt"])
 
             # ── Build messages for this turn ──────────────────────────
-            # 1. Add the user's question
-            messages.append({"role": "user", "content": turn["user"]})
+            # 1. Add the user's question (with optional image for vision models)
+            image_path = turn.get("image")
+            if image_path:
+                # Resolve path relative to the scenario file
+                scenario_dir = os.path.dirname(os.path.abspath(scenario.get("_path", "")))
+                abs_image = os.path.join(scenario_dir, image_path)
+                if not os.path.exists(abs_image):
+                    # Try relative to the scenarios/ directory
+                    script_dir = os.path.dirname(os.path.abspath(__file__))
+                    abs_image = os.path.join(script_dir, "scenarios", image_path)
+                image_data_url = load_image_as_base64(abs_image)
+                messages.append(build_vision_message(turn["user"], image_data_url))
+            else:
+                messages.append({"role": "user", "content": turn["user"]})
 
             # 2. If there's a tool call, add the assistant's tool invocation
             #    and the tool's result as messages. This simulates the
@@ -503,7 +565,17 @@ def run_scenario(scenario, stream_fn, base_url, model, runs=1, backend="ollama")
 
             # ── Calculate context metrics ─────────────────────────────
             # How many tokens are in the full message history?
-            ctx_chars = sum(len(m["content"]) for m in messages)
+            # For vision messages, content is a list — count text parts only.
+            # Image tokens are estimated separately (~1000 tokens per image).
+            def _msg_chars(m):
+                c = m.get("content", "")
+                if isinstance(c, str):
+                    return len(c)
+                # Multimodal content list
+                chars = sum(len(p.get("text", "")) for p in c if isinstance(p, dict))
+                chars += sum(4000 for p in c if isinstance(p, dict) and p.get("type") == "image_url")
+                return chars
+            ctx_chars = sum(_msg_chars(m) for m in messages)
             ctx_tokens_est = ctx_chars // 4       # Rough estimate: 1 token ≈ 4 chars
             new_tokens_est = (ctx_chars - prev_ctx_chars) // 4  # New tokens added this turn
 
@@ -520,7 +592,7 @@ def run_scenario(scenario, stream_fn, base_url, model, runs=1, backend="ollama")
                 # The model's response becomes part of the context for
                 # the next turn. This is why context grows every turn.
                 messages.append({"role": "assistant", "content": metrics["response"]})
-                prev_ctx_chars = sum(len(m["content"]) for m in messages)
+                prev_ctx_chars = sum(_msg_chars(m) for m in messages)
 
                 # ── Build result record ───────────────────────────────
                 result = {
@@ -640,6 +712,7 @@ def run_single(args, scenario_path, script_dir, stream_fn, base_url, warm_up_don
 
 def _save_responses(path, scenario, results, label, model, backend):
     """Save model responses to a readable markdown file for quality comparison."""
+    turns = scenario.get("turns", [])
     with open(path, "w") as f:
         f.write(f"# {scenario['name']} — {model} via {backend}\n\n")
         f.write(f"**Label:** {label}  \n")
@@ -651,13 +724,25 @@ def _save_responses(path, scenario, results, label, model, backend):
             user = r.pop("_user", None)
             if response is None:
                 continue
-            turn = r.get("turn", "?")
+            turn_num = r.get("turn", 1)
             run = r.get("run", 1)
             tps = r.get("gen_tps", 0)
             total = r.get("total", 0)
 
-            f.write(f"## Turn {turn} (run {run})\n\n")
+            f.write(f"## Turn {turn_num} (run {run})\n\n")
+
+            # Show image reference if this is a vision turn
+            turn_data = turns[turn_num - 1] if turn_num <= len(turns) else {}
+            if turn_data.get("image"):
+                f.write(f"**Document:** `{turn_data['image']}`\n\n")
+
             f.write(f"**User:** {user}\n\n")
+
+            # Show expected output if defined (vision-ocr scenarios)
+            expected = turn_data.get("expected")
+            if expected:
+                f.write(f"**Expected:**\n```json\n{json.dumps(expected, indent=2, ensure_ascii=False)}\n```\n\n")
+
             f.write(f"**Assistant** ({r.get('output_tokens', 0)} tokens, {tps} tok/s, {total:.1f}s total):\n\n")
             f.write(f"{response}\n\n")
             f.write("---\n\n")

@@ -1,0 +1,114 @@
+{
+  "name": "vision-ocr",
+  "description": "Document extraction with vision models. Tests OCR accuracy and speed on German documents: invoices, receipts, recipes, and technical drawings.",
+  "mode": "single-shot",
+  "system_prompt": "You are a document processing assistant. Extract all relevant information from the provided document image. Return a JSON object with these fields: type (invoice/receipt/recipe/floor_plan/other), date (as found in document), correspondent (sender or organization), title (short description), language, and for financial documents: total_amount and currency. Be precise with numbers and dates. Respond ONLY with the JSON object, no explanation.",
+  "max_tokens": 500,
+  "temperature": 0.1,
+  "turns": [
+    {
+      "user": "Extract all information from this document.",
+      "image": "documents/rechnung.png",
+      "expected": {
+        "type": "invoice",
+        "date": "20.11.2025",
+        "correspondent": "Bodenseeschifferpatent",
+        "title": "Anzahlungsrechnung BSP Ausbildung",
+        "language": "de",
+        "total_amount": "480.00",
+        "currency": "EUR"
+      }
+    },
+    {
+      "user": "Extract all information from this document.",
+      "image": "documents/tankbeleg-esso.pdf",
+      "expected": {
+        "type": "receipt",
+        "date": "03.03.2026",
+        "correspondent": "ESSO Station Stefan Sulger",
+        "title": "Tankbeleg Diesel",
+        "language": "de",
+        "total_amount": "50.07",
+        "currency": "EUR"
+      }
+    },
+    {
+      "user": "Extract all information from this document.",
+      "image": "documents/kassenbon-obst.pdf",
+      "expected": {
+        "type": "receipt",
+        "date": "19.03.2026",
+        "correspondent": "Maria Hänsler Obst & Gemüse",
+        "title": "Kassenbon Obst und Gemüse",
+        "language": "de",
+        "total_amount": "26.20",
+        "currency": "EUR"
+      }
+    },
+    {
+      "user": "Extract all information from this document.",
+      "image": "documents/kassenbon-kaeserei.pdf",
+      "expected": {
+        "type": "receipt",
+        "date": "19.03.2026",
+        "correspondent": "Naturkäserei Maucher GmbH",
+        "title": "Einkaufsbeleg Käserei",
+        "language": "de",
+        "total_amount": "10.55",
+        "currency": "EUR"
+      }
+    },
+    {
+      "user": "Extract all information from this document.",
+      "image": "documents/rezept-kuchen.pdf",
+      "expected": {
+        "type": "recipe",
+        "date": null,
+        "correspondent": "LECKER",
+        "title": "Johannisbeer-Baiser-Kuchen",
+        "language": "de",
+        "total_amount": null,
+        "currency": null
+      }
+    },
+    {
+      "user": "Extract all information from this document.",
+      "image": "documents/rezept-lasagne.pdf",
+      "expected": {
+        "type": "recipe",
+        "date": null,
+        "correspondent": null,
+        "title": "Lasagne",
+        "language": "de",
+        "total_amount": null,
+        "currency": null
+      }
+    },
+    {
+      "user": "Extract all information from this document.",
+      "image": "documents/grundriss-flaechen.png",
+      "expected": {
+        "type": "floor_plan",
+        "date": "16.05.2003",
+        "correspondent": "Eckhard Albrecht Freier Architekt",
+        "title": "Wohnflächenberechnung Erdgeschoss",
+        "language": "de",
+        "total_amount": null,
+        "currency": null
+      }
+    },
+    {
+      "user": "Extract all information from this document.",
+      "image": "documents/rezept-fisch.pdf",
+      "expected": {
+        "type": "recipe",
+        "date": null,
+        "correspondent": null,
+        "title": "Pangasiusfilets",
+        "language": "de",
+        "total_amount": null,
+        "currency": null
+      }
+    }
+  ]
+}
