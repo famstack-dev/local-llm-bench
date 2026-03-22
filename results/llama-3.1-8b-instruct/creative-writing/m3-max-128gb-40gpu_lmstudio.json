@@ -10,7 +10,7 @@
     "runs": 1,
     "max_tokens": 2000,
     "cold": false,
-    "warm_up_time": 0.304,
+    "warm_up_time": 0.185,
     "system": {
       "os": "Darwin",
       "os_version": "26.3.1",
@@ -23,7 +23,7 @@
       "gpu_cores": 40,
       "gpu_wired_limit_mb": 0
     },
-    "timestamp": "2026-03-22T09:09:50"
+    "timestamp": "2026-03-22T12:55:59"
   },
   "results": [
     {
@@ -31,12 +31,12 @@
       "run": 1,
       "ctx_tokens_est": 57,
       "new_tokens_est": 29,
-      "ttft": 0.516,
-      "gen_time": 12.768,
-      "gen_tps": 24.0,
-      "total": 13.285,
-      "output_tokens": 307,
-      "_response": "In twilight depths, where shadows reign,\nA kingdom thrives, a silent refrain.\n Rows of steel, like sentinels of old,\nGuard secrets kept, and stories untold.\n\nTheir humming heartbeat, a lullaby sweet,\nAs data flows, their whispers repeat.\nA chorus of ones and zeros blend,\nAs memories dance, like ghosts that never end.\n\nThe Price family's laughter echoes through time,\nTheir joy and tears, forever entwined.\nA father's hand, that held a child so tight,\nA mother's love, that shone like morning light.\n\nTheir home, now empty, yet the heart remains,\nWhere memories reside, like ghostly refrains.\nTheir lives a tapestry, rich and bold,\nEach thread a moment, forever to be told.\n\nIn disks and drives, their stories sleep,\nYet when awakened, memories creep.\nThe children's smiles, the parents' gentle art,\nA symphony of love, that touches every heart.\n\nTheir digital tomb, a mausoleum grand,\nWhere memories keep vigil, hand in hand.\nThrough servers humming, their essence stays,\nA testament to love that never fades away.\n\nAs night descends, and darkness gathers near,\nThe servers hold their vigil, year by year.\nTheir rhythm steady, a heartbeat true,\nA family's memories, forever shining through.\n\nIn this dark sanctum, where technology reigns,\nTheir love and laughter echo, like sweet refrains.\nFor in this repository of digital dreams,\nThe Price family's memories forever beam.",
+      "ttft": 0.228,
+      "gen_time": 5.148,
+      "gen_tps": 78.1,
+      "total": 5.375,
+      "output_tokens": 402,
+      "_response": "In twilight depths, where shadows play,\nA secret world of whispering machines atplay,\nRow upon row, metal sentinels stand guard,\nTheir gentle hum, a soothing, dark-yard.\n\nIn this subterranean heart of light and sound,\nA family's stories live, forever bound,\nMemories etched like fossils in the night,\nKept safe from time and fading light.\n\nThe servers, sentinels of love and laughter,\nWhisper secrets, echoing through each after,\nPhotos, letters, and tales from years gone by,\nAll stored within these humming hearts that sigh.\n\nIn this dark refuge, an archive of the past,\nA world of dreams and love forever last,\nWhere tears and joy in every moment's caught,\nA tapestry woven from the threads of remembrance bought.\n\nThe servers' hum, a lullaby to sleep,\nAs moonlight through the vents begins to seep,\nCasting shadows on the wall, like silken threads,\nThe machines, ancient keepers of the family's deeds.\n\nTheir rustling wings, like autumn leaves that fall,\nThe soft clucking of the servers, standing tall,\nBeneath a mantle of silence, quiet as a stone,\nThe memories they keep: the only sound that's known.\n\nLike night's dark veil, their data flows and grows,\nA river of remembrance, where the family's roots show,\nWhere love and laughter merged with tears and pain,\nA chronicle of years, where every moment's saved within.\n\nThe servers whisper secrets to the night,\nTheir gentle hum, a heartbeat that shines so bright,\nA lighthouse in the darkness, guiding through time's tide,\nThe memories they keep: an endless testament to love inside.\n\nFor in this subterranean heart, where shadows reign,\nA family's stories live on, forever sustained by the machines' refrain,\nTheir gentle hum, a lullaby to sleep and dream,\nA symphony of love and memories, forever echoing in the machines' deep.",
       "_user": "Write a poem about a mass of servers humming in a dark basement, keeping a family's memories alive. At least 30 lines."
     },
     {
@@ -44,12 +44,12 @@
       "run": 1,
       "ctx_tokens_est": 60,
       "new_tokens_est": 32,
-      "ttft": 0.423,
-      "gen_time": 13.144,
-      "gen_tps": 24.2,
-      "total": 13.567,
-      "output_tokens": 318,
-      "_response": "In a verdant glen, where sunbeams danced,\nA tortoise toiled, with diligence's chance.\nHe crafted a box of circuitry fine,\nA computer born, from wires divine.\n\nWith sluggish pace, the hare did play,\nHis gaming rig, a wonder of the day.\nGraphics roared, and processors whirred,\nBut even as he conquered digital words,\n\nThe tortoise's machine hummed soft and low,\nA gentle purr, as wisdom did grow.\nNo fiery zeal, nor frantic stress,\nCould overwhelm this calm digital nest.\n\nThe hare sneered at the tortoise's pace,\n\"You'll never keep, this frantic digital race.\"\nBut still the tortoise worked, day and night,\nCoding scripts, with gentle, steady light.\n\nAt dawn he'd rise, to start his test,\nAnd find his screen, in perfect rest.\nNo lag or glitch, did mar his way,\nAs he solved problems, through the endless day.\n\nThe hare grew weary, as days turned cold,\nHis machine a beast, with strength grown old.\nFor in the night, when all was still,\nThe hare's rig slept, its batteries chilled.\n\nBut not the tortoise's computer fair,\nIt kept on working, without a care.\nNo need to rest, nor dream of sleep,\nFor in its heart, an endless vigil kept.\n\nAnd as the years went by, and seasons passed,\nThe hare's machine faltered, his might surpassed.\nFor in the darkness, where slumber's chains,\n Bind even strength, the tortoise's coding reigns.",
+      "ttft": 0.192,
+      "gen_time": 5.013,
+      "gen_tps": 78.4,
+      "total": 5.205,
+      "output_tokens": 393,
+      "_response": "In a verdant valley where sunbeams danced, a tortoise named Tempo toiled away in his underground workshop. With fingers deft and eyes so bright, he crafted a tiny computer that sparkled with circuitry lights.\n\nAs the machine whirred to life, Tempo's slow and steady heart swelled with pride. He claimed his creation would outlast any machine, for it was built to withstand the weight of time itself. Meanwhile, a hare named Hyperion boasted about his gaming rig's lightning speed.\n\n\"Ha!\" the hare cried. \"My console can render graphics in a mere fraction of your sluggish seconds, Tempo! It's the envy of all the other hares!\"\n\nTempo smiled wearily. \"My computer may be slow, but it never sleeps or grows tired. It hums along all day and night, every day and night.\"\n\nHyperion snickered. \"Oh, sure? Watch me play the most complex games on my rig while you're stuck in low-res.\"\n\nThe two adversaries installed their machines, and the gaming began. Hyperion's console zipped through levels like a speeding bullet, but his machine's speed came at a cost. It overheated and burned bright, like a firefly in the desert sun.\n\nTempos' computer, however, plodded along steadily. It rendered each scene in painstaking detail but never faltered or failed to render its graphics. As Hyperion's machine finally expired from exhaustion, Tempo's computer continued to play on.\n\nThe hare slumped against the wall, his ears drooping. \"I underestimated you, Tempo,\" he said with a sigh.\n\nTempo chuckled softly and patted his computer's casing. \"Speed may be flashy, but endurance is the secret to victory.\"\n\nFrom that day forward, the hares and tortoises respected Tempo's steady strength. His computer continued to play on, a testament to the power of persistence in an ever-changing world.",
       "_user": "Write a short fable about a tortoise who built a tiny computer that was slower than the hare's gaming rig but never needed to rest."
     },
     {
@@ -57,12 +57,12 @@
       "run": 1,
       "ctx_tokens_est": 58,
       "new_tokens_est": 31,
-      "ttft": 0.386,
-      "gen_time": 12.911,
-      "gen_tps": 24.2,
-      "total": 13.297,
-      "output_tokens": 313,
-      "_response": "In twilight's hush, where dust and memories sleep,\nAmidst forgotten trinkets, a relic did creep,\nA photograph, yellowed and worn with age,\nThe last of its kind, a final, faded page.\n\nIn an attic deep, where shadows danced and played,\nA young archaeologist unearthed this treasure laid,\nHer fingers tracing the edges, worn and thin,\nAs she brought it to light, a story to spin.\n\nA family's smile, a picnic's joyous face,\n Captured in time, a moment's fleeting pace,\nA summer's day, long since lost to the past,\nWhen laughter echoed, love did forever last.\n\nThe photographer's name, a forgotten clue,\nA century's silence, a story anew,\nThe film's dark heart, a secret kept so well,\nA memory locked, until the attic's spell.\n\nThe image softens, like a sunset in the west,\nA bittersweet reminder of love that would rest,\nThe world outside moved on, to digital's pace,\nLeaving this relic, a nostalgic, fading space.\n\nA hundred years from now, when all is said and done,\nThis photograph will remain, a memory won,\nA testament to love, in black and white's pure light,\nThe last print on paper, a fading, final sight.\n\nIn this forgotten attic, a piece of history's heart,\nA photograph, the last, a work of art,\nA glimpse into time, when love was printed on paper thin,\nThe last photograph ever made, a memory locked within.",
+      "ttft": 0.19,
+      "gen_time": 3.834,
+      "gen_tps": 79.0,
+      "total": 4.025,
+      "output_tokens": 303,
+      "_response": "In a box, hidden and worn,\nA relic of times long born,\nLay the last photograph to be seen,\nPrinted on paper, in a world unseen.\n\nA century past, the click of the viewfinder,\nThe flash that lit up all things in it;\nA moment captured, now lost to the ages,\nAs digital memories forever engage.\n\nThis print, delicate as a summer breeze,\nFaded with time, like forgotten trees;\nA century-old secret, hidden away,\nUntil a curious hand touched it today.\n\nThe picture's edges, yellowed with age,\nFolds that creased, a story to engage;\nA snapshot of love, joy and laughter,\nFrozen in time, now a relic of wonder.\n\nThe subject's face, a smile so bright,\nA dancer spinning with abandon and light;\nHer dress fluttering like a bird in flight,\nAs the world around her danced through the night.\n\nThe background's blur, a world in motion,\nA sound of music and celebration;\nA moment seized, now lost to the past,\nAs the last photograph on paper was at last.\n\nIn this box, hidden and worn with care,\nLies a memory of love, long past there;\nA century-old treasure, now revealed to the eye,\nThe last photograph on paper, a memory to deny.\n\nAs we view this print, now rare and divine,\nWe remember a world where love was printed in line;\nA time when moments were captured with care,\nAnd memories lived on paper, beyond compare.",
       "_user": "Write a poem about the last photograph ever printed on paper, found in an attic a hundred years from now. At least 25 lines."
     }
   ]

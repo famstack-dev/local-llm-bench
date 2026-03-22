@@ -1,0 +1,69 @@
+{
+  "meta": {
+    "scenario": "creative-writing",
+    "mode": "single-shot",
+    "label": "oMLX MLX",
+    "backend": "omlx",
+    "model_info": {
+      "name": "Llama-3.1-8B-Instruct"
+    },
+    "runs": 1,
+    "max_tokens": 2000,
+    "cold": false,
+    "warm_up_time": 0.207,
+    "system": {
+      "os": "Darwin",
+      "os_version": "26.3.1",
+      "arch": "arm64",
+      "chip": "Apple M3 Max",
+      "memory_gb": 128,
+      "cpu_cores": 16,
+      "cpu_cores_performance": 12,
+      "cpu_cores_efficiency": 4,
+      "gpu_cores": 40,
+      "gpu_wired_limit_mb": 0
+    },
+    "timestamp": "2026-03-22T13:02:28"
+  },
+  "results": [
+    {
+      "turn": 1,
+      "run": 1,
+      "ctx_tokens_est": 57,
+      "new_tokens_est": 29,
+      "ttft": 0.233,
+      "gen_time": 5.904,
+      "gen_tps": 76.9,
+      "total": 6.137,
+      "output_tokens": 454,
+      "_response": "In the depths of a basement, where shadows play,\nA congregation of servers whispers all day,\nTheir hum a gentle melody, a soothing sound,\nA symphony of ones and zeros, all around.\n\nIn rows of steel cabinets, they stand at attention,\nTheir fans a gentle breeze, a quiet affection,\nFor the family above, who sleep and dine,\nUnaware of the tapestry they weave in time.\n\nTheir memories, a treasure trove, a storehouse deep,\nWhere laughter and love, and moments they keep,\nAre recorded and stored, with care and might,\nA digital archive, shining with quiet light.\n\nThe servers hum, a gentle thrum, a vibration true,\nAs they process and preserve, all that's been and new,\nPhotos of smiling faces, and holidays so bright,\nAre saved and secured, in this digital night.\n\nIn this darkened basement, where only shadows roam,\nThe servers reign, a kingdom of ones and zeros, their home,\nA place where time stands still, where memories are made,\nAnd the past and present, in harmony, are played.\n\nTheir disks a whirl of activity, a whirling dervish spin,\nAs they write and rewrite, the stories to be within,\nThe family's history, a rich and vibrant tale,\nIs kept alive, in this digital gale.\n\nIn this sea of machinery, where wires weave and twist,\nThe servers stand, a sentinel, a guardian of the past,\nTheir hum a heartbeat, a pulse of life and sound,\nA reminder that memories, are never lost, but found.\n\nTheir data a treasure, a hoard of love and light,\nIs safeguarded and preserved, through the dark of night,\nThe servers humming, a lullaby so sweet,\nA symphony of memories, where love and joy meet.\n\nAnd when the family sleeps, and the house is still,\nThe servers whisper, a gentle, soothing thrill,\nTheir hum a reminder, of the love that's been,\nA digital archive, where memories are seen.\n\nIn this dark basement, where only shadows play,\nThe servers reign, a kingdom of love and light of day,\nTheir hum a symphony, a melody so true,\nA reminder that memories, are never lost, but shine through.",
+      "_user": "Write a poem about a mass of servers humming in a dark basement, keeping a family's memories alive. At least 30 lines."
+    },
+    {
+      "turn": 2,
+      "run": 1,
+      "ctx_tokens_est": 60,
+      "new_tokens_est": 32,
+      "ttft": 0.231,
+      "gen_time": 4.324,
+      "gen_tps": 76.8,
+      "total": 4.555,
+      "output_tokens": 332,
+      "_response": "In the scorching desert where cacti pierced the sky,\nA tortoise named Tempo toiled day and night,\nHe crafted a machine from copper and gold,\nA tiny computer that would never grow old.\n\nWith gears that clicked and wires that hummed,\nThe device whirred to life, its screen glowed numb,\nBut though it was slow, it was never late,\nUnlike the hare's gaming rig, a speedy trait.\n\nThat hare, named Pixel, had a gaming throne,\nWhere his console roared like a lion's moan,\nGames loaded fast, graphics a treat,\nBut when the hare got tired, his console would retreat.\n\nTemple, the tortoise, never knew fatigue,\nHe worked through the night, through the desert's rage,\nHis computer chugged along, a steady pace,\nWhile Pixel's console, with a flicker, would lose its place.\n\nOne day, the two met, their machines in sight,\nPixel sneered, \"My rig is faster, it's a pure delight!\"\nTemple smiled, \"Mine may be slow, but it never sleeps,\nWhile you're resting, my computer keeps my hopes and dreams it keeps.\"\n\nThe hare looked puzzled, his gaming throne idle,\nAs Temple's computer, steady, his tasks did fulfill,\nThe desert sun set, casting a warm glow,\nAnd the tortoise, Tempo, knew his machine would grow.\n\nFrom that day on, the two became unlikely friends,\nTheir machines, a testament to different paths that blend,\nFor though Pixel's console was fast, it was a fleeting thrill,\nWhile Temple's computer, slow, but steady, stood still.",
+      "_user": "Write a short fable about a tortoise who built a tiny computer that was slower than the hare's gaming rig but never needed to rest."
+    },
+    {
+      "turn": 3,
+      "run": 1,
+      "ctx_tokens_est": 58,
+      "new_tokens_est": 31,
+      "ttft": 0.23,
+      "gen_time": 5.215,
+      "gen_tps": 76.9,
+      "total": 5.445,
+      "output_tokens": 401,
+      "_response": "In the attic's dusty, forgotten space\nWhere memories fade like the fading light on a winter's face\nA relic remains, a tangible past\nA photograph, worn, but still so vast\n\nIt's the last one, printed on paper so fine\nA century's legacy, a fading line\nThe emulsion's cracked, the image's grey\nYet, in its worn-out corners, a story's to stay\n\nA family's love, a moment's catch\nA snapshot of life, in a bygone's patch\nThe people, smiling, with eyes so bright\nTheir laughter, a whisper, in the fading light\n\nThe background's blurred, a hazy dream\nA world in motion, it seems\nThe photograph's edges, rough and torn\nA testament to the passage of time, forever sworn\n\nThe camera's lens, a window to the soul\nA fragment of life, in a bygone's role\nThe moment's captured, the emotion's real\nA love, a joy, a sorrow, all revealed\n\nIn the attic's silence, the photograph's voice\nEchoes through the years, a haunting, hollow choice\nA memory, a relic, a moment in time\nThe last photograph, printed on paper so fine\n\nThe paper's texture, a tactile feel\nA sensation, a memory, that's hard to conceal\nThe creases, the folds, the tears, the wear\nA story, a testament, to the love that was there\n\nThe family's name, a label, a tag\nA reminder of the love that was lived, and lagged\nThe photograph's story, a tale so true\nA memory, a keepsake, a relic, shining through\n\nIn the attic's darkness, the photograph's light\nFlickers, it fades, but still, it's a beautiful sight\nA moment's beauty, a love's pure light\nThe last photograph, printed on paper, a treasure in flight.",
+      "_user": "Write a poem about the last photograph ever printed on paper, found in an attic a hundred years from now. At least 25 lines."
+    }
+  ]
+}
