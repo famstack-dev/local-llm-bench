@@ -82,7 +82,6 @@ def stream_openai(base_url, model, messages, max_tokens=300, temperature=0.6, ti
         "stream": True,              # Enable SSE streaming
         "max_tokens": max_tokens,    # Cap output length
         "temperature": temperature,  # Lower = more deterministic
-        "chat_template_kwargs": {"enable_thinking": False},
     }
     headers = {"Content-Type": "application/json"}
     if extra_headers:
