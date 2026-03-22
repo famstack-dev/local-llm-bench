@@ -1,0 +1,69 @@
+{
+  "meta": {
+    "scenario": "creative-writing",
+    "mode": "single-shot",
+    "label": "m2-pro-32gb-19gpu lmstudio",
+    "backend": "lmstudio",
+    "model_info": {
+      "name": "qwen3.5-35b-a3b"
+    },
+    "runs": 1,
+    "max_tokens": 2000,
+    "cold": false,
+    "warm_up_time": 3.434,
+    "system": {
+      "os": "Darwin",
+      "os_version": "15.7.4",
+      "arch": "arm64",
+      "chip": "Apple M2 Pro",
+      "memory_gb": 32,
+      "cpu_cores": 12,
+      "cpu_cores_performance": 8,
+      "cpu_cores_efficiency": 4,
+      "gpu_cores": 19,
+      "gpu_wired_limit_mb": 0
+    },
+    "timestamp": "2026-03-22T10:06:12"
+  },
+  "results": [
+    {
+      "turn": 1,
+      "run": 1,
+      "ctx_tokens_est": 57,
+      "new_tokens_est": 29,
+      "ttft": 3.786,
+      "gen_time": 6.319,
+      "gen_tps": 62.8,
+      "total": 10.105,
+      "output_tokens": 397,
+      "_response": "Beneath the street and heavy with the rain,\nA subterranean silence holds its reign.\nNo sunlight dares to pierce the concrete skin,\nWhere thousands blink with cold and silver din.\n\nThe hum is low, a constant, rhythmic drone,\nThat stitches up the fabric of our own.\nIn racks that stretch to shadows deep and black,\nThe lives you loved are humming their own track.\n\nNot flesh and bone, but digits in the dark,\nPreserving moments from a distant park.\nThe laughter of a child on scraped-up knees,\nThe weight of rain upon the window trees.\nA video of a wedding, grainy, old,\nWhere time and memory are meticulously told.\n\nThe servers pulse with borrowed, electric breath,\nKeeping the dead from fading into death.\nThey hold a recipe written in your hand,\nA letter typed by someone else's command.\nThe voice of father, soft and slightly rough,\nIs coded here to never age or cough.\n\nIn the cooling towers, fans spin round and round,\nTo keep the digital ghosts from losing ground.\nThey monitor the stream of data flow,\nA river that will never ebb or flow,\nBut simply stay and wait for someone's touch,\nTo bring the past within a glowing rush.\n\nNo rust can claim the chips of cold design,\nNo time can truly make these files decline.\nThough walls may crumble and the earth above,\nMay shift and turn to dust upon their groove.\n\nFor here in basements deep where silence rules,\nThe family's soul continues to proceed.\nA chorus made of ones and zeros bright,\nKeeping the love you carry in the night.\n\nUntil the power fails or wires sever,\nThe memory remains to keep you together.\nA mass of hum that never sleeps or fades,\nIn the cold basement where the memory wades.",
+      "_user": "Write a poem about a mass of servers humming in a dark basement, keeping a family's memories alive. At least 30 lines."
+    },
+    {
+      "turn": 2,
+      "run": 1,
+      "ctx_tokens_est": 60,
+      "new_tokens_est": 32,
+      "ttft": 3.747,
+      "gen_time": 11.41,
+      "gen_tps": 62.2,
+      "total": 15.158,
+      "output_tokens": 710,
+      "_response": "In the valley of Silicon Spruce, where wires grew like ivy and routers hummed in the shadows, lived a tortoise named Barnaby. While the hares of the forest spent their sun-drenched afternoons tuning their neural-linked headsets and overclocking their graphics cards to the breaking point, Barnaby was busy sorting pebbles into circuits.\n\nBarnaby did not build the fastest machine in the forest. His computer was a monolith of slow, deliberate craftsmanship\u2014a box carved from polished river stone and wired with copper vine. It ran on moss-based energy cells that harvested sunlight one photon at a time. When Barnaby initiated his first render, the progress bar crawled so slowly he finished calculating it before the coffee had even cooled. The hares, led by a flash-optimized hare named Zephyr, would laugh as their rigs screamed with the sound of liquid cooling fans, projecting virtual worlds so vivid they could taste the digital rain.\n\n\"Your processor is a snail!\" Zephyr cried, his avatar dancing through a neon inferno while his rig drew power from the grid's main artery. \"I can render a million frames before your cursor blinks!\"\n\nBarnaby did not blink his eyes fast enough to compete, yet he simply placed a fresh sprig of clover into the intake valve and let his machine chug along.\n\nDays turned to seasons. Zephyr's sleek, high-performance rigs began to fail under the relentless stress of their own ambition. The cooling systems clogged with dust; the microchips overheated and warped in the midday heat. The hares were forced to pause, to sleep, to repair, to upgrade, to recharge their biological batteries and their digital tanks. They entered long cycles of maintenance, their screens going dark as they waited for the morning sun to wake them up again.\n\nBut Barnaby's machine never slept. It did not need a reboot, nor a battery swap. It simply existed in the slow rhythm of the valley, processing the world's data at its own deliberate pace. While Zephyr rested and recharged his neural links, Barnaby's stone processor finished rendering the entire history of the forest, leaf by leaf, stone by stone.\n\nWhen the great digital storm hit\u2014fierce winds that knocked out the grid and flooded the hares' low-lying server farms\u2014the forest went dark. The hares were stranded, their high-speed connections severed, their sophisticated interfaces useless in the mud and mist.\n\nOnly Barnaby's computer was still glowing with a soft, amber light. It had been quietly compiling the backup data of every creature in the valley for three hundred turns, using no extra energy beyond what the moss gathered. It held the maps to dry ground and the codes to rebuild the water filtration systems, all calculated in the silence while others slept.\n\nZephyr approached Barnaby's stone box, his own rig cold and dead in the mud. \"How long did it take you to finish this?\" he asked, bewildered by the stability of the slow machine.\n\nBarnaby tapped a single key with his claw, and the screen flickered to life, displaying a perfect map of safety.\n\n\"I did not finish it,\" Barnaby said, his voice as deep and steady as the roots of the trees. \"I simply kept going while you were resting.\"\n\nIn the end, the fastest machine did not win the race; it was simply the one that never stopped running.",
+      "_user": "Write a short fable about a tortoise who built a tiny computer that was slower than the hare's gaming rig but never needed to rest."
+    },
+    {
+      "turn": 3,
+      "run": 1,
+      "ctx_tokens_est": 58,
+      "new_tokens_est": 31,
+      "ttft": 3.699,
+      "gen_time": 6.947,
+      "gen_tps": 62.6,
+      "total": 10.646,
+      "output_tokens": 435,
+      "_response": "The dust of centuries settles thick on the wooden shelf,\nWhere silence waits for a hand to turn the page.\nA box of cardboard lies open, soft with age,\nHolding a ghost that the data clouds can't save.\nNo pixels glow here in the dim attic light,\nJust silver grains trapped within a gelatin embrace.\nThe edges curl like dried leaves in autumn's bite,\nA fragile membrane from the era before the great erase.\n\nI hold it now with hands that tremble and shake,\nA paper-thin memory of a face long gone.\nThe colors have bled into a sepia haze,\nA soft focus on the joy that was once so sharp.\nSomeone smiled here a hundred years ago,\nA stranger who wore the coat of my own time's thread.\nThey laughed at a joke that no algorithm knows,\nA fleeting moment frozen until the end of speech.\n\nNow the servers sleep beneath the ocean floor,\nThe cloud has drifted out to space and died.\nThis is the only proof that people ever stood,\nThat they ate bread and felt the summer rain.\nThe grain of paper is a river in my palm,\nA darkened stream where the living used to swim.\nIt smells of cedar and of old wood smoke,\nA scent that digital files can never know.\n\nThe image fades a little more with every glance,\nAs the silver whispers secrets to the air.\nA child's face, a dog with muddy paws,\nThe corner of a wedding dress or train.\nIt does not loop or pause to refresh the screen,\nIt simply is, and then it slowly turns to gray.\nThe last photograph printed on the earth,\nA paper ship sailing the final sea of time.\n\nI place it back inside the box with care,\nAnd lift the lid to let the dust settle down.\nThe attic holds no more than shadows now,\nFor the paper keeps what the wires forgot to say.\nOne hundred years from now, when all is still and deep,\nThis sheet of white remains the only voice.",
+      "_user": "Write a poem about the last photograph ever printed on paper, found in an attic a hundred years from now. At least 25 lines."
+    }
+  ]
+}

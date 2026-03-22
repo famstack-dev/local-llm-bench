@@ -1,0 +1,141 @@
+{
+  "meta": {
+    "scenario": "ops-agent",
+    "mode": "conversation",
+    "label": "m2-pro-32gb-19gpu lmstudio",
+    "backend": "lmstudio",
+    "model_info": {
+      "name": "glm-4.7-flash"
+    },
+    "runs": 1,
+    "max_tokens": 500,
+    "cold": false,
+    "system": {
+      "os": "Darwin",
+      "os_version": "15.7.4",
+      "arch": "arm64",
+      "chip": "Apple M2 Pro",
+      "memory_gb": 32,
+      "cpu_cores": 12,
+      "cpu_cores_performance": 8,
+      "cpu_cores_efficiency": 4,
+      "gpu_cores": 19,
+      "gpu_wired_limit_mb": 0
+    },
+    "timestamp": "2026-03-22T10:13:41"
+  },
+  "results": [
+    {
+      "turn": 1,
+      "run": 1,
+      "ctx_tokens_est": 575,
+      "new_tokens_est": 421,
+      "ttft": 2.717,
+      "gen_time": 3.644,
+      "gen_tps": 42.0,
+      "total": 6.361,
+      "output_tokens": 153,
+      "tool": "server_status",
+      "_response": "I see what's off. Everything is running, but **Immich-ML** (the machine learning service) has a massive load.\n\n*   It is using **8.2GB of RAM** and consuming the highest CPU at 45%.\n*   This is likely causing high load averages (currently ~3.8, which isn't terrible but noticeable).\n*   Since Immich-ML is GPU-accelerated, if a specific AI processing job gets stuck or hangs on your hardware (even Mac Studio), it will monopolize resources.\n\n**Recommendation:** Check if Immich-ML is stuck processing a specific batch of photos. If it's been running for hours, you may need to restart the container or check if a job is stalled.",
+      "_user": "Something feels off with the server. Can you check what's running?"
+    },
+    {
+      "turn": 2,
+      "run": 1,
+      "ctx_tokens_est": 967,
+      "new_tokens_est": 235,
+      "ttft": 1.92,
+      "gen_time": 3.51,
+      "gen_tps": 39.3,
+      "total": 5.43,
+      "output_tokens": 138,
+      "tool": "service_logs",
+      "_response": "It looks like Immich-ML is working through a backlog of images, likely missing files or imports.\n\n*   **It's stuck in \"facial recognition mode\":** The last few lines show it is processing faces and clustering vectors, with **351 images remaining**, which means a long queue.\n*   It hit low memory earlier and reclaimed 1.2GB, but it's still working hard.\n*   **Action:** There isn't an immediate error; this is just a heavy processing load. It should clear out in about 45 minutes if the queue keeps draining.\n\nIs this expected behavior (e.g., a scheduled scan), or did you just import 351 new photos?",
+      "_user": "Immich ML is eating a lot of CPU. What's it doing?"
+    },
+    {
+      "turn": 3,
+      "run": 1,
+      "ctx_tokens_est": 1207,
+      "new_tokens_est": 89,
+      "ttft": 1.243,
+      "gen_time": 2.862,
+      "gen_tps": 40.2,
+      "total": 4.104,
+      "output_tokens": 115,
+      "tool": "docker_exec",
+      "_response": "Yes, it should be fine.\n\n*   **Memory:** It is using 8.2GB out of a limit for the container, so it has about **~5-6 GB** left if needed.\n*   The Low Memory warning you saw earlier was just a cleanup; the container has plenty of breathing room.\n*   **ETA:** The logs suggest ~45 minutes for this batch, but it depends on how many more photos are in the import queue. Just let it run; don't restart anything yet.\n\nYou should be back to normal load within the hour.",
+      "_user": "Ah right, we uploaded vacation photos yesterday. Is it going to be OK memory-wise?"
+    },
+    {
+      "turn": 4,
+      "run": 1,
+      "ctx_tokens_est": 1537,
+      "new_tokens_est": 214,
+      "ttft": 1.837,
+      "gen_time": 2.915,
+      "gen_tps": 39.4,
+      "total": 4.752,
+      "output_tokens": 115,
+      "tool": "backup_status",
+      "_response": "Good news, the backup ran last night.\n\n*   **Status:** Completed with warnings (but finished successfully).\n    *   It ran at 02:00 AM, syncing **12.4GB** of data.\n    *   It processed 1847 files (which includes the vacation photos).\n*   **Warnings:** Just standard housekeeping messages (\"Vault eject\", \"uchg flags\"). Nothing critical.\n*   **Safety:** Your photos are safe. The backup completed, so the vacation data is offloaded to your storage destination.\n\nYou can relax knowing everything made it through.",
+      "_user": "Good. Check if last night's backup ran. I want to make sure the vacation photos are safe."
+    },
+    {
+      "turn": 5,
+      "run": 1,
+      "ctx_tokens_est": 1904,
+      "new_tokens_est": 239,
+      "ttft": 2.023,
+      "gen_time": 3.602,
+      "gen_tps": 36.9,
+      "total": 5.625,
+      "output_tokens": 133,
+      "tool": "disk_usage",
+      "_response": "Space is looking healthy across all drives.\n\n*   **Main Drive (`/`):** 33% used (roughly half a TB free). Plenty of room.\n*   **Backup Vault (`/Volumes/backup-vault`):** 69% used (~7.5 TB free). It has room for more data.\n*   **Time Machine (`/Volumes/time-machine`):** 75% used (~5.9 TB free). Also room to spare.\n\nThe \"Vault eject failed\" warning is likely just a timing issue with the backup script, not an actual problem. You are in great shape disk-wise.\n\nIs there anything else you need to check?",
+      "_user": "The vault didn't eject again. How's disk space looking on all drives?"
+    },
+    {
+      "turn": 6,
+      "run": 1,
+      "ctx_tokens_est": 2279,
+      "new_tokens_est": 249,
+      "ttft": 2.31,
+      "gen_time": 2.717,
+      "gen_tps": 37.2,
+      "total": 5.027,
+      "output_tokens": 101,
+      "tool": "service_logs",
+      "_response": "Yes! Paperless picked them up just fine.\n\n*   **Time:** It processed the documents at 7:45 AM.\n*   **Results:** All three scanned files were successfully OCR'd and auto-classified:\n    *   `school-report-emma`: Classified as \"School Report\".\n    *   `swimming-certificate-max`: Classified as a Certificate.\n*   **Errors:** None. The task finished cleanly with 0 errors.\n\nThey are now searchable and ready for you to browse or download.",
+      "_user": "Time Machine is at 75%. Also did Paperless process the school documents I scanned this morning?"
+    },
+    {
+      "turn": 7,
+      "run": 1,
+      "ctx_tokens_est": 2487,
+      "new_tokens_est": 98,
+      "ttft": 1.545,
+      "gen_time": 2.933,
+      "gen_tps": 37.5,
+      "total": 4.478,
+      "output_tokens": 110,
+      "tool": "docker_exec",
+      "_response": "It\u2019s using **~7.5GB** of RAM (as we saw earlier), but the database itself is only **~7.5GB** of space.\n\n*   The \"Matrix\" chatter isn't the database growing; it's likely high traffic or a large room state.\n*   The largest chunk (845 MB) is `state_groups_state`, which tracks room metadata. If you have a lot of groups or high-join rooms, that table gets heavy.\n\nIt's healthy for its size. Nothing to worry about there!",
+      "_user": "Nice, it even picked up the electricity bill. How big is the Matrix database? It's been chatty lately."
+    },
+    {
+      "turn": 8,
+      "run": 1,
+      "ctx_tokens_est": 2779,
+      "new_tokens_est": 188,
+      "ttft": 2.081,
+      "gen_time": 5.043,
+      "gen_tps": 35.5,
+      "total": 7.124,
+      "output_tokens": 179,
+      "tool": "docker_exec",
+      "_response": "It's not quite **7.5GB**, but the database is actually storing roughly 34,000 events.\n\n*   **The Main Culprit:** The `#server` room is massive. It has 8,934 events and only **5 members** (a low ratio). This means every single message is stored, likely with a lot of metadata.\n*   **The Others:** `#butler` (3475 events) and the old room (#marvin-old, 2103)\n*   **Action:** If you use Matrix often and don't need to keep the entire history of #server, consider purging old events or using a \"Read Marker\" (mark as read) so it stops tracking new traffic, though the storage size is mostly \"events,\" not necessarily heavy text.\n\nIt's doing well for a Matrix server, though #server is definitely the data hog.",
+      "_user": "2.1GB for Matrix seems like a lot. Can we see which rooms take the most space?"
+    }
+  ]
+}
