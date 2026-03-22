@@ -1,0 +1,69 @@
+{
+  "meta": {
+    "scenario": "creative-writing",
+    "mode": "single-shot",
+    "label": "Gemma 12B oMLX",
+    "backend": "omlx",
+    "model_info": {
+      "name": "gemma-3-12b-it-qat-4bit"
+    },
+    "runs": 1,
+    "max_tokens": 2000,
+    "cold": false,
+    "warm_up_time": 0.385,
+    "system": {
+      "os": "Darwin",
+      "os_version": "26.2",
+      "arch": "arm64",
+      "chip": "Apple M1 Max",
+      "memory_gb": 64,
+      "cpu_cores": 10,
+      "cpu_cores_performance": 8,
+      "cpu_cores_efficiency": 2,
+      "gpu_cores": 24,
+      "gpu_wired_limit_mb": 0
+    },
+    "timestamp": "2026-03-18T22:20:50"
+  },
+  "results": [
+    {
+      "turn": 1,
+      "run": 1,
+      "ctx_tokens_est": 57,
+      "new_tokens_est": 29,
+      "ttft": 0.553,
+      "gen_time": 12.733,
+      "gen_tps": 27.5,
+      "total": 13.286,
+      "output_tokens": 350,
+      "_response": "The breath of the earth, cool and damp,\na granite womb where shadows clamp.\nBelow the house, a silent sprawl,\na metal forest, standing tall.\n\nNo leaves of green, no sunlit grace,\nbut blinking lights in a tiled space.\nA chorus hums, a steady drone,\na thousand voices, all at once, unknown.\n\nHere, the past doesn\u2019t fade to gray,\nbut flickers bright on a glowing screen.\nGrandmother\u2019s laugh, a birthday glee,\na child\u2019s first steps, for all to see.\n\nThe scent of lilac, long since gone,\npreserved in pixels, neatly kept.\nA wedding dance, a summer day,\nthe echoes of a song un-slept.\n\nEach server a sentinel, a tireless guard,\nagainst the rust of oblivion's hand.\nA digital ark, a coded plea,\nto keep the currents flowing, understand?\n\nNo dust motes dance in this coded light,\nno cobwebs cling to circuits deep.\nJust whirring fans and pulsing glow,\na silent promise, whispered low.\n\nA family\u2019s history, bound in wire,\na legacy etched in binary code.\nA father\u2019s smile, a sister's gaze,\nforever held, a vibrant load.\n\nAnd when the house above should fall,\nand families scatter, far and wide,\nthese humming giants, steadfast still,\nwill hold the stories, side by side.\n\nA basement kingdom, bathed in blue,\nwhere memory breathes, eternally new.\nA constant vigil, never to cease,\nthe family's heart, in coded peace.\n",
+      "_user": "Write a poem about a mass of servers humming in a dark basement, keeping a family's memories alive. At least 30 lines."
+    },
+    {
+      "turn": 2,
+      "run": 1,
+      "ctx_tokens_est": 60,
+      "new_tokens_est": 32,
+      "ttft": 0.59,
+      "gen_time": 15.332,
+      "gen_tps": 27.4,
+      "total": 15.922,
+      "output_tokens": 420,
+      "_response": "The tortoise, Bartholomew, collected pebbles. Not for a garden, not for a wall, but for circuits. For years he gathered them, sorting by shade, by weight, by the faintest shimmer of quartz. He built his machine in a hollow beneath the elderberry bush, a tangle of vines and polished stones humming with a quiet, internal light. It was small, no bigger than a robin\u2019s nest, and excruciatingly slow.\n\nThe hare, Zephyr, arrived one sun-drenched afternoon, his ears twitching with amusement. His own gaming rig, a gleaming behemoth of polished wood and hummingbird feathers, throbbed with vibrant projections of leaping sprites and exploding stars.\n\n\u201cLook at you, Bartholomew,\u201d Zephyr scoffed, frantically tapping at his controls. \"Still fiddling with rocks? My frame rate alone makes your entire\u2026thing\u2026look like a fossil.\u201d \n\nBartholomew simply adjusted a particularly smooth pebble with a claw. His machine blinked a single, steady green light. He was running a simulation of the slow drift of glacial ice. It had been running for seventy-two days.\n\nZephyr launched into a dazzling display of high-speed aerial combat. He boasted, he gloated, he threw virtual fruit at the air. His machine whirred and pulsed, demanding cooling gusts of wind, pushing him to refill its energy crystals. He paused to hydrate, then to adjust the ergonomic feather-cushions. \n\nBartholomew\u2019s machine continued its glacial drift.\n\nZephyr\u2019s rig sputtered. A blue screen blossomed, then winked out. He cursed, frantically rebooting, slamming a paw against the casing. \n\nBartholomew\u2019s machine blinked its single, steady green light. The glacial ice was still drifting. \n\nZephyr, defeated and sweating, watched the green light. \u201cHow...how does it *not* overheat?\u201d he mumbled. \n\nBartholomew, without looking up, replied, \u201cIt doesn\u2019t need to rest.\u201d \n",
+      "_user": "Write a short fable about a tortoise who built a tiny computer that was slower than the hare's gaming rig but never needed to rest."
+    },
+    {
+      "turn": 3,
+      "run": 1,
+      "ctx_tokens_est": 58,
+      "new_tokens_est": 31,
+      "ttft": 0.599,
+      "gen_time": 13.682,
+      "gen_tps": 27.5,
+      "total": 14.282,
+      "output_tokens": 376,
+      "_response": "Dust-velvet clung to the box, cedar and regret.\nA hundred years had sifted, a grey, silent net,\nacross the house that breathed no voices, held no debt\nto memory but the moth's slow, patterned threat.\n\nInside, nestled amongst brittle lace and chipped bone,\na single print, a rectangle of fading hue.\nNo vibrant gloss, no digital sheen, alone\nit lay, a relic of an antiquated view.\n\nA girl, perhaps ten, with hair the color of rust,\nstands knee-deep in sunflowers, a riot of gold.\nHer smile, a fractured echo, caught mid-laughter, \na sunbeam trapped within a silvered hold.\n\nHer dress, a faded gingham, patched with care,\nand shoes that knew the earth, the mud, the stone.\nBehind her, a porch, a swing, a weathered chair\u2014\na life contained within a square, alone.\n\nThe paper, thick and warm, a tactile plea,\nagainst the spectral dance of data streams.\nThe ink, a whisper of pigment, almost gone,\nyet holding fast to laughter, light, and grace.\n\nNo caption, no identifying mark,\njust the girl, the sunflowers, a fading day.\nA scientist\u2019s gloved hand, hesitant and slow,\nlifts the image, a sigh escaping unseen.\n\n\u201cThe last,\u201d she murmurs, a question in the air,\n\u201cthe final testament to analog skin.\u201d\nThen darkness falls, and the photograph remains,\na silent sun, blooming within the dust.\n\nA fragile kingdom, held in fading tone,\nthe ghost of a moment, beautifully alone.\nA promise, lost and found, a memory's sigh,\nthe girl, the sunflowers, beneath a paper sky.\n",
+      "_user": "Write a poem about the last photograph ever printed on paper, found in an attic a hundred years from now. At least 25 lines."
+    }
+  ]
+}

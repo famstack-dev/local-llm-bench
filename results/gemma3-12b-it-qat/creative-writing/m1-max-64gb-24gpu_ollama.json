@@ -1,0 +1,79 @@
+{
+  "meta": {
+    "scenario": "creative-writing",
+    "mode": "single-shot",
+    "label": "Gemma 12B Ollama",
+    "backend": "ollama",
+    "model_info": {
+      "name": "gemma3:12b-it-qat",
+      "format": "gguf",
+      "family": "gemma3",
+      "parameter_size": "12.2B",
+      "quantization": "Q4_0"
+    },
+    "runs": 1,
+    "max_tokens": 2000,
+    "cold": false,
+    "warm_up_time": 0.272,
+    "system": {
+      "os": "Darwin",
+      "os_version": "26.2",
+      "arch": "arm64",
+      "chip": "Apple M1 Max",
+      "memory_gb": 64,
+      "cpu_cores": 10,
+      "cpu_cores_performance": 8,
+      "cpu_cores_efficiency": 2,
+      "gpu_cores": 24,
+      "gpu_wired_limit_mb": 0
+    },
+    "timestamp": "2026-03-18T21:54:49"
+  },
+  "results": [
+    {
+      "turn": 1,
+      "run": 1,
+      "ctx_tokens_est": 57,
+      "new_tokens_est": 29,
+      "ttft": 0.499,
+      "gen_time": 14.119,
+      "gen_tps": 24.1,
+      "total": 14.618,
+      "output_tokens": 340,
+      "prompt_eval_count": 95,
+      "prompt_eval_duration_ms": 400.1,
+      "_response": "The concrete breathes a chill, a damp embrace,\nDown here, where daylight finds no trace.\nA basement kingdom, low and deep,\nWhere silent giants softly sleep,\nOr rather, pulse, a restless hive,\nA thousand blinking eyes alive.\n\nRacks of servers, steel and grey,\nA metal forest, come what may.\nThey hum a monotone, a steady drone,\nA digital heartbeat, all alone.\nNo voices echo, no footsteps fall,\nJust fans that whisper through the wall.\n\nWithin their circuits, data flows,\nA family\u2019s history, softly glows.\nGrandmother\u2019s laughter, caught in time,\nA child\u2019s first steps, in youthful prime.\nChristmas mornings, bright and bold,\nStories whispered, yet untold.\n\nA wedding dance, a fading hue,\nVacation snapshots, fresh and new.\nThe scent of pine, a summer breeze,\nA grandfather\u2019s wisdom, if you please.\nEach pixel holds a cherished scene,\nA vibrant tapestry, evergreen.\n\nThese cold machines, a faithful keep,\nWhere fleeting moments gently sleep.\nAgainst the entropy\u2019s relentless tide,\nThese memories safely reside.\nA digital ark, a solemn vow,\nTo keep the past alive, somehow.\n\nThey spin and click, a tireless grace,\nPreserving smiles on every face.\nA silent promise, dark and deep,\nWhile the world above is fast asleep.\nThe humming grows, a lullaby,\nFor echoes of a life gone by.\n\nAnd when the last star fades from sight,\nThese servers burn with steady light.\n",
+      "_user": "Write a poem about a mass of servers humming in a dark basement, keeping a family's memories alive. At least 30 lines."
+    },
+    {
+      "turn": 2,
+      "run": 1,
+      "ctx_tokens_est": 60,
+      "new_tokens_est": 32,
+      "ttft": 0.369,
+      "gen_time": 14.772,
+      "gen_tps": 24.0,
+      "total": 15.141,
+      "output_tokens": 354,
+      "prompt_eval_count": 94,
+      "prompt_eval_duration_ms": 277.7,
+      "_response": "Barnaby the tortoise, shell speckled with moss and ancient dust, did not race. He *built*. He built with salvaged berries, polished river stones, and the delicate filaments of glow-worm silk. He built a computer.\n\nIt was small, barely larger than a pebble, and its processing speed made a snail look speedy. The hare, Jasper, roared with laughter, showcasing his obsidian tower, a beast of flashing lights and cooling fans, capable of rendering galaxies in an instant. Jasper\u2019s games were a blur of explosions and impossible physics. Barnaby\u2019s computer\u2026 mostly blinked.\n\n\u201cIt\u2019s charming,\u201d Jasper sneered, launching a meteor shower across his screen. \u201cBut utterly useless.\u201d\n\nBarnaby, unperturbed, tapped a single, polished stone. His computer, named \"Pebble,\" began to calculate the precise trajectory of dandelion seeds, charting their flight patterns over decades, predicting where they would land, influencing the growth of wildflowers. \n\nJasper played for days, fuelled by energy drinks and boasting. His rig whirred, pulsed, and eventually, shuddered to a halt. Overheating. A technician had to be summoned, and Jasper sulked in the shade.\n\nBarnaby, meanwhile, was still at his Pebble, charting the movement of a single, wandering ladybug. It took three days. But he finished. \n\nHe didn\u2019t win a race. He didn\u2019t achieve glory. But Barnaby's Pebble, small and slow, continued to tick, never needing a recharge, a constant, quiet hum of persistent calculation, a testament to the enduring strength of steady work. The wildflowers bloomed where he predicted. And that, in its own way, was a victory.\n",
+      "_user": "Write a short fable about a tortoise who built a tiny computer that was slower than the hare's gaming rig but never needed to rest."
+    },
+    {
+      "turn": 3,
+      "run": 1,
+      "ctx_tokens_est": 58,
+      "new_tokens_est": 31,
+      "ttft": 0.389,
+      "gen_time": 12.387,
+      "gen_tps": 23.7,
+      "total": 12.777,
+      "output_tokens": 293,
+      "prompt_eval_count": 95,
+      "prompt_eval_duration_ms": 289.6,
+      "_response": "Dust motes danced, a spectral snow,\nUpon the attic's slumbering glow.\nA century had spun its thread,\nSince sunlight warmed the room instead.\n\nWithin a box of brittle things,\nA relic whispered, memory sings.\nA photograph, a fragile square,\nThe last of paper, beyond compare.\n\nThe colors faded, muted gold,\nA story in its depths unfolds.\nA woman smiles, a summer dress,\nA laughter held in stillness, blessed.\n\nBeside her, boy, with sun-kissed hair,\nA kite aloft, beyond all care.\nHis hand outstretched, a joyful plea,\nToward boundless skies, eternally.\n\nThe paper cracks, a whispered sigh,\nAs history drifts slowly by.\nNo digital echo, sharp and bright,\nJust fading hues in softened light.\n\nThey stare, the finders, wide-eyed and slow,\nAt faces from a world they do not know.\nA tangible past, a fading grace,\nA moment held in time and space.\n\nThe scent of ages, faint and deep,\nOf ink and linen, secrets to keep.\nA final print, a whispered claim,\nBefore the paper turned to flame.\n\nA silent testament, frail and worn,\nTo lives remembered, newly born.\nThe last of paper, a poignant plea,\nTo hold the past, for all to see.\n",
+      "_user": "Write a poem about the last photograph ever printed on paper, found in an attic a hundred years from now. At least 25 lines."
+    }
+  ]
+}

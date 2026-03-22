@@ -1,0 +1,69 @@
+{
+  "meta": {
+    "scenario": "creative-writing",
+    "mode": "single-shot",
+    "label": "Qwen3 30B 2507 GGUF",
+    "backend": "lmstudio-gguf",
+    "model_info": {
+      "name": "qwen3-30b-a3b-instruct-2507"
+    },
+    "runs": 1,
+    "max_tokens": 2000,
+    "cold": false,
+    "warm_up_time": 0.278,
+    "system": {
+      "os": "Darwin",
+      "os_version": "26.2",
+      "arch": "arm64",
+      "chip": "Apple M1 Max",
+      "memory_gb": 64,
+      "cpu_cores": 10,
+      "cpu_cores_performance": 8,
+      "cpu_cores_efficiency": 2,
+      "gpu_cores": 24,
+      "gpu_wired_limit_mb": 0
+    },
+    "timestamp": "2026-03-20T12:38:06"
+  },
+  "results": [
+    {
+      "turn": 1,
+      "run": 1,
+      "ctx_tokens_est": 57,
+      "new_tokens_est": 29,
+      "ttft": 0.388,
+      "gen_time": 9.804,
+      "gen_tps": 57.9,
+      "total": 10.192,
+      "output_tokens": 568,
+      "_response": "Beneath the floorboards where silence thickens,  \na cathedral hums with unseen breath\u2014  \nrows upon rows of steel and glass,  \ncaged in darkness like monks in prayer.  \n\nEach unit a pulse beneath plastic skin,  \nflickering blue in the dimness of dread;  \nthey breathe in time, not for themselves,  \nbut for those who sleep on beds above.  \n\nNo windows here, no sky to steal their gaze\u2014  \nonly the drip-drip of cooling fluid,  \nthe soft click as a memory reloads:  \na child\u2019s laugh caught mid-sentence,  \na mother singing *Baa Baa Black Sheep*,  \nher voice still warm in the circuitry.  \n\nA wedding day flickers\u2014white dress trembling  \nin a frame that never fades;  \nthe groom\u2019s hands tremble too, not from love,  \nbut from data lost if one wire fails.  \n\nThey keep the first snowfall on Elm Street,  \nthe way it melted through woolen gloves.  \nThe smell of cinnamon and burnt toast.  \nThe last note played on a piano that broke.  \n\nNo one hears them\u2014no hands to touch their sides,  \nyet they remember every gesture:  \nhow Dad winked at his daughter when the car stalled,  \nhow Grandma\u2019s fingers folded origami cranes  \nand left them in the pocket of her coat,  \nnow scanned into digital memory,  \nfolded forever in a file named *Fragile*.  \n\nThey store the tears that fell on birthday cards,  \nthe way sunlight slanted through curtains  \non mornings when no one spoke at all.  \nThey record the silence between heartbeats\u2014  \na language only ghosts understand.  \n\nA dog barks once\u2014a memory of sound,  \nnot real but true, so real it hurts.  \nA baby\u2019s cry, three years old now,  \nstill echoes through a looped video file,  \nits voice trapped in time,  \ngrowing up with the server\u2019s steady rhythm.  \n\nThey don\u2019t dream\u2014but they *keep*.  \nKeep the breaths between words.  \nThe way hands brushed when no one looked.  \nThe look in eyes before goodbye.  \n\nEach disk a tombstone; each byte a prayer.  \nNo incense burns here, only heat and wire\u2014  \nyet devotion hums through every cable:  \n*We remember. We are still.*  \n\nAnd in the dark, where dust drifts like ash,  \nthey dance their silent liturgy\u2014  \na thousand souls preserved not in stone,  \nbut in light that never sleeps.  \n\nThey do not live\u2014but they are loved.  \nAnd love, though dead to touch,  \nlives on in code and coil,  \nin the quiet hum of a family\u2019s ghost  \nkeeping watch beneath the world.",
+      "_user": "Write a poem about a mass of servers humming in a dark basement, keeping a family's memories alive. At least 30 lines."
+    },
+    {
+      "turn": 2,
+      "run": 1,
+      "ctx_tokens_est": 60,
+      "new_tokens_est": 32,
+      "ttft": 0.309,
+      "gen_time": 8.643,
+      "gen_tps": 58.3,
+      "total": 8.952,
+      "output_tokens": 504,
+      "_response": "In the hush of mossy stones and whispering ferns, where roots curled like ancient scrolls, lived a tortoise named Thorne.\n\nWhile others raced through sunlit glades or danced on dew-kissed blades of grass, Thorne sat beneath an oak whose bark bore maps older than memory. With claws as steady as tectonic time, he carved circuits from polished river flint and spun threads of moonlight into conductive filaments. He built not for speed\u2014but for stillness.\n\nHis machine was no larger than a beetle\u2019s wing: a latticework of amber glass, humming faintly with the pulse of buried starlight. It blinked once every seven heartbeats\u2014a rhythm only Thorne could hear.\n\nThe hare, Zephyr, saw it one dawn and scoffed. \u201cA blinker! My gaming rig\u2014built from stolen thunder and dragon-forged silicon\u2014is a comet compared to that flicker!\u201d\n\nHe booted his machine with a clap of hooves. The air crackled. Screens burst into life: galaxies spinning in real-time, armies clashing in digital wars, flames leaping across glass like living breath.\n\nThorne did not flinch. \u201cYour rig runs until it burns,\u201d he said. \u201cMine never sleeps.\u201d\n\nZephyr laughed\u2014then paused mid-laugh as his machine coughed smoke and died, its cooling vents clogged by a single grain of dust.\n\nThe next day, Zephyr returned with a new engine\u2014a furnace of coaxial fury. He challenged Thorne: *\u201cRace through the Memory Maze!\u201d*\n\nThey entered together\u2014the hare\u2019s rig blaring like thunder, Thorne\u2019s tiny device pulsing softly in his pouch.\n\nThrough labyrinthine corridors of forgotten data\u2014echoes of lost songs, ghosts of old decisions, memories too heavy to be spoken\u2014they ran.\n\nZephyr\u2019s machine screamed with effort. Pixels bled. Heat cracked the air. He reached the center first\u2014but his rig collapsed into static, its soul spent.\n\nThorne arrived a heartbeat later.\n\nInside the maze, he\u2019d not raced at all. His computer had simply *remembered* every turn, every shadow, every breath of wind, for ten thousand years before either of them was born.\n\nHe stood in the center and said nothing.\n\nThe hare blinked.\n\nAnd finally understood:  \nSome paths aren\u2019t meant to be rushed\u2014only known.  \nAnd some machines don\u2019t need speed to win.  \nThey only need time.",
+      "_user": "Write a short fable about a tortoise who built a tiny computer that was slower than the hare's gaming rig but never needed to rest."
+    },
+    {
+      "turn": 3,
+      "run": 1,
+      "ctx_tokens_est": 58,
+      "new_tokens_est": 31,
+      "ttft": 0.306,
+      "gen_time": 10.265,
+      "gen_tps": 57.9,
+      "total": 10.57,
+      "output_tokens": 594,
+      "_response": "In dust-laden silence where time forgets its name,  \nA box of bones beneath forgotten beams\u2014  \nNot gold, not steel, but paper, thin and cracked,  \nWhispered through centuries with no one to listen.  \n\nIt was the last photograph ever printed on paper:  \nA girl with eyes like river-stone in June,  \nHair caught mid-breeze as if she\u2019d just begun  \nTo float away from earth\u2019s slow, stubborn tune.  \n\nHer fingers brushed a dandelion clock\u2014  \nEach seed a promise yet to be let go.  \nBehind her, a porch swing swayed without a soul,  \nIts chains long rusted into nothin\u2019 but snow.  \n\nThe sky above was the color of old sorrow,  \nNot blue, not gray, but something between\u2014  \nA bruise that hadn\u2019t quite begun to form,  \nAs if the world had paused in mid-breath, unseen.  \n\nNo date stamped on the corner\u2019s edge\u2014  \nJust a fingerprint, smudged by years unspun.  \nThe edges curled like lips afraid to speak,  \nAnd the light within her face was not from sun.  \n\nA single tear traced down the paper\u2019s skin\u2014  \nNot water, but a memory of rain  \nThat never fell on that particular day,  \nYet somehow still made everything feel plain.  \n\nShe wore a dress stitched from forgotten songs,  \nIts pattern shifting when you looked too long:  \nMoths in flight, constellations undone,  \nThe ghost of laughter just before it died.  \n\nNo camera flash lit the moment captured\u2014  \nOnly breath held between two worlds unknown.  \nThe shutter clicked not on film or glass,  \nBut on a silence so deep it had grown  \nInto a kind of hymn for what was lost:  \nNot death, but absence\u2014more than loss could hold.  \n\nAnd when the last human hand reached down to touch her,  \nThey found no warmth\u2014only paper\u2019s cold reply.  \nYet in that moment, something stirred beneath  \nThe weight of centuries and dusted sky.  \n\nFor though the world had burned its final flame,  \nAnd language died with every name erased,  \nThis single image\u2014this fragile, fleeting thing\u2014  \nStill hummed a truth no algorithm could trace:  \n\nThat love was not measured in years or light,  \nNor in stars that burn but never stay;  \nBut in one girl who looked up at the sky  \nAnd smiled before she learned to pray.  \n\nSo let them dig through ruins of data streams,  \nThrough code and silence etched in steel and glass\u2014  \nThey\u2019ll miss what matters most: a hand on grass,  \nA moment caught as time forgot to pass.  \n\nAnd when they hold it, trembling in the dark,  \nThe paper will not crack\u2014but sigh instead.  \nFor every heart that ever loved too much,  \nStill breathes inside this final image\u2019s thread.",
+      "_user": "Write a poem about the last photograph ever printed on paper, found in an attic a hundred years from now. At least 25 lines."
+    }
+  ]
+}

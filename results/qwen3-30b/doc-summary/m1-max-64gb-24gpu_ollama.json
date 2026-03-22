@@ -1,0 +1,108 @@
+{
+  "meta": {
+    "scenario": "doc-summary",
+    "mode": "single-shot",
+    "label": "Qwen3 30B Ollama",
+    "backend": "ollama",
+    "model_info": {
+      "name": "qwen3:30b",
+      "format": "gguf",
+      "family": "qwen3moe",
+      "parameter_size": "30.5B",
+      "quantization": "Q4_K_M"
+    },
+    "runs": 1,
+    "max_tokens": 150,
+    "cold": false,
+    "system": {
+      "os": "Darwin",
+      "os_version": "26.2",
+      "arch": "arm64",
+      "chip": "Apple M1 Max",
+      "memory_gb": 64,
+      "cpu_cores": 10,
+      "cpu_cores_performance": 8,
+      "cpu_cores_efficiency": 2,
+      "gpu_cores": 24,
+      "gpu_wired_limit_mb": 0
+    },
+    "timestamp": "2026-03-20T11:28:08"
+  },
+  "results": [
+    {
+      "turn": 1,
+      "run": 1,
+      "ctx_tokens_est": 425,
+      "new_tokens_est": 324,
+      "ttft": 1.215,
+      "gen_time": 3.397,
+      "gen_tps": 44.2,
+      "total": 4.612,
+      "output_tokens": 150,
+      "prompt_eval_count": 559,
+      "prompt_eval_duration_ms": 1112.7,
+      "_response": "Hmm, the user wants me to classify a document from a family archive. They've provided very specific formatting instructions: I need to output exactly three fields - Category, Tags, and Summary - with no extra commentary.\n\nLooking at this document, it's clearly an electricity bill from Portland Electric Utility. The header says \"Annual Electricity Statement 2025\" with all the standard billing details: account number, meter readings, usage calculations, and payment history. \n\nFor the Category, \"Invoice\" fits perfectly since it's a billing statement for services rendered. Other options like \"Tax\" or \"Legal\" don't apply here. \n\nTags should be concise keywords capturing the essence: \"Electricity Bill\" is obvious, \"Annual Statement\" matches",
+      "_user": "Please process this document:\n\n---\nPORTLAND ELECTRIC UTILITY\nCustomer Service | PO Box 4400 | Portland, OR 97208\n\nThe Miller Family\n742 Maple Street\nPortland, OR 97201\n\nAnnual Electricity Statement 2025\nAccount Number: PE-2025-44812\nBilling Period: 01/01/2025 - 12/31/2025\nMeter Number: EMH-0048712\n\nUsage:\n  Meter reading 01/01/2025:     34,812 kWh\n  Meter reading 12/31/2025:     38,947 kWh\n  Annual consumption:            4,135 kWh\n\nCharges:\n  Energy charge 4,135 kWh x $0.1147/kWh       $474.28\n  Base charge 12 months x $12.50                $150.00\n  Transmission & distribution                   $287.40\n  Public purpose charge                          $85.19\n  Renewable energy surcharge                      $0.00\n  Franchise fee                                  $49.62\n  ---------------------------------------------------\n  Total charges                               $1,046.49\n  Payments received (12 x $85.00)             $1,020.00\n  ---------------------------------------------------\n  Balance due                                    $26.49\n\nYour new monthly payment starting 03/01/2026: $88.00\n\nThe balance will be charged to your account on 03/15/2026.\nBank account ending in: ****4130\n\nQuestions? Call 1-800-555-4321 (toll free)\nor email: service@portlandelectric.example.com\n---"
+    },
+    {
+      "turn": 2,
+      "run": 1,
+      "ctx_tokens_est": 612,
+      "new_tokens_est": 512,
+      "ttft": 0.837,
+      "gen_time": 3.381,
+      "gen_tps": 44.4,
+      "total": 4.218,
+      "output_tokens": 150,
+      "prompt_eval_count": 523,
+      "prompt_eval_duration_ms": 771.2,
+      "_response": "Hmm, the user is asking me to classify a document from a family archive. This is a mid-year report card from Forest Grove Elementary School for a student named Emma Miller. I need to follow the strict format they specified: Category, Tags, and Summary with exactly those three fields.\n\nLooking at the document, it's clearly a school report card. The header has \"FOREST GROVE ELEMENTARY SCHOOL\" and \"Mid-Year Report Card\" with student details. The content is all about academic performance, grades, and teacher comments - no invoices, medical info, or other categories.\n\nFor the Category, \"School Report\" is the exact match from the allowed list. I should avoid generic terms like \"Report\" since the system specifies \"School",
+      "_user": "Next document:\n\n---\nFOREST GROVE ELEMENTARY SCHOOL\nPrincipal's Office | 15 Forest Road | Portland, OR 97201\n\nMid-Year Report Card \u2014 School Year 2025/26\n\nStudent: Emma Miller\nGrade: 3B\nTeacher: Dr. Schneider\nDate: 02/14/2026\n\nEnglish Language Arts:\nEmma reads fluently and with good expression. She understands texts quickly and can summarize their content accurately. Her essays are creative and well-structured. Spelling is solid, with occasional errors on double consonants. She participates regularly in class discussions and contributes her own ideas.\n\nMathematics:\nEmma has a strong grasp of numbers up to 1,000. She completes addition and subtraction problems quickly and accurately. She shows good understanding of written multiplication, though division sometimes takes her a bit longer. She solves word problems methodically and can explain her reasoning. She identifies and names geometric shapes reliably.\n\nScience:\nEmma shows strong interest in natural science topics. For the \"Our Forest\" project she prepared an excellent presentation on mushrooms. She asks thoughtful questions and works carefully during experiments.\n\nArt:\nEmma creates with imagination and persistence. Her color compositions are mature for her age. She enjoys trying new techniques and helps classmates with their projects.\n\nPhysical Education:\nEmma is physically coordinated and shows good effort. In team sports she is fair and supports weaker teammates. In swimming class she earned her Bronze swimming badge.\n\nSocial Skills:\nEmma is friendly, helpful, and respectful toward classmates and teachers. She resolves conflicts calmly and gladly takes on classroom responsibilities.\n\nWork Habits:\nEmma works independently and reliably. Her notebooks are neatly kept. She completes homework conscientiously. She concentrates well and manages her time effectively.\n\nDays absent: 3 (excused)\n\nPortland, 02/14/2026\n\n_________________________          _________________________\nDr. Schneider                      Mr. Brown\nClassroom Teacher                  Principal\n---"
+    },
+    {
+      "turn": 3,
+      "run": 1,
+      "ctx_tokens_est": 535,
+      "new_tokens_est": 434,
+      "ttft": 0.938,
+      "gen_time": 3.43,
+      "gen_tps": 43.7,
+      "total": 4.369,
+      "output_tokens": 150,
+      "prompt_eval_count": 602,
+      "prompt_eval_duration_ms": 871.9,
+      "_response": "Hmm, the user has shared a medical document and wants me to classify it according to specific categories. This looks like a well-child visit report from a pediatrician.\n\nLet me analyze the document carefully. It's from Dr. Karla Hoffman, a family medicine physician, with patient details for Max Miller (DOB 07/15/2019). The document includes physical findings, vision and hearing screenings, motor skills assessment, speech evaluation, immunizations, and recommendations. The key elements are the medical examination, developmental assessment, and specific recommendations like speech therapy.\n\nConsidering the classification options: Invoice (no, it's not financial), School Report (no, this is medical), Certificate (no), Medical (yes, this is clearly",
+      "_user": "And this one:\n\n---\nDR. KARLA HOFFMAN, MD\nFamily Medicine\n3 Linden Plaza | Portland, OR 97205\nTel: 503-555-7890 | Fax: 503-555-7891\n\nWELL-CHILD VISIT REPORT\n\nPatient: Max Miller, DOB 07/15/2019\nDate of examination: 03/03/2026\n\nReason for visit:\n5-year well-child checkup\n\nFindings:\n\nPhysical Development:\n  Height: 46.5 in (75th percentile)\n  Weight: 47.0 lbs (65th percentile)\n  BMI: 15.3 (normal range)\n  General condition good, age-appropriate nutrition\n\nVision:\n  Vision screening passed both eyes (Lea Symbols)\n  No strabismus, stereopsis present\n\nHearing:\n  Audiometry screening unremarkable both ears\n\nMotor Skills:\n  Gross motor: Hops on one foot confidently, catches ball, rides bicycle without training wheels\n  Fine motor: Draws person with 6+ details, cuts out shapes, ties simple knots\n  Age-appropriate development\n\nSpeech & Language:\n  Speaks in complete, grammatically correct sentences\n  Counts to 20, knows colors and shapes\n  Tells coherent stories\n  Mild difficulty with /sh/ and /ch/ sounds \u2014 speech therapy evaluation recommended\n\nSocial-Emotional Development:\n  Age-appropriate. Plays cooperatively, can wait turns, understands simple rules.\n  Parents report occasional tantrums during transitions (leaving playground, etc.) \u2014 within normal range for age.\n\nImmunizations:\n  DTaP/IPV booster administered (Kinrix)\n  Next due: flu vaccine in fall 2026\n\nRecommendations:\n  1. Schedule speech therapy appointment for /sh/ and /ch/ sounds\n  2. Annual dental checkup (last visit >12 months ago)\n  3. Next well-child visit: age 7-8 (pre-kindergarten)\n\nSchool readiness from medical perspective: likely ready.\nSchool district screening still pending.\n\nPortland, 03/03/2026\n\n_________________________\nDr. Karla Hoffman, MD\n---"
+    },
+    {
+      "turn": 4,
+      "run": 1,
+      "ctx_tokens_est": 524,
+      "new_tokens_est": 423,
+      "ttft": 0.894,
+      "gen_time": 3.41,
+      "gen_tps": 44.0,
+      "total": 4.304,
+      "output_tokens": 150,
+      "prompt_eval_count": 577,
+      "prompt_eval_duration_ms": 826.3,
+      "_response": "Hmm, the user has given me a document classification task for a family archive. I need to analyze this insurance notice and categorize it correctly with specific formatting.\n\nLooking at the document, it's clearly from Pacific Northwest Insurance Group addressing Thomas Miller about policy adjustments. The key elements are: policy number HO-2019-887432, effective date 04/01/2026, and specific premium changes ($1,812 to $1,866.36). \n\nI should confirm this isn't another category like \"Legal\" - but no, this is a straightforward insurance policy notice. The \"Notice of Policy Adjustment\" header seals it as Insurance. \n\nFor tags,",
+      "_user": "Next:\n\n---\nPACIFIC NORTHWEST INSURANCE GROUP\n500 Congress Center Blvd | Portland, OR 97204\n\nNotice of Policy Adjustment\n\nPolicyholder: Thomas Miller\nPolicy Number: HO-2019-887432\nPolicy: Homeowner's Insurance Plus\n\nDear Mr. Miller,\n\nDue to the annual adjustment of your insurance policy to the current homeowner's insurance index, we are notifying you of the following changes, effective 04/01/2026:\n\nPrevious coverage amount:       $285,000.00\nNew coverage amount:            $293,550.00 (increase 3.0%)\n\nPrevious annual premium:          $1,812.00\nNew annual premium:               $1,866.36 (increase 3.0%)\nMonthly premium:                    $155.53\n\nYour coverage summary:\n  - Dwelling and personal property against fire, theft, water damage, windstorm/hail\n  - Bicycle theft up to $2,000 (including away from home)\n  - Power surge damage from lightning\n  - Hotel costs if uninhabitable up to $100/day, max 30 days\n  - Deductible: $500 per claim\n  - Guaranteed replacement cost with accurate square footage\n\nCurrent square footage on file: 1,022 sq ft\n\nImportant: If your home's square footage has changed (e.g., addition, finished basement), please notify us within 30 days to ensure your coverage remains adequate.\n\nYou have the right to object to this adjustment within one month of receiving this notice. In that case, your policy will terminate at the next renewal date.\n\nQuestions? Contact us:\nPhone: 503-922-1000 (Mon-Fri 8am-6pm)\nEmail: service@pnw-insurance.example.com\nOnline: www.my-pnw-insurance.example.com\n\nSincerely,\n\nS. Lechner\nProperty Insurance Department\nPacific Northwest Insurance Group\n\nEnclosures:\n- Updated premium schedule\n- Revised policy terms (2026 edition)\n---"
+    },
+    {
+      "turn": 5,
+      "run": 1,
+      "ctx_tokens_est": 1518,
+      "new_tokens_est": 1417,
+      "ttft": 3.034,
+      "gen_time": 3.925,
+      "gen_tps": 38.2,
+      "total": 6.959,
+      "output_tokens": 150,
+      "prompt_eval_count": 1606,
+      "prompt_eval_duration_ms": 2969.1,
+      "_response": "Hmm, the user has given me a document to classify for a family archive. It's a Residential Lease Agreement between Cascade Property Management LLC and the Miller family. I need to categorize this using the specified format.\n\nLooking at the document, it's clearly a lease agreement for residential property. The key elements include tenant names (Thomas and Sarah Miller), property address (742 Maple Street), rent details ($1,970/month), security deposit ($1,970), and lease terms. This matches the \"Legal\" category because it's a binding contract governing landlord-tenant rights.\n\nFor tags, I'll focus on the most distinctive elements: \"Residential Lease\" (the core purpose), \"Oregon Law\" (since it",
+      "_user": "Process this multi-page document:\n\n---\nRESIDENTIAL LEASE AGREEMENT\n\nBetween\n  Cascade Property Management LLC\n  represented by Stefan Huber, Managing Partner\n  500 Congress Center Blvd, Suite 400, Portland, OR 97204\n  Tax ID: 93-1234567\n  \u2014 hereinafter \"Landlord\" \u2014\n\nand\n  Thomas Miller and Sarah Miller\n  currently residing at: 12 Birch Lane, Portland, OR 97225\n  \u2014 hereinafter \"Tenant\" \u2014\n\nThe following lease agreement is entered into:\n\nSECTION 1: PREMISES\n\nThe Landlord leases to the Tenant the following dwelling:\n  Address: 742 Maple Street, Unit 2A, Portland, OR 97201\n  Living area: approximately 1,022 sq ft\n  Rooms: 4 (3 bedrooms, kitchen, bathroom, hallway, storage closet)\n  Year built: 1962, last renovation: 2019\n  Energy rating: 87 kBtu/sq ft/yr, Class C\n  Heating: Central gas furnace\n\nIncluded with the unit:\n  - Storage unit #7 in basement (approx. 85 sq ft)\n  - 1 parking space in underground garage (#TG-14)\n  - Shared use: laundry room, drying room, bicycle storage, garden\n\nNot included:\n  - Attic (restricted access)\n  - Community sauna in basement (separate agreement required)\n\nSECTION 2: LEASE TERM\n\nThe lease begins on 05/01/2021 and runs for an indefinite period.\nEither party may terminate with 30 days written notice before the end of the month.\nAfter 12 months of tenancy, the Landlord's notice period extends to 60 days.\nAfter 24 months, the Landlord's notice period extends to 90 days.\nOregon state law (ORS 90.427) governs all termination procedures.\n\nSECTION 3: RENT AND UTILITIES\n\n3.1 Base Rent:\n  Dwelling:     $1,850.00/month\n  Parking:        $120.00/month\n  Total:        $1,970.00/month\n\n3.2 Utilities included in rent:\n  Water/sewer, garbage collection, recycling\n\n3.3 Utilities paid by Tenant:\n  Electricity, gas (heating), internet, renter's insurance\n\n3.4 Estimated monthly utility costs (for reference only):\n  Gas (heating/hot water):   $145.00/month (winter avg)\n  Electricity:                $85.00/month\n  Internet:                   $65.00/month\n\n3.5 Total estimated monthly cost: $2,265.00/month\n\n3.6 Rent is due on the 1st of each month. A grace period of 4 days\n    is provided. Late fee of $50.00 applies after the 5th.\n    Payment by check or electronic transfer to:\n    Cascade Property Management LLC\n    Account ending in: ****3456\n    Reference: Rent 742Maple/2A - Miller\n\nSECTION 4: SECURITY DEPOSIT\n\n4.1 The Tenant shall pay a security deposit equal to one month's rent:\n    $1,970.00\n\n4.2 The deposit shall be held in a trust account per Oregon law (ORS 90.300).\n\n4.3 The deposit shall be returned within 31 days of lease termination,\n    less any lawful deductions for:\n    - Unpaid rent or utilities\n    - Damage beyond normal wear and tear\n    - Cleaning costs if unit is not left in reasonable condition\n\n4.4 An itemized statement of any deductions shall accompany\n    the deposit return.\n\nSECTION 5: CONDITION OF PREMISES\n\n5.1 The Tenant has inspected the unit and accepts it in its\n    current condition, subject to the following noted defects:\n\n5.2 Move-in condition report (attached as Exhibit C):\n    - Bedroom 2: Scratch on hardwood floor near window (approx. 12x8 in)\n    - Bathroom: Caulking around bathtub discolored (Landlord will replace\n      within 4 weeks of move-in)\n    - Kitchen: Dishwasher connection leaking (will be repaired before move-in)\n\n5.3 A detailed move-in checklist with photographs is attached as Exhibit C.\n\nSECTION 6: MAINTENANCE AND REPAIRS\n\n6.1 The Landlord is responsible for:\n    - Structural repairs and maintenance\n    - Plumbing, electrical, and HVAC systems\n    - Appliance repair/replacement (those provided by Landlord)\n    - Common area maintenance\n    - Pest control\n\n6.2 The Tenant is responsible for:\n    - Keeping the unit clean and sanitary\n    - Minor maintenance (light bulbs, HVAC filters, smoke detector batteries)\n    - Reporting maintenance issues promptly in writing\n    - Damage caused by Tenant, household members, or guests\n\n6.3 Emergency maintenance (burst pipe, no heat in winter, electrical hazard)\n    should be reported immediately to: 503-555-9111 (24-hour line)\n\nSECTION 7: HOUSE RULES\n\nThe attached house rules (Exhibit B) are part of this agreement.\nKey provisions:\n  - Quiet hours: 10:00 PM - 7:00 AM daily\n  - No charcoal or gas grills on balconies. Electric grills permitted.\n  - Smoking: Permitted inside unit only, not in common areas or balcony\n  - Pets: Small caged animals (fish, hamsters) allowed. Dogs and cats\n    require prior written approval from Landlord. Pet deposit of $500 applies.\n  - Musical instruments: Maximum 2 hours daily, not during quiet hours\n  - Parking: One assigned space only. No vehicle repairs in garage.\n  - Storage: No flammable materials in storage unit or common areas.\n\nSECTION 8: GENERAL PROVISIONS\n\n8.1 Amendments to this agreement must be in writing and signed by both parties.\n8.2 If any provision is found unenforceable, the remaining provisions\n    shall remain in effect.\n8.3 This agreement is governed by Oregon Residential Landlord and Tenant Act.\n8.4 Two copies of this agreement are prepared, one for each party.\n\nExhibits:\n  A. Floor plan of the unit\n  B. House rules\n  C. Move-in condition report with photographs\n  D. Lead-based paint disclosure (pre-1978 building)\n  E. Mold information disclosure\n  F. Security deposit receipt\n\nPortland, OR, 04/15/2021\n\n_________________________          _________________________\nStefan Huber                       Thomas Miller\nCascade Property Management        Tenant\nLLC, Managing Partner\n\n                                   _________________________\n                                   Sarah Miller\n                                   Tenant\n---"
+    }
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "meta": {
+    "scenario": "creative-writing",
+    "mode": "single-shot",
+    "label": "Qwen3 30B llama.cpp raw",
+    "backend": "llama-server",
+    "model_info": {
+      "name": "Qwen3-30B-A3B-Instruct-2507"
+    },
+    "runs": 1,
+    "max_tokens": 2000,
+    "cold": false,
+    "warm_up_time": 0.153,
+    "system": {
+      "os": "Darwin",
+      "os_version": "26.2",
+      "arch": "arm64",
+      "chip": "Apple M1 Max",
+      "memory_gb": 64,
+      "cpu_cores": 10,
+      "cpu_cores_performance": 8,
+      "cpu_cores_efficiency": 2,
+      "gpu_cores": 24,
+      "gpu_wired_limit_mb": 0
+    },
+    "timestamp": "2026-03-20T13:38:58"
+  },
+  "results": [
+    {
+      "turn": 1,
+      "run": 1,
+      "ctx_tokens_est": 57,
+      "new_tokens_est": 29,
+      "ttft": 0.291,
+      "gen_time": 11.986,
+      "gen_tps": 55.9,
+      "total": 12.277,
+      "output_tokens": 670,
+      "_response": "Beneath the floor where silence sleeps,  \nbeneath the stair that creaks and weeps,  \na thousand hearts in metal throats  \nbeat time in steady, hidden notes.  \n\nNo breath, no pulse, no fleeting glance\u2014  \njust circuits humming, slow, immense.  \nA thousand glass eyes, cold and bright,  \nwatching through the night\u2019s long flight.  \n\nHere, in the damp and shadowed hold,  \nwhere dust has learned to kneel and fold,  \na million whispers, trapped and spun,  \nlike moths beneath a frozen sun.  \n\nA child\u2019s first laugh, a lullaby,  \na father\u2019s voice, \u201cCome home, come by,\u201d  \nthe wedding toast, the whispered prayer,  \nthe firelight dancing in the air\u2014  \n\nall stored in chambers, sealed and deep,  \nwhere memory is not what it seems.  \nNot flesh, nor blood, nor warm embrace,  \nbut data etched in silent grace.  \n\nThe mother\u2019s hands, the summer\u2019s heat,  \nthe dog who barked at midnight\u2019s beat,  \nthe scraped knee, the book on the shelf,  \nthe way the rain would kiss the eaves\u2014  \n\nall held in rows of blinking light,  \nlike stars that died but still burn bright.  \nThey do not dream, yet dream they keep\u2014  \na ghost of love, a living sleep.  \n\nA birthday cake with candles high,  \na stolen kiss beneath the sky,  \nthe sound of waves on shore so far,  \na song that played just once, too rare.  \n\nNo one comes down here to pray,  \nno hands to touch, no lips to say\u2014  \n\u201cRemember me?\u201d\u2014yet still they wait,  \nfor someone, somewhere, to relate.  \n\nThe cooling fans, like ancient wings,  \nsigh through the dark with steady strings.  \nA single server, faintly red,  \nflares once, then fades like a thought led.  \n\nThe air is thick with static hum,  \na low, electric, living drum.  \nNot life, not death\u2014just what remains  \nwhen time forgets, but hearts still strain.  \n\nA name is typed in a forgotten file,  \na voice recorded, lost in style.  \nA photo fades to grainy grey\u2014  \nyet still it shows the laughing day.  \n\nNo one knows, no one can see,  \nbut in the dark, the truth is free:  \nthese machines do not remember,  \nthey only *are*\u2014and so they *remember*.  \n\nThey hold the moments that were real,  \nthe way the world used to feel.  \nNot life, but love\u2019s faint, stubborn trace\u2014  \na memory that refuses to erase.  \n\nAnd when the world above forgets,  \nwhen all the living fade and fret,  \nthese silent hearts will still recall\u2014  \nthe family\u2019s breath, the love\u2019s soft call.  \n\nIn this cold vault, beneath the floor,  \nwhere silence learns to hum and soar,  \nthey keep the past in steady light,  \na ghost of love, a pulse of night.  \n\nFor every heart that once has beat,  \nfor every dream that ever fleet,  \na thousand servers, cold and true,  \nhold love in silence\u2014ever new.",
+      "_user": "Write a poem about a mass of servers humming in a dark basement, keeping a family's memories alive. At least 30 lines."
+    },
+    {
+      "turn": 2,
+      "run": 1,
+      "ctx_tokens_est": 60,
+      "new_tokens_est": 32,
+      "ttft": 0.217,
+      "gen_time": 8.755,
+      "gen_tps": 57.0,
+      "total": 8.972,
+      "output_tokens": 499,
+      "_response": "In the moss-draped hollow where the roots of ancient oaks cradled forgotten dreams, there lived a tortoise named Thistle. Not swift, not bold, but with eyes like polished river stones and a mind that hummed with quiet invention.\n\nOne twilight, while the fireflies stitched the air with gold, Thistle carved a box from birch bark, laced it with copper wire spun from spider silk, and powered it with the slow pulse of a captured dandelion seed \u2014 a battery of wind and memory. He called it the *StillMind*.\n\nIt was smaller than a beetle\u2019s wing, slower than a snail\u2019s sigh. When the hare, Flash, booted his gleaming gaming rig \u2014 a thundering beast of whirring fans and neon veins \u2014 the *StillMind* blinked once, then slept for a full hour before replying.\n\n\u201cFoolish,\u201d Flash scoffed, launching a game where stars exploded in digital rain. \u201cYou\u2019ll never keep up!\u201d\n\nBut Thistle smiled beneath his shell. For the *StillMind* did not race. It remembered. It calculated. It stored every dewdrop that fell, every leaf that turned, every breath of the forest.\n\nWhen the Great Blight came \u2014 a storm of shadow that choked the trees and silenced the streams \u2014 Flash\u2019s rig burned out in a scream of sparks. His circuits melted like wax in fire.\n\nThistle, meanwhile, sat beneath the weeping willow. His *StillMind* hummed in the dark, its memory intact: the shape of the first spring bloom, the path of the migrating heron, the song of the stream before it dried.\n\nHe whispered the old songs into the machine. And from its tiny heart, a single note emerged \u2014 not of flame or speed, but of green, of roots, of time.\n\nThe forest stirred.\n\nNot with lightning, nor with fire, but with quiet: the scent of new moss, the first green shoot cracking stone.\n\nFlash, half-buried in ash, heard it. He crawled toward the light.\n\n\u201cWhy did you win?\u201d he breathed.\n\nThistle turned his slow eyes. \u201cI never raced. I simply remembered. And memory,\u201d he said, \u201cnever rests.\u201d\n\nFrom that day, the *StillMind* sat in the hollow, a single flicker in the dark \u2014 a testament not to speed, but to the deep, endless patience of the world that remembers.",
+      "_user": "Write a short fable about a tortoise who built a tiny computer that was slower than the hare's gaming rig but never needed to rest."
+    },
+    {
+      "turn": 3,
+      "run": 1,
+      "ctx_tokens_est": 58,
+      "new_tokens_est": 31,
+      "ttft": 0.217,
+      "gen_time": 10.621,
+      "gen_tps": 56.2,
+      "total": 10.837,
+      "output_tokens": 597,
+      "_response": "Beneath a shroud of dust and time\u2019s soft breath,  \nwhere sunlight threads through broken window glass,  \na box of bones and whispers, half-dead,  \nlies cradled in the silence of the past.  \n\nThe air is thick with ghosts of forgotten names,  \nwith letters folded tight like buried wounds.  \nA single envelope, its seal still tame,  \nholds what the world believed it could not lose.  \n\nUnwrapped with care\u2014like unearthing a prayer\u2014  \na photograph unfolds in brittle light.  \nNo flash, no frame, no digital flair,  \njust paper, stained with time\u2019s slow, sallow bite.  \n\nIt shows a child, barefoot in summer grass,  \nkneeling by a stream that no longer flows.  \nHer laughter caught in silver-toned distress,  \na moment frozen where the world still grows.  \n\nShe wears a dress of faded, sun-bleached blue\u2014  \na color now erased by centuries of rain.  \nHer hair, a tangle of wild, sunlit dew,  \nfalls like a river lost to time again.  \n\nBehind her, a house with shutters cracked and thin,  \na porch swing creaking in a dreamless breeze.  \nA dog, half-ghost, half-shadow, sits within  \nthe frame, its eyes still watching for the trees.  \n\nNo one remembers why the picture was made,  \nor who held the camera, or who stood still.  \nOnly the child remains, unafraid,  \nher face a compass set to truth\u2019s own will.  \n\nThe print, though yellowed, still holds warmth,  \nas if the sun that once poured down on her  \nstill lingers in the paper\u2019s faintly marked  \nedges, where the light once kissed the blur.  \n\nNo digital trace, no cloud, no ghost of code,  \nno password lost in endless streams.  \nThis one small square, this fragile, fated load,  \nis all the world has left of what it dreams.  \n\nThe child stares up\u2014not at you, but through\u2014  \nas if she knows the attic\u2019s silent weight.  \nShe sees the future, sees the centuries\u2019 due,  \nand smiles, though time has stolen every date.  \n\nA hundred years have turned the world to dust,  \nand nations rise and fall like waves on shore.  \nBut here, in this forgotten, cracked, and just  \na single image still remembers more.  \n\nIt does not speak. It does not claim. It *is*.  \nAnd in its gaze, the universe is whole\u2014  \na single breath, a child, a sunlit kiss,  \na final, quiet proof we were not soulless.  \n\nWhen all the stars have cooled, and memory\u2019s gone,  \nand no one names the names we used to know\u2014  \nthis photograph, this fragile, dying dawn,  \nwill be the last thing light has ever shown.",
+      "_user": "Write a poem about the last photograph ever printed on paper, found in an attic a hundred years from now. At least 25 lines."
+    }
+  ]
+}
