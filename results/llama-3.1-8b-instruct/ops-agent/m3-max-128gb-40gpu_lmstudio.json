@@ -1,0 +1,141 @@
+{
+  "meta": {
+    "scenario": "ops-agent",
+    "mode": "conversation",
+    "label": "m3-max-128gb-40gpu lmstudio",
+    "backend": "lmstudio",
+    "model_info": {
+      "name": "llama-3.1-8b-instruct"
+    },
+    "runs": 1,
+    "max_tokens": 500,
+    "cold": false,
+    "system": {
+      "os": "Darwin",
+      "os_version": "26.3.1",
+      "arch": "arm64",
+      "chip": "Apple M3 Max",
+      "memory_gb": 128,
+      "cpu_cores": 16,
+      "cpu_cores_performance": 12,
+      "cpu_cores_efficiency": 4,
+      "gpu_cores": 40,
+      "gpu_wired_limit_mb": 0
+    },
+    "timestamp": "2026-03-22T12:56:38"
+  },
+  "results": [
+    {
+      "turn": 1,
+      "run": 1,
+      "ctx_tokens_est": 575,
+      "new_tokens_est": 421,
+      "ttft": 1.076,
+      "gen_time": 2.739,
+      "gen_tps": 74.5,
+      "total": 3.815,
+      "output_tokens": 204,
+      "tool": "server_status",
+      "_response": "It looks like our server is running smoothly, but there are a few things to note. \n\n- **Uptime**: The server has been running for 12 days, which is a good sign.\n- **Load average**: The load average has been fluctuating between 2.4 to 3.8, which is relatively high but might not be a cause for concern.\n- **Memory usage**: We're using 47.3 GB out of 64, which is around 74% usage. This might be a bit high.\n- **Services**: Most services are running within expected CPU and memory usage. However, the `immich-ml` service is consuming a significant amount of CPU (45.2%) and memory (8.2 GB), which might be a sign that it's not optimized or needs more resources.\n\nI'd recommend checking the `immich-ml` service logs to see if there are any issues or optimizing its configuration.\n\nLet me run `service_logs` for you to see the recent log lines.",
+      "_user": "Something feels off with the server. Can you check what's running?"
+    },
+    {
+      "turn": 2,
+      "run": 1,
+      "ctx_tokens_est": 1020,
+      "new_tokens_est": 235,
+      "ttft": 0.708,
+      "gen_time": 2.938,
+      "gen_tps": 75.2,
+      "total": 3.646,
+      "output_tokens": 221,
+      "tool": "service_logs",
+      "_response": "The `immich-ml` service is performing facial recognition and CLIP embedding tasks. It's processing a large batch of images (1203) and seems to be doing its job.\n\nHowever, there are a few things to note:\n\n- **CPU-intensive tasks**: The service is performing CPU-intensive tasks like facial recognition, clustering face embeddings, and generating CLIP embeddings. This explains the high CPU usage (45.2%).\n- **Memory issues**: The service detected a low memory condition and triggered the garbage collector (GC). This resulted in 1.2 GB of memory being freed.\n- **Long-running task**: The service is processing a large batch of images, and it estimates that there are 351 images remaining to be processed. This task is expected to take around 45 minutes.\n\nIt seems like the `immich-ml` service is designed for batch processing and might not be optimized for continuous or real-time processing. If this service needs to run continuously, we might need to consider optimizing its configuration or scaling it up.\n\nLet me check the disk usage and make sure we have enough space.",
+      "_user": "Immich ML is eating a lot of CPU. What's it doing?"
+    },
+    {
+      "turn": 3,
+      "run": 1,
+      "ctx_tokens_est": 1378,
+      "new_tokens_est": 89,
+      "ttft": 0.36,
+      "gen_time": 1.998,
+      "gen_tps": 73.6,
+      "total": 2.358,
+      "output_tokens": 147,
+      "tool": "docker_exec",
+      "_response": "It looks like the `immich-ml` service is using a significant amount of memory, around 8.2 GB, which is about 68% of its configured limit (12 GB). This might cause issues if the service continues to grow or if we need to scale it up.\n\nGiven that we uploaded vacation photos yesterday, this might be the cause of the increased memory usage. However, since the service has a configured limit (12 GB), it should not exceed this amount.\n\nTo ensure that the service doesn't run out of memory, I'd recommend keeping an eye on its usage and consider adding more resources or optimizing the service if necessary.\n\nLet me check the disk space to see if we have enough room for any potential growth.",
+      "_user": "Ah right, we uploaded vacation photos yesterday. Is it going to be OK memory-wise?"
+    },
+    {
+      "turn": 4,
+      "run": 1,
+      "ctx_tokens_est": 1764,
+      "new_tokens_est": 214,
+      "ttft": 0.566,
+      "gen_time": 2.381,
+      "gen_tps": 71.0,
+      "total": 2.946,
+      "output_tokens": 169,
+      "tool": "backup_status",
+      "_response": "It looks like last night's backup ran successfully, but with some warnings. The backup completed at 2:00 AM yesterday and transferred approximately 12.4 GB of data.\n\nThere are a couple of warnings:\n\n- **Vault eject failed (non-fatal)**: This is likely a non-critical issue and didn't prevent the backup from completing. I'd recommend investigating this further to ensure it's not a sign of a larger problem.\n- **uchg flags applied successfully**: This is probably related to how the backup tool interacts with certain file systems. It's good that it applied successfully, but I'd keep an eye on this to make sure it doesn't cause any issues in the future.\n\nThe backup also transferred 1847 files and synced 23 and 15 files on the two previous nights, respectively.\n\nIt seems like our vacation photos are safe!",
+      "_user": "Good. Check if last night's backup ran. I want to make sure the vacation photos are safe."
+    },
+    {
+      "turn": 5,
+      "run": 1,
+      "ctx_tokens_est": 2206,
+      "new_tokens_est": 239,
+      "ttft": 0.689,
+      "gen_time": 4.74,
+      "gen_tps": 70.0,
+      "total": 5.429,
+      "output_tokens": 332,
+      "tool": "disk_usage",
+      "_response": "It looks like we have three primary drives: the system volume (`/`), a backup vault (`/Volumes/backup-vault`), and a Time Machine volume (`/Volumes/time-machine`). Let's take a look at each drive individually.\n\n- **System Volume (/)**: This is the main system volume, and it's using about 33% of its total space (1.2 TB out of 3.6 TB). This is a relatively low usage, so we're good for now.\n- **Backup Vault (/Volumes/backup-vault)**: This drive is mostly used for backups, and it's currently using about 69% of its total space (3.8 TB out of 5.5 TB). This is a bit concerning, as we're getting close to filling up this drive.\n- **Time Machine Volume (/Volumes/time-machine)**: This drive is used for Time Machine backups, and it's currently using about 75% of its total space (4.1 TB out of 5.5 TB). This is a bit alarming, as we're getting close to running out of space for our Time Machine backups.\n\nAs for the data directory (`~/server/data`), it's using a total of 892 GB, with most of that space being used by the `photos` directory (634 GB). The other directories (`documents`, `messages`, and `code-repo`) are using relatively small amounts of space.\n\nOverall, it looks like we need to free up some space on the backup vault and Time Machine volume. I'd recommend reviewing our backup schedules and retention policies to see if we can optimize our backups without running out of space.",
+      "_user": "The vault didn't eject again. How's disk space looking on all drives?"
+    },
+    {
+      "turn": 6,
+      "run": 1,
+      "ctx_tokens_est": 2804,
+      "new_tokens_est": 249,
+      "ttft": 0.787,
+      "gen_time": 1.927,
+      "gen_tps": 70.1,
+      "total": 2.714,
+      "output_tokens": 135,
+      "tool": "service_logs",
+      "_response": "It looks like Paperless successfully processed the school documents you scanned this morning.\n\nHere's what happened:\n\n- **3 new files detected**: Paperless noticed that you added 3 new files to the consumption directory.\n- **Processing documents**: Paperless processed each of these documents, performing OCR (Optical Character Recognition) on them and auto-classifying them into different types.\n- **School report, certificate, and invoice processed**: Specifically, Paperless processed a school report for Emma, a swimming certificate for Max, and an electricity bill invoice.\n- **No errors**: Paperless completed processing all 3 documents without any errors.\n\nIt seems like everything is working as expected with Paperless!",
+      "_user": "Time Machine is at 75%. Also did Paperless process the school documents I scanned this morning?"
+    },
+    {
+      "turn": 7,
+      "run": 1,
+      "ctx_tokens_est": 3085,
+      "new_tokens_est": 98,
+      "ttft": 0.36,
+      "gen_time": 3.459,
+      "gen_tps": 66.2,
+      "total": 3.819,
+      "output_tokens": 229,
+      "tool": "docker_exec",
+      "_response": "It looks like the Matrix database is relatively large, with a total size of 2.1 GB.\n\nBreaking down the largest tables, we see that:\n\n- **state_groups_state** is the largest table, taking up 845 MB. This suggests that there are a significant number of state group memberships in the Matrix database.\n- **event_json** and **events** are also large tables, taking up 412 MB and 298 MB respectively. This indicates that there have been a lot of events (e.g., messages, file uploads) in the Matrix database.\n- **event_edges** is a smaller but still significant table, taking up 187 MB. This suggests that there are a lot of relationships between events in the database.\n- **receipts_linearized** and **room_memberships** are smaller tables, taking up 94 MB and 67 MB respectively.\n\nIt's not surprising that the Matrix database has been \"chatty\" lately, given its size and complexity. However, it's good to know that the largest tables are manageable and not causing any significant issues.\n\nLet me check if there's anything we can do to optimize the database or improve performance.",
+      "_user": "Nice, it even picked up the electricity bill. How big is the Matrix database? It's been chatty lately."
+    },
+    {
+      "turn": 8,
+      "run": 1,
+      "ctx_tokens_est": 3542,
+      "new_tokens_est": 188,
+      "ttft": 0.629,
+      "gen_time": 2.842,
+      "gen_tps": 66.2,
+      "total": 3.471,
+      "output_tokens": 188,
+      "tool": "docker_exec",
+      "_response": "It looks like we have a list of rooms and their corresponding event counts.\n\nHere are the top 3 rooms by events:\n\n- **#family** has 8,934 events, which is the most in the list. This suggests that there's been a lot of activity in this room.\n- **#server** has 12,847 events, which is the most of any room. This might be due to the fact that this room is used for server-related discussions and notifications.\n- **#test-room** has 4,521 events, which is a significant number. This might be due to the fact that this room was used for testing and development purposes.\n\nThe other rooms have fewer events, but it's still interesting to see the breakdown. The total number of events across all rooms is 34,286.\n\nIt seems like we have a good understanding of which rooms are the most active and might be contributing to the size of the Matrix database.",
+      "_user": "2.1GB for Matrix seems like a lot. Can we see which rooms take the most space?"
+    }
+  ]
+}

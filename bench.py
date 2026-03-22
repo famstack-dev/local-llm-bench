@@ -326,6 +326,21 @@ def check_backend(backend, base_url, model):
                 sys.exit(1)
         except (json.JSONDecodeError, KeyError):
             pass  # Can't parse response, let the benchmark try anyway
+    elif backend == "lmstudio":                                      # Check if LMStudio model backend is available
+        try:
+            data = json.loads(body)
+            available = [m.get("id", "") for m in data.get("data", [])]
+            if available and model not in available:
+                print(f"Error: Model '{model}' is not loaded in LM Studio.\n",
+                      file=sys.stderr)
+                print(f"  Loaded models:", file=sys.stderr)
+                for m in sorted(available):
+                    print(f"    - {m}", file=sys.stderr)
+                print(f"\n  Load the model in LM Studio, or pass one of the above"
+                      f" with --model.\n", file=sys.stderr)
+                sys.exit(1)
+        except (json.JSONDecodeError, KeyError):
+            pass  # Can't parse response, let the benchmark try anyway
 
 
 def estimate_max_context(scenario):

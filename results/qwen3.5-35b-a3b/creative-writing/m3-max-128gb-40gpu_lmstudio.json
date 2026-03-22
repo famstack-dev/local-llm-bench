@@ -1,0 +1,69 @@
+{
+  "meta": {
+    "scenario": "creative-writing",
+    "mode": "single-shot",
+    "label": "LM Studio MLX",
+    "backend": "lmstudio",
+    "model_info": {
+      "name": "qwen3.5-35b-a3b"
+    },
+    "runs": 1,
+    "max_tokens": 2000,
+    "cold": false,
+    "warm_up_time": 2.87,
+    "system": {
+      "os": "Darwin",
+      "os_version": "26.3.1",
+      "arch": "arm64",
+      "chip": "Apple M3 Max",
+      "memory_gb": 128,
+      "cpu_cores": 16,
+      "cpu_cores_performance": 12,
+      "cpu_cores_efficiency": 4,
+      "gpu_cores": 40,
+      "gpu_wired_limit_mb": 0
+    },
+    "timestamp": "2026-03-22T10:34:11"
+  },
+  "results": [
+    {
+      "turn": 1,
+      "run": 1,
+      "ctx_tokens_est": 57,
+      "new_tokens_est": 29,
+      "ttft": 2.949,
+      "gen_time": 4.368,
+      "gen_tps": 94.3,
+      "total": 7.317,
+      "output_tokens": 412,
+      "_response": "Beneath the root system, where the streetlights cease to gleam,\nThe air is thick with static and a cold, blue-lit dream.\nA thousand black servers stand in rows like silent metal monks,\nTheir cooling fans a chorus of low, electric rungs.\nThey hum a steady lullaby to keep the ghosts from turning grey,\nWhile wires like silver ivy climb and twist throughout the day.\n\nIn here, no dust can settle on the spinning drives of old,\nFor data streams flow fast and loud within this heavy hold.\nA wedding gown in pixels hangs, preserved against the fade,\nThe laughter of a newborn recorded in a digital shade.\nA video of a summer storm that fell three decades past,\nIs replayed in perfect loop to keep the memory vast.\n\nThe father's voice, now just a code of ones and zeros deep,\nSays \"Be kind to your own,\" while secrets softly creep.\nA mother's recipe for pie, a father's fishing spot,\nAre cached within the circuits where the shadows often rot.\nNo sun can reach this basement floor, no moon to paint the walls,\nJust flickering green LEDs behind the server halls.\n\nBut if one drive should crack and fail, a piece of them would die,\nA fragment of the grandfather's face would lose its sky.\nSo they hum louder, harder still, to push the heat away,\nTo keep the family's history from fading into gray.\nA digital cathedral built for those who walk below,\nWhere love and loss alike are kept in steady, glowing flow.\n\nThe power goes out for a second, then the emergency kicks in,\nA backup generator starts to let the data spin.\nNo tombstone marks this place of things that cannot rot or rust,\nJust humming voices of the past and future firmly gusted.\nThey stand beneath the city streets, a subconscious mind,\nTo hold the family's history until the time is kind.",
+      "_user": "Write a poem about a mass of servers humming in a dark basement, keeping a family's memories alive. At least 30 lines."
+    },
+    {
+      "turn": 2,
+      "run": 1,
+      "ctx_tokens_est": 60,
+      "new_tokens_est": 32,
+      "ttft": 2.92,
+      "gen_time": 7.528,
+      "gen_tps": 91.5,
+      "total": 10.448,
+      "output_tokens": 689,
+      "_response": "In the forest of Silicon, where vines tangled with copper wire and owls hooted in binary code, lived a tortoise named Thaddeus. While the hare, Zephyr, charged through the digital highlands with a rig of polished chrome and liquid cooling that hummed with reckless energy, Thaddeus moved slowly.\n\nZephyr's machine rendered worlds in nanoseconds, lighting up the skybox with blinding ray-traced suns. He played the Great Race of Pixels, a game that demanded reflexes faster than light, and he won every match before the loading bar had even crept a fraction of an inch.\n\nThaddeus, however, did not play to win. He played to endure.\n\nHis computer was a clunky thing, fashioned from river stones and dried reeds, wired together with spider silk and hope. It did not render the skybox; it simply held the memory of the sun. Its processor was a single, slow crystal that ticked once every minute to update its thoughts. It could not run the Great Race, nor could it simulate a storm in real-time.\n\n\"Look at you,\" Zephyr laughed, his cooling fans spinning like a jet engine as he defeated the boss monster for the hundredth time. \"Your screen takes an hour to turn on, and your frame rate is a single heartbeat per minute. You will never beat the game.\"\n\n\"I am not playing to beat it,\" Thaddeus replied, his slow eyes scanning the pixelated grass. \"I am playing to see it grow.\"\n\nHours passed, then days. Zephyr's rig began to overheat. The glorious chrome cracked under the strain of his constant, breathless victory laps. He had to shut down his rig every night, sleeping while the game world froze before him. When he woke, the digital sun had risen and set a thousand times in the span of his dreamless rest. He forgot the color of the grass, for he had only seen it in the frantic flicker of victory screens.\n\nThaddeus, however, did not rest. He did not power down. His tiny computer ran a single, endless loop of data, updating slowly but surely. A pixel here changed color; a tree grew one leaf at a time. Because his machine was so slow, it did not burn out the world it rendered; it built it up layer by layer.\n\nYears of digital time passed, and Zephyr's rig finally shattered under the weight of its own speed. The screen went black, and the silence was total. Zephyr could not remember what he had played, for his machine had never finished a season.\n\nBut in the forest of Silicon, Thaddeus's tiny screen still glowed with a soft, amber light. Inside that slow machine, the Great Race had finally completed its full cycle three times over. The grass was now an ancient forest, the rivers had carved their paths, and the digital sun had painted a million different skies across the screen.\n\nZephyr stared in awe at the slow, steady screen. \"You did it,\" he whispered to the silence. \"How?\"\n\nThaddeus smiled, his shell gleaming in the low-resolution light. \"I never stopped to blink. My computer was slow, so I had all the time in the world.\"",
+      "_user": "Write a short fable about a tortoise who built a tiny computer that was slower than the hare's gaming rig but never needed to rest."
+    },
+    {
+      "turn": 3,
+      "run": 1,
+      "ctx_tokens_est": 58,
+      "new_tokens_est": 31,
+      "ttft": 2.919,
+      "gen_time": 3.804,
+      "gen_tps": 90.7,
+      "total": 6.723,
+      "output_tokens": 345,
+      "_response": "The attic holds the silence of a century,\nWhere dust motes dance in beams that never sleep.\nBeneath the eaves, a leather-bound mystery\nIs pressed against the wood of some old sheep.\nA box opens to reveal a single sheet,\nNot pixels scaled by algorithms of the dark,\nBut silver halide that makes a cold and sweet\nReflection from a smile that fades to mark.\nThe edges curl with time's own gentle bite,\nA sepia ghost of hands that held the light.\nNo digital decay has touched its night,\nNo data loss to strip the soul from sight.\nIt shows a child beneath an oak tree's bough,\nWho laughed before the screens began to hum.\nThat laughter hangs within the paper now,\nA frozen song that waits for someone's drum.\nThe ink has turned to brown, the colors deep,\nA memory that no cloud can steal away.\nThe grain is rough, a promise to the sleep,\nOf all the things we thought would stay today.\nWe built our world of glass and blinking wire,\nTo store the moments that we feared to lose.\nBut here beneath the wooden attic mire,\nThe truth remains within these soft, old hues.\nA father's face is worn by thirty years,\nThe corners torn where fingers used to trace.\nA final printed snapshot of our fears,\nThat time has found a use for to embrace.\nThe photographer is gone, the camera rusted,\nYet the image holds a life that never ends.\nThe world has turned to noise and dust and musted,\nBut this small square of light remains our friend.",
+      "_user": "Write a poem about the last photograph ever printed on paper, found in an attic a hundred years from now. At least 25 lines."
+    }
+  ]
+}
