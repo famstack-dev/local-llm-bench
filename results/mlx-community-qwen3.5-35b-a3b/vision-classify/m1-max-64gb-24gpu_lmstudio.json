@@ -1,0 +1,133 @@
+{
+  "meta": {
+    "scenario": "vision-classify",
+    "mode": "single-shot",
+    "label": "Qwen3.5-35B-A3B",
+    "backend": "lmstudio",
+    "model_info": {
+      "name": "mlx-community/qwen3.5-35b-a3b"
+    },
+    "runs": 1,
+    "max_tokens": 500,
+    "cold": true,
+    "system": {
+      "os": "Darwin",
+      "os_version": "26.2",
+      "arch": "arm64",
+      "chip": "Apple M1 Max",
+      "memory_gb": 64,
+      "cpu_cores": 10,
+      "cpu_cores_performance": 8,
+      "cpu_cores_efficiency": 2,
+      "gpu_cores": 24,
+      "gpu_wired_limit_mb": 0
+    },
+    "timestamp": "2026-03-21T22:01:22"
+  },
+  "results": [
+    {
+      "turn": 1,
+      "run": 1,
+      "ctx_tokens_est": 1136,
+      "new_tokens_est": 1005,
+      "ttft": 10.805,
+      "gen_time": 1.676,
+      "gen_tps": 53.7,
+      "total": 12.481,
+      "output_tokens": 90,
+      "_response": "```json\n{\n  \"type\": \"invoice\",\n  \"date\": \"20.11.2025\",\n  \"correspondent\": null,\n  \"title\": \"Anzahlungsrechnung f\u00fcr das Bodenseeschifferpatent Kat. A & D\",\n  \"language\": \"de\",\n  \"total_amount\": \"\u20ac 480,00\",\n  \"currency\": \"EUR\"\n}\n```",
+      "_user": "Classify this document."
+    },
+    {
+      "turn": 2,
+      "run": 1,
+      "ctx_tokens_est": 1136,
+      "new_tokens_est": 1005,
+      "ttft": 16.29,
+      "gen_time": 1.464,
+      "gen_tps": 55.3,
+      "total": 17.754,
+      "output_tokens": 81,
+      "_response": "```json\n{\n  \"type\": \"receipt\",\n  \"date\": \"03.03.2026\",\n  \"correspondent\": \"ESSO Station Stefan Sulger\",\n  \"title\": \"Kundenbeleg\",\n  \"language\": \"de\",\n  \"total_amount\": \"50,07 EUR\",\n  \"currency\": \"EUR\"\n}\n```",
+      "_user": "Classify this document."
+    },
+    {
+      "turn": 3,
+      "run": 1,
+      "ctx_tokens_est": 1136,
+      "new_tokens_est": 1005,
+      "ttft": 11.396,
+      "gen_time": 1.454,
+      "gen_tps": 55.7,
+      "total": 12.85,
+      "output_tokens": 81,
+      "_response": "```json\n{\n  \"type\": \"receipt\",\n  \"date\": \"19.03.2026\",\n  \"correspondent\": \"Maria H\u00e4nsler Obst & Gem\u00fcse\",\n  \"title\": \"Kassenbon\",\n  \"language\": \"de\",\n  \"total_amount\": \"26,20\",\n  \"currency\": \"EUR\"\n}\n```",
+      "_user": "Classify this document."
+    },
+    {
+      "turn": 4,
+      "run": 1,
+      "ctx_tokens_est": 1136,
+      "new_tokens_est": 1005,
+      "ttft": 10.489,
+      "gen_time": 1.448,
+      "gen_tps": 55.9,
+      "total": 11.937,
+      "output_tokens": 81,
+      "_response": "```json\n{\n  \"type\": \"receipt\",\n  \"date\": \"19-03-2026\",\n  \"correspondent\": \"Naturk\u00e4serei Maucher GmbH\",\n  \"title\": \"Kassenbon\",\n  \"language\": \"de\",\n  \"total_amount\": \"10,50\",\n  \"currency\": \"EUR\"\n}\n```",
+      "_user": "Classify this document."
+    },
+    {
+      "turn": 5,
+      "run": 1,
+      "ctx_tokens_est": 1136,
+      "new_tokens_est": 1005,
+      "ttft": 7.814,
+      "gen_time": 1.269,
+      "gen_tps": 55.2,
+      "total": 9.083,
+      "output_tokens": 70,
+      "_response": "```json\n{\n  \"type\": \"recipe\",\n  \"date\": \"3/2012\",\n  \"correspondent\": \"LECKER\",\n  \"title\": \"Johannisbeer-Baiser-Kuchen\",\n  \"language\": \"de\",\n  \"total_amount\": null,\n  \"currency\": null\n}\n```",
+      "_user": "Classify this document."
+    },
+    {
+      "turn": 6,
+      "run": 1,
+      "ctx_tokens_est": 1136,
+      "new_tokens_est": 1005,
+      "ttft": 7.888,
+      "gen_time": 1.014,
+      "gen_tps": 55.2,
+      "total": 8.901,
+      "output_tokens": 56,
+      "_response": "```json\n{\n  \"type\": \"recipe\",\n  \"date\": null,\n  \"correspondent\": null,\n  \"title\": \"Lasagne\",\n  \"language\": \"de\",\n  \"total_amount\": null,\n  \"currency\": null\n}\n```",
+      "_user": "Classify this document."
+    },
+    {
+      "turn": 7,
+      "run": 1,
+      "ctx_tokens_est": 1136,
+      "new_tokens_est": 1005,
+      "ttft": 15.573,
+      "gen_time": 1.338,
+      "gen_tps": 55.3,
+      "total": 16.912,
+      "output_tokens": 74,
+      "_response": "{\n  \"type\": \"other\",\n  \"date\": \"16.05.2003\",\n  \"correspondent\": \"ECKHARD ALBRECHT FREIER ARCHITEKT\",\n  \"title\": \"WOHNFL\u00c4CHENBERECHNUNG ERDGESCHOSS\",\n  \"language\": \"de\"\n}",
+      "_user": "Classify this document."
+    },
+    {
+      "turn": 8,
+      "run": 1,
+      "ctx_tokens_est": 1136,
+      "new_tokens_est": 1005,
+      "ttft": 7.668,
+      "gen_time": 1.385,
+      "gen_tps": 54.9,
+      "total": 9.054,
+      "output_tokens": 76,
+      "_response": "```json\n{\n  \"type\": \"recipe\",\n  \"date\": null,\n  \"correspondent\": \"Gutes kann\",\n  \"title\": \"Fischrezept der Woche: Pangasiusfilet mit Spekulatiuskruste\",\n  \"language\": \"de\",\n  \"total_amount\": null,\n  \"currency\": null\n}\n```",
+      "_user": "Classify this document."
+    }
+  ]
+}

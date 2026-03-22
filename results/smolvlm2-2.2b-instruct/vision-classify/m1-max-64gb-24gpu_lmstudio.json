@@ -1,0 +1,133 @@
+{
+  "meta": {
+    "scenario": "vision-classify",
+    "mode": "single-shot",
+    "label": "SmolVLM2 2.2B GGUF",
+    "backend": "lmstudio",
+    "model_info": {
+      "name": "smolvlm2-2.2b-instruct"
+    },
+    "runs": 1,
+    "max_tokens": 500,
+    "cold": true,
+    "system": {
+      "os": "Darwin",
+      "os_version": "26.2",
+      "arch": "arm64",
+      "chip": "Apple M1 Max",
+      "memory_gb": 64,
+      "cpu_cores": 10,
+      "cpu_cores_performance": 8,
+      "cpu_cores_efficiency": 2,
+      "gpu_cores": 24,
+      "gpu_wired_limit_mb": 0
+    },
+    "timestamp": "2026-03-21T22:09:41"
+  },
+  "results": [
+    {
+      "turn": 1,
+      "run": 1,
+      "ctx_tokens_est": 1136,
+      "new_tokens_est": 1005,
+      "ttft": 0.824,
+      "gen_time": 0.835,
+      "gen_tps": 107.8,
+      "total": 1.659,
+      "output_tokens": 90,
+      "_response": " {\n  \"type\": \"letter\",\n  \"date\": \"2019-03-11\",\n  \"correspondent\": \"A&D\",\n  \"title\": \"Anpassungsrechnung f\u00fcr das Boderscheinkraftstuhl\",\n  \"language\": \"de\",\n  \"total_amount\": \"480,00 \u20ac\",\n  \"currency\": \"EUR\"\n}",
+      "_user": "Classify this document."
+    },
+    {
+      "turn": 2,
+      "run": 1,
+      "ctx_tokens_est": 1136,
+      "new_tokens_est": 1005,
+      "ttft": 0.906,
+      "gen_time": 0.708,
+      "gen_tps": 110.1,
+      "total": 1.614,
+      "output_tokens": 78,
+      "_response": " {\n  \"type\": \"receipt\",\n  \"date\": \"03.05.2021\",\n  \"correspondent\": \"ESO Station\",\n  \"title\": \"Beschreibung\",\n  \"language\": \"de\",\n  \"total_amount\": \"49,00 EUR\",\n  \"currency\": \"EUR\"\n}",
+      "_user": "Classify this document."
+    },
+    {
+      "turn": 3,
+      "run": 1,
+      "ctx_tokens_est": 1136,
+      "new_tokens_est": 1005,
+      "ttft": 0.82,
+      "gen_time": 0.753,
+      "gen_tps": 108.9,
+      "total": 1.572,
+      "output_tokens": 82,
+      "_response": " {\n  \"type\": \"receipt\",\n  \"date\": \"2019-03-14\",\n  \"correspondent\": \"Maria H\\u00f6rsle & Gemuse\",\n  \"title\": null,\n  \"language\": \"de\",\n  \"total_amount\": \"26.20\",\n  \"currency\": \"EUR\"\n}",
+      "_user": "Classify this document."
+    },
+    {
+      "turn": 4,
+      "run": 1,
+      "ctx_tokens_est": 1136,
+      "new_tokens_est": 1005,
+      "ttft": 1.491,
+      "gen_time": 0.715,
+      "gen_tps": 110.5,
+      "total": 2.205,
+      "output_tokens": 79,
+      "_response": " {\n  \"type\": \"receipt\",\n  \"date\": \"2019-03-24\",\n  \"correspondent\": \"Natur-Maucher GmbH\",\n  \"title\": \"Butter\",\n  \"language\": \"de\",\n  \"total_amount\": \"1.05\",\n  \"currency\": \"EUR\"\n}",
+      "_user": "Classify this document."
+    },
+    {
+      "turn": 5,
+      "run": 1,
+      "ctx_tokens_est": 1136,
+      "new_tokens_est": 1005,
+      "ttft": 0.65,
+      "gen_time": 0.836,
+      "gen_tps": 106.5,
+      "total": 1.486,
+      "output_tokens": 89,
+      "_response": " {\n    \"type\": \"recipe\",\n    \"date\": \"2017-03-29\",\n    \"correspondent\": \"Johannis-B\u00e6ker-Kuchen\",\n    \"title\": \"G. Balleres Gappa Meerwein\",\n    \"language\": \"de\",\n    \"total_amount\": \"400g\",\n    \"currency\": \"EUR\"\n}",
+      "_user": "Classify this document."
+    },
+    {
+      "turn": 6,
+      "run": 1,
+      "ctx_tokens_est": 1136,
+      "new_tokens_est": 1005,
+      "ttft": 0.652,
+      "gen_time": 0.766,
+      "gen_tps": 108.4,
+      "total": 1.418,
+      "output_tokens": 83,
+      "_response": " {\n    \"type\": \"recipe\",\n    \"date\": \"2019-03-15\",\n    \"correspondent\": \"Herr Doktor\",\n    \"title\": \"Sauce Sauerkraut und Beidens\",\n    \"language\": \"de\",\n    \"total_amount\": \"1.00\",\n    \"currency\": \"EUR\"\n}",
+      "_user": "Classify this document."
+    },
+    {
+      "turn": 7,
+      "run": 1,
+      "ctx_tokens_est": 1136,
+      "new_tokens_est": 1005,
+      "ttft": 0.734,
+      "gen_time": 0.797,
+      "gen_tps": 109.1,
+      "total": 1.532,
+      "output_tokens": 87,
+      "_response": " {\n  \"type\": \"letter\",\n  \"date\": \"15.06.2019\",\n  \"correspondent\": \"Herrn/Frau [Name]\",\n  \"title\": \"Wohnungsbeschreibung\",\n  \"language\": \"de\",\n  \"total_amount\": \"1477,58 \u20ac\",\n  \"currency\": \"EUR\"\n}",
+      "_user": "Classify this document."
+    },
+    {
+      "turn": 8,
+      "run": 1,
+      "ctx_tokens_est": 1136,
+      "new_tokens_est": 1005,
+      "ttft": 0.69,
+      "gen_time": 0.61,
+      "gen_tps": 113.1,
+      "total": 1.299,
+      "output_tokens": 69,
+      "_response": " {\n  \"type\": \"recipe\",\n  \"date\": null,\n  \"correspondent\": \"Gutes kann\",\n  \"title\": \"Fischrezept der Woche\",\n  \"language\": \"de\",\n  \"total_amount\": \"0.00\",\n  \"currency\": \"EUR\"\n}",
+      "_user": "Classify this document."
+    }
+  ]
+}

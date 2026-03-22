@@ -380,6 +380,8 @@ def check_context_size(stream_fn, base_url, model, backend, needed_tokens):
     try:
         metrics = stream_fn(base_url, model, messages, max_tokens=5, temperature=0)
         if metrics["output_tokens"] == 0:
+            if metrics.get("saw_reasoning"):
+                _print_thinking_error(backend)
             _print_context_error(needed_tokens, backend)
         print(" ok.\n")
     except Exception as e:
@@ -408,6 +410,27 @@ def _print_context_error(needed_tokens, backend):
     print(f"\n  After changing the setting, reload the model in your backend")
     print(f"  for the new context size to take effect.")
     print(f"\n  Full guide: docs/setup-guide.md")
+    print(f"\n{'='*70}\n")
+    sys.exit(1)
+
+
+def _print_thinking_error(backend):
+    """Print error when a thinking/reasoning model produces no visible output."""
+    print(f"\n\n{'='*70}")
+    print(f"\n  Error: Model produced reasoning tokens but no visible output.")
+    print(f"  This model appears to use internal thinking (e.g. GLM, DeepSeek).")
+    print(f"  It spent its entire token budget on reasoning, leaving nothing")
+    print(f"  for the actual response.\n")
+
+    hints = {
+        "ollama": "  Ollama: use the native backend (--backend ollama) which\n"
+                  "  automatically disables thinking mode.",
+        "lmstudio": "  LM Studio: check if the model has a thinking/reasoning\n"
+                    "  toggle in the model settings, or try a non-thinking variant.",
+    }
+    print(hints.get(backend,
+        "  Try disabling thinking/reasoning mode in your backend settings,\n"
+        "  or use a non-thinking variant of the model."))
     print(f"\n{'='*70}\n")
     sys.exit(1)
 
@@ -614,10 +637,13 @@ def run_scenario(scenario, stream_fn, base_url, model, runs=1, backend="ollama")
                 if metrics.get("prompt_eval_duration_ms"):
                     result["prompt_eval_duration_ms"] = round(metrics["prompt_eval_duration_ms"], 1)
 
-                # ── Check for empty output (likely context too small) ──
+                # ── Check for empty output ──
                 if metrics["output_tokens"] == 0:
                     print(f"\n  Turn {i+1} produced 0 output tokens.")
-                    _print_context_error(ctx_tokens_est + max_tokens, backend)
+                    if metrics.get("saw_reasoning"):
+                        _print_thinking_error(backend)
+                    else:
+                        _print_context_error(ctx_tokens_est + max_tokens, backend)
 
                 # Save response text for quality comparison (not in JSON metrics)
                 result["_response"] = metrics["response"]
@@ -640,8 +666,12 @@ def run_scenario(scenario, stream_fn, base_url, model, runs=1, backend="ollama")
     return all_results
 
 
-def find_all_scenarios(script_dir):
-    """Find all scenario JSON files in the scenarios/ directory."""
+def find_all_scenarios(script_dir, vision=False):
+    """Find scenario JSON files in the scenarios/ directory.
+
+    By default, excludes vision scenarios (vision-*.json).
+    With vision=True, returns ONLY vision scenarios.
+    """
     scenario_dir = os.path.join(script_dir, "scenarios")
     if not os.path.isdir(scenario_dir):
         return []
@@ -649,6 +679,7 @@ def find_all_scenarios(script_dir):
         os.path.join(scenario_dir, f)
         for f in os.listdir(scenario_dir)
         if f.endswith(".json")
+        and (f.startswith("vision-") if vision else not f.startswith("vision-"))
     )
     return paths
 
@@ -796,6 +827,8 @@ def main():
     parser.add_argument("--no-think", action="store_true",
                         help="Disable thinking in the Qwen3.5 chat template before running. "
                              "Backs up the original template and restores it when done (or on error/Ctrl+C).")
+    parser.add_argument("--vision-only", action="store_true",
+                        help="Run only vision scenarios (vision-*.json) instead of the default text scenarios.")
     parser.add_argument("--check", action="store_true",
                         help="Show detected hardware and tuning flags, then exit.")
     args = parser.parse_args()
@@ -915,10 +948,11 @@ def main():
 
             run_single(args, scenario_path, script_dir, stream_fn, base_url, warm_up_done=False)
         else:
-            # Default: run all scenarios
-            scenarios = find_all_scenarios(script_dir)
+            # Default: run all non-vision scenarios; --vision-only for vision
+            scenarios = find_all_scenarios(script_dir, vision=args.vision_only)
             if not scenarios:
-                print("Error: No scenario files found in scenarios/", file=sys.stderr)
+                kind = "vision" if args.vision_only else "non-vision"
+                print(f"Error: No {kind} scenario files found in scenarios/", file=sys.stderr)
                 sys.exit(1)
 
             # Pre-flight: check context window against the most demanding scenario

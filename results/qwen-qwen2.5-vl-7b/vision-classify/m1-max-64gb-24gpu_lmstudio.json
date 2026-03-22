@@ -1,0 +1,133 @@
+{
+  "meta": {
+    "scenario": "vision-classify",
+    "mode": "single-shot",
+    "label": "Qwen2.5-VL-7B",
+    "backend": "lmstudio",
+    "model_info": {
+      "name": "qwen/qwen2.5-vl-7b"
+    },
+    "runs": 1,
+    "max_tokens": 500,
+    "cold": true,
+    "system": {
+      "os": "Darwin",
+      "os_version": "26.2",
+      "arch": "arm64",
+      "chip": "Apple M1 Max",
+      "memory_gb": 64,
+      "cpu_cores": 10,
+      "cpu_cores_performance": 8,
+      "cpu_cores_efficiency": 2,
+      "gpu_cores": 24,
+      "gpu_wired_limit_mb": 0
+    },
+    "timestamp": "2026-03-21T19:23:11"
+  },
+  "results": [
+    {
+      "turn": 1,
+      "run": 1,
+      "ctx_tokens_est": 1136,
+      "new_tokens_est": 1005,
+      "ttft": 9.394,
+      "gen_time": 2.065,
+      "gen_tps": 42.1,
+      "total": 11.459,
+      "output_tokens": 87,
+      "_response": "{\n  \"type\": \"invoice\",\n  \"date\": \"20.11.2025\",\n  \"correspondent\": \"organization name\",\n  \"title\": \"Anzahlungsrechnung f\u00fcr das Bodenseeschifferpatent Kat . A & D\",\n  \"language\": \"de\",\n  \"total_amount\": \"480,00\",\n  \"currency\": \"EUR\"\n}",
+      "_user": "Classify this document."
+    },
+    {
+      "turn": 2,
+      "run": 1,
+      "ctx_tokens_est": 1136,
+      "new_tokens_est": 1005,
+      "ttft": 16.258,
+      "gen_time": 1.654,
+      "gen_tps": 42.3,
+      "total": 17.912,
+      "output_tokens": 70,
+      "_response": "{\n  \"type\": \"receipt\",\n  \"date\": \"03.03.2026\",\n  \"correspondent\": \"organization name\",\n  \"title\": \"Fuel Receipt\",\n  \"language\": \"de\",\n  \"total_amount\": \"50,07 EUR\",\n  \"currency\": \"EUR\"\n}",
+      "_user": "Classify this document."
+    },
+    {
+      "turn": 3,
+      "run": 1,
+      "ctx_tokens_est": 1136,
+      "new_tokens_est": 1005,
+      "ttft": 9.716,
+      "gen_time": 1.803,
+      "gen_tps": 42.7,
+      "total": 11.519,
+      "output_tokens": 77,
+      "_response": "{\n  \"type\": \"receipt\",\n  \"date\": \"19.03.2026\",\n  \"correspondent\": \"Maria H\u00e4nsler Obst & Gem\u00fcse\",\n  \"title\": \"Receipt for groceries\",\n  \"language\": \"de\",\n  \"total_amount\": \"26,20\",\n  \"currency\": \"EUR\"\n}",
+      "_user": "Classify this document."
+    },
+    {
+      "turn": 4,
+      "run": 1,
+      "ctx_tokens_est": 1136,
+      "new_tokens_est": 1005,
+      "ttft": 8.53,
+      "gen_time": 2.047,
+      "gen_tps": 42.0,
+      "total": 10.577,
+      "output_tokens": 86,
+      "_response": "{\n  \"type\": \"receipt\",\n  \"date\": \"19-03-2026\",\n  \"correspondent\": \"Naturk\u00e4serei Maucher GmbH\",\n  \"title\": \"Receipt for purchases from Naturk\u00e4serei Maucher GmbH\",\n  \"language\": \"de\",\n  \"total_amount\": \"10,50\",\n  \"currency\": \"EUR\"\n}",
+      "_user": "Classify this document."
+    },
+    {
+      "turn": 5,
+      "run": 1,
+      "ctx_tokens_est": 1136,
+      "new_tokens_est": 1005,
+      "ttft": 4.996,
+      "gen_time": 1.454,
+      "gen_tps": 44.7,
+      "total": 6.45,
+      "output_tokens": 65,
+      "_response": "{\n  \"type\": \"recipe\",\n  \"date\": \"3/2012\",\n  \"correspondent\": \"organization name\",\n  \"title\": \"Johannisbeer-Baiser-Kuchen\",\n  \"language\": \"de\",\n  \"total_amount\": null,\n  \"currency\": null\n}",
+      "_user": "Classify this document."
+    },
+    {
+      "turn": 6,
+      "run": 1,
+      "ctx_tokens_est": 1136,
+      "new_tokens_est": 1005,
+      "ttft": 4.845,
+      "gen_time": 1.114,
+      "gen_tps": 46.7,
+      "total": 5.959,
+      "output_tokens": 52,
+      "_response": "{\n  \"type\": \"recipe\",\n  \"date\": null,\n  \"correspondent\": \"author\",\n  \"title\": \"Lasagne\",\n  \"language\": \"de\",\n  \"total_amount\": null,\n  \"currency\": null\n}",
+      "_user": "Classify this document."
+    },
+    {
+      "turn": 7,
+      "run": 1,
+      "ctx_tokens_est": 1136,
+      "new_tokens_est": 1005,
+      "ttft": 15.164,
+      "gen_time": 1.988,
+      "gen_tps": 42.3,
+      "total": 17.152,
+      "output_tokens": 84,
+      "_response": "{\n  \"type\": \"floor_plan\",\n  \"date\": \"16.05.2003\",\n  \"correspondent\": \"ECKHARD ALBRECHT FREIER ARCHITEKT\",\n  \"title\": \"WOHNFL\u00c4CHENBERECHNUNG\",\n  \"language\": \"de\",\n  \"total_amount\": null,\n  \"currency\": null\n}",
+      "_user": "Classify this document."
+    },
+    {
+      "turn": 8,
+      "run": 1,
+      "ctx_tokens_est": 1136,
+      "new_tokens_est": 1005,
+      "ttft": 4.584,
+      "gen_time": 1.407,
+      "gen_tps": 44.8,
+      "total": 5.991,
+      "output_tokens": 63,
+      "_response": "{\n  \"type\": \"recipe\",\n  \"date\": null,\n  \"correspondent\": \"author\",\n  \"title\": \"Pangasiusfilet mit Spekulatiuskruste\",\n  \"language\": \"de\",\n  \"total_amount\": null,\n  \"currency\": null\n}",
+      "_user": "Classify this document."
+    }
+  ]
+}

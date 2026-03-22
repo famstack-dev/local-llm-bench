@@ -1,0 +1,133 @@
+{
+  "meta": {
+    "scenario": "vision-classify",
+    "mode": "single-shot",
+    "label": "Mistral Small 3.1 24B",
+    "backend": "lmstudio",
+    "model_info": {
+      "name": "mistral-small-3.1-24b-instruct-2503"
+    },
+    "runs": 1,
+    "max_tokens": 500,
+    "cold": true,
+    "system": {
+      "os": "Darwin",
+      "os_version": "26.2",
+      "arch": "arm64",
+      "chip": "Apple M1 Max",
+      "memory_gb": 64,
+      "cpu_cores": 10,
+      "cpu_cores_performance": 8,
+      "cpu_cores_efficiency": 2,
+      "gpu_cores": 24,
+      "gpu_wired_limit_mb": 0
+    },
+    "timestamp": "2026-03-21T21:51:46"
+  },
+  "results": [
+    {
+      "turn": 1,
+      "run": 1,
+      "ctx_tokens_est": 1136,
+      "new_tokens_est": 1005,
+      "ttft": 13.115,
+      "gen_time": 5.145,
+      "gen_tps": 15.9,
+      "total": 18.261,
+      "output_tokens": 82,
+      "_response": "```json\n{\n  \"type\": \"contract\",\n  \"date\": \"20.11.2025\",\n  \"correspondent\": \"Kat. A & D\",\n  \"title\": \"Anzahlungsrechnung\",\n  \"language\": \"de\",\n  \"total_amount\": \"\u20ac480,00\",\n  \"currency\": \"EUR\"\n}\n```",
+      "_user": "Classify this document."
+    },
+    {
+      "turn": 2,
+      "run": 1,
+      "ctx_tokens_est": 1136,
+      "new_tokens_est": 1005,
+      "ttft": 12.811,
+      "gen_time": 6.514,
+      "gen_tps": 15.7,
+      "total": 19.325,
+      "output_tokens": 102,
+      "_response": "```json\n{\n  \"type\": \"invoice\",\n  \"date\": \"03.03.2026\",\n  \"correspondent\": \"ESSO Station Stefan Su\u0308r Mee\u00dfburgstra\u00dfe, 88690 Uhlldingen-Muhlhofen\",\n  \"title\": \"Gesamtbetrag\",\n  \"language\": \"de\",\n  \"total_amount\": \"50.07 EUR\",\n  \"currency\": \"EUR\"\n}\n```",
+      "_user": "Classify this document."
+    },
+    {
+      "turn": 3,
+      "run": 1,
+      "ctx_tokens_est": 1136,
+      "new_tokens_est": 1005,
+      "ttft": 12.404,
+      "gen_time": 4.002,
+      "gen_tps": 16.5,
+      "total": 16.405,
+      "output_tokens": 66,
+      "_response": "```json\n{\n  \"type\": \"contract\",\n  \"date\": \"19.03.2026\",\n  \"correspondent\": \"Maria H\u00e4nsl\",\n  \"title\": null,\n  \"language\": \"de\",\n  \"total_amount\": null,\n  \"currency\": null\n}\n```",
+      "_user": "Classify this document."
+    },
+    {
+      "turn": 4,
+      "run": 1,
+      "ctx_tokens_est": 1136,
+      "new_tokens_est": 1005,
+      "ttft": 13.223,
+      "gen_time": 5.067,
+      "gen_tps": 15.8,
+      "total": 18.29,
+      "output_tokens": 80,
+      "_response": "```json\n{\n  \"type\": \"receipt\",\n  \"date\": \"19-03-2026\",\n  \"correspondent\": \"Naturk\u00e4serei Maucher GmbH\",\n  \"title\": null,\n  \"language\": \"de\",\n  \"total_amount\": \"10,54\",\n  \"currency\": \"EUR\"\n}\n```",
+      "_user": "Classify this document."
+    },
+    {
+      "turn": 5,
+      "run": 1,
+      "ctx_tokens_est": 1136,
+      "new_tokens_est": 1005,
+      "ttft": 12.414,
+      "gen_time": 4.327,
+      "gen_tps": 16.2,
+      "total": 16.741,
+      "output_tokens": 70,
+      "_response": "```json\n{\n  \"type\": \"recipe\",\n  \"date\": \"3/2012\",\n  \"correspondent\": \"LECKER\",\n  \"title\": \"Johannisbeer-Baiser-Kuchen\",\n  \"language\": \"de\",\n  \"total_amount\": null,\n  \"currency\": null\n}\n```",
+      "_user": "Classify this document."
+    },
+    {
+      "turn": 6,
+      "run": 1,
+      "ctx_tokens_est": 1136,
+      "new_tokens_est": 1005,
+      "ttft": 11.757,
+      "gen_time": 3.309,
+      "gen_tps": 16.6,
+      "total": 15.066,
+      "output_tokens": 55,
+      "_response": "```json\n{\n  \"type\": \"recipe\",\n  \"date\": null,\n  \"correspondent\": null,\n  \"title\": \"Lasagne\",\n  \"language\": \"de\",\n  \"total_amount\": null,\n  \"currency\": null\n}\n```",
+      "_user": "Classify this document."
+    },
+    {
+      "turn": 7,
+      "run": 1,
+      "ctx_tokens_est": 1136,
+      "new_tokens_est": 1005,
+      "ttft": 12.412,
+      "gen_time": 4.06,
+      "gen_tps": 16.0,
+      "total": 16.472,
+      "output_tokens": 65,
+      "_response": "{\n \"type\": \"floor_plan\",\n \"date\": \"16.05.2003\",\n \"correspondent\": \"Freie Architektur Eckhard Brech\",\n \"title\": \"Wohnfl\u00e4chenberechnung\",\n \"language\": \"de\",\n \"total_amount\": null,\n \"currency\": null\n}",
+      "_user": "Classify this document."
+    },
+    {
+      "turn": 8,
+      "run": 1,
+      "ctx_tokens_est": 1136,
+      "new_tokens_est": 1005,
+      "ttft": 10.893,
+      "gen_time": 3.783,
+      "gen_tps": 16.7,
+      "total": 14.676,
+      "output_tokens": 63,
+      "_response": "```json\n{\n  \"type\": \"recipe\",\n  \"date\": null,\n  \"correspondent\": null,\n  \"title\": \"Pangasiusfilet mit Spekulatius\",\n  \"language\": \"de\",\n  \"total_amount\": null,\n  \"currency\": null\n}\n```",
+      "_user": "Classify this document."
+    }
+  ]
+}

@@ -98,6 +98,7 @@ def stream_openai(base_url, model, messages, max_tokens=300, temperature=0.6, ti
     first_token_time = None   # When the first content token arrives
     token_count = 0           # Number of content tokens received
     full_response = []        # Accumulate the full response text
+    saw_reasoning = False     # Whether we saw reasoning/thinking tokens
 
     # Read the SSE stream line by line
     for line in resp:
@@ -114,7 +115,13 @@ def stream_openai(base_url, model, messages, max_tokens=300, temperature=0.6, ti
 
         try:
             d = json.loads(chunk)
-            content = d["choices"][0]["delta"].get("content", "")
+            delta = d["choices"][0]["delta"]
+
+            # Detect thinking/reasoning tokens (used by GLM, DeepSeek, etc.)
+            if delta.get("reasoning_content") or delta.get("reasoning"):
+                saw_reasoning = True
+
+            content = delta.get("content", "")
             if content:
                 # Record when the first content token arrives — this is our TTFT
                 if first_token_time is None:
@@ -133,14 +140,23 @@ def stream_openai(base_url, model, messages, max_tokens=300, temperature=0.6, ti
     total = t_end - t_start
     gen_tps = token_count / gen_time if gen_time > 0 else 0
 
-    return {
+    response = "".join(full_response)
+
+    # Detect <think> blocks in content (Qwen, Llama, etc. via llama.cpp)
+    if not saw_reasoning and "<think>" in response:
+        saw_reasoning = True
+
+    result = {
         "ttft": ttft,
         "gen_time": gen_time,
         "gen_tps": gen_tps,
         "total": total,
         "output_tokens": token_count,
-        "response": "".join(full_response),
+        "response": response,
     }
+    if saw_reasoning:
+        result["saw_reasoning"] = True
+    return result
 
 
 def stream_ollama(base_url, model, messages, max_tokens=300, temperature=0.6, timeout=300):
@@ -231,13 +247,15 @@ def stream_ollama(base_url, model, messages, max_tokens=300, temperature=0.6, ti
     total = t_end - t_start
     gen_tps = token_count / gen_time if gen_time > 0 else 0
 
-    return {
+    response = "".join(full_response)
+
+    result = {
         "ttft": ttft,
         "gen_time": gen_time,
         "gen_tps": gen_tps,
         "total": total,
         "output_tokens": token_count,
-        "response": "".join(full_response),
+        "response": response,
         # Ollama-specific: internal stats from llama.cpp
         # NOTE: prompt_eval_count always reports TOTAL prompt tokens, even when
         # the KV cache is reused. It does NOT indicate cache miss. To detect
@@ -246,6 +264,10 @@ def stream_ollama(base_url, model, messages, max_tokens=300, temperature=0.6, ti
         "prompt_eval_count": final_stats.get("prompt_eval_count"),
         "prompt_eval_duration_ms": (final_stats.get("prompt_eval_duration_ns") or 0) / 1_000_000,
     }
+    # Detect <think> blocks that slipped through despite "think": false
+    if "<think>" in response:
+        result["saw_reasoning"] = True
+    return result
 
 
 def stream_minimax(base_url, model, messages, max_tokens=300, temperature=0.6, timeout=300):
