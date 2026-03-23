@@ -72,6 +72,15 @@ Open the model settings in the LM Studio UI. The context length is shown in the 
 
 ![LM Studio context length setting](images/lmstudio-adjust-context-size.png)
 
+### Turning off thinking for Qwen3.5 tests:
+
+1. Go to the My Models page in LM Studio.
+2. Select the model
+3. Locate Inference on the right-hand sidebar.
+4. Scroll down to find the Prompt Template and enter into template(Jinja ) section.
+5. Add `{%- set enable_thinking = false %}` to the first line of the template.
+6. Reload your model.
+
 ---
 
 ## oMLX

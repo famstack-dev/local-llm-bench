@@ -1,0 +1,69 @@
+{
+  "meta": {
+    "scenario": "creative-writing",
+    "mode": "single-shot",
+    "label": "m3-max-128gb-40gpu lmstudio",
+    "backend": "lmstudio",
+    "model_info": {
+      "name": "llama-3.1-8b-instruct"
+    },
+    "runs": 1,
+    "max_tokens": 2000,
+    "cold": false,
+    "warm_up_time": 0.185,
+    "system": {
+      "os": "Darwin",
+      "os_version": "26.3.1",
+      "arch": "arm64",
+      "chip": "Apple M3 Max",
+      "memory_gb": 128,
+      "cpu_cores": 16,
+      "cpu_cores_performance": 12,
+      "cpu_cores_efficiency": 4,
+      "gpu_cores": 40,
+      "gpu_wired_limit_mb": 0
+    },
+    "timestamp": "2026-03-22T12:55:59"
+  },
+  "results": [
+    {
+      "turn": 1,
+      "run": 1,
+      "ctx_tokens_est": 57,
+      "new_tokens_est": 29,
+      "ttft": 0.228,
+      "gen_time": 5.148,
+      "gen_tps": 78.1,
+      "total": 5.375,
+      "output_tokens": 402,
+      "_response": "In twilight depths, where shadows play,\nA secret world of whispering machines atplay,\nRow upon row, metal sentinels stand guard,\nTheir gentle hum, a soothing, dark-yard.\n\nIn this subterranean heart of light and sound,\nA family's stories live, forever bound,\nMemories etched like fossils in the night,\nKept safe from time and fading light.\n\nThe servers, sentinels of love and laughter,\nWhisper secrets, echoing through each after,\nPhotos, letters, and tales from years gone by,\nAll stored within these humming hearts that sigh.\n\nIn this dark refuge, an archive of the past,\nA world of dreams and love forever last,\nWhere tears and joy in every moment's caught,\nA tapestry woven from the threads of remembrance bought.\n\nThe servers' hum, a lullaby to sleep,\nAs moonlight through the vents begins to seep,\nCasting shadows on the wall, like silken threads,\nThe machines, ancient keepers of the family's deeds.\n\nTheir rustling wings, like autumn leaves that fall,\nThe soft clucking of the servers, standing tall,\nBeneath a mantle of silence, quiet as a stone,\nThe memories they keep: the only sound that's known.\n\nLike night's dark veil, their data flows and grows,\nA river of remembrance, where the family's roots show,\nWhere love and laughter merged with tears and pain,\nA chronicle of years, where every moment's saved within.\n\nThe servers whisper secrets to the night,\nTheir gentle hum, a heartbeat that shines so bright,\nA lighthouse in the darkness, guiding through time's tide,\nThe memories they keep: an endless testament to love inside.\n\nFor in this subterranean heart, where shadows reign,\nA family's stories live on, forever sustained by the machines' refrain,\nTheir gentle hum, a lullaby to sleep and dream,\nA symphony of love and memories, forever echoing in the machines' deep.",
+      "_user": "Write a poem about a mass of servers humming in a dark basement, keeping a family's memories alive. At least 30 lines."
+    },
+    {
+      "turn": 2,
+      "run": 1,
+      "ctx_tokens_est": 60,
+      "new_tokens_est": 32,
+      "ttft": 0.192,
+      "gen_time": 5.013,
+      "gen_tps": 78.4,
+      "total": 5.205,
+      "output_tokens": 393,
+      "_response": "In a verdant valley where sunbeams danced, a tortoise named Tempo toiled away in his underground workshop. With fingers deft and eyes so bright, he crafted a tiny computer that sparkled with circuitry lights.\n\nAs the machine whirred to life, Tempo's slow and steady heart swelled with pride. He claimed his creation would outlast any machine, for it was built to withstand the weight of time itself. Meanwhile, a hare named Hyperion boasted about his gaming rig's lightning speed.\n\n\"Ha!\" the hare cried. \"My console can render graphics in a mere fraction of your sluggish seconds, Tempo! It's the envy of all the other hares!\"\n\nTempo smiled wearily. \"My computer may be slow, but it never sleeps or grows tired. It hums along all day and night, every day and night.\"\n\nHyperion snickered. \"Oh, sure? Watch me play the most complex games on my rig while you're stuck in low-res.\"\n\nThe two adversaries installed their machines, and the gaming began. Hyperion's console zipped through levels like a speeding bullet, but his machine's speed came at a cost. It overheated and burned bright, like a firefly in the desert sun.\n\nTempos' computer, however, plodded along steadily. It rendered each scene in painstaking detail but never faltered or failed to render its graphics. As Hyperion's machine finally expired from exhaustion, Tempo's computer continued to play on.\n\nThe hare slumped against the wall, his ears drooping. \"I underestimated you, Tempo,\" he said with a sigh.\n\nTempo chuckled softly and patted his computer's casing. \"Speed may be flashy, but endurance is the secret to victory.\"\n\nFrom that day forward, the hares and tortoises respected Tempo's steady strength. His computer continued to play on, a testament to the power of persistence in an ever-changing world.",
+      "_user": "Write a short fable about a tortoise who built a tiny computer that was slower than the hare's gaming rig but never needed to rest."
+    },
+    {
+      "turn": 3,
+      "run": 1,
+      "ctx_tokens_est": 58,
+      "new_tokens_est": 31,
+      "ttft": 0.19,
+      "gen_time": 3.834,
+      "gen_tps": 79.0,
+      "total": 4.025,
+      "output_tokens": 303,
+      "_response": "In a box, hidden and worn,\nA relic of times long born,\nLay the last photograph to be seen,\nPrinted on paper, in a world unseen.\n\nA century past, the click of the viewfinder,\nThe flash that lit up all things in it;\nA moment captured, now lost to the ages,\nAs digital memories forever engage.\n\nThis print, delicate as a summer breeze,\nFaded with time, like forgotten trees;\nA century-old secret, hidden away,\nUntil a curious hand touched it today.\n\nThe picture's edges, yellowed with age,\nFolds that creased, a story to engage;\nA snapshot of love, joy and laughter,\nFrozen in time, now a relic of wonder.\n\nThe subject's face, a smile so bright,\nA dancer spinning with abandon and light;\nHer dress fluttering like a bird in flight,\nAs the world around her danced through the night.\n\nThe background's blur, a world in motion,\nA sound of music and celebration;\nA moment seized, now lost to the past,\nAs the last photograph on paper was at last.\n\nIn this box, hidden and worn with care,\nLies a memory of love, long past there;\nA century-old treasure, now revealed to the eye,\nThe last photograph on paper, a memory to deny.\n\nAs we view this print, now rare and divine,\nWe remember a world where love was printed in line;\nA time when moments were captured with care,\nAnd memories lived on paper, beyond compare.",
+      "_user": "Write a poem about the last photograph ever printed on paper, found in an attic a hundred years from now. At least 25 lines."
+    }
+  ]
+}
