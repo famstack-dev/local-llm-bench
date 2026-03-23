@@ -237,6 +237,17 @@ INSTALL_HINTS = {
         "\n"
         "  Or use --base-url to point to a different llama-server instance."
     ),
+    "mlx-openai-server": (
+        "mlx-openai-server is not running at {url}.\n"
+        "\n"
+        "  To fix:\n"
+        "    1. Install:  uv pip install mlx-openai-server\n"
+        "    2. Launch:   mlx-openai-server launch --model-path {model} --model-type lm\n"
+        "    3. Verify:   curl {url}/v1/models\n"
+        "\n"
+        "  GitHub: https://github.com/cubist38/mlx-openai-server\n"
+        "  Or use --base-url to point to a different instance."
+    ),
     "minimax": (
         "MiniMax API is not accessible at {url}.\n"
         "\n"
@@ -402,6 +413,7 @@ def _print_context_error(needed_tokens, backend):
     hints = {
         "ollama": "  Ollama: create a Modelfile with PARAMETER num_ctx 16384",
         "lmstudio": "  LM Studio: change Context Length in the model settings UI",
+        "mlx-openai-server": "  mlx-openai-server: relaunch with --context-length 16384",
         "openai": "  oMLX: admin panel -> Settings -> Generation Defaults -> Max Context Window\n"
                   "  Other: check your server's context/max_seq_len setting",
         "llama-server": "  llama-server: restart with -c 16384",
@@ -802,7 +814,7 @@ def main():
     )
     parser.add_argument("--scenario", default=None,
                         help="Run a single scenario JSON file. Default: runs ALL scenarios.")
-    parser.add_argument("--backend", choices=["ollama", "lmstudio", "llama-server", "minimax", "openai"],
+    parser.add_argument("--backend", choices=["ollama", "lmstudio", "llama-server", "mlx-openai-server", "minimax", "openai"],
                         default="ollama", help="Inference backend (default: ollama)")
     parser.add_argument("--backend-label", default=None,
                         help="Custom backend name for result paths and metadata (e.g. omlx, vllm)")

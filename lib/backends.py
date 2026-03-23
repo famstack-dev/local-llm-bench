@@ -53,6 +53,7 @@ DEFAULT_URLS = {
     "ollama": "http://localhost:11434",
     "lmstudio": "http://localhost:1234",
     "llama-server": "http://localhost:8090",
+    "mlx-openai-server": "http://localhost:8000",
     "minimax": "https://api.minimax.io",
     "openai": "http://localhost:8080",
 }
@@ -382,6 +383,7 @@ def get_backend(name):
         "ollama": stream_ollama,              # Native API with think:false + eval stats
         "lmstudio": stream_openai,            # OpenAI-compatible SSE
         "llama-server": stream_openai,        # OpenAI-compatible SSE (raw llama.cpp)
+        "mlx-openai-server": stream_openai,   # OpenAI-compatible SSE (MLX native)
         "minimax": stream_minimax,            # MiniMax cloud API (OpenAI-compatible)
         "openai": stream_openai_compat,       # Any OpenAI-compatible endpoint
     }

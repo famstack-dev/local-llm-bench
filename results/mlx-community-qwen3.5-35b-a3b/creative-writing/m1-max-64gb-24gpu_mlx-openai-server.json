@@ -1,0 +1,69 @@
+{
+  "meta": {
+    "scenario": "creative-writing",
+    "mode": "single-shot",
+    "label": "mlx-openai-server MLX",
+    "backend": "mlx-openai-server",
+    "model_info": {
+      "name": "mlx-community/Qwen3.5-35B-A3B-4bit"
+    },
+    "runs": 1,
+    "max_tokens": 2000,
+    "cold": false,
+    "warm_up_time": 0.427,
+    "system": {
+      "os": "Darwin",
+      "os_version": "26.2",
+      "arch": "arm64",
+      "chip": "Apple M1 Max",
+      "memory_gb": 64,
+      "cpu_cores": 10,
+      "cpu_cores_performance": 8,
+      "cpu_cores_efficiency": 2,
+      "gpu_cores": 24,
+      "gpu_wired_limit_mb": 0
+    },
+    "timestamp": "2026-03-23T10:26:37"
+  },
+  "results": [
+    {
+      "turn": 1,
+      "run": 1,
+      "ctx_tokens_est": 57,
+      "new_tokens_est": 29,
+      "ttft": 0.712,
+      "gen_time": 7.038,
+      "gen_tps": 62.8,
+      "total": 7.75,
+      "output_tokens": 442,
+      "_response": "Deep in the earth where the concrete breathes cold,\nA billion tiny hearts begin to unfold.\nNo windows here, just the hum of the fan,\nA low, electric purr, the basement's only plan.\nBlack towers stand in silent, silver rows,\nKeeping the secrets of the living and the close.\nThey do not sleep, they do not rest,\nWatching the data streams slowly, gently, rest.\n\nHere lives the laugh of a child's first word,\nStored in a flash of light that can never be blurred.\nThe video of a holiday, crisp and clear,\nA pixelated ghost of a holiday cheer.\nThe grocery lists and the photos of dogs,\nThe quiet conversations that used to be gods,\nThe voice of a father, the song of a mother,\nNow just a string of ones and zeros, a wonder.\n\nCables like vines stretch across the floor,\nConnecting the past to the future, the before and the more.\nThe cooling fans spin like a hurricane's eye,\nTurning the warmth of the memories high.\nA single hard drive holds a baby's sigh,\nA terabyte archive of the way we fly.\nThey hold the voice of a mother who left,\nSaid she will be back, but she never will be.\n\nThe server racks blink with a rhythmic, blue light,\nA constellation of stars in the dead of the night.\nThey process the grief and they store the joy,\nA digital garden where the dead bloom and grow.\nNo dust can settle upon the memory chip,\nNo rust can creep in to let the world slip.\nThey guard the archive of every name,\nIn the dark, humming basement, a digital shame.\n\nFor when the power might finally fail,\nThat fragile, electric, eternal tale,\nWill fade into silence, a ghost without sound,\nLeaving the family alone and unbound.\nBut until that day, the fans keep their pace,\nKeeping the past from turning to waste.\nA choir of machines in the basement deep,\nWhere the living and dead are almost asleep.",
+      "_user": "Write a poem about a mass of servers humming in a dark basement, keeping a family's memories alive. At least 30 lines."
+    },
+    {
+      "turn": 2,
+      "run": 1,
+      "ctx_tokens_est": 60,
+      "new_tokens_est": 32,
+      "ttft": 0.608,
+      "gen_time": 11.503,
+      "gen_tps": 62.3,
+      "total": 12.11,
+      "output_tokens": 717,
+      "_response": "In the quiet valley of Verdant Loop, there lived a tortoise named Barnaby who did not race. While the hares spent their days tearing across the dirt, breathless and blinking fast, Barnaby spent his time in the mossy shadows, soldering wires and etching circuits onto a shard of slate.\n\nHe built a computer, small enough to fit in the crook of his shell. It was a masterpiece of efficiency, crafted from river-stone processors and solar leaves for power. It ran on a logic of patience, calculating one thought at a time with the deliberate grace of a falling raindrop.\n\nAcross the clearing, a hare named Zephyr sat before a towering rig of glowing crystals and spinning fans. It hummed with the heat of a thousand suns, rendering images so fast the eye could not catch them, moving data so quickly Zephyr often had to blink to keep up.\n\n\"Look at my speed!\" Zephyr would taunt, his eyes flickering with the neon blue of a million calculations per second. \"I can solve the world's problems before my coffee cools!\"\n\nBarnaby ignored the flash. He typed a command into his stone screen. The screen flickered once, then twice, then settled into a steady, amber glow. It took three days for his machine to render a single frame of a blooming flower.\n\n\"Three days?\" Zephyr laughed, his processor screaming with laughter. \"I could render that flower in three nanoseconds, then plant it, water it, and watch it wilt and grow back again before you finish your sentence!\"\n\nAnd yet, the hares grew tired. Their screens flickered with heat warnings; their fans whirred into a desperate, grinding whine. They would pause to let their rigs cool, to drink water, to sleep, for the machine demanded rest as fiercely as it demanded power. They were bound to the rhythm of the cooling fan.\n\nBut Barnaby's machine never overheated. It never slept. It did not need the sun to rise to work; it worked by the moonlight, by the rain, in the deep dark of the night when the hares' screens went black.\n\nYears passed. The hares came and went, a blur of fur and fleeting speed. They raced, they won, they slept, they woke, they raced again. But Barnaby's computer was still humming, a tiny, steady heartbeat in the moss.\n\nWhen the great winter storm finally struck, blinding the valley with snow and silence, the hares' rigs froze, their circuits locking up in the cold, waiting for spring to thaw the wires. Only Barnaby's stone machine continued its work, calculating the slow, steady growth of the roots beneath the snow, mapping the path of the thaw.\n\nWhen the spring finally returned, the hares woke to find their systems needing repairs, their data corrupted by the freeze. But Barnaby was there, his screen glowing with the complete map of the valley's rebirth, drawn line by line, day by day, without a single moment of rest.\n\nZephyr looked at his dead, cold rig, then at the slow, steady glow of the stone. \"I was so fast,\" the hare whispered, \"that I never saw the world change while I was waiting to play again.\"\n\n\"Speed is a sprint,\" said Barnaby, his shell heavy with the weight of his long work. \"But endurance is the earth itself.\"",
+      "_user": "Write a short fable about a tortoise who built a tiny computer that was slower than the hare's gaming rig but never needed to rest."
+    },
+    {
+      "turn": 3,
+      "run": 1,
+      "ctx_tokens_est": 58,
+      "new_tokens_est": 31,
+      "ttft": 0.619,
+      "gen_time": 4.758,
+      "gen_tps": 63.0,
+      "total": 5.377,
+      "output_tokens": 300,
+      "_response": "In dust that settles like a heavy gray,\nA box of tin is cracked and split in two.\nNo screen glows there, no pixel soft to play,\nJust paper's breath, the only thing to do.\nThe edges curl from humidity's old kiss,\nA ghost of hands that held the frame so tight.\nIt shows a child, a woman, and a bliss\nOf frozen time, a moment caught in light.\nThe face of him has faded into brown,\nThe blue of sky is lost to chemical fade.\nThe film has stopped, the shutter's silent drown,\nA memory that cannot be re-made.\nNo cloud will save this image from decay,\nNo server holds the pixels in the air.\nJust silver halides in a slow decay,\nThat fades to void when summer heat is near.\nA hundred years have turned the world to code,\nTo streams of data, endless, deep, and vast.\nBut here, inside this attic, heavy load,\nThe final print is waiting to be passed.\nThe photographer who took the shot is dust,\nThe printer turned to scrap in distant years.\nOnly the paper holds the stubborn trust\nOf what was real before the silence clears.\nSo hold it up against the attic's gloom,\nAnd watch the colors bleed into the white.\nA final, fragile, human, paper bloom,\nThat died to live within the fading light.",
+      "_user": "Write a poem about the last photograph ever printed on paper, found in an attic a hundred years from now. At least 25 lines."
+    }
+  ]
+}
