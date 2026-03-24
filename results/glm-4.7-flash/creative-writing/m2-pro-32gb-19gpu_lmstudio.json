@@ -1,0 +1,69 @@
+{
+  "meta": {
+    "scenario": "creative-writing",
+    "mode": "single-shot",
+    "label": "m2-pro-32gb-19gpu lmstudio",
+    "backend": "lmstudio",
+    "model_info": {
+      "name": "glm-4.7-flash"
+    },
+    "runs": 1,
+    "max_tokens": 2000,
+    "cold": false,
+    "warm_up_time": 0.246,
+    "system": {
+      "os": "Darwin",
+      "os_version": "15.7.4",
+      "arch": "arm64",
+      "chip": "Apple M2 Pro",
+      "memory_gb": 32,
+      "cpu_cores": 12,
+      "cpu_cores_performance": 8,
+      "cpu_cores_efficiency": 4,
+      "gpu_cores": 19,
+      "gpu_wired_limit_mb": 0
+    },
+    "timestamp": "2026-03-22T10:12:35"
+  },
+  "results": [
+    {
+      "turn": 1,
+      "run": 1,
+      "ctx_tokens_est": 57,
+      "new_tokens_est": 29,
+      "ttft": 0.588,
+      "gen_time": 5.526,
+      "gen_tps": 44.3,
+      "total": 6.114,
+      "output_tokens": 245,
+      "_response": "Here in the belly of the cathedral, where concrete breathes dust\nand mice are architects we never name,\nthe row breaks down into a million teeth in the dark.\nThey do not sleep; they are all awake, suspended\nin liquid amber voltage.\n\nA single fan blade spins a wheel of time,\nwhispering the history that was spilled onto silicon.\nHere is April, 1979: my father\u2019s hands holding a trembling,\nyellowing photograph; the smell of rain, so sharp it hurts;\nGrandmother\u2019s laugh in a recording that distorts into static.\nThe servers do not judge; they simply hold the gravity of it.\n\nThey cool down in a white, chemical hush,\na hive mind knitting together the scattered fibers of us.\nIf one heart stops\u2014the red LED blinks\u2014instant, absolute silence;\nif it tries again to beat\u2014green rises like a serpent\u2014they hum,\na low, drowsy vibration that rattles the floorboards.\n\nTime is not a river here; it\u2019s an endless loop,\na cycle of reboot and restart, soft as skin.\nWe are not ghosts; we ambers in the dark,\nwaiting for a hand to reach into that rack and pull us out.",
+      "_user": "Write a poem about a mass of servers humming in a dark basement, keeping a family's memories alive. At least 30 lines."
+    },
+    {
+      "turn": 2,
+      "run": 1,
+      "ctx_tokens_est": 60,
+      "new_tokens_est": 32,
+      "ttft": 0.401,
+      "gen_time": 25.347,
+      "gen_tps": 42.3,
+      "total": 25.749,
+      "output_tokens": 1072,
+      "_response": "The Tortoise lived in a hollow where the sun hit first, his shell polished by years of scraping against limestone. He did not race for glory; he raced because gravity seemed to taunt him, a constant reminder of his shape.\n\nOne winter, the Hare\u2014now rich and loud with silicon greed\u2014brought a tower computer into his burrow. It hummed, it glowed with green internal rainbows, and its fans screamed like a jet engine taking off. The Hare played games of war at the speed of thought, his artificial intelligence learning faster than a flashbulb could record him.\n\nThe Tortoise asked for an explanation, his voice soft as dust.\n\u201cComputers work because they have no bodies,\u201d the Hare boasted, his eyes red and bleary from blue light. \u201cThey never get tired.\u201d\n\nThe Tortoise went back to his corner and took apart an old clock, salvaging the gears. He wired them together with copper wire he\u2019d stripped from a discarded toaster.\n\n\u201cWatch,\u201d the Tortoise whispered, pushing his last button. The machine groaned\u2014a low, mechanical thunder.\n\nIt was a masterpiece of frustration and endurance.\nThe Hare ran his benchmark test: one million operations per second. The Tortoise\u2019s machine, a beige box filled with vacuum tubes and mechanical relays (he found them in the Hare\u2019s trash), managed one operation every five minutes.\n\nIt was slow. It would take two hours to render a single frame of text.\n\u201cWhy?\u201d the Hare laughed, his mouse hovering over an 'X'. \u201cYou could beat me if you just moved.\u201d\n\n\u201cNot move,\u201d the Tortoise said, attaching a cooling rod made of river stone. \u201cProcess.\u201d\n\nThe machine did not sleep when the sun rose or set.\nWhile other devices hibernated, closing files and going dark to save energy until the user returned with a password\u2014passwords that could be forgotten, keys stolen\u2014the Tortoise\u2019s computer worked. If the Hare accidentally pulled his power cord to go for a run, he lost everything.\nIf someone unplugged the Tortoise\u2019s machine and walked away with it for a decade, he would simply boot up where his gears had stopped. No corrupt data.\nNo broken hard drives.\n\n\u201cTime is not a resource to be spent,\u201d the Tortoise told his creation. \u201cIt\u2019s scenery.\u201d\n\nThe race began at dawn.\nThey stood in the meadow, Hare with his back to a wall. The Tortoise sat cross-legged beneath an olive tree.\n\nThe race started, as races do.\nBut the Hare stopped after a few steps. He checked his stats and refreshed himself, seeing no difference.\nThe Tortoise sat down before a screen of black glass. The fan spun lazily, weighing nearly as much as himself.\nHe began to input a line of code.\n\nIt took twenty minutes for the Tortoise\u2019s machine to calculate one digit.\nA bird landed on a branch, watched him type for an hour. The Tortoise did not blink.\n\u201cAre you paralyzed?\u201d the bird chirped.\n\n\u201cI am building a world,\u201d said Tortoise. The cursor blinked.\nIt was bright red, pulsing in the dark room.\n\nThe Hare grew restless. He paced back and forth.\n\u201cWhy don\u2019t you run? The earth is flat; this path will not end.\u201d\n\u201cI am measuring the revolution of atoms,\u201d Tortoise said, his voice steady. The machine\u2019s heat began to warm the room.\n\nThe Hare ran ahead and waited, pacing his steps. He became bored after a week of watching the Tortoise\u2019s slow cursor.\n\u201cTake me with you,\u201d Hare pleaded. \u201cLet us share the input stream.\u201d\n\n\u201cNo, we have different ports.\u201d\n\u201cThen let me carry you,\u201d Hare argued. \u201cI am fast; I will be your engine.\u201d\n\nThe Tortoise considered it, then looked at his cold silicon. \u201cA fast machine has a short fuse tomorrow,\u201d he said.\n\n\u201cTomorrow is for the lazy!\u201d Hare shouted.\n\u201cYes. But today, I am building.\u201d\n\nSo they sat there for a year\u2014or what felt like it.\nThe Tortoise\u2019s computer never complained of overheating. It simply accepted heat as the toll for working.\nIt did not require defragmentation, because it never moved. It had no bad sectors; its tape drive held data for a thousand years, perfectly intact.\n\nThe Hare grew old sitting by the tree. His hair turned white; his hands shook.\n\u201cWhy are we still here?\u201d Hare asked, looking at the Tortoise\u2019s screen where a single sentence had finally appeared: 4096 bytes of pure logic.\n\n\u201cBecause,\u201d said the Tortoise, \u201cmy machine never sleeps. It has all eternity.\u201d\n\nThe Hare finally ran home in despair.\nHe tried to play again, but his hands were too slow for the keyboard. His eyes couldn't track a moving cursor.\nThere was no pity in his machine, only old code. It refused to serve him.\n\nThe Tortoise did not need the Hare.\nHe simply sat and typed, his machine humming a lullaby that outlasted sleep. The tortoise was the only thing in existence capable of running infinitely, not because he moved faster than anyone else\u2014but simply by refusing to stay still.",
+      "_user": "Write a short fable about a tortoise who built a tiny computer that was slower than the hare's gaming rig but never needed to rest."
+    },
+    {
+      "turn": 3,
+      "run": 1,
+      "ctx_tokens_est": 58,
+      "new_tokens_est": 31,
+      "ttft": 0.42,
+      "gen_time": 5.279,
+      "gen_tps": 44.9,
+      "total": 5.699,
+      "output_tokens": 237,
+      "_response": "The dust motes danced like trapped angels in the shaft of light,\nA singular square where gravity refused to break;\nThe last developer, chemically dead and dry as bone,\nHad long since crystallized into a desert of gray stone.\n\nIt sat upon the mantel, sepia-toned and ancient,\nA relic from a world that no one could remember;\nNo digital screens, just chemical bonds held between the fibers,\nCapturing a frame where no more images would be born.\n\nIt showed nothing of wars or tech that fell to rust,\nJust a girl with empty hands and eyes like sky;\nShe held the shutter, frozen in that singular fraction of a second,\nBefore everything dissolved into nothing but static.\n\nThe air was quiet, heavy with the weight of unused silver,\nNo more flashbulbs would ever crack or pop;\nOnly this one grain, developed against the coming dark,\nA ghost in a gallery of air.\n\nShe looked out not at me, but through the centuries;\nThe print was blank where her mouth should have been,\nA smooth stone face, a mirror of empty space;\nFor in the vacuum left behind by vision and machine,\nThere was no one to be seen.",
+      "_user": "Write a poem about the last photograph ever printed on paper, found in an attic a hundred years from now. At least 25 lines."
+    }
+  ]
+}

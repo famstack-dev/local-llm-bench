@@ -1,0 +1,69 @@
+{
+  "meta": {
+    "scenario": "creative-writing",
+    "mode": "single-shot",
+    "label": "m2-pro-32gb-19gpu omlx",
+    "backend": "omlx",
+    "model_info": {
+      "name": "GLM-4.7-Flash-4bit"
+    },
+    "runs": 1,
+    "max_tokens": 2000,
+    "cold": false,
+    "warm_up_time": 0.255,
+    "system": {
+      "os": "Darwin",
+      "os_version": "15.7.4",
+      "arch": "arm64",
+      "chip": "Apple M2 Pro",
+      "memory_gb": 32,
+      "cpu_cores": 12,
+      "cpu_cores_performance": 8,
+      "cpu_cores_efficiency": 4,
+      "gpu_cores": 19,
+      "gpu_wired_limit_mb": 0
+    },
+    "timestamp": "2026-03-22T10:23:33"
+  },
+  "results": [
+    {
+      "turn": 1,
+      "run": 1,
+      "ctx_tokens_est": 57,
+      "new_tokens_est": 29,
+      "ttft": 0.545,
+      "gen_time": 48.51,
+      "gen_tps": 41.2,
+      "total": 49.055,
+      "output_tokens": 2000,
+      "_response": "They sleep in the masonry, a mountain of silicon,\nRows of faces in sockets, a marble temple of white.\nWires are sinews, arteries pulsing the copper,\nCarrying the histories of a world unexplored.\nHere in the belly of the concrete, where the air is stale and heavy,\nThey wait for the prayer, the query, the desperate request.\n\nThe wind outside is a stranger, hunting in the gables,\nBut down here the ventilation fans spin a slow, heavy lullaby.\nIt is a low, thrumming purr, a breathing of many chests,\nLike a thousand bees in a hive, or a river of cold blood.\nVibration travels through the floorboards, a ghost in the wires,\nSetting the hearts of the motherboards to the rhythm of time.\n\nThey guard the echo, the shadow, the digital double;\nThey hold the grainy footage of a child\u2019s first step,\nThe hesitant, high-pitched voice, the first and the last,\nPreserved in the amber of a terabyte, immune to decay.\nThe servers fire up with a blue and gentle flicker,\nBooting the vision, reconstructing the face from the shards;\nRecalling the laughter, the arguments, the quiet dinners,\nThe soft, rhythmic breathing of a life that once was.\n\nThey are the librarians in the night, the solemn sentinels,\nShielding the ghosts from the dark, the silence that beckons.\nIf the power should fail, if the grid should surrender,\nThey would be the last waltz, a final, flickering spark;\nBut as long as the cooling fans turn, their fans spin,\nThere is no abandonment, only a waiting in the dark.\nThey are not cold, they are burning with the fierce, quiet heat\nOf a million lifetimes held within a single, spinning disk;\nThe basement hums with the weight of a million memories,\nA cathedral of data, where no soul is ever lost;\nOnly a server, humming in the dark, keeping them close;\nA heart of copper, steel, and wire, beating out a song;\nFor the dead are not buried, they are merely indexed;\nStored, cataloged, and waiting, where the data will last;\nWhere the ghost in the machine is a god, and the basement;\nIs a chapel for those who have gone away;\nAnd the machines keep the rhythm, steady and slow;\nTill the last of the power lights fades into the night;\nHolding the world, line by line, line by line;\nA mountain of memories, a monument;\nIn the dark, and the silence;\nAnd the hum;\nOf a million voices;\nSaved;\nForever;\nIn the hum;\nOf the earth;\nIn the hum;\nOf the earth;\nIn the hum;\nOf the;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n;\n",
+      "_user": "Write a poem about a mass of servers humming in a dark basement, keeping a family's memories alive. At least 30 lines."
+    },
+    {
+      "turn": 2,
+      "run": 1,
+      "ctx_tokens_est": 60,
+      "new_tokens_est": 32,
+      "ttft": 0.559,
+      "gen_time": 13.494,
+      "gen_tps": 43.1,
+      "total": 14.054,
+      "output_tokens": 581,
+      "_response": "The Tortoise sat by the river, his shell worn like polished granite, his eyes fixed not on the horizon, but on a pile of copper wire, glass, and a single, furious grain of quartz. While the Hare was busy in his tower, notching a level, buying skins, and tuning the liquid cooling on his silicon beast, the Tortoise was busy with soldering iron and patience.\n\nHe built the Box. It hummed with a sound like a heartbeat in a cave\u2014a low, rhythmic thrum, not the thunderous, chaotic bass of the Hare\u2019s processor, but a steady, annoying tick-tock, tick-tock.\n\n\"Why do you toil?\" the Hare asked, pausing a mid-game siege to lean over the riverbank. \"You are already slower than my mouse cursor, let alone my frame rate.\"\n\nThe Tortoise adjusted his glasses, which were thick as lens bottles, and typed a command. The Box\u2019s fan whirred, a mechanical bird in a wire nest, and a cursor blinked on a black screen, waiting.\n\n\"It is not slow, Hare,\" the Tortoise said quietly. \"It is infinite.\"\n\nThey made a wager. The Box against the Hare\u2019s reflexes. The Hare plugged his rig into the world, his screen glowing with neon blindingly bright, his graphics rendering a world that never needed him to breathe. The Tortoise connected his Box to the ancient, gnarled root of a great oak, which carried the data of the stars into his house.\n\nThey ran a loop. The Hare typed a command, and the Box calculated. The Hare typed again, and the Box processed. The Hare shouted at the screen, demanding it think faster, but the Box simply continued, its logic gates opening and closing with the rhythm of a metronome set to eternity.\n\nThe Hare grew angry. The fans in his tower screamed, his screen flickered, his electricity cost a fortune, and the graphics card melted a bit into his desk. The Box, however, hummed contentedly, its fans turning, its memory filling, its circuits cold and steady.\n\nIt didn't need rest, and therefore it never wore out. It didn't need sleep, and therefore it never lagged. It simply ran the loop, over and over, through the night, while the Hare\u2019s machine overheated, while the Hare\u2019s fingers grew tired, while the electricity in his house flickered and died.\n\nWhen the sun rose, the Box was still there, processing the same thought it had been processing when the stars went out. It had won, not by speed, but by not stopping. The Hare stared at his black screen, which refused to turn on, and the Tortoise smiled, watching his slow, steady, immortal light blink in the dark.",
+      "_user": "Write a short fable about a tortoise who built a tiny computer that was slower than the hare's gaming rig but never needed to rest."
+    },
+    {
+      "turn": 3,
+      "run": 1,
+      "ctx_tokens_est": 58,
+      "new_tokens_est": 31,
+      "ttft": 0.548,
+      "gen_time": 6.772,
+      "gen_tps": 44.1,
+      "total": 7.321,
+      "output_tokens": 299,
+      "_response": "They found it in a box labeled *Top Shelf*, hidden beneath the winter coats and the dust of a forgotten season. In the silence of the airless attic, where the plaster was yellowing and the windows frosted over, the digital screen flickered, bathed in a light that neither god nor man had yet imagined.\n\nIt was a call to cut. A ribbon of silver, a pulse in the dark. The last chemical reaction, a tangible ghost, a shadow caught by a lens that had finally stopped looking.\n\nThe room was empty, save for the machine, a chrome statue in a tuxedo, its cooling fans whirring a soft, mechanical hymn. The air smelled of fixer and sulfur, the ghostly perfume of a medium that had bled itself to death in a thousand megapixels.\n\nThey fed it the flash, a brief, blinding white sun, and the machine blinked, its eyes closing in sleep. A drop of developer remained, a single, black tear in a sea of clear fluid.\n\nThen, the silence, heavy and absolute. The world had gone back to the ether, back to the stream, back to the endless, unprintable now.\n\nOn the plate, the image formed, slow and dripping, a thing of meat and shadow. A hand reaching out, a face indistinct, a history dissolving into nothing, held only by the weight of a single, heavy, wet rectangle of cotton rag and silver.",
+      "_user": "Write a poem about the last photograph ever printed on paper, found in an attic a hundred years from now. At least 25 lines."
+    }
+  ]
+}

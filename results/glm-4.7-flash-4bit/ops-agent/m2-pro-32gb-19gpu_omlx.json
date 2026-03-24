@@ -1,0 +1,141 @@
+{
+  "meta": {
+    "scenario": "ops-agent",
+    "mode": "conversation",
+    "label": "m2-pro-32gb-19gpu omlx",
+    "backend": "omlx",
+    "model_info": {
+      "name": "GLM-4.7-Flash-4bit"
+    },
+    "runs": 1,
+    "max_tokens": 500,
+    "cold": false,
+    "system": {
+      "os": "Darwin",
+      "os_version": "15.7.4",
+      "arch": "arm64",
+      "chip": "Apple M2 Pro",
+      "memory_gb": 32,
+      "cpu_cores": 12,
+      "cpu_cores_performance": 8,
+      "cpu_cores_efficiency": 4,
+      "gpu_cores": 19,
+      "gpu_wired_limit_mb": 0
+    },
+    "timestamp": "2026-03-22T10:25:01"
+  },
+  "results": [
+    {
+      "turn": 1,
+      "run": 1,
+      "ctx_tokens_est": 575,
+      "new_tokens_est": 421,
+      "ttft": 2.727,
+      "gen_time": 5.656,
+      "gen_tps": 40.7,
+      "total": 8.383,
+      "output_tokens": 230,
+      "tool": "server_status",
+      "_response": "Here's the current status. Everything is running, but there are two things that stand out as potential issues:\n\n**High CPU Load (9.7)**\nThe system load is quite high relative to the 12 cores available. While not critical, it indicates the CPU is working hard. This is likely due to **immich-ml** using 45% CPU.\n\n**High Memory Usage (74%)\nMemory usage is at 47.3GB out of 64GB. This is the main reason for the high load; the system is swapping or under significant pressure.\n\n**Summary:**\n*   **immich-ml** is the culprit (8.2GB RAM, 45% CPU). This is likely processing image recognition tasks.\n*   **Memory pressure** is high, which is driving the CPU usage up as the system manages resources.\n*   No services are down, but the system is struggling under the current workload.\n\n**Recommendation:** Check if immich-ml is processing a large batch of photos, or if it's stuck. You can log into the container to investigate further, or just wait if it's a scheduled task.",
+      "_user": "Something feels off with the server. Can you check what's running?"
+    },
+    {
+      "turn": 2,
+      "run": 1,
+      "ctx_tokens_est": 1052,
+      "new_tokens_est": 235,
+      "ttft": 2.453,
+      "gen_time": 4.632,
+      "gen_tps": 38.6,
+      "total": 7.085,
+      "output_tokens": 179,
+      "tool": "service_logs",
+      "_response": "**It's working.**\n\nImmich ML is in the middle of a massive batch job. Here is what I see happening:\n\n*   **Current Task:** It is currently processing **Batch 847/1203**.\n*   **Workload:** It's doing two things: Clustering face embeddings (grouping faces) and generating CLIP embeddings (tagging images).\n*   **Remaining Work:** There are **351 images** left in the queue with an estimated **45 minutes** to finish.\n*   **Memory Pressure:** The logs show it hit \"Low memory condition\" and triggered a Garbage Collection, reclaiming 1.2GB. This confirms the heavy load is stressing the RAM.\n\n**Verdict:** Nothing is wrong, it just has a backlog of 1205 photos to process. It should finish in about 45 minutes, then settle down to normal background processing.",
+      "_user": "Immich ML is eating a lot of CPU. What's it doing?"
+    },
+    {
+      "turn": 3,
+      "run": 1,
+      "ctx_tokens_est": 1331,
+      "new_tokens_est": 89,
+      "ttft": 1.939,
+      "gen_time": 5.012,
+      "gen_tps": 38.1,
+      "total": 6.952,
+      "output_tokens": 191,
+      "tool": "docker_exec",
+      "_response": "**No, it's pushing the limits, but it should be fine.**\n\nHere is the breakdown:\n\n*   **Memory Usage:** 8.2GB out of 12GB (68%).\n*   **Headroom:** You have about **~3.7GB** of free space.\n*   **The Risk:** The logs showed it hit \"Low memory condition\" and had to trigger a Garbage Collection (GC) to free up 1.2GB. This means the system is actively fighting to keep memory available.\n*   **The Good News:** The container is limited to 12GB, and it's not currently crashing or swapping to disk aggressively (which would cause a hard freeze). It's just working hard.\n\n**Verdict:** It will likely hit 9-10GB and trigger another GC cycle, but it should finish within the 45-minute estimate without crashing. Just keep an eye on it, but it should be self-regulating.",
+      "_user": "Ah right, we uploaded vacation photos yesterday. Is it going to be OK memory-wise?"
+    },
+    {
+      "turn": 4,
+      "run": 1,
+      "ctx_tokens_est": 1735,
+      "new_tokens_est": 214,
+      "ttft": 1.922,
+      "gen_time": 4.977,
+      "gen_tps": 38.0,
+      "total": 6.899,
+      "output_tokens": 189,
+      "tool": "backup_status",
+      "_response": "Good news, the backup ran last night, but it hit some minor snags.\n\n**Summary:**\n*   **Time:** Ran at 02:00 AM (7th March).\n*   **Status:** Completed with warnings.\n*   **Volume:** Successfully synced **1847 files** (12.4GB).\n\n**What to watch out for:**\nThere were two warnings, but they look like cleanup tasks rather than data loss:\n1.  **Vault eject failed:** This is normal; it just means it couldn't eject a backup volume (like a DVD or external drive) if one was attached, but it finished the backup.\n2.  **uchg flags applied:** This is a system-level permission change; it's just optimizing the backup files.\n\n**Verdict:** The 12.4GB of data (including your vacation photos) was transferred to the backup destination. The warnings are minor cleanup issues, so your photos are safe.",
+      "_user": "Good. Check if last night's backup ran. I want to make sure the vacation photos are safe."
+    },
+    {
+      "turn": 5,
+      "run": 1,
+      "ctx_tokens_est": 2172,
+      "new_tokens_est": 239,
+      "ttft": 2.895,
+      "gen_time": 9.444,
+      "gen_tps": 35.3,
+      "total": 12.34,
+      "output_tokens": 333,
+      "tool": "disk_usage",
+      "_response": "Disk space is looking healthy across all drives, though the backup volume is getting tight.\n\n**Main Drive (`/`): 33% Used**\n*   **Usage:** 780GB used of 914GB (Wait, `size` says 914GB, `used` says 780GB, `available` says 914GB? Let me re-read...)\n*   **Actually:** Main volume has 780GB used, 914GB total. You have plenty of breathing room (914GB free).\n\n**Backup Vault Drive (`/Volumes/backup-vault`): 69% Used**\n*   **Usage:** 7.9TB used of 7.9TB total.\n*   **Status:** This is the one you need to watch. You are at 7.9TB used, which means you are **almost full**. You have about 780GB of free space left.\n*   **Impact:** If this fills up, backups will fail or the Vault eject issue will get worse.\n\n**Time Machine Drive (`/Volumes/time-machine`): 75% Used**\n*   **Usage:** 9.9TB used of 7.9TB total.\n*   **Status:** Interestingly, the Time Machine volume shows more used than total, which implies it might be using a sparsebundle or external storage pool, but you are effectively full there too.\n\n**Summary:**\n*   Your main server data (892GB) is comfortable.\n*   The **Backup Vault** is the bottleneck. It's at 7.9TB, which is very close to capacity. If you plan to backup today, you might need to clear some space there.",
+      "_user": "The vault didn't eject again. How's disk space looking on all drives?"
+    },
+    {
+      "turn": 6,
+      "run": 1,
+      "ctx_tokens_est": 2728,
+      "new_tokens_est": 249,
+      "ttft": 2.899,
+      "gen_time": 4.671,
+      "gen_tps": 35.5,
+      "total": 7.57,
+      "output_tokens": 166,
+      "tool": "service_logs",
+      "_response": "**Yes, Paperless processed them.**\n\nHere is the summary of this morning's batch:\n\n*   **School Report (Emma):** Successfully scanned, OCR'd, and tagged as \"School Report\" with tags `education` and `emma`.\n*   **Swimming Certificate (Max):** Successfully scanned, OCR'd, and tagged as \"Certificate\" with tags `sports` and `max`.\n*   **Electricity Bill:** Successfully scanned, OCR'd, and tagged as \"Invoice\" with tags `utilities` and `electricity`.\n*   **Result:** 0 errors, 100% success rate.\n\n**Regarding Disk Space:** Don't forget, the Time Machine volume is at 75% (9.9TB used). If the backup fails later, you might need to prune some files there to free up space.",
+      "_user": "Time Machine is at 75%. Also did Paperless process the school documents I scanned this morning?"
+    },
+    {
+      "turn": 7,
+      "run": 1,
+      "ctx_tokens_est": 2993,
+      "new_tokens_est": 98,
+      "ttft": 2.112,
+      "gen_time": 3.298,
+      "gen_tps": 34.0,
+      "total": 5.41,
+      "output_tokens": 112,
+      "tool": "docker_exec",
+      "_response": "**It's 845 MB.**\n\nThe \"Matrix\" (Synapse) database is currently 845 MB, and that is entirely dominated by **`state_groups_state`** (845 MB). This table tracks all the room state changes, which is why it's growing so fast if the server has been active all day.\n\n**Recommendation:** You are currently using 380MB RAM, so 845MB of database space isn't causing a memory issue, but it is taking up a chunk of your 780GB free space on the main volume.",
+      "_user": "Nice, it even picked up the electricity bill. How big is the Matrix database? It's been chatty lately."
+    },
+    {
+      "turn": 8,
+      "run": 1,
+      "ctx_tokens_est": 3292,
+      "new_tokens_est": 188,
+      "ttft": 2.648,
+      "gen_time": 6.601,
+      "gen_tps": 33.3,
+      "total": 9.249,
+      "output_tokens": 220,
+      "tool": "docker_exec",
+      "_response": "**Here is the breakdown by room.**\n\nThe biggest space hogs are the chat logs, not who is in them.\n\n**Top 5 Space Consumers:**\n1.  **#server** (8,847 events): The main server room.\n2.  **#test-room** (4,521 events): A chat room with a lot of history.\n3.  **#butler** (3,741 events): A bot room.\n4.  **#family** (7,934 events): The main family room.\n5.  **#marvin-old** (9,931 events - wait, actually 9,931 total, 2103 old): A room with a lot of history.\n\n**Summary:**\n*   **Total Events:** 34,286 messages.\n*   **Average:** ~5,000 events per room.\n*   **Action:** If **#test-room** or **#marvin-old** are inactive, you might consider deleting them to save space. Otherwise, 845MB is actually quite small for a Matrix database with 34k messages.",
+      "_user": "2.1GB for Matrix seems like a lot. Can we see which rooms take the most space?"
+    }
+  ]
+}
