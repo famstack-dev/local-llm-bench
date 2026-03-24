@@ -41,36 +41,51 @@ Results auto-save to `results/<model>/<scenario>/<chip>_<backend>.json`.
 
 Effective tok/s (**bold**) with generation tok/s in parentheses. Higher is better.
 
-### Qwen3.5-35B-A3B (4-bit, thinking disabled)
+### Qwen3.5-35B-A3B (thinking disabled)
 
-| Hardware | Backend | ops-agent | doc-summary | prefill-test | creative-writing |
-|---|---|---:|---:|---:|---:|
-| M1 Max (64GB, 24 GPU) | oMLX | **34.6** (53.3) | **25.7** (55.5) | **30.0** (52.0) | **51.5** (56.2) |
-| M1 Max (64GB, 24 GPU) | LM Studio MLX | **17.0** (56.6) | **13.4** (56.8) | **5.9** (54.4) | **38.3** (58.9) |
-| M1 Max (64GB, 24 GPU) | LM Studio GGUF | **17.6** (28.2) | **19.4** (29.3) | **7.8** (28.4) | **27.7** (28.6) |
+| Hardware | Backend | Format | ops-agent | doc-summary | prefill-test | creative-writing |
+|---|---|---|---:|---:|---:|---:|
+| M3 Max (128GB, 40 GPU) | oMLX | MLX 4-bit | **71.3** (90.8) | **61.4** (93.8) | **22.6** (87.9) | **90.1** (94.3) |
+| M3 Max (128GB, 40 GPU) | LM Studio | MLX | **37.1** (83.5) | **22.5** (87.3) | **14.8** (85.8) | **59.0** (92.2) |
+| M1 Max (64GB, 24 GPU) | oMLX | MLX 4-bit fp16 | **47.3** (65.2) | **33.1** (65.9) | **12.4** (62.5) | **63.4** (70.2) |
+| M1 Max (64GB, 24 GPU) | oMLX | MLX 4-bit | **37.5** (53.3) | **29.4** (55.5) | **27.8** (52.0) | **53.7** (56.2) |
+| M1 Max (64GB, 24 GPU) | Rapid-MLX | MLX 4-bit | **35.6** (59.9) | **28.7** (60.7) | **8.5** (57.3) | **56.5** (62.2) |
+| M1 Max (64GB, 24 GPU) | mlx-openai-server | MLX 4-bit | **26.2** (59.3) | **26.2** (59.8) | **8.7** (57.5) | **57.8** (62.7) |
+| M1 Max (64GB, 24 GPU) | LM Studio | MLX | **17.0** (56.6) | **13.4** (56.8) | **5.9** (54.4) | **38.3** (58.9) |
+| M1 Max (64GB, 24 GPU) | LM Studio | GGUF | **17.6** (28.2) | **19.4** (29.3) | **7.8** (28.4) | **27.7** (28.6) |
+| M2 Pro (32GB, 19 GPU) | LM Studio | MLX | **17.6** (58.4) | **14.3** (60.4) | **5.6** (57.9) | **42.9** (62.5) |
 
-[oMLX](https://github.com/jundot/omlx) wins every scenario. Generation speed is identical to LM Studio MLX (~55 tok/s), but prefill is **up to 10x faster** thanks to its tiered KV cache. At 8K context, LM Studio takes 49s to prefill. oMLX takes 1.7s.
+[oMLX](https://github.com/jundot/omlx) wins every scenario thanks to its tiered KV cache. On M3 Max, effective throughput reaches **71 tok/s** in ops-agent — nearly 2x the M1 Max result. Generation speed is identical across MLX engines (~55-93 tok/s depending on hardware), but prefill speed varies dramatically: at 8K context, LM Studio MLX takes 49s to prefill while oMLX takes 1.7s (with its persistent SSD cache from a prior run — cold prefill is higher).
 
-### Llama 3.1 8B (4-bit)
+### Llama 3.1 8B
 
-| Hardware | Backend | ops-agent | doc-summary | prefill-test | creative-writing |
-|---|---|---:|---:|---:|---:|
-| M1 Max (64GB, 24 GPU) | LM Studio MLX | **40.7** (55.0) | **21.9** (59.6) | **8.4** (51.8) | **58.9** (62.1) |
-| M1 Max (64GB, 24 GPU) | LM Studio GGUF | **30.6** (36.4) | **18.5** (40.7) | **7.1** (33.4) | **38.1** (39.1) |
-| M1 Max (64GB, 24 GPU) | Ollama GGUF | **27.1** (33.4) | **18.9** (37.8) | **5.8** (30.7) | **38.6** (39.6) |
+| Hardware | Backend | Format | ops-agent | doc-summary | prefill-test | creative-writing |
+|---|---|---|---:|---:|---:|---:|
+| M3 Max (128GB, 40 GPU) | LM Studio | MLX | **57.6** (70.8) | **38.2** (76.0) | **14.4** (65.6) | **75.2** (78.5) |
+| M3 Max (128GB, 40 GPU) | oMLX | MLX | **53.3** (69.4) | **35.1** (71.1) | **14.5** (63.2) | **73.6** (76.9) |
+| M1 Max (64GB, 24 GPU) | LM Studio | MLX | **40.7** (55.0) | **21.9** (59.6) | **8.4** (51.8) | **58.9** (62.1) |
+| M1 Max (64GB, 24 GPU) | LM Studio | GGUF | **30.6** (36.4) | **18.5** (40.7) | **7.1** (33.4) | **38.1** (39.1) |
+| M1 Max (64GB, 24 GPU) | Ollama | GGUF | **27.1** (33.4) | **18.9** (37.8) | **5.8** (30.7) | **38.6** (39.6) |
 
-At 8B, MLX wins across the board. The model is small enough that prefill stays fast and the 1.5x generation speed advantage dominates.
+MLX wins across the board. At 8B the model fits comfortably in memory, prefill stays fast, and the ~1.5x generation speed advantage dominates. On M3 Max, LM Studio MLX edges out oMLX thanks to lower TTFT overhead at this model size.
+
+### GLM-4.7-Flash
+
+| Hardware | Backend | Format | ops-agent | doc-summary | prefill-test | creative-writing |
+|---|---|---|---:|---:|---:|---:|
+| M2 Pro (32GB, 19 GPU) | oMLX | MLX 4-bit | **25.4** (36.7) | **15.3** (39.1) | **5.2** (34.3) | **40.9** (42.8) |
+| M2 Pro (32GB, 19 GPU) | LM Studio | MLX | **24.3** (38.5) | **16.4** (41.3) | **5.1** (35.4) | **41.4** (43.8) |
 
 ### Help fill this table
 
-> Run `python3 bench.py --model llama3.1:8b` and [open a PR](#contribute-your-results). Five minutes, no dependencies.
+> Run the benchmark on your hardware and [open a PR](#contribute-your-results). Five minutes, no dependencies.
 
-| Hardware | Backend | ops-agent | doc-summary | prefill-test | creative-writing |
-|---|---|---:|---:|---:|---:|
-| M1 Max (64GB, 24 GPU) | Ollama GGUF | **27.1** (33.4) | **18.9** (37.8) | **5.8** (30.7) | **38.6** (39.6) |
-| M2 Pro / Max | | | | | |
-| M3 / Pro / Max | | | | | |
-| M4 / Pro / Max | | | | | |
+| Hardware | Backend | Format | ops-agent | doc-summary | prefill-test | creative-writing |
+|---|---|---|---:|---:|---:|---:|
+| M1 Max (64GB, 24 GPU) | Ollama | GGUF | **27.1** (33.4) | **18.9** (37.8) | **5.8** (30.7) | **38.6** (39.6) |
+| M2 Pro (32GB, 19 GPU) | LM Studio | MLX | **17.6** (58.4) | **14.3** (60.4) | **5.6** (57.9) | **42.9** (62.5) |
+| M3 Max (128GB, 40 GPU) | oMLX | MLX 4-bit | **71.3** (90.8) | **61.4** (93.8) | **22.6** (87.9) | **90.1** (94.3) |
+| M4 / Pro / Max | | | | | | |
 
 ## Scenarios
 
