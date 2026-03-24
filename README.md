@@ -12,7 +12,7 @@ This benchmark measures **effective throughput**: output tokens divided by total
 effective tok/s = output_tokens / (prefill_time + generation_time)
 ```
 
-[Full analysis: MLX vs llama.cpp on Apple Silicon](https://famstack.dev/guides/mlx-vs-gguf-apple-silicon) | [Discord](https://discord.gg/tT54FNyf) | [Bluesky](https://bsky.app/profile/famstack.dev) | [Reddit](https://www.reddit.com/user/arthware/)
+[Part 1: MLX vs llama.cpp on Apple Silicon](https://famstack.dev/guides/mlx-vs-gguf-apple-silicon) | [Part 2: Five runtimes benchmarked](https://famstack.dev/guides/mlx-vs-gguf-part-2-isolating-variables) | [Discord](https://discord.gg/tT54FNyf) | [Bluesky](https://bsky.app/profile/famstack.dev) | [Reddit](https://www.reddit.com/user/arthware/)
 
 ## Quick Start
 
