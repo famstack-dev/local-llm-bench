@@ -45,8 +45,6 @@ Effective tok/s (**bold**) with generation tok/s in parentheses. Higher is bette
 
 | Hardware | Backend | Format | ops-agent | doc-summary | prefill-test | creative-writing |
 |---|---|---|---:|---:|---:|---:|
-| M3 Max (128GB, 40 GPU) | oMLX | MLX 4-bit | **71.3** (90.8) | **61.4** (93.8) | **22.6** (87.9) | **90.1** (94.3) |
-| M3 Max (128GB, 40 GPU) | LM Studio | MLX | **37.1** (83.5) | **22.5** (87.3) | **14.8** (85.8) | **59.0** (92.2) |
 | M1 Max (64GB, 24 GPU) | oMLX | MLX 4-bit fp16 | **47.3** (65.2) | **33.1** (65.9) | **12.4** (62.5) | **63.4** (70.2) |
 | M1 Max (64GB, 24 GPU) | oMLX | MLX 4-bit | **37.5** (53.3) | **29.4** (55.5) | **27.8** (52.0) | **53.7** (56.2) |
 | M1 Max (64GB, 24 GPU) | Rapid-MLX | MLX 4-bit | **35.6** (59.9) | **28.7** (60.7) | **8.5** (57.3) | **56.5** (62.2) |
@@ -54,6 +52,8 @@ Effective tok/s (**bold**) with generation tok/s in parentheses. Higher is bette
 | M1 Max (64GB, 24 GPU) | LM Studio | MLX | **17.0** (56.6) | **13.4** (56.8) | **5.9** (54.4) | **38.3** (58.9) |
 | M1 Max (64GB, 24 GPU) | LM Studio | GGUF | **17.6** (28.2) | **19.4** (29.3) | **7.8** (28.4) | **27.7** (28.6) |
 | M2 Pro (32GB, 19 GPU) | LM Studio | MLX | **17.6** (58.4) | **14.3** (60.4) | **5.6** (57.9) | **42.9** (62.5) |
+| M3 Max (128GB, 40 GPU) | oMLX | MLX 4-bit | **71.3** (90.8) | **61.4** (93.8) | **22.6** (87.9) | **90.1** (94.3) |
+| M3 Max (128GB, 40 GPU) | LM Studio | MLX | **37.1** (83.5) | **22.5** (87.3) | **14.8** (85.8) | **59.0** (92.2) |
 
 [oMLX](https://github.com/jundot/omlx) wins every scenario thanks to its tiered KV cache. On M3 Max, effective throughput reaches **71 tok/s** in ops-agent — nearly 2x the M1 Max result. Generation speed is identical across MLX engines (~55-93 tok/s depending on hardware), but prefill speed varies dramatically: at 8K context, LM Studio MLX takes 49s to prefill while oMLX takes 1.7s (with its persistent SSD cache from a prior run — cold prefill is higher).
 
