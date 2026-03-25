@@ -20,14 +20,17 @@ Python 3.8+, no dependencies. Just a running inference backend with a model load
 
 ```bash
 # Ollama (default)
-python3 bench.py --model llama3.1:8b
+python3 bench.py --model llama3.1:8b --model-label llama-3.1-8b-instruct
 
 # LM Studio
-python3 bench.py --backend lmstudio --model mlx-community/qwen3.5-35b-a3b --no-think
+python3 bench.py --backend lmstudio --model mlx-community/qwen3.5-35b-a3b \
+  --model-label qwen3.5-35b-a3b --no-think
 
 # oMLX or any OpenAI-compatible endpoint
-OPENAI_API_KEY=key python3 bench.py --backend openai --backend-label omlx \
-  --base-url http://localhost:8000 --model "Qwen3.5-35B-A3B-4bit" --no-think
+export OPENAI_API_KEY=omlx
+python3 bench.py --backend openai --backend-label omlx \
+  --base-url http://localhost:8000 --model "Qwen3.5-35B-A3B-4bit" \
+  --model-label qwen3.5-35b-a3b --no-think
 
 # Compare results
 python3 compare.py results/<model>/<scenario>/*.json
@@ -69,7 +72,7 @@ Effective tok/s (**bold**) with generation tok/s in parentheses. Higher is bette
 export OPENAI_API_KEY=omlx
 python3 bench.py --backend openai --backend-label omlx \
   --base-url http://localhost:8000 --model Qwen3.5-35B-A3B-4bit \
-  --model-label qwen3.5-35b-a3b-4bit --no-think
+  --model-label qwen3.5-35b-a3b --no-think
 
 # LM Studio (MLX)
 python3 bench.py --backend lmstudio --backend-label lmstudio-mlx \
@@ -147,7 +150,7 @@ python3 bench.py --backend lmstudio --backend-label lmstudio-mlx \
 export OPENAI_API_KEY=omlx
 python3 bench.py --backend openai --backend-label omlx \
   --base-url http://localhost:8000 --model GLM-4.7-Flash-4bit \
-  --model-label glm-4.7-flash-4bit
+  --model-label glm-4.7-flash
 ```
 
 </details>
