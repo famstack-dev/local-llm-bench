@@ -738,14 +738,17 @@ def run_single(args, scenario_path, script_dir, stream_fn, base_url, warm_up_don
 
     # Save results
     label = args.label or f"{make_chip_slug()} {backend_key}"
-    outpath = args.output or make_result_path(script_dir, args.model, scenario["name"], backend_key)
+    model_for_path = args.model_label or args.model
+    outpath = args.output or make_result_path(script_dir, model_for_path, scenario["name"], backend_key)
     os.makedirs(os.path.dirname(outpath), exist_ok=True)
     meta = {
         "scenario": scenario["name"],
         "mode": scenario.get("mode", "conversation"),
         "label": label,
         "backend": backend_key,
-        "model_info": get_model_info(args.backend, base_url, args.model),
+        "model_info": get_model_info(args.backend, base_url, args.model,
+                                     backend_label=args.backend_label,
+                                     format_override=args.format),
         "runs": args.runs,
         "max_tokens": scenario.get("max_tokens", 500),
         "cold": args.cold,
@@ -837,6 +840,11 @@ def main():
                         help="Override backend URL (default: auto from backend)")
     parser.add_argument("--model", default=None,
                         help="Model name/identifier as known by the backend")
+    parser.add_argument("--model-label", default=None,
+                        help="Normalized model name for result directory (e.g. qwen3.5-35b-a3b). "
+                             "Use this to group results from different backends/formats under the same model.")
+    parser.add_argument("--format", choices=["gguf", "mlx"], default=None,
+                        help="Model packaging format. Auto-detected from backend and model name if not set.")
     parser.add_argument("--label", default=None,
                         help="Human-readable label (default: auto-generated from hardware + backend)")
     parser.add_argument("--runs", type=int, default=1,
@@ -1004,7 +1012,7 @@ def main():
             # ── Contribute prompt ─────────────────────────────────────────
             chip_slug = make_chip_slug()
             backend_key = args.backend_label or args.backend
-            model_slug = make_model_slug(args.model)
+            model_slug = make_model_slug(args.model_label or args.model)
             branch = f"results/{chip_slug}"
 
             # Detect if this is a direct clone (no push access) or a fork

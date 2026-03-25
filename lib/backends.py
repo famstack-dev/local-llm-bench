@@ -324,7 +324,57 @@ def stream_openai_compat(base_url, model, messages, max_tokens=300, temperature=
     )
 
 
-def get_model_info(backend, base_url, model):
+def detect_model_format(backend, backend_label, model):
+    """
+    Detect whether the model uses GGUF or MLX packaging.
+
+    Detection rules:
+      1. Backend type: ollama/llama-server → gguf, mlx-openai-server → mlx
+      2. Backend label: omlx/rapid-mlx/vmlx → mlx, contains 'gguf' → gguf
+      3. Model name: mlx-community/ prefix → mlx, -gguf/-GGUF suffix → gguf,
+         lmstudio-community/ → gguf, qwen/ or similar HF org → gguf (LM Studio GGUF)
+      4. Model name keywords: contains 'mlx' → mlx
+
+    Returns "gguf", "mlx", or None if undetermined.
+    """
+    # 1. Backend type — definitive
+    if backend in ("ollama", "llama-server"):
+        return "gguf"
+    if backend in ("mlx-openai-server", "omlx", "rapid-mlx", "vmlx"):
+        return "mlx"
+
+    # 2. Backend label — user-specified, high confidence
+    label = (backend_label or "").lower()
+    if label in ("omlx", "rapid-mlx", "vmlx"):
+        return "mlx"
+    if "gguf" in label:
+        return "gguf"
+    if "mlx" in label:
+        return "mlx"
+
+    # 3. Model name patterns
+    model_lower = model.lower()
+    if model_lower.startswith("mlx-community/"):
+        return "mlx"
+    if "-gguf" in model_lower or model_lower.startswith("lmstudio-community/"):
+        return "gguf"
+    # LM Studio GGUF models use HF org prefixes like qwen/, meta-llama/
+    if backend == "lmstudio" and "/" in model:
+        org = model.split("/")[0].lower()
+        # mlx-community already handled above; other orgs are GGUF in LM Studio
+        if org not in ("mlx-community",):
+            return "gguf"
+
+    # 4. Keyword fallback
+    if "mlx" in model_lower:
+        return "mlx"
+    if "gguf" in model_lower:
+        return "gguf"
+
+    return None
+
+
+def get_model_info(backend, base_url, model, backend_label=None, format_override=None):
     """
     Fetch model details from the backend, if available.
 
@@ -332,8 +382,8 @@ def get_model_info(backend, base_url, model):
     architecture, parameter count, quantization, and format without having
     to remember what you ran.
 
-    Only Ollama provides detailed model info via /api/show. For LM Studio
-    and llama-server, we return just the model name.
+    Only Ollama provides detailed model info via /api/show. For other backends,
+    we detect the format (gguf/mlx) from the backend type and model name.
     """
     info = {"name": model}
 
@@ -345,6 +395,7 @@ def get_model_info(backend, base_url, model):
         }
         if model in models:
             info.update(models[model])
+        info["format"] = "cloud"
         return info
 
     if backend == "ollama":
@@ -365,6 +416,15 @@ def get_model_info(backend, base_url, model):
                 info["quantization"] = details.get("quantization_level")
         except Exception:
             pass
+        # Ollama is always GGUF, even if API didn't return it
+        if "format" not in info:
+            info["format"] = "gguf"
+        return info
+
+    # Non-Ollama backends: detect format from backend type + model name
+    fmt = format_override or detect_model_format(backend, backend_label, model)
+    if fmt:
+        info["format"] = fmt
 
     return info
 

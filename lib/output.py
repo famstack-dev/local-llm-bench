@@ -215,17 +215,37 @@ def make_model_slug(model_name):
     """
     Normalize a model identifier into a filesystem-safe slug.
 
+    Strips HuggingFace org prefixes and packaging suffixes so the same
+    base model always lands in the same directory regardless of backend
+    or packaging format.
+
     Examples:
-      "qwen3.5:35b-a3b"                         → "qwen3.5-35b-a3b"
-      "mlx-community/qwen3.5-35b-a3b"           → "mlx-community-qwen3.5-35b-a3b"
-      "lmstudio-community/qwen3.5-35b-a3b-gguf" → "lmstudio-community-qwen3.5-35b-a3b-gguf"
+      "qwen3.5:35b-a3b"                              → "qwen3.5-35b-a3b"
+      "mlx-community/qwen3.5-35b-a3b"                → "qwen3.5-35b-a3b"
+      "qwen/qwen3.5-35b-a3b"                         → "qwen3.5-35b-a3b"
+      "lmstudio-community/Meta-Llama-3.1-8B-GGUF"    → "meta-llama-3.1-8b-instruct"
+      "Qwen3.5-35B-A3B-4bit-fp16"                    → "qwen3.5-35b-a3b-4bit"
+      "JANGQ-AI/Qwen3.5-35B-A3B-JANG_4K"             → "qwen3.5-35b-a3b-jang_4k"
     """
     slug = model_name
+
+    # Strip HuggingFace org prefixes (mlx-community/, qwen/, meta-llama/, etc.)
+    if "/" in slug:
+        slug = slug.split("/", 1)[1]
+
     # Ollama uses colon as separator (qwen3.5:35b-a3b)
     slug = slug.replace(":", "-")
-    # Slashes from org prefixes (mlx-community/, qwen/) become hyphens
-    slug = slug.replace("/", "-")
-    return slug.lower()
+
+    slug = slug.lower()
+
+    # Strip packaging suffixes — these are format details, not model identity.
+    # Order matters: check longest suffixes first.
+    for suffix in ("-gguf", "-mlx", "-fp16", "-bf16"):
+        if slug.endswith(suffix):
+            slug = slug[:-len(suffix)]
+            break
+
+    return slug
 
 
 def make_config_suffix():
