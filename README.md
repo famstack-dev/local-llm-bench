@@ -57,17 +57,75 @@ Effective tok/s (**bold**) with generation tok/s in parentheses. Higher is bette
 
 [oMLX](https://github.com/jundot/omlx) wins every scenario thanks to its tiered KV cache. On M3 Max, effective throughput reaches **71 tok/s** in ops-agent — nearly 2x the M1 Max result. Generation speed is identical across MLX engines (~55-93 tok/s depending on hardware), but prefill speed varies dramatically: at 8K context, LM Studio MLX takes 49s to prefill while oMLX takes 1.7s (with its persistent SSD cache from a prior run — cold prefill is higher).
 
+<details>
+<summary>Run this benchmark</summary>
+
+**Prerequisites:** Disable thinking mode for Qwen3.5 — it burns tokens on invisible `<think>` blocks.
+- **Ollama / LM Studio (GGUF):** `--no-think` handles it automatically
+- **LM Studio (MLX) / oMLX:** Run `python3 scripts/qwen3.5-35b-a3b-toggle-thinking.py off` then reload the model
+
+```bash
+# oMLX (4-bit) — fastest effective throughput
+export OPENAI_API_KEY=omlx
+python3 bench.py --backend openai --backend-label omlx \
+  --base-url http://localhost:8000 --model Qwen3.5-35B-A3B-4bit \
+  --model-label qwen3.5-35b-a3b-4bit --no-think
+
+# LM Studio (MLX)
+python3 bench.py --backend lmstudio --backend-label lmstudio-mlx \
+  --model mlx-community/qwen3.5-35b-a3b \
+  --model-label qwen3.5-35b-a3b --no-think
+
+# LM Studio (GGUF)
+python3 bench.py --backend lmstudio --backend-label lmstudio-gguf \
+  --model qwen/qwen3.5-35b-a3b \
+  --model-label qwen3.5-35b-a3b --no-think
+
+# Ollama
+python3 bench.py --model qwen3.5:35b-a3b \
+  --model-label qwen3.5-35b-a3b --no-think
+```
+
+</details>
+
 ### Llama 3.1 8B
 
 | Hardware | Backend | Format | ops-agent | doc-summary | prefill-test | creative-writing |
 |---|---|---|---:|---:|---:|---:|
-| M3 Max (128GB, 40 GPU) | LM Studio | MLX | **57.6** (70.8) | **38.2** (76.0) | **14.4** (65.6) | **75.2** (78.5) |
-| M3 Max (128GB, 40 GPU) | oMLX | MLX | **53.3** (69.4) | **35.1** (71.1) | **14.5** (63.2) | **73.6** (76.9) |
 | M1 Max (64GB, 24 GPU) | LM Studio | MLX | **40.7** (55.0) | **21.9** (59.6) | **8.4** (51.8) | **58.9** (62.1) |
 | M1 Max (64GB, 24 GPU) | LM Studio | GGUF | **30.6** (36.4) | **18.5** (40.7) | **7.1** (33.4) | **38.1** (39.1) |
 | M1 Max (64GB, 24 GPU) | Ollama | GGUF | **27.1** (33.4) | **18.9** (37.8) | **5.8** (30.7) | **38.6** (39.6) |
+| M3 Max (128GB, 40 GPU) | LM Studio | MLX | **57.6** (70.8) | **38.2** (76.0) | **14.4** (65.6) | **75.2** (78.5) |
+| M3 Max (128GB, 40 GPU) | oMLX | MLX | **53.3** (69.4) | **35.1** (71.1) | **14.5** (63.2) | **73.6** (76.9) |
 
 MLX wins across the board. At 8B the model fits comfortably in memory, prefill stays fast, and the ~1.5x generation speed advantage dominates. On M3 Max, LM Studio MLX edges out oMLX thanks to lower TTFT overhead at this model size.
+
+<details>
+<summary>Run this benchmark</summary>
+
+```bash
+# LM Studio (MLX)
+python3 bench.py --backend lmstudio --backend-label lmstudio-mlx \
+  --model mlx-community/meta-llama-3.1-8B-instruct \
+  --model-label llama-3.1-8b-instruct
+
+# LM Studio (GGUF)
+python3 bench.py --backend lmstudio --backend-label lmstudio-gguf \
+  --model lmstudio-community/Meta-Llama-3.1-8B-Instruct-GGUF \
+  --model-label llama-3.1-8b-instruct
+
+# oMLX (MLX)
+export OPENAI_API_KEY=omlx
+python3 bench.py --backend openai --backend-label omlx \
+  --base-url http://localhost:8000 --model Llama-3.1-8B-Instruct \
+  --model-label llama-3.1-8b-instruct
+
+# Ollama (GGUF)
+python3 bench.py --model llama3.1:8b \
+  --model-label llama-3.1-8b-instruct
+```
+
+</details>
 
 ### GLM-4.7-Flash
 
@@ -75,6 +133,24 @@ MLX wins across the board. At 8B the model fits comfortably in memory, prefill s
 |---|---|---|---:|---:|---:|---:|
 | M2 Pro (32GB, 19 GPU) | oMLX | MLX 4-bit | **25.4** (36.7) | **15.3** (39.1) | **5.2** (34.3) | **40.9** (42.8) |
 | M2 Pro (32GB, 19 GPU) | LM Studio | MLX | **24.3** (38.5) | **16.4** (41.3) | **5.1** (35.4) | **41.4** (43.8) |
+
+<details>
+<summary>Run this benchmark</summary>
+
+```bash
+# LM Studio (MLX)
+python3 bench.py --backend lmstudio --backend-label lmstudio-mlx \
+  --model mlx-community/glm-4.7-flash \
+  --model-label glm-4.7-flash
+
+# oMLX (4-bit)
+export OPENAI_API_KEY=omlx
+python3 bench.py --backend openai --backend-label omlx \
+  --base-url http://localhost:8000 --model GLM-4.7-Flash-4bit \
+  --model-label glm-4.7-flash-4bit
+```
+
+</details>
 
 ### Help fill this table
 
@@ -121,8 +197,8 @@ One data point is an anecdote. A table full of hardware is useful.
 # 1. Fork and clone
 git clone https://github.com/<you>/local-llm-bench && cd local-llm-bench
 
-# 2. Run (auto-detects your hardware)
-python3 bench.py --model llama3.1:8b
+# 2. Run — pick a command from the "Run this benchmark" sections above, or:
+python3 bench.py --model llama3.1:8b --model-label llama-3.1-8b-instruct
 
 # 3. Commit and PR
 git checkout -b results/my-hardware
@@ -132,7 +208,7 @@ git push -u origin HEAD
 gh pr create --title "results: my hardware" --body "Benchmark results"
 ```
 
-Filenames encode your hardware specs, so there are no merge conflicts between contributors.
+Use `--model-label` to ensure results land in the correct directory (see copy-paste commands above). Filenames encode your hardware specs, so there are no merge conflicts between contributors.
 
 ## Tuning
 
