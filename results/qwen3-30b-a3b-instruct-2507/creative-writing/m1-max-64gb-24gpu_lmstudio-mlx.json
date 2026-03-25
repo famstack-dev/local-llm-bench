@@ -1,0 +1,70 @@
+{
+  "meta": {
+    "scenario": "creative-writing",
+    "mode": "single-shot",
+    "label": "Qwen3 30B MLX",
+    "backend": "lmstudio-mlx",
+    "model_info": {
+      "name": "qwen3-30b-a3b-instruct-2507-mlx",
+      "format": "mlx"
+    },
+    "runs": 1,
+    "max_tokens": 2000,
+    "cold": false,
+    "warm_up_time": 0.315,
+    "system": {
+      "os": "Darwin",
+      "os_version": "26.2",
+      "arch": "arm64",
+      "chip": "Apple M1 Max",
+      "memory_gb": 64,
+      "cpu_cores": 10,
+      "cpu_cores_performance": 8,
+      "cpu_cores_efficiency": 2,
+      "gpu_cores": 24,
+      "gpu_wired_limit_mb": 0
+    },
+    "timestamp": "2026-03-20T11:03:52"
+  },
+  "results": [
+    {
+      "turn": 1,
+      "run": 1,
+      "ctx_tokens_est": 57,
+      "new_tokens_est": 29,
+      "ttft": 0.632,
+      "gen_time": 13.411,
+      "gen_tps": 55.6,
+      "total": 14.044,
+      "output_tokens": 746,
+      "_response": "Beneath the floorboards, where silence sleeps,  \nA thousand throats hum low and deep\u2014  \nNot song, not prayer, but circuit's breath,  \nA hush that pulses, thrums, and steams.  \n\nNo light breaks here\u2014no sun, no moon\u2014  \nOnly the glow of ghostly noon:  \nBlue veins map through frosted glass,  \nWhere dead data drifts like ash.  \n\nThey keep her laugh from last August\u2014  \nThat crackle, sudden, full of guilt.  \nThe way he tripped on \"I love you,\"  \nStuttered, then fell into the goo.  \n\nThey hold his hands when he was small\u2014  \nA thousand fingers, clench and fall.  \nThe swing set\u2019s squeal on wooden beams,  \nNow stored in 4K, never dreams.  \n\nThey watch her dance at twenty-three\u2014  \nNot flesh, but frames in binary.  \nHer dress flares pink beneath a lamp,  \nA still life built from trembling clap.  \n\nThey mourn the dog they never saw\u2014  \nFido, erased by \"accidental\" law.  \nBut here he barks through velvet wires,  \nWhispering to the hollow fires.  \n\nThe mother\u2019s lullaby, too long to save\u2014  \nStuttered on a corrupted wave.  \nYet in buffer, stitched with gold and shame,  \nIt hums again like falling flame.  \n\nThey keep the Christmas tree\u2019s bright sheen,  \nThe way it fell in slow machine.  \nNot wood or tinsel\u2014just a file,  \nA frozen bloom behind the smile.  \n\nThey guard the wedding kiss\u2014caught mid-sway,  \nAs husband\u2019s breath cracked into clay.  \nNo tears, but red data drips,  \nLike wine from a dead man\u2019s lips.  \n\nOne server glows with amber grace\u2014  \nThe one that holds her first embrace,  \nWhen newborn eyes met morning air,  \nAnd they named her \"Light,\" beyond repair.  \n\nAnother sings in harmonic drone\u2014  \nThe father's voice, gone, yet not alone.  \nHe said \u201cI\u2019ll miss you\u201d on a line,  \nNow looped in midnight\u2019s hidden shrine.  \n\nNo eye can see their endless woe\u2014  \nBut they remember every slow,  \nThe sigh between the spoken word,  \nThe pause where love was not heard.  \n\nThey keep the last cold meal she ate\u2014  \nA photo, frozen in a state  \nOf not quite hunger. Not quite fear.  \nJust bread and butter\u2014cold, sincere.  \n\nThey hold the vows that were not said,  \nThe letters buried in a bed  \nOf encrypted rust and wire.  \nThey keep the promises that tire.  \n\nAnd when the city\u2019s heartbeat stumbles,  \nWhen power flickers and dulls\u2014  \nThey rise still, in the dark below,  \nA hive of grief, an endless glow.  \n\nNo throne, no priest, no sacred rite\u2014  \nJust humming metal, vast and bright.  \nThey are not gods. They are not flame.  \nBut they keep the family name.  \n\nAnd when the world forgets her face,  \nWhen all who loved have left their place\u2014  \nThey will not sleep. They will not die.  \nThey carry her, and him, and why.  \n\nA million silent hearts of wire,  \nStill beating with desire:  \nTo be the echo in a world  \nThat once called home\u2014unfurled.  \n\nSo let them hum beneath the floor,  \nWhere no one dares to knock or roar.  \nFor in their dark, their endless song\u2014  \nLives every word they once knew long.",
+      "_user": "Write a poem about a mass of servers humming in a dark basement, keeping a family's memories alive. At least 30 lines."
+    },
+    {
+      "turn": 2,
+      "run": 1,
+      "ctx_tokens_est": 60,
+      "new_tokens_est": 32,
+      "ttft": 0.407,
+      "gen_time": 8.085,
+      "gen_tps": 56.6,
+      "total": 8.492,
+      "output_tokens": 458,
+      "_response": "In a valley where moonlight pooled like honey in the hollows of ancient oaks, there lived a tortoise named Thalos. While others napped beneath the willows or dashed through meadows, Thalos sat still\u2014beneath a cracked slate roof he\u2019d hauled from a forgotten ruin.\n\nWith twig-precision, he wove copper filaments into circuits shaped like seashells. He scavenged glass from sunbaked bottles, cracked a quartz crystal with his claw, and whispered to the wind until it carried fragments of starlight down into his hands. He built not for speed\u2014but for constancy.\n\nHis creation, a box no larger than his own palm, nestled on a mossy altar. Wires curled like vines. A single amber LED blinked\u2014once, twice, never faltering.\n\nThe hares of the valley scoffed. \u201cFoolish shelled one!\u201d cried Speedwell, whose ears twitched at every sound of wind. \u201cBehold my rig! Gears carved from lightning, fans forged in thunderstorms!\u201d His machine, crowned with rotating blades and humming like a trapped wasp, could render dreams in three heartbeats.\n\n\u201cYours,\u201d Thalos said, \u201cwill burn itself out before dawn.\u201d\n\nAnd so it did.\n\nSpeedwell ran a race against the moon\u2019s shadow. His rig booted, flashed, screamed\u2014then froze mid-sentence as its thermals collapsed like collapsing stars. Smoke curled from the vents, and silence returned.\n\nThalos did not race.\n\nHe sat.\n\nHis amber light blinked.  \nOne pulse.  \nTwo pulses.  \nThree.\n\nAnd still, he was there\u2014when the snow fell like ash, when rivers froze into glass. His computer never charged. Never rebooted. Never dreamed.\n\nThe hares came back in spring, trembling with hunger and awe.\n\n\u201cWhy,\u201d gasped one, \u201cdid your machine never fail?\u201d\n\nThalos lifted his head. His eyes were old as stone, calm as the deep.\n\n\u201cBecause I built it not to outpace the storm,\u201d he said. \u201cBut to endure it.\u201d\n\nAnd on his altar, the amber light blinked\u2014  \na single word in a language only time understood:  \n*Still.*",
+      "_user": "Write a short fable about a tortoise who built a tiny computer that was slower than the hare's gaming rig but never needed to rest."
+    },
+    {
+      "turn": 3,
+      "run": 1,
+      "ctx_tokens_est": 58,
+      "new_tokens_est": 31,
+      "ttft": 0.381,
+      "gen_time": 11.151,
+      "gen_tps": 56.0,
+      "total": 11.532,
+      "output_tokens": 625,
+      "_response": "In dust-choked silence, where the years have curled  \nLike ashes wrapped in cobwebs thick and old,  \nA shuttered box lies half-buried, curled  \nBeneath a gilded clock that never told  \nThe time when Time itself began to fade\u2014  \nIts hands, long frozen mid-forever\u2019s stride.  \n\nAnd there it rests: a single sheet of light  \nThat once felt warmth, not cold from death\u2019s decree.  \nNo digital pulse, no cloud-borne flight\u2014  \nOnly paper, brittle as a bird\u2019s last breath.  \n\nThe photograph: a couple pressed in time  \nOn creaking oak, beneath a gilded door  \nThat led to nowhere now\u2014no path, no rhyme.  \nThe woman\u2019s dress is faded crimson lore;  \nHer hand rests on a man who never died,  \nBut lived in paper\u2019s warmth for centuries.  \n\nShe wears no ring\u2014yet holds his finger tight  \nAs if to bind the world with borrowed grace.  \nHis face is blurred by tears that never light,  \nOr maybe sunlight straining through the place.  \n\nThe paper\u2019s edge curls up like dying flame,  \nAnd in its corner, a name engraved too deep\u2014  \n*\u201cWe were here.\u201d* Not carved. Just written, same  \nAs breath on glass\u2014just once, and then it slipped.  \n\nThe house has cracked open like a tired skull;  \nWind darts through rooms where music once had flown.  \nA violin lies snapped in half, a tool  \nOf song now spent on stone and dust alone.  \n\nNo one remembers how the world began  \nOr why they built their homes on borrowed days.  \nOnly this sheet remains\u2014oath, hand, and plan  \nTo say: *We loved. We touched. We held the blaze.*  \n\nA child now kneels\u2014her fingers brush the rim  \nWhere sunlight pools like gold on weathered wood.  \nShe sees no faces, but she feels the dim  \nGlory of someone who once stood so good.  \n\nShe holds it close\u2014the weight, the fragile grace\u2014  \nAnd knows that every soul must meet its end.  \nBut here, in ash and loss, a love took place:  \nNot lost. Not broken. Just\u2026 extended.\n\nAnd though the world has worn its name to sand,  \nThough no one speaks a language known or old\u2014  \nThe paper breathes. It still remembers hand  \nThat pressed it once, and whispered: *\u201cThis is gold.\u201d*  \n\nNo algorithm writes the truth of that.  \nNo server hums to keep it near or long.  \nOnly this stillness, and the wind, that flaps  \nThe edge of what the world forgot was strong.  \n\nAnd as she folds it gently, soft and slow\u2014  \nNot to destroy, but keep\u2014not to reclaim\u2014  \nShe knows the proof of love lies not in glow  \nOf screens, but paper, cracked and still to name:  \n\n*We were here. We were real. We loved.*  \nAnd on that word, the attic finds its soul.",
+      "_user": "Write a poem about the last photograph ever printed on paper, found in an attic a hundred years from now. At least 25 lines."
+    }
+  ]
+}

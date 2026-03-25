@@ -5,7 +5,8 @@
     "label": "m3-max-128gb-40gpu lmstudio",
     "backend": "lmstudio",
     "model_info": {
-      "name": "llama-3.1-8b-instruct"
+      "name": "llama-3.1-8b-instruct",
+      "format": "mlx"
     },
     "runs": 1,
     "max_tokens": 150,

@@ -5,7 +5,8 @@
     "label": "LM Studio MLX",
     "backend": "lmstudio",
     "model_info": {
-      "name": "qwen3.5-35b-a3b"
+      "name": "qwen3.5-35b-a3b",
+      "format": "mlx"
     },
     "runs": 1,
     "max_tokens": 500,

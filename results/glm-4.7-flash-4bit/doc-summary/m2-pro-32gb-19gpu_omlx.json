@@ -5,7 +5,8 @@
     "label": "m2-pro-32gb-19gpu omlx",
     "backend": "omlx",
     "model_info": {
-      "name": "GLM-4.7-Flash-4bit"
+      "name": "GLM-4.7-Flash-4bit",
+      "format": "mlx"
     },
     "runs": 1,
     "max_tokens": 150,

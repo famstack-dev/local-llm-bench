@@ -1,0 +1,70 @@
+{
+  "meta": {
+    "scenario": "creative-writing",
+    "mode": "single-shot",
+    "label": "oMLX MLX",
+    "backend": "omlx",
+    "model_info": {
+      "name": "JANGQ-AI/Qwen3.5-35B-A3B-JANG_4K",
+      "format": "mlx"
+    },
+    "runs": 1,
+    "max_tokens": 2000,
+    "cold": false,
+    "warm_up_time": 0.088,
+    "system": {
+      "os": "Darwin",
+      "os_version": "26.3.1",
+      "arch": "arm64",
+      "chip": "Apple M3 Max",
+      "memory_gb": 128,
+      "cpu_cores": 16,
+      "cpu_cores_performance": 12,
+      "cpu_cores_efficiency": 4,
+      "gpu_cores": 40,
+      "gpu_wired_limit_mb": 0
+    },
+    "timestamp": "2026-03-22T11:52:49"
+  },
+  "results": [
+    {
+      "turn": 1,
+      "run": 1,
+      "ctx_tokens_est": 57,
+      "new_tokens_est": 29,
+      "ttft": 0.253,
+      "gen_time": 6.544,
+      "gen_tps": 64.0,
+      "total": 6.797,
+      "output_tokens": 419,
+      "_response": "The air is thick with static, cold and dry,\nBeneath the city streets where no sun rises.\nA choir of fans spins in a lullaby,\nWhile silicon hearts beat in the dark of the crypt.\nBlue LEDs blink like distant, sleeping stars,\nTracing paths through copper veins of data streams.\nThey guard the laughter that the old man heard,\nThe video files of birthdays and quiet dreams.\nA terabyte of a toddler's first clumsy step,\nSaved on a drive that never rusts or breaks.\nThe server racks stand tall in rows so deep,\nKeeping the ghosts of yesterday from fading.\nNo dust can touch the pixels, no moth can eat,\nThe digital ink that holds the family's face.\nA gigabyte of summer rain on a tin roof,\nPreserved in code, a perfect, frozen track.\nThe hum is not a song of metal and wire,\nBut the breathing of a machine that knows the cost.\nTo lose this room is to lose the mother's voice,\nThe way she spoke of winters long ago.\nWe built a vault in concrete, deep and gray,\nTo hold the fragments that the world might steal.\nThe cooling towers hiss a soft, white fog,\nExchanging heat for the cold of memory.\nHere in the basement, time does not decay,\nFor every file is stored in perfect light.\nA million photos stacked in rows of zero,\nA library built of silicon and ghost.\nIf the power fails, the silence takes its due,\nThe stories drift into the static void.\nBut for now, the fans spin round and round,\nA heartbeat in the dark, a vessel strong.\nThey keep the past from turning into smoke,\nEnsuring that the love will still be known.\nWhen we are gone, the machines will wait,\nGuarding the photos we have never lost.\nA silent sentinel in the sub-basement deep,\nKeeping the family alive in the code.",
+      "_user": "Write a poem about a mass of servers humming in a dark basement, keeping a family's memories alive. At least 30 lines."
+    },
+    {
+      "turn": 2,
+      "run": 1,
+      "ctx_tokens_est": 60,
+      "new_tokens_est": 32,
+      "ttft": 0.241,
+      "gen_time": 9.165,
+      "gen_tps": 63.8,
+      "total": 9.406,
+      "output_tokens": 585,
+      "_response": "In the forest of Silicon Glade, where the sun hummed with electricity and the leaves were solar panels, lived a hare named Blitz. Blitz was fast, a blur of neon fur and racing stripes, his mind a storm of high-resolution graphics. He boasted a rig the size of a boulder, fueled by liquid nitrogen, capable of rendering a thousand sunsets in the time it took a cloud to drift across the sky.\n\n\"I run at the speed of thought!\" Blitz would scream, his mechanical ears twitching as he defeated the latest digital dragon in a microsecond.\n\nBut in the shadow of an old oak, lived a tortoise named Shell. Shell was heavy, his shell a map of moss and time. He did not chase the dragons. Instead, he spent his days soldering wires that were thicker than his fingers, strapping them onto a chassis made of river stones.\n\n\"Look at that!\" Shell said, tapping a key that sounded like a stone dropping into a deep well. \"I have built a mind.\"\n\nBlitz laughed, a sound like static. \"A mind? That machine moves slower than a snail's shadow. I could finish a century of games before your computer even loads its desktop. You will never catch the horizon.\"\n\nShell said nothing. He simply began his work. He compiled a line of code to solve the Great Puzzle, a problem so vast it required a lifetime of calculation. While Blitz played, his rig whirring and glowing, demanding a recharge every few hours, Shell's machine hummed a low, steady note. It did not need sleep. It did not need a cooling fan. It needed only the patience of the stone.\n\nDays turned to weeks. The sun rose and set, and Blitz's rig would overheat, forcing him into a long, dark slumber while his fans spun down. Shell's machine worked through the night, through the storms, through the seasons.\n\nWhen the sun finally set on a hundred years, Blitz awoke, his fur frizzy with static, his screen flickering with the same boring quest he had beaten a thousand times. \"I am bored,\" he groaned, his battery light blinking red. \"I need a nap.\"\n\nBut in the corner, Shell's tiny computer, built of river stones and patience, lit up with a single, warm blue LED.\n\n*Done,* it signaled.\n\nThe Great Puzzle was solved. Not in a microsecond, but in a lifetime of steady, unbroken thought.\n\nBlitz stared at the screen, his high-speed gaming rig silent and useless against the simplicity of the slow.\n\n\"You won,\" the hare whispered, his neon fur dull in the twilight.\n\n\"I simply did not stop,\" Shell replied, his voice the sound of a river flowing over smooth rocks. \"And that is how the stone breaks the wave.\"",
+      "_user": "Write a short fable about a tortoise who built a tiny computer that was slower than the hare's gaming rig but never needed to rest."
+    },
+    {
+      "turn": 3,
+      "run": 1,
+      "ctx_tokens_est": 58,
+      "new_tokens_est": 31,
+      "ttft": 0.246,
+      "gen_time": 6.609,
+      "gen_tps": 63.8,
+      "total": 6.855,
+      "output_tokens": 422,
+      "_response": "The attic dust settles soft on cardboard boxes,\nWhere silver halides once waited in the dark,\nBefore the cloud could capture all our faces\nAnd leave the heavy chemical process in the ark.\nThis rectangle, a sliver of frozen morning,\nIs sealed in plastic, yellowed by the sun,\nA final breath of cyan and magenta ink\nThat died before the digital days had begun.\nNo battery hums within this paper frame,\nNo Wi-Fi signal flickers on the screen,\nJust the ghost of a man who smiled at nothing,\nThe grain of silver frozen in the green.\nWe found it in a crate marked \"Do Not Open,\"\nTucked beneath a coat of winter wool,\nThe world had moved to screens of endless light,\nAnd forgot the weight of something that could pull.\nThe photographer had packed the darkroom dry,\nThe last roll developed by a fading hand,\nA silent testament to touch and time\nBefore the image vanished from the land.\nThere is no copy on a server farm,\nNo backup in the server's humming chest,\nJust this fragile square of cellulose and light,\nThat held the memory of the bygone west.\nThe sun burns through the window, turning gold\nThe edges brown where time has started to decay,\nA portrait of a woman in a dress of blue,\nWho looks as if she might speak any day.\nHer eyes are sharp, the black of wet asphalt,\nCaptured by a lens that needs a guiding hand,\nA moment caught before the pixel grid\nCould steal the soul from every single strand.\nWe hold it now, this last and fragile thing,\nA heavy, cold relic from the age of print,\nWhile all the other stories float away,\nAnd leave the tangible world to grow and spin.\nThe paper crinkles in a trembling hand,\nThe smell of fixer still upon the skin,\nA ghost of chemistry in a world of code,\nThe last photograph that ever truly began.",
+      "_user": "Write a poem about the last photograph ever printed on paper, found in an attic a hundred years from now. At least 25 lines."
+    }
+  ]
+}

@@ -1,0 +1,134 @@
+{
+  "meta": {
+    "scenario": "vision-extract",
+    "mode": "single-shot",
+    "label": "Gemma 3 12B",
+    "backend": "lmstudio",
+    "model_info": {
+      "name": "google/gemma-3-12b",
+      "format": "gguf"
+    },
+    "runs": 1,
+    "max_tokens": 1500,
+    "cold": true,
+    "system": {
+      "os": "Darwin",
+      "os_version": "26.2",
+      "arch": "arm64",
+      "chip": "Apple M1 Max",
+      "memory_gb": 64,
+      "cpu_cores": 10,
+      "cpu_cores_performance": 8,
+      "cpu_cores_efficiency": 2,
+      "gpu_cores": 24,
+      "gpu_wired_limit_mb": 0
+    },
+    "timestamp": "2026-03-21T19:39:05"
+  },
+  "results": [
+    {
+      "turn": 1,
+      "run": 1,
+      "ctx_tokens_est": 1078,
+      "new_tokens_est": 1009,
+      "ttft": 4.538,
+      "gen_time": 6.265,
+      "gen_tps": 28.9,
+      "total": 10.804,
+      "output_tokens": 181,
+      "_response": "```markdown\n20.11.2025\n\nf\u00fcr das Bodenseeschifferpatent Kat. A & D\n\nAnzahlungsrechnung\n\nbrutto - \u20ac 480,00\nAnzahlungsbetrag\nnetto - \u20ac 403,36\nBetrag\nzzgl. 19 % Mwst - \u20ac 76,64\n\nFertigstellung der BSP Ausbildung in Saison 2026\n\nRechnungsnummer : 121 / 2025\nVerwendungszweck : Merle Arthur + Rg.Nr. 121 / 2025\n\nBitte \u00fcberweisen Sie uns den Rechnungsbetrag \u20ac 480 mit Angabe des Verwendungszwecks bis zum\n05.12.2025 \u2013 Vielen Dank !\n```",
+      "_user": "Extract all text from this document."
+    },
+    {
+      "turn": 2,
+      "run": 1,
+      "ctx_tokens_est": 1078,
+      "new_tokens_est": 1009,
+      "ttft": 4.559,
+      "gen_time": 12.182,
+      "gen_tps": 27.5,
+      "total": 16.741,
+      "output_tokens": 335,
+      "_response": "```markdown\n# ESSO\n\nStefan Sulger\nMeersburgterstr. 1\n88690 Uhldingen-M\u00fchlhofen\nTel.: 07556/5111\n\n---\n\nDatum Uhrzeit Belegnummer\n03.03.2026 08:34 6977/00001/002\n\nRechnung\n*00003 Diesel 50,07 EUR A ##\n*Zp 06 26,79 1 1,869 EUR/1 ##\n\nGesamtbetrag\n50,07 EUR\n\n---\n\nEcho TankstellenGmbH 27/160/01175 (#)\n\n| Typ | Netto | Mwst. | Brutto |\n|---|---|---|---|\n| A:19,00% | 42,08 | 7,99 | 50,07 |\n\n---\n\nUhrzeit: 08:33 Uhr\nBeleg-Nr. 4958\nTrace-Nr. 196575\n\n---\n\nBezahlung\nContact less\n\n###### #########2968 0000\n45560002386\n\n---\n\nNr. 019464\nVU-Nr. 08 075 00\nGenehmigungs-Nr. 78103831\nTerminal-ID",
+      "_user": "Extract all text from this document."
+    },
+    {
+      "turn": 3,
+      "run": 1,
+      "ctx_tokens_est": 1078,
+      "new_tokens_est": 1009,
+      "ttft": 4.413,
+      "gen_time": 15.521,
+      "gen_tps": 27.1,
+      "total": 19.935,
+      "output_tokens": 421,
+      "_response": "```markdown\n# Maria H\u00e4nsler\n\nAllmannshofen 12 88639 Wald\nTel. 07578 / 9120\n\n---\n\n**Ab.** 19.03.2026 8:01:27 # 039867\n\nPapaya 10 kg 664,4 /kg Uerk.\n0.392 8,40 3,29 \u20ac/kg \u20ac/Stk\n\nBimi wilder Broccoli\n0,204 26,00 5,30 \u20ac/kg \u20ac\n\nTomaten Flaschen\n0,420 7,95 3,34 \u20ac/Stk \u20ac\n\nGurke mini\n2,114 1,40 2,80 kg \u20ac/kg\n\nApfel\n\nKohlrabi\n\n---\n\n18 Pos. Summe 26,20 \u20ac\n\nin der Summe enthalten sind:\n\n7,00% Erm\u00e4\u00dfigter Satz\nSumme 24,49 MwSt. 1,71\nBeleg-Nr. 23450\nKassen-ID: 1186836\nTSE-Start: 2026-03-19T08:04:57.000-01:00\nTSE-Ende: 2026-03-19T08:04:57.000-01:00\nSE-Signatur:\n86F06B77E86A459C3BCC60EB978FE6F1 18PE6A46FFB08\nE2B108BC3A95D838\n\n---\n\n# f\u00fcr Ihren Dank\n```",
+      "_user": "Extract all text from this document."
+    },
+    {
+      "turn": 4,
+      "run": 1,
+      "ctx_tokens_est": 1078,
+      "new_tokens_est": 1009,
+      "ttft": 4.927,
+      "gen_time": 16.811,
+      "gen_tps": 27.1,
+      "total": 21.737,
+      "output_tokens": 456,
+      "_response": "```markdown\n# Natur\n## K\u00e4seerei Maucher\n\nwww.naturkaeserei-maucher.de\nTel: 08387 3903919\n\n**Verk\u00e4ufer:** V i\n**Bon-Nr.:** 500166530\n**Zeit:** 19-03-2026 09:26:48\n\n---\n**Artikelname** | **kg(Stk.)** | \u20ac/kg(Stk.) | \u20ac\n------- | -------- | -------- | --------\nButter | 0,248 kg |  | 3,47\nMaucher Joghurt Natur | 195 | 1,95 | 3,90\nFruchtquark sort. | 0,294 kg | 7,20 | 2,12\nFrischk\u00e4se m.Zutaten | 0,170 kg | 17,90 | 3,04\nArtikel: 4 | Total: 10,58\n\nBargeld | MwSt. Information\n------- | --------\nMwSt. B 7,00% | 9,88 | MwSt. 0,00\n\n---\nVielen Dank f\u00fcr Ihren Einkauf\n\n**Nacho Maucher**\nBahnhofstrasse 2\n88167 R\u00f6hrenbach\nSerienummer: CO49659361\nTransaktion: 1020681\nSignaturzeile: Chi1BVJ2db8hpHN6/aPuXwscXaNXR49bH\nPr\u00fcfsumme: 6FDeCg+96/GldTMaBpJ+/aPuXwscXaNXR49bH\nMYaa2QW+6PQRHswq7KOcpBTgBkAo+Cp2qyBjzv\n996c6f810\n\n2026-03-19T09:27:10\n```",
+      "_user": "Extract all text from this document."
+    },
+    {
+      "turn": 5,
+      "run": 1,
+      "ctx_tokens_est": 1078,
+      "new_tokens_est": 1009,
+      "ttft": 4.318,
+      "gen_time": 7.407,
+      "gen_tps": 27.8,
+      "total": 11.725,
+      "output_tokens": 206,
+      "_response": "```markdown\n# Johannisbeer-Baiser-Kuchen\n\nAus LECKER-Sonderheft 3/2012\n\n![Image of Johannisbeer-Baiser-Kuchen]\n\n## Zutaten\n\n|           | Menge |\n|-----------|-------|\n| 400 g     | Mehl   |\n| 2 TL      | Backpulver |\n| 6         | Eier (Gr. M) |\n| 150 g     | + 200 g Zucker |\n| 1 P\u00e4ckchen | Vanillezucker |\n| 150 g     | kalte + etwas Butter |\n| 500 g     | Johannisbeeren |\n| 200 g     | gemahlene Mandeln (ohne Haut) |\n|           | Puderzucker |\n|           | Frischhaltefolie |\n\n## Zubereitung\n\n90 Minuten \n\n```",
+      "_user": "Extract all text from this document."
+    },
+    {
+      "turn": 6,
+      "run": 1,
+      "ctx_tokens_est": 1078,
+      "new_tokens_est": 1009,
+      "ttft": 4.376,
+      "gen_time": 15.015,
+      "gen_tps": 27.6,
+      "total": 19.391,
+      "output_tokens": 415,
+      "_response": "```markdown\n# Kn\u00f6blachzehe\n\n**Lasagne**\n\n**Bechamel-Sauce**\n40g Butter\n40g Mehl\nAuf einmal dazugeben, mit dem Schneebesen unterr\u00fchren und anschwitzen.\nVon der Herdplatte nehmen.\nNach und nach darunterr\u00fchren, unter best\u00e4ndigem r\u00fchren zum Kochen bringen. Bei schwacher Hitze und unter h\u00e4ufigem R\u00fchren 1 Stunde ausquellen lassen.\nSalz, Pfeffer, Muskat\nSauce w\u00fcrzen und abschmecken.\n\n**Hackfleischsauce**\n2 Zwiebeln Sch\u00e4len, w\u00fcrfeln\nPfeffer, \n250g Hackfleisch Sch\u00e4len, fein hacken und beides in etwas Fett glasig\n1 Dose Sch\u00e4ltomaten Zugeben und alles bei milder Hitze unter gelegentlichem\nUmr\u00fchren dicklich einkochen.\nSalz, Pfeffer, Sauce w\u00fcrzen und abschmecken.\n\nBei einer (Lasagne wird eine m\u00f6glichst rechteckige Auflaufform mit Butter eingefettet. Dann werden die Saucen schichtweise mit den Nudelbl\u00e4ttern, Nudelbl\u00e4tter, Hackfleischsauce, ....). Zuletzt wird geriebener K\u00e4se \u00fcber die Lasagne gestreut.\n\n30 min im vorgeheizten Ofen bei ca. 200 \u00b0C goldgelb \u00fcberbacken.\n\n**Variationen:**\nGem\u00fcsesauce:\nAnstatt der Hackfleischsauce wird eine Gem\u00fcsesauce hergestellt. Dazu wird Gem\u00fcse nach belieben ged\u00fcnstet und mit etwas Gem\u00fcsebr\u00fche abgeschmeckt.\n\n**Spinat-Lachs-Lasagne:**\nBei dieser Lasagne wird,\neine Bechamel-Sauce\n* eine Tomatensauce (=Hackfleischsauce ohne Hackfleisch) und\n* eine Schicht aus abgeschmecktem Blattspinat und Lachsstreifen hergestellt.\n```",
+      "_user": "Extract all text from this document."
+    },
+    {
+      "turn": 7,
+      "run": 1,
+      "ctx_tokens_est": 1078,
+      "new_tokens_est": 1009,
+      "ttft": 4.36,
+      "gen_time": 14.984,
+      "gen_tps": 27.8,
+      "total": 19.344,
+      "output_tokens": 416,
+      "_response": "```markdown\n# WOHNFL\u00c4CHENBERECHNUNG\n\n|                 | x   | 8,69 | m\u00b2 |\n|-----------------|-----|------|----|\n| Diele           | 1   | 8,69 | m\u00b2 |\n| DU/WC          | 1   | 5,69 | m\u00b2 |\n| Kind I         | 1   | 14,63 | m\u00b2 |\n| Schlafen        | 1   | 20,74 | m\u00b2 |\n| Gast            | 1   | 14,58 | m\u00b2 |\n| Essen / Wohnen  | 1   | 59,68 | m\u00b2 |\n| K\u00fcche           | 1   | 7,56 | m\u00b2 |\n| Flur            | 1   | 3,83 | m\u00b2 |\n| WC              | 1   | 3,87 | m\u00b2 |\n| Bruttofl\u00e4che    |     |      |    |\n| abz\u00f6gl. 3% Putz | 1   | 4,18 | m\u00b2 |\n| Nettowohnfl\u00e4che  |     |      |    |\n| Terrasse        | 1   | 27,45 | /  | 4 |\n| Erweiterung     | 1   | 20,20 | /  | 4 |\n| Nettowohnfl\u00e4che Gesamt |     |      |    |\n| Aufgestellt. Radolfzell, den 16.05.2003 |     |      |    |\n| 147,00 m\u00b2 |\n\n# ARCHITEKT\n\n**ECKHARDBRECHT**\n**FREIE ARBEIT**\n* 79312 Radolfzell / Steinhaus\nTel. 076/52-583\n\n```",
+      "_user": "Extract all text from this document."
+    },
+    {
+      "turn": 8,
+      "run": 1,
+      "ctx_tokens_est": 1078,
+      "new_tokens_est": 1009,
+      "ttft": 4.321,
+      "gen_time": 13.326,
+      "gen_tps": 27.6,
+      "total": 17.647,
+      "output_tokens": 368,
+      "_response": "```markdown\n# Gutes kann\n\n![Image of document]\n\n**Fischrezept der Woche:**\n\n## Pangasiusfilet mit Spekulatiuskruste\n\nPangasiusfilet (\u00e0 ca. 150 g) gr\u00fcndlich waschen, trocken tupfen, mit Zitronensaft betr\u00e4ufeln, salzen und in eine Auflaufform (circa 20 mal 30 cm) geben.\n\nF\u00fcr die Kruste Spekulatius fein zerbr\u00f6seln, weiche Butter schaumig schlagen, Spekulatiusr\u00f6sel und Semmelbr\u00f6sel dazu geben, mit Salz und Pfeffer w\u00fcrzen, auf dem Fisch verteilen und im vorgeheizten Backofen bei 200 Grad circa 15 Minuten (So\u00dfe: Stufe 4, Umluft: 180 Grad) gar.\n\n**Zutaten f\u00fcr 4 Portionen:**\n\n*   4 Pangasiusfilets (\u00e0 ca. 150 g)\n*   2 EL Zitronensaft\n*   200 ml Rotweinessig\n*   1 TL Zucker\n*   1 EL So\u00dfenbinder\n*   50 g Semmelbr\u00f6sel\n*   frisch gemahlener Pfeffer\n\n**Zutaten f\u00fcr Rotweinsauce:**\n\n*   1 TL Orangensaft\n*   1 Zimmtstange\n*   1/2 TL Thymian\n*   2 EL So\u00dfenbinder\n\n**Zubereitung:**\n\nSo\u00dfenbinder andicken. Vor dem Servieren Neige und Zimmtstange entfernen. Fisch mit Rotweinsauce und frischem Thymian servieren.\n\n**Zubereitungszeit:** ca. 30 Minuten\n```",
+      "_user": "Extract all text from this document."
+    }
+  ]
+}

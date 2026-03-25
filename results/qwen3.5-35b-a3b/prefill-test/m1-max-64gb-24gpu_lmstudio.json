@@ -1,0 +1,74 @@
+{
+  "meta": {
+    "scenario": "prefill-test",
+    "mode": "single-shot",
+    "label": "m1-max-64gb-24gpu lmstudio",
+    "backend": "lmstudio",
+    "model_info": {
+      "name": "qwen/qwen3.5-35b-a3b",
+      "format": "mlx"
+    },
+    "runs": 1,
+    "max_tokens": 150,
+    "cold": false,
+    "system": {
+      "os": "Darwin",
+      "os_version": "26.2",
+      "arch": "arm64",
+      "chip": "Apple M1 Max",
+      "memory_gb": 64,
+      "cpu_cores": 10,
+      "cpu_cores_performance": 8,
+      "cpu_cores_efficiency": 2,
+      "gpu_cores": 24,
+      "gpu_wired_limit_mb": 0
+    },
+    "timestamp": "2026-03-12T15:56:19"
+  },
+  "results": [
+    {
+      "turn": 1,
+      "run": 1,
+      "ctx_tokens_est": 655,
+      "new_tokens_est": 540,
+      "ttft": 2.899,
+      "gen_time": 4.34,
+      "gen_tps": 29.7,
+      "total": 7.24,
+      "output_tokens": 129
+    },
+    {
+      "turn": 2,
+      "run": 1,
+      "ctx_tokens_est": 1453,
+      "new_tokens_est": 1338,
+      "ttft": 4.056,
+      "gen_time": 5.162,
+      "gen_tps": 28.9,
+      "total": 9.219,
+      "output_tokens": 149
+    },
+    {
+      "turn": 3,
+      "run": 1,
+      "ctx_tokens_est": 3015,
+      "new_tokens_est": 2900,
+      "ttft": 8.661,
+      "gen_time": 5.222,
+      "gen_tps": 28.5,
+      "total": 13.883,
+      "output_tokens": 149
+    },
+    {
+      "turn": 4,
+      "run": 1,
+      "ctx_tokens_est": 8496,
+      "new_tokens_est": 8381,
+      "ttft": 37.809,
+      "gen_time": 5.576,
+      "gen_tps": 26.7,
+      "total": 43.385,
+      "output_tokens": 149
+    }
+  ]
+}

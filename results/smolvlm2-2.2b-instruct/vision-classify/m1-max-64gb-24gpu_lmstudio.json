@@ -5,7 +5,8 @@
     "label": "SmolVLM2 2.2B GGUF",
     "backend": "lmstudio",
     "model_info": {
-      "name": "smolvlm2-2.2b-instruct"
+      "name": "smolvlm2-2.2b-instruct",
+      "format": "gguf"
     },
     "runs": 1,
     "max_tokens": 500,

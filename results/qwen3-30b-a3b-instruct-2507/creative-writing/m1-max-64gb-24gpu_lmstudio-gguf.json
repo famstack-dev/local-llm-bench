@@ -5,7 +5,8 @@
     "label": "Qwen3 30B 2507 GGUF",
     "backend": "lmstudio-gguf",
     "model_info": {
-      "name": "qwen3-30b-a3b-instruct-2507"
+      "name": "qwen3-30b-a3b-instruct-2507",
+      "format": "gguf"
     },
     "runs": 1,
     "max_tokens": 2000,

@@ -1,0 +1,74 @@
+{
+  "meta": {
+    "scenario": "prefill-test",
+    "mode": "single-shot",
+    "label": "LM Studio MLX Llama-3.1-8B",
+    "backend": "lmstudio",
+    "model_info": {
+      "name": "mlx-community/meta-llama-3.1-8B-instruct",
+      "format": "mlx"
+    },
+    "runs": 1,
+    "max_tokens": 150,
+    "cold": false,
+    "system": {
+      "os": "Darwin",
+      "os_version": "26.2",
+      "arch": "arm64",
+      "chip": "Apple M1 Max",
+      "memory_gb": 64,
+      "cpu_cores": 10,
+      "cpu_cores_performance": 8,
+      "cpu_cores_efficiency": 2,
+      "gpu_cores": 24,
+      "gpu_wired_limit_mb": 0
+    },
+    "timestamp": "2026-03-12T22:41:11"
+  },
+  "results": [
+    {
+      "turn": 1,
+      "run": 1,
+      "ctx_tokens_est": 655,
+      "new_tokens_est": 540,
+      "ttft": 2.115,
+      "gen_time": 2.461,
+      "gen_tps": 59.7,
+      "total": 4.576,
+      "output_tokens": 147
+    },
+    {
+      "turn": 2,
+      "run": 1,
+      "ctx_tokens_est": 1453,
+      "new_tokens_est": 1338,
+      "ttft": 4.277,
+      "gen_time": 2.543,
+      "gen_tps": 57.0,
+      "total": 6.82,
+      "output_tokens": 145
+    },
+    {
+      "turn": 3,
+      "run": 1,
+      "ctx_tokens_est": 3015,
+      "new_tokens_est": 2900,
+      "ttft": 9.744,
+      "gen_time": 2.769,
+      "gen_tps": 52.7,
+      "total": 12.514,
+      "output_tokens": 146
+    },
+    {
+      "turn": 4,
+      "run": 1,
+      "ctx_tokens_est": 8496,
+      "new_tokens_est": 8381,
+      "ttft": 41.33,
+      "gen_time": 3.789,
+      "gen_tps": 37.7,
+      "total": 45.119,
+      "output_tokens": 143
+    }
+  ]
+}

@@ -5,7 +5,8 @@
     "label": "Mistral Small 3.1 24B",
     "backend": "lmstudio",
     "model_info": {
-      "name": "mistral-small-3.1-24b-instruct-2503"
+      "name": "mistral-small-3.1-24b-instruct-2503",
+      "format": "mlx"
     },
     "runs": 1,
     "max_tokens": 500,
