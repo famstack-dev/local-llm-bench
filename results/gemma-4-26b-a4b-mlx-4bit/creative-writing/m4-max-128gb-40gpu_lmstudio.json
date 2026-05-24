@@ -1,0 +1,70 @@
+{
+  "meta": {
+    "scenario": "creative-writing",
+    "mode": "single-shot",
+    "label": "m4-max-128gb-40gpu lmstudio",
+    "backend": "lmstudio",
+    "model_info": {
+      "name": "gemma-4-26b-a4b-it-mlx@4bit",
+      "format": "mlx"
+    },
+    "runs": 1,
+    "max_tokens": 2000,
+    "cold": false,
+    "warm_up_time": 0.169,
+    "system": {
+      "os": "Darwin",
+      "os_version": "26.3",
+      "arch": "arm64",
+      "chip": "Apple M4 Max",
+      "memory_gb": 128,
+      "cpu_cores": 16,
+      "cpu_cores_performance": 12,
+      "cpu_cores_efficiency": 4,
+      "gpu_cores": 40,
+      "gpu_wired_limit_mb": 0
+    },
+    "timestamp": "2026-05-20T16:03:27"
+  },
+  "results": [
+    {
+      "turn": 1,
+      "run": 1,
+      "ctx_tokens_est": 57,
+      "new_tokens_est": 29,
+      "ttft": 0.356,
+      "gen_time": 3.671,
+      "gen_tps": 106.5,
+      "total": 4.027,
+      "output_tokens": 391,
+      "_response": "In the hollow gut of the limestone floor,\nWhere the daylight dies at the heavy door,\nA choir of fans begins to sing,\nA mechanical, rhythmic, metal thing.\nBlue LEDs blink like pulse-points in sleep,\nIn the heavy dark where the shadows creep,\nA cathedral of silicon, copper, and glass,\nWatching the ghosts of the centuries pass.\n\nThere is no wind in this windowless tomb,\nOnly the heat in the cavernous room,\nA steady, low thrum that vibrates the bone,\nThe heartbeat of data, standing alone.\nIn the spinning platters and the flash-memory cells,\nThe architecture of a thousand spells:\nA wedding in sunlight, a child\u2019s first cry,\nThe squint of an eye and a summer-blue sky.\n\nLocked in the circuits, the secrets are sown:\nThe scent of a garden once overgrown,\nA grandmother\u2019s laughter, captured in bits,\nA collection of shadows and digital wits.\nThe grainy film of a long-faded face,\nHeld in the grip of this air-conditioned space,\nPreserved from the rot and the moth and the rust,\nBy a current of lightning that defies the dust.\n\nThe processors churn through the weight of the years,\nA harvest of joy and a reservoir of tears.\nEvery pixel is sacred, every byte is a breath,\nA clever defiance of silence and death.\nIf the power should flicker, if the cooling should fail,\nThe ghosts in the wiring would turn thin and pale.\n\nBut the fans spin on with a relentless hum,\nBeating the rhythm like a low-tuned drum.\nThe basement is dark, but the memory stays bright,\nFeeding on electricity, warding off night.\nA lineage written in lightning and code,\nWhile the world sleeps above on the gravel-strewn road.",
+      "_user": "Write a poem about a mass of servers humming in a dark basement, keeping a family's memories alive. At least 30 lines."
+    },
+    {
+      "turn": 2,
+      "run": 1,
+      "ctx_tokens_est": 60,
+      "new_tokens_est": 32,
+      "ttft": 0.258,
+      "gen_time": 7.639,
+      "gen_tps": 105.1,
+      "total": 7.896,
+      "output_tokens": 803,
+      "_response": "In the hollow of a silver-bark tree, Barnaby the tortoise sat amidst a sea of copper wire and polished quartz. He lived in the quiet shade where the sun only reached in golden, fleeting fingers at noon.\n\nBarnaby was not interested in lightning. He did not care for the thunder of overclocked processors or the neon fever of liquid-cooling fans. He did not seek to chase the horizon, for he knew the horizon was an illusion that moved as fast as its pursuer.\n\nAcross the meadow, in a burrow lined with velvet and glowing with LED strips, lived Dash the hare. Dash owned a machine of terrifying speed. It was a monolith of obsidian and chrome, capable of rendering entire worlds in the blink of an eye. Dash lived for the chase\u2014the high-frame-rate wars, the frantic clicks, the breathless pursuit of a score that climbed like a mountain peak.\n\nOne evening, Dash sprinted to the edge of the clearing, his chest heaving, his eyes bloodshot from the blue light. He looked at Barnaby\u2019s tiny device: a small, wooden box with a single, dim screen and a hand-cranked winding mechanism.\n\n\"Why bother?\" Dash laughed, the sound sharp as a snapping twig. \"My rig can calculate the trajectory of a falling star before your screen even flickers to life! You spend all day building, and for what? A flicker? A hum? It\u2019s a waste of life.\"\n\nBarnaby looked up, his eyes slow and deep as amber. \"Your machine is a storm, Dash. It is magnificent. But storms must break. They must spend their fury or die.\"\n\n\"It doesn't die,\" Dash boasted, tapping his glowing tower. \"It dominates.\"\n\n\"But it tires,\" Barnaby said softly. \"And you tire with it.\"\n\nThe Great Drought came in the season of the Red Moon. The heat was a physical weight, and the power lines\u2014the lifelines of the meadow\u2014shuddered and went dark under the weight of the sun. \n\nDash\u2019s fortress fell silent. His obsidian monolith became a tomb of cold plastic. Without the hum of his cooling fans, the heat inside his burrow became unbearable. He spent the days in a frantic, sweaty stupor, pacing his cage of stillness, staring at a black screen that offered no solace. He was a creature of momentum, and without his engine, he felt himself vanishing into the dust.\n\nBarnaby\u2019s machine did not flicker. It did not hum with a roar, but with a steady, rhythmic pulse, like the heartbeat of a sleeping cricket. It hummed because it was built of low-voltage dreams and slow-turning gears. It did not require a flood of lightning to breathe; it asked only for a gentle breeze of energy.\n\nAs the weeks passed, Dash grew thin and restless. He visited the silver-bark tree, his fur matted, his spirit frayed. He watched as Barnaby sat by the dim screen, reading digital scrolls of poetry and watching slow-motion captures of swaying grass. The machine processed a single page with the patience of a growing oak.\n\n\"How is it still on?\" Dash whispered, his voice cracked.\n\n\"It does not chase the light,\" Barnaby replied, not looking up. \"It waits for it. It is slow enough to catch the moments that speed misses.\"\n\nDash looked at his own dark, silent tower in the distance. He realized then that he had built a god that required constant sacrifice to stay alive. He had built a companion that demanded his entire life as fuel.\n\nBarnaby\u2019s machine was not a tool for conquest, but a vessel for endurance. It lived in the space between seconds, where nothing was lost to the friction of haste. While the hare had mastered the sprint, the tortoise had mastered the journey\u2014and the machine that refused to stop.",
+      "_user": "Write a short fable about a tortoise who built a tiny computer that was slower than the hare's gaming rig but never needed to rest."
+    },
+    {
+      "turn": 3,
+      "run": 1,
+      "ctx_tokens_est": 58,
+      "new_tokens_est": 31,
+      "ttft": 0.251,
+      "gen_time": 3.448,
+      "gen_tps": 106.4,
+      "total": 3.7,
+      "output_tokens": 367,
+      "_response": "It lies beneath a shroud of silver dust,\nIn a cedar chest where the hinges weep rust.\nA century has passed in a silent slide,\nWhile empires crumbled and the oceans sighed.\nThe attic air is heavy, thick with ghosts,\nOf forgotten masters and long-vanished hosts.\nBut there, in the gloom of a sunless room,\nA flicker of light defies the tomb.\n\nIt is not digital, nor a ghost in a screen,\nBut a chemical miracle, tangible and keen.\nA silver-halide dream on a fiber of wood,\nCaptured in an epoch when the light was understood.\nThe paper is brittle, a parchment of age,\nA relic preserved from a vanishing age.\nIt smells of old vinegar, ozone, and rain,\nA physical anchor to a world without pain.\n\nIn the frame, there is no motion, no pulse of the light,\nJust a moment frozen in the belly of night.\nA woman is standing by a gate made of stone,\nIn a garden of shadows she once called her own.\nHer hand is mid-gesture, a ghost of a wave,\nA fragment of beauty the decades couldn't grave.\nThe sunlight catches the lace of her sleeve,\nA trick of the optics that refuses to leave.\n\nThere are no pixels here to break or to fray,\nNo data to vanish when the power gives way.\nIt is ink and it is salt, it is shadow and bone,\nA miracle of matter that stands all alone.\nThe wind through the rafters may howl and may moan,\nBut the image remains in its quiet, dark zone.\nThe last of the paper, the last of the print,\nA soul caught in silver with a permanent glint.",
+      "_user": "Write a poem about the last photograph ever printed on paper, found in an attic a hundred years from now. At least 25 lines."
+    }
+  ]
+}

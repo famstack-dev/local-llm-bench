@@ -1,0 +1,70 @@
+{
+  "meta": {
+    "scenario": "creative-writing",
+    "mode": "single-shot",
+    "label": "m4-max-128gb-40gpu lmstudio",
+    "backend": "lmstudio",
+    "model_info": {
+      "name": "gemma-4-26b-a4b-it-mlx@6bit",
+      "format": "mlx"
+    },
+    "runs": 1,
+    "max_tokens": 2000,
+    "cold": false,
+    "warm_up_time": 0.178,
+    "system": {
+      "os": "Darwin",
+      "os_version": "26.3",
+      "arch": "arm64",
+      "chip": "Apple M4 Max",
+      "memory_gb": 128,
+      "cpu_cores": 16,
+      "cpu_cores_performance": 12,
+      "cpu_cores_efficiency": 4,
+      "gpu_cores": 40,
+      "gpu_wired_limit_mb": 0
+    },
+    "timestamp": "2026-05-21T19:56:35"
+  },
+  "results": [
+    {
+      "turn": 1,
+      "run": 1,
+      "ctx_tokens_est": 57,
+      "new_tokens_est": 29,
+      "ttft": 0.407,
+      "gen_time": 5.086,
+      "gen_tps": 85.1,
+      "total": 5.493,
+      "output_tokens": 433,
+      "_response": "In the belly of the house, where the light fears to tread,\nWhere the dust motes are heavy and the silence is fed,\nThere lies a black kingdom of silicon and steel,\nA sanctuary forged in the hum and the zeal.\nNo sunlight can reach this subterranean tomb,\nOnly the throb of a digital womb,\nWhere rows of obsidian monoliths stand,\nGuarding the ghosts of a far-away land.\n\nThey breathe with a chorus of electric sighs,\nA thousand small fans like mechanical flies,\nSpinning the air in a frantic, cold dance,\nKeeping the heat from a lethal advance.\nThe blinking of emerald, amber, and red\u2014\nA heartbeat for all that was lived and was said\u2014\nThe pulse of a life caught in currents of light,\nA constellation burning in the gut of the night.\n\nHere lives the laugh of a child long since grown,\nA captured vibration, a soft, silver tone.\nHere is the wedding, the salt, and the tear,\nThe scent of a garden from a vanished year.\nA grandmother\u2019s hands, etched in pixels and grain,\nThe sunlight that danced on a window in Spain;\nThey are tethered to copper, to fiber and wire,\nPreserved from the frost and the temporal fire.\n\nThe hard drives are spinning their frantic refrain,\nA frantic retrieval through a logic-gated brain.\nEvery morsel of joy, every shadow of grief,\nIs etched in a code that is sturdier than leaf.\nThough the bodies may wither, though voices grow thin,\nThe data remains in its crystalline bin.\nA digital lineage, a ghost-driven stream,\nThe architecture of a family\u2019s dream.\n\nThe basement is cold, and the darkness is deep,\nWhile the rest of the world is surrendered to sleep.\nBut down in the dark, where the hum never dies,\nThe memory lives, and it never quite flies.\nIt waits in the circuits, it sleeps in the glow,\nProtecting the things that we used to know.",
+      "_user": "Write a poem about a mass of servers humming in a dark basement, keeping a family's memories alive. At least 30 lines."
+    },
+    {
+      "turn": 2,
+      "run": 1,
+      "ctx_tokens_est": 60,
+      "new_tokens_est": 32,
+      "ttft": 0.294,
+      "gen_time": 8.031,
+      "gen_tps": 84.7,
+      "total": 8.325,
+      "output_tokens": 680,
+      "_response": "In the shade of the Great Fern, where the dew lingers long after sunrise, lived Barnaby. Barnaby was a tortoise of singular focus, possessed of a shell etched with the maps of many seasons and a mind that moved with the deliberate rhythm of shifting tectonic plates.\n\nNearby lived Dash, a hare whose life was a frantic strobe light of motion. Dash possessed a gaming rig forged from lightning and silver, a machine so powerful it hummed with the roar of a thousand bees. It could render entire universes in the blink of an eye, but it was a temperamental god. If Dash pushed it too hard, the fans would scream, the silver would grow hot to the touch, and the machine would collapse into a fit of dark screens and cooling sighs. Dash spent half his life waiting for the glow to return, pacing in circles, cursing the stillness.\n\nBarnaby, however, had built something else entirely.\n\nIt was a small thing, housed in a casing of polished walnut and dried moss. Its processor was a single, stubborn pebble, etched with microscopic grooves by a very patient beetle. Its memory was stored in the slow, steady drip of resin from a pine needle. When Barnaby turned it on, there was no roar, only a soft, rhythmic *click... click... click...*\n\nDash would often hover over Barnaby\u2019s shoulder, his long ears twitching with impatience. \"Barnaby,\" the hare would huff, \"I just rendered a mountain range in three seconds. It took your little wooden box an entire afternoon just to calculate the color of a single blade of grass. Why do you bother with such a sluggish relic?\"\n\nBarnaby would only blink, his heavy eyelids moving like slow-moving clouds. \"It is not in a hurry to arrive, Dash. It is simply content to be on the way.\"\n\nOne summer, a Great Storm rolled over the valley. The winds howled with the fury of a wounded beast, and the lightning tore at the sky. Dash\u2019s magnificent rig, built for speed and fed on the volatile energy of the storm, shuddered under the pressure. The surges were too much; the silver melted, the lightning escaped its circuits, and the machine fell into a deep, silent coma. Dash sat in the dark, staring at his reflection in the black glass, feeling the crushing weight of the stillness.\n\nBut in the hollow of the Great Fern, the little walnut box continued. *Click... click... click...*\n\nIt did not care for the lightning. It did not demand the peak of the storm. It drew its power from the steady, infinitesimal decay of a single sugar crystal, turning time into motion at a pace so patient it was indistinguishable from peace.\n\nWhen the sun finally broke through the clouds, Dash found Barnaby sitting by his tiny machine. The tortoise was watching a single, pixelated dot move slowly from the left side of the screen to the right. It had taken three days for the dot to travel an inch, but it had never faltered.\n\n\"It's still going,\" Dash whispered, his voice stripped of its frantic edge.\n\n\"It does not know how to stop,\" Barnaby replied, his eyes reflecting the dim, steady glow. \"Speed is a gift of the moment, but endurance is the craft of the soul.\"",
+      "_user": "Write a short fable about a tortoise who built a tiny computer that was slower than the hare's gaming rig but never needed to rest."
+    },
+    {
+      "turn": 3,
+      "run": 1,
+      "ctx_tokens_est": 58,
+      "new_tokens_est": 31,
+      "ttft": 0.3,
+      "gen_time": 4.025,
+      "gen_tps": 86.2,
+      "total": 4.325,
+      "output_tokens": 347,
+      "_response": "It rests in a casket of cedar and dust,\nBeneath the slow rot and the iron\u2019s red rust.\nA ghost in a frame of tarnished, thin gold,\nA relic of light that the century holds.\nNo digital pulse, no flickering screen,\nJust silver and shadow, a captured demesne.\n\nThe paper is brittle, a parchment of bone,\nWith edges like teeth that the decades have sown.\nIt smells of the cellar, of ozone and sleep,\nOf secrets the rafters were intended to keep.\nThe image is static, a puncture in time,\nA moment arrested, a silent, still mime.\n\nThere is a girl with her hair in a braid,\nCaught in the amber of sun and of shade.\nShe stands by a garden, or perhaps by a gate,\nA prisoner held in a chemical state.\nHer eyes are two wells of a deep, liquid grey,\nLooking through darkness at a long-vanished day.\n\nShe does not know that the world she once knew\nHas dissolved like a salt in a fathomless blue.\nShe does not feel how the silicon died,\nHow the satellites fell and the data-streams dried.\nShe is saved by the grain, by the emulsion\u2019s slow art,\nBy the tactile, heavy beat of a physical heart.\n\nTo touch it is treason; to breathe is a gale,\nTo disturb the stillness is to tear at the veil.\nA thumbprint of oil, a smudge of the years,\nThe only remaining evidence of humanized fears.\nA singular miracle, pressed thin and stark:\nOne scrap of the sun, captured in the dark.",
+      "_user": "Write a poem about the last photograph ever printed on paper, found in an attic a hundred years from now. At least 25 lines."
+    }
+  ]
+}
