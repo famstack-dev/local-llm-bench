@@ -1,0 +1,70 @@
+{
+  "meta": {
+    "scenario": "creative-writing",
+    "mode": "single-shot",
+    "label": "m4-max-128gb-40gpu lmstudio-mlx",
+    "backend": "lmstudio-mlx",
+    "model_info": {
+      "name": "qwen3.6-35b-a3b",
+      "format": "mlx"
+    },
+    "runs": 1,
+    "max_tokens": 2000,
+    "cold": false,
+    "warm_up_time": 0.183,
+    "system": {
+      "os": "Darwin",
+      "os_version": "26.3",
+      "arch": "arm64",
+      "chip": "Apple M4 Max",
+      "memory_gb": 128,
+      "cpu_cores": 16,
+      "cpu_cores_performance": 12,
+      "cpu_cores_efficiency": 4,
+      "gpu_cores": 40,
+      "gpu_wired_limit_mb": 0
+    },
+    "timestamp": "2026-05-17T14:51:54"
+  },
+  "results": [
+    {
+      "turn": 1,
+      "run": 1,
+      "ctx_tokens_est": 57,
+      "new_tokens_est": 29,
+      "ttft": 0.422,
+      "gen_time": 5.122,
+      "gen_tps": 89.8,
+      "total": 5.544,
+      "output_tokens": 460,
+      "_response": "In the throat of the earth where the concrete breathes cold,\nBeneath the floorboards that hide the stories told,\nA hive of black boxes stands in silent rows,\nWith eyes of blinking green and amber glow.\n\nNo sun has touched this floor for thirty years,\nJust the low, electric hum of distant fears.\nThe fans spin up their white-noise lullaby,\nKeeping the ghosts of data from dying.\n\nHere lies the summer of ninety-four,\nWhen the camera shook and we laughed by the shore.\nA JPEG frozen in pixels and light,\nCaptured fast before the end of night.\n\nAnd there, a folder named \u201cChristmas 2009,\u201d\nHolds the silence of a tear-stained sky.\nThe video file, corrupted at start,\nStill plays the moment before it went dark.\n\nThese silicon hearts beat with binary blood,\nHolding the scattered pieces of mud\nAnd memory, glued together by code,\nOn a server rack on this heavy road.\n\nA hard drive spins at seven thousand RPM,\nWhispering secrets of who we were then.\nA gigabyte grave for a grandmother\u2019s smile,\nPreserved in the cold of this digital style.\n\nIf the power cuts and the grid goes down,\nWill the images fade in a digital drown?\nOr will they persist in the magnetic grain,\nWaiting for someone to press play again?\n\nThe heat rises up through the sub-basement floor,\nWarmth that we cannot feel anymore.\nBut inside the chip, the light stays bright,\nDefying the decay of day and night.\n\nWe walk on above, drinking tea and rain,\nUnaware of the ghosts that remain.\nAlive in the dark, in the humming maze,\nLost in the web of our private days.\n\nSo listen close if you stand on the rug,\nPast the kitchen stool and the pantry hug.\nCan you hear it? The low, steady drone?\nThe keeper of moments, alone in stone.\n\nFor every laugh and every sigh,\nIs locked away in a silicon sky.\nSafe from the rust, safe from the rot,\nIn this dark and deep and electric spot.",
+      "_user": "Write a poem about a mass of servers humming in a dark basement, keeping a family's memories alive. At least 30 lines."
+    },
+    {
+      "turn": 2,
+      "run": 1,
+      "ctx_tokens_est": 60,
+      "new_tokens_est": 32,
+      "ttft": 0.294,
+      "gen_time": 8.421,
+      "gen_tps": 91.7,
+      "total": 8.714,
+      "output_tokens": 772,
+      "_response": "In the hollow of an ancient oak, where the roots curled like sleeping dragons, lived Barnaby. While his neighbor, Silas the Hare, spent his daylight hours charging diamond-tier graphics cards and tuning liquid-cooled cooling loops, Barnaby spent his nights weaving fiber-optic strands from spider silk and carving silicon wafers from smooth river stones.\n\nSilas\u2019s setup was a symphony of neon lights and aggressive humming, capable of rendering worlds in milliseconds. Barnaby\u2019s creation was a box of polished walnut, filled with gears that clicked softly, like the heartbeat of a hibernating bear. It had no screen, only a single, tiny punch-card slot and a dial that turned with the resistance of deep earth.\n\nOne evening, Silas laughed as he watched Barnaby insert a single card into his machine. \"I can simulate a supernova in that box before you\u2019ve finished winding the spring,\" Silas teased, his eyes reflecting the blue glow of his monitors. \"Why bother? You\u2019ll be old dust before your first calculation finishes.\"\n\nBarnaby did not look up. \"I am not calculating for speed, Silas,\" he said, his voice as slow and steady as the sap rising in spring. \"I am calculating for truth.\"\n\nSilas shrugs and returned to his game, his fingers flying across a mechanical keyboard. He played until the sky turned purple, then gray, then black. His eyes burned. His back ached. His rig overheated, forcing him to shut it down for an hour while fans whirred desperately. He slept fitfully, dreaming of lag and frame drops.\n\nBarnaby did not sleep. When the moon was high, he would wind a tiny crank. One turn for every minute of pause. Two turns for every question asked by the wind. His machine did not produce answers instantly; it produced them only when the gears had settled, when the weight of the question balanced perfectly against the counterweight of his patience.\n\nYears passed. Silas grew arrogant, then tired, then worn down by the relentless pace of new releases and higher demands. His rig became obsolete, replaced by newer, faster lights that demanded more of him. He found himself chasing ghosts in the machine, always one step behind the next update, always resting, never present.\n\nMeanwhile, Barnaby\u2019s machine, though slower than a single blink of Silas\u2019s eye, had never stopped. It solved the riddle of the migrating birds\u2019 paths by watching them for ten years without distraction. It mapped the growth rings of the oak tree down to the finest grain, using data that had accumulated slowly, layer by heavy layer.\n\nOne day, a storm struck the forest, knocking out the power grid for miles. Silas\u2019s high-tech sanctuary went dark and useless. He sat in his gloom, stranded without his digital crutches, panic rising in his chest as he realized he no longer knew how to think without the screen.\n\nBarnaby stepped out of his oak. His small walnut box was still there, untouched by the lightning. He inserted a card. The gears clicked. Once. Twice. A week later, a small paper strip emerged from the slot with a single number written on it.\n\nIt was the safe path through the storm-damaged forest, calculated not by raw processing power, but by a lifetime of observation and perfect, uninterrupted focus.\n\nSilas looked at the paper, then at his dark, silent computer. He realized that while he had been moving fast, he had gone nowhere. Barnaby, who never rested, had arrived everywhere.\n\nSilas put down the mouse. He picked up a pen. And for the first time in years, he began to write his own story, slowly, one word at a time.",
+      "_user": "Write a short fable about a tortoise who built a tiny computer that was slower than the hare's gaming rig but never needed to rest."
+    },
+    {
+      "turn": 3,
+      "run": 1,
+      "ctx_tokens_est": 58,
+      "new_tokens_est": 31,
+      "ttft": 0.303,
+      "gen_time": 5.211,
+      "gen_tps": 93.3,
+      "total": 5.514,
+      "output_tokens": 486,
+      "_response": "The dust motes dance in shafts of amber light,\nWhere shadows stretch across the rotting floor,\nAnd time has turned the attic to a night\nThat sleeps beneath the weight of centuries more.\nI pull aside the velvet, cracked and gray,\nTo find a box of silver, sealed in wax,\nThat holds the final breath of yesterday,\nBefore the cloud dissolved the physical facts.\n\nInside, a rectangle of slightest gloss,\nPreserved in vacuum-sealed, inert air,\nA moment caught before the final loss,\nWhen ink and chemical were still aware.\nIt shows a hand, translucent in the grain,\nHolding a tool that hummed with silent heat,\nThe printer\u2019s last, mechanical refrain,\nBefore the data stream dissipated complete.\n\nHer face is sharp against the fading white,\nEyes bright with hope for something tangible,\nFor weight, and texture, and the deep delight\nOf holding memory when it was changeable.\nShe smiles at us across a hundred years,\nUnaware that paper would become a myth,\nA relic found in forgotten corners here,\nWhen memory became a liquid wraith.\n\nThe edges curl, though protected well,\nBy plastic skins that never quite deceived,\nFor even here, the decay began to swell,\nAs entropy within the heavens roved.\nBut look how vibrant is the crimson dress,\nHow distinct the shadow on the wall,\nA physical artifact, a universe,\nBefore we lost the power to hold it all.\n\nNo code can replicate this chemical birth,\nThis silver halide\u2019s slow and patient kiss,\nThe way the light surrendered to its worth,\nTrapped in a grid of microscopic bliss.\nIt is the last true thing we ever made,\nBefore the mind was left alone in space,\nA ghost of light, a paper-made decayed,\nThat time could not erase in a single glance.\n\nI touch the surface, rough with age and dust,\nAnd feel the pulse of someone else\u2019s art,\nThe final echo, turned to quiet trust,\nBefore the digital sky broke apart.\nHere lies the proof that we were once so bold,\nTo make a ghost we could hold in our hand,\nBefore the story turned to liquid gold,\nAnd everything we knew fell from the land.",
+      "_user": "Write a poem about the last photograph ever printed on paper, found in an attic a hundred years from now. At least 25 lines."
+    }
+  ]
+}

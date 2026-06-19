@@ -1,0 +1,70 @@
+{
+  "meta": {
+    "scenario": "creative-writing",
+    "mode": "single-shot",
+    "label": "m4-max-128gb-40gpu lmstudio",
+    "backend": "lmstudio",
+    "model_info": {
+      "name": "gemma-4-31b-it-mlx",
+      "format": "mlx"
+    },
+    "runs": 1,
+    "max_tokens": 2000,
+    "cold": false,
+    "warm_up_time": 0.436,
+    "system": {
+      "os": "Darwin",
+      "os_version": "26.3",
+      "arch": "arm64",
+      "chip": "Apple M4 Max",
+      "memory_gb": 128,
+      "cpu_cores": 16,
+      "cpu_cores_performance": 12,
+      "cpu_cores_efficiency": 4,
+      "gpu_cores": 40,
+      "gpu_wired_limit_mb": 0
+    },
+    "timestamp": "2026-05-22T08:45:25"
+  },
+  "results": [
+    {
+      "turn": 1,
+      "run": 1,
+      "ctx_tokens_est": 57,
+      "new_tokens_est": 29,
+      "ttft": 1.073,
+      "gen_time": 32.051,
+      "gen_tps": 14.0,
+      "total": 33.125,
+      "output_tokens": 448,
+      "_response": "Down where the concrete breathes a damp, grey chill,\nIn the hollow gut of the house, where the air stands still,\nSits a monolith of obsidian steel and wire,\nA cold-burning hearth, a digital fire.\n\nRow upon row of blinking amber eyes,\nWatching the ghosts of a decade arise.\nThe hum is a hymn, a low-frequency drone,\nA choir of silicon singing alone.\n\nHere lies the laughter of a June afternoon,\nThe grainy gold light of a solstice moon,\nTen thousand snapshots of a toddler\u2019s first stride,\nTucked in the sectors where the binary hide.\n\nThe scent is ozone and warm, recycled breath,\nA fortress built against a slow, fading death.\nFor the mind is a sieve, and the heart is a leak,\nBut the disk never tires; the drive does not speak.\n\nThere are weddings preserved in a shimmering stream,\nThe lace and the lilies, a high-definition dream.\nThere are voicemails saved from a voice now gone,\nA frequency looping from dusk until dawn.\n\nThe cooling fans whir like a thousand small wings,\nWhile the motherboard pulses and the circuitry sings.\nIt holds the salt-spray of a coast long since left,\nStoring the joy and archiving the theft.\n\nA blur of a birthday, the cake\u2019s flickering light,\nLocked in a casket of neon and night.\nThe way that she looked when she turned to the door,\nA ghost in the machine, forevermore.\n\nThey are pulses of light, they are currents of gold,\nStories that refuse to grow dusty or old.\nA library etched in a microscopic grain,\nProtecting the love from the erosion of rain.\n\nUpstairs they are sleeping, unaware of the beat,\nOf the heart in the basement, the rhythmic heat.\nThe servers are dreaming in currents of blue,\nKeeping a promise that the living once drew:\n\n*Forget not the shadow, forget not the glow,*\n*Keep every whisper, let no memory go.*\nSo the racks keep their vigil in the velvet dark,\nTending the flame of a flickering spark.",
+      "_user": "Write a poem about a mass of servers humming in a dark basement, keeping a family's memories alive. At least 30 lines."
+    },
+    {
+      "turn": 2,
+      "run": 1,
+      "ctx_tokens_est": 60,
+      "new_tokens_est": 32,
+      "ttft": 0.871,
+      "gen_time": 38.272,
+      "gen_tps": 13.9,
+      "total": 39.142,
+      "output_tokens": 533,
+      "_response": "In the hollow of a gnarled cedar, Barnaby the Tortoise labored. While the other forest folk slept or chased the erratic dance of fireflies, Barnaby soldered copper veins and polished crystals of quartz. He was building a machine\u2014a calculating engine small enough to fit atop his shell, designed to map the movements of every star in the southern sky.\n\nAcross the meadow lived Horace the Hare, a creature of frantic energy and neon lights. Horace possessed a rig of shimmering chrome and humming fans that breathed ice. His computer was a thunderbolt; it rendered worlds in an instant, flickering through calculations like a hummingbird\u2019s wing. Horace spent his days shouting into the ether, winning digital races and conquering virtual empires in a blur of overclocked speed.\n\n\"Why bother with that pebble, Barnaby?\" Horace would jeer, his paws dancing across a backlit keyboard. \"My machine thinks in lightning. Yours thinks in molasses. By the time your screen flickers once, I have seen a thousand sunsets.\"\n\nBarnaby did not argue. He simply adjusted a dial and watched his cursor crawl across the screen, one steady, deliberate pixel at a time.\n\nBut Horace\u2019s machine was a hungry beast. It demanded vast currents of power and grew hot enough to singe the grass. Every few hours, the rig would scream in a high-pitched whine and plunge into darkness\u2014a crash, a freeze, a desperate need for cooling. Horace would throw his paws up in fury, forced to wait for the fans to settle and the systems to reboot. He lived his life in bursts of brilliance followed by long, yawning voids of silence.\n\nBarnaby\u2019s machine, however, breathed with the rhythm of the earth. It required no cooling fans and drank only a trickle of current from a slow-dripping battery of saltwater. It never crashed. It never stuttered. It never slept.\n\nYears passed. Horace\u2019s rig grew obsolete, replaced by newer, faster machines that crashed even more spectacularly. He spent his old age chasing the ghost of speed, forever interrupted by the blue screen of failure.\n\nOne evening, Barnaby climbed to the highest ridge of the cedar grove. He tapped a final key. His screen, which had been humming quietly for a decade without a single second of downtime, suddenly flared with light. While Horace had spent ten years starting and stopping, Barnaby had simply *continued*. \n\nThe screen revealed a perfect, shimmering map of the cosmos\u2014every star, every nebula, every drifting comet accounted for. The tortoise had reached the finish line not by sprinting, but by refusing to stop.",
+      "_user": "Write a short fable about a tortoise who built a tiny computer that was slower than the hare's gaming rig but never needed to rest."
+    },
+    {
+      "turn": 3,
+      "run": 1,
+      "ctx_tokens_est": 58,
+      "new_tokens_est": 31,
+      "ttft": 0.79,
+      "gen_time": 26.994,
+      "gen_tps": 13.9,
+      "total": 27.784,
+      "output_tokens": 376,
+      "_response": "It lay beneath a shroud of silver dust,\nWhere ceiling beams had bowed to moth and rust,\nA rectangle of gloss, a heavy weight,\nThe final anchor in a drifting state.\nNot etched in light or beamed from distant air,\nBut pressed in ink\u2014a chemical prayer.\n\nThe edges curled like autumn\u2019s dying leaf,\nA physical ghost, a tangible grief.\nA hundred years of silence held the frame,\nOf a world that forgot its own tactile name.\nFor the era of pixels had eaten the grain,\nAnd washed every shadow in a digital rain.\n\nIn the image: a girl by a salt-sprayed pier,\nHer laughter frozen, crystalline and clear.\nThe wind had caught her collar in a snap,\nA moment captured in a developer's trap.\nThere is depth to the grey, a texture of skin,\nWhere the chemistry ends and the memories begin.\n\nThe finder\u2019s fingers\u2014sleek, synthetic, cold\u2014\nTrembled to touch something daringly old.\nThey knew the glow of a holographic screen,\nThe flicker of ghosts in a neon sheen,\nBut here was a thing that did not blink or fade,\nA permanent scar that the sunlight had made.\n\nIt smelled of old cedar and ozone and brine,\nA singular point on a vanishing line.\nNo cloud held this image, no server, no wire,\nIt survived the great crashing, the electrical fire.\nJust paper and silver, a marriage of art,\nA slice of a second torn violently apart.\n\nThe finder held it up to the attic\u2019s dim light,\nAnd felt a strange shudder, a sudden, sharp fright:\nThat the world had grown weightless, translucent, and thin,\nWhile here was a doorway they could finally step in.",
+      "_user": "Write a poem about the last photograph ever printed on paper, found in an attic a hundred years from now. At least 25 lines."
+    }
+  ]
+}
