@@ -91,6 +91,42 @@ python3 bench.py --model qwen3.5:35b-a3b \
 
 </details>
 
+### Qwen3.6-35B-A3B (VLM, thinking disabled)
+
+| Hardware | Backend | Format | ops-agent | doc-summary | prefill-test | creative-writing |
+|---|---|---|---:|---:|---:|---:|
+| M1 Max (64GB, 24 GPU) | oMLX | UD-MLX 4-bit | **26.7** (49.3) | **25.7** (50.7) | **18.7** (47.5) | **49.1** (51.0) |
+
+Qwen3.6 adds vision capabilities (document classification, OCR extraction) while keeping the same MoE architecture. The Unsloth Dynamic (UD) quantization keeps 312 layers at 8-bit for better accuracy, at the cost of ~15% slower generation vs Qwen3.5. Vision benchmarks (vision-classify, vision-extract) are included in the results directory.
+
+> **bf16 and M1/M2:** The UD model ships with bf16 weights, which are software-emulated on M1/M2. Unlike standard MLX quantizations, the UD quant cannot be converted to fp16 — the conversion produces garbage output on vision tasks and likely degrades text quality. M3+ chips with native bf16 support will see significantly better prefill performance.
+
+<details>
+<summary>Run this benchmark</summary>
+
+**Prerequisites:** Disable thinking mode — Qwen3.6 supports `enable_thinking` natively via oMLX model settings (no template patching needed).
+
+```bash
+# oMLX — disable thinking via admin API, then run
+curl -X POST http://localhost:8888/admin/api/login \
+  -H "Content-Type: application/json" -d '{"api_key": "YOUR_KEY"}' -c /tmp/omlx.txt
+curl -X PUT http://localhost:8888/admin/api/models/Qwen3.6-35B-A3B-UD-MLX-4bit/settings \
+  -H "Content-Type: application/json" -b /tmp/omlx.txt \
+  -d '{"chat_template_kwargs": {"enable_thinking": false}}'
+
+export OPENAI_API_KEY=YOUR_KEY
+python3 bench.py --backend openai --backend-label omlx \
+  --base-url http://localhost:8888 --model Qwen3.6-35B-A3B-UD-MLX-4bit \
+  --model-label qwen3.6-35b-a3b-ud-mlx-4bit
+
+# Vision scenarios
+python3 bench.py --backend openai --backend-label omlx \
+  --base-url http://localhost:8888 --model Qwen3.6-35B-A3B-UD-MLX-4bit \
+  --model-label qwen3.6-35b-a3b-ud-mlx-4bit --vision-only
+```
+
+</details>
+
 ### Llama 3.1 8B
 
 | Hardware | Backend | Format | ops-agent | doc-summary | prefill-test | creative-writing |
