@@ -95,9 +95,10 @@ python3 bench.py --model qwen3.5:35b-a3b \
 
 | Hardware | Backend | Format | ops-agent | doc-summary | prefill-test | creative-writing |
 |---|---|---|---:|---:|---:|---:|
+| M4 Max (128GB, 40 GPU) | LM Studio | MLX | **70.5** (85.5) | **56.6** (91.7) | **35.7** (85.5) | **86.6** (91.6) |
 | M1 Max (64GB, 24 GPU) | oMLX | UD-MLX 4-bit | **26.7** (49.3) | **25.7** (50.7) | **18.7** (47.5) | **49.1** (51.0) |
 
-Qwen3.6 adds vision capabilities (document classification, OCR extraction) while keeping the same MoE architecture. The Unsloth Dynamic (UD) quantization keeps 312 layers at 8-bit for better accuracy, at the cost of ~15% slower generation vs Qwen3.5. Vision benchmarks (vision-classify, vision-extract) are included in the results directory.
+Qwen3.6 adds vision capabilities (document classification, OCR extraction) while keeping the same MoE architecture. On M4 Max with LM Studio, performance is on par with Qwen3.5 on the same hardware. The Unsloth Dynamic (UD) quantization keeps 312 layers at 8-bit for better accuracy, at the cost of ~15% slower generation vs Qwen3.5. Vision benchmarks (vision-classify, vision-extract) are included in the results directory.
 
 > **bf16 and M1/M2:** The UD model ships with bf16 weights, which are software-emulated on M1/M2. Unlike standard MLX quantizations, the UD quant cannot be converted to fp16 — the conversion produces garbage output on vision tasks and likely degrades text quality. M3+ chips with native bf16 support will see significantly better prefill performance.
 
