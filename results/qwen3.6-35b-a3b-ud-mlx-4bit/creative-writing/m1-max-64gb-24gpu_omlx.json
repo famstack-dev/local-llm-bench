@@ -1,0 +1,108 @@
+{
+  "meta": {
+    "scenario": "creative-writing",
+    "mode": "single-shot",
+    "label": "m1-max-64gb-24gpu omlx",
+    "backend": "omlx",
+    "model_info": {
+      "name": "Qwen3.6-35B-A3B-UD-MLX-4bit"
+    },
+    "runs": 2,
+    "max_tokens": 2000,
+    "cold": false,
+    "warm_up_time": 0.156,
+    "system": {
+      "os": "Darwin",
+      "os_version": "26.2",
+      "arch": "arm64",
+      "chip": "Apple M1 Max",
+      "memory_gb": 64,
+      "cpu_cores": 10,
+      "cpu_cores_performance": 8,
+      "cpu_cores_efficiency": 2,
+      "gpu_cores": 24,
+      "gpu_wired_limit_mb": 0
+    },
+    "timestamp": "2026-05-19T22:50:12"
+  },
+  "results": [
+    {
+      "turn": 1,
+      "run": 1,
+      "ctx_tokens_est": 57,
+      "new_tokens_est": 29,
+      "ttft": 0.372,
+      "gen_time": 7.758,
+      "gen_tps": 51.3,
+      "total": 8.129,
+      "output_tokens": 398,
+      "_response": "Deep in the throat of the earth, where the light never bleeds,\nThe black monoliths stand like silent, cold steel trees,\nHumming a low, electric psalm that vibrates through the floor,\nA rhythmic pulse in the dark, counting seconds once more.\nNo windows to catch the sun, no air to carry scent,\nJust the whir of fans and the blink of an amber light,\nGuarding the ghosts of the living in this concrete vault,\nWhere the past is stored in binary, cold and want.\n\nHere lies the birthday of a daughter, long grown gray,\nCaptured in pixels, burning in a digital way.\nHere is the voice of a father, now dust and bone,\nLaughing at a joke on a screen all alone.\nHard drives spin like tiny planets in a void,\nKeeping the warmth of a touch permanently deployed,\nPreserving the smile, the tear, the mundane Tuesday,\nIn a loop of code that will never truly fray.\n\nThe cables snake like roots through the damp, dark soil,\nFetching the water of memory from a digital toil.\nA server rack breathes, a mechanical lung,\nInhaling the years, exhaling the young.\nIt does not sleep, it does not dream, it only holds,\nThe stories of ancestors, brave and bold,\nThe photographs fading not in the sun\u2019s cruel heat,\nBut safe in the silicon, cold and complete.\n\nOutside, the world spins fast, forgetting faces,\nWhile down here, in the basement\u2019s stained embrace,\nTime is arrested, frozen in the rack,\nKeeping the family\u2019s soul from turning black.\nThe hum is a lullaby, steady and deep,\nPromises to the dead that they shall not sleep,\nNot while the power flows, not while the fans turn,\nThe memory endures, though the flesh will burn.",
+      "_user": "Write a poem about a mass of servers humming in a dark basement, keeping a family's memories alive. At least 30 lines."
+    },
+    {
+      "turn": 2,
+      "run": 1,
+      "ctx_tokens_est": 60,
+      "new_tokens_est": 32,
+      "ttft": 0.381,
+      "gen_time": 15.553,
+      "gen_tps": 50.9,
+      "total": 15.934,
+      "output_tokens": 792,
+      "_response": "In the shadow of an ancient oak, where the roots twisted like knuckles over stone, lived Thorne. Thorne was a tortoise of deliberate pace and profound patience. While his neighbor, Jasper, a hare of twitching nerves and boundless energy, spent his days chasing digital ghosts on a rig that hummed with the aggression of a jet engine, Thorne spent his nights with a soldering iron and a pile of scavenged scrap.\n\nJasper\u2019s machine was a beacon of brute force. It had liquid cooling lines that glowed neon blue, fans that screamed like banshees, and a processor that could calculate the trajectory of a falling leaf before the leaf had even detached. Jasper would play for hours, his eyes reflecting the strobing lights, his fingers a blur. But when the heat warnings flashed red, Jasper had to stop. He had to stretch, to drink water, to blink, to rest his twitching legs.\n\nThorne\u2019s computer, however, was different. It was housed in a hollowed-out gourd, wired together with copper thread and hope. It used a single, salvaged microchip from a forgotten calculator. It had no fan, no lights, no speed. When Thorne hit \"Enter,\" the cursor blinked once, twice, three times, before the screen\u2014a cracked pane of glass held by twine\u2014displayed a single line of code.\n\nJasper laughed, his whiskers trembling with mirth. \"You\u2019re building a paperweight, Thorne! My rig renders a sunset in four seconds. Your machine takes forty minutes to load the desktop!\"\n\nThorne did not look up from his wiring. \"Speed is a measure of anxiety,\" he rumbled, his voice like stones grinding deep underground. \"I am building for permanence.\"\n\nWinter came early that year. The frost bit through the fur of the forest floor. Jasper, heated by his overclocked processor and the frantic pace of his life, found his rig struggling. The extreme cold caused the thermal paste to harden, and the delicate components of his high-speed rig grew brittle. Every time he tried to launch his favorite game, the system crashed. The speed, once his greatest asset, became a liability; the faster the data flew, the more the cold fractured the connections. He sat shivering, his beautiful machine dark and silent, unable to function without the constant, frantic warmth of its own overheating cycle.\n\nThorne, meanwhile, sat in his burrow, wrapped in moss. His gourd-computer sat on a bed of dry leaves. It did not overheat. It did not crash. It did not need cooling fans to fight the ambient chill, nor did it need high-voltage spikes to overcome latency. It simply *was*.\n\nWhen Thorne pressed the key, the screen flickered. And flickered. And flickered. Then, slowly, beautifully, the text appeared. It was a simple poem he had been writing for three days. The typing had taken an hour. The compilation had taken another. But the result was there, perfect and unchanging, preserved in the amber of its slow logic.\n\nJasper peered into the burrow, his breath pluming in the air. He looked at his dark, frozen rig, then at Thorne\u2019s glowing, steadfast gourd.\n\n\"It took you all night to write that sentence,\" Jasper whispered, his voice hoarse from the cold.\n\n\"It took me three days,\" Thorne corrected gently. \"But it will last forever. And I did not stop once.\"\n\nJasper shivered, not from the cold, but from the realization that while he had built the fastest machine in the forest, he had forgotten to build a way to keep it running when the world slowed down. Thorne, having built nothing at all, had built everything that mattered: the time to finish.",
+      "_user": "Write a short fable about a tortoise who built a tiny computer that was slower than the hare's gaming rig but never needed to rest."
+    },
+    {
+      "turn": 3,
+      "run": 1,
+      "ctx_tokens_est": 58,
+      "new_tokens_est": 31,
+      "ttft": 0.389,
+      "gen_time": 5.819,
+      "gen_tps": 51.0,
+      "total": 6.208,
+      "output_tokens": 297,
+      "_response": "The dust motes dance in shafts of gray,\nUnseen by eyes that never knew the sun,\nBeneath the eaves where shadows play,\nUntil the pry-bar breaks the wood\u2019s old ban.\nA box of cedar, cracked and dry,\nSits waiting for a hand to claim its prize,\nBeneath the weight of years gone by,\nBefore the digital tide rolled over skies.\n\nInside, wrapped in acid-free white cloth,\nLies the final artifact of light,\nA ghost of silver, salt, and frost,\nPreserved against the endless night.\nIt shows a face, a fleeting smile,\nCaptured in a second\u2019s breath,\nBefore the cloud made truth a while,\nBefore the world forgot its depth.\n\nThe paper crinkles, soft and thin,\nA texture lost to tactile memory,\nWhere grain and emulsion begin,\nAnd stop, suspended in their history.\nNo pixel waits to refresh its hue,\nNo algorithm filters out the flaw,\nJust chemistry, both old and new,\nDefying time\u2019s relentless flaw.\n\nA hundred years have passed since then,\nSince ink and light learned how to part,\nNow this is all that remains,\nA fragile, physical heart.\nThey hold it with two trembling fingers,\nAfraid the image might erase,\nThis last tangible connection,\nTo a time before the endless space.",
+      "_user": "Write a poem about the last photograph ever printed on paper, found in an attic a hundred years from now. At least 25 lines."
+    },
+    {
+      "turn": 1,
+      "run": 2,
+      "ctx_tokens_est": 57,
+      "new_tokens_est": 29,
+      "ttft": 0.373,
+      "gen_time": 7.757,
+      "gen_tps": 51.2,
+      "total": 8.13,
+      "output_tokens": 397,
+      "_response": "Beneath the floorboards, deep in the dark,\nWhere silence is a currency too small to spark,\nA hum begins, a electric bee\u2019s low drone,\nIn crates of black, upon a concrete throne.\n\nNo windows here, no sunlight pierce the gloom,\nJust blinking lights that dance within the room,\nA constellation made of green and red,\nBy cooling fans and metal frames are fed.\n\nThey hold the weight of years not yet decayed,\nIn silicon, in circuits, unafraid,\nOf time\u2019s slow erosion, of the rust,\nOf iron gates and dust within the rust.\n\nHere lies the laughter from a summer\u2019s eve,\nCaptured in pixels, preserved, and not deceived,\nThe grainy footage of a wedding dance,\nThe fleeting smile, the gilded, golden glance.\n\nHere lies the voice, now faint and growing thin,\nOf grandmothers who let the household in,\nA birthday wish, a lullaby, a plea,\nStored in the cold geometry of me.\n\nThe air is stale, recycled, cold and thin,\nA sterile womb beneath the world\u2019s deep skin,\nWhere terabytes of love and loss reside,\nWith nowhere left for analog to hide.\n\nThe servers blink, a rhythmic, heart-like beat,\nA silent guardian of the family\u2019s sweet,\nFragile archive, paper-thin and dry,\nGuarding the shadows of a bygone sky.\n\nIf power failed, if current ceased to flow,\nWould all these moments wither, rot, and go?\nOr does the memory live in something more,\nThan just the charge upon the copper core?\n\nThey hum their song, a monotone refrain,\nKeeping the ghosts of joy and grief in chain,\nIn basements dark, where earth and electricity meet,\nPreserving what the living cannot keep.",
+      "_user": "Write a poem about a mass of servers humming in a dark basement, keeping a family's memories alive. At least 30 lines."
+    },
+    {
+      "turn": 2,
+      "run": 2,
+      "ctx_tokens_est": 60,
+      "new_tokens_est": 32,
+      "ttft": 0.375,
+      "gen_time": 14.046,
+      "gen_tps": 50.8,
+      "total": 14.421,
+      "output_tokens": 714,
+      "_response": "In the shadow of the Great Oak, where the roots tangled like old cables, lived Barnaby. While the hares of the Meadow raced through the sun-dappled fields, their ears twitching with the frantic energy of the new age, Barnaby remained still. He did not run. He built.\n\nFrom the hollow of his shell and the dust of the forest floor, Barnaby constructed a machine. It was no larger than a walnut, woven from copper wire pulled from fallen vines and lenses ground from river stones. He called it *The Eternal Click*.\n\nOne afternoon, a sleek, silver hare named Jax hopped into the clearing. Jax carried a gaming rig that hummed with the heat of a thousand stars, its screens flashing with neon storms and pixelated dragons. Jax laughed, a sharp, staccato sound.\n\n\"Look at you, Barnaby,\" Jax sneered, tapping his keyboard. The fans whirred like a jet engine. \"You\u2019re playing a game that takes three days to load a single frame. My rig processes a thousand worlds before you\u2019ve finished carving your first pixel.\"\n\nBarnaby blinked his slow, ancient eyes. \"The speed of thought is not measured in cycles,\" he rumbled, his voice like gravel shifting in a tide. \"It is measured in continuity.\"\n\nJax scoffed and launched *Cyber-Chase*. For hours, the hare dominated the digital landscape, his reflexes perfect, his scores astronomical. But as the sun began to dip below the horizon, painting the sky in bruises of purple and orange, Jax\u2019s eyes grew heavy. The heat of the rig bounced off his fur. The rhythm of the game had become a cage. His hands, once swift, began to tremble with fatigue. He needed sleep. He needed to rest.\n\nBarnaby sat unmoved. His machine, *The Eternal Click*, did not whir. It did not flash. It simply existed. Inside its copper heart, a single calculation was being solved, a problem of geometry so complex it would take the hare\u2019s rig a century to brute-force. But Barnaby had not stopped. He had not blinked. He had not slept.\n\nNight fell. The forest went dark, save for the faint, warm glow of Barnaby\u2019s creation. The light was dim, barely visible, but it did not flicker. While Jax dreamed of faster processors and higher frames per second, Barnaby watched his number rise. One increment per hour. One increment per day.\n\nBy the time the moon was high and Jax was snoring beneath a fern, *The Eternal Click* had solved the equation. The result was printed on a strip of dried bark, unrolling slowly like a tongue of truth.\n\nJax woke at dawn, rubbing his eyes, expecting to have lost by a landslide. He looked at the bark. He looked at Barnaby, who was still watching the machine, his shell covered in dew.\n\n\"You didn't even try,\" Jax whispered, confused.\n\n\"I tried,\" Barnaby said softly, \"and I did not stop.\"\n\nThe hare looked at his shiny, overheating rig, then at the tiny, steady light of the tortoise. He realized then that while he had conquered the speed of the moment, Barnaby had conquered the endurance of time. The hare\u2019s rig was faster, yes, but it was mortal. Barnaby\u2019s machine was slow, but it was eternal.",
+      "_user": "Write a short fable about a tortoise who built a tiny computer that was slower than the hare's gaming rig but never needed to rest."
+    },
+    {
+      "turn": 3,
+      "run": 2,
+      "ctx_tokens_est": 58,
+      "new_tokens_est": 31,
+      "ttft": 0.387,
+      "gen_time": 8.711,
+      "gen_tps": 51.1,
+      "total": 9.098,
+      "output_tokens": 445,
+      "_response": "The dust motes dance in shafts of amber light,\nWhere silence keeps its vigil in the beam,\nBeneath the eaves, the attic holds its night,\nA museum built of time and forgotten dream.\nMy fingers tremble, cold against the air,\nAs I brush aside the shroud of gray decay,\nAnd find the relic there, suspended there,\nIn shadows cast by centuries of day.\n\nIt is not digital, nor cloud-bound code,\nNor pixelated ghost of light and screen,\nBut chemical the weight of this small load,\nA physical artifact of what was seen.\nThe paper curls at edges, brittle, brown,\nYellowed by suns that burned a hundred years,\nThe emulsion cracks like dried-up river town,\nFraming the faces in their final fears.\n\nA couple standing on a wooden pier,\nThe man\u2019s smile tight, the woman\u2019s eyes look past,\nBeyond the lens, beyond the crystal clear,\nInto the void where shadows hold them fast.\nThe ink has bled slightly in the rain,\nA water mark stains up the left-hand side,\nA testament to weather\u2019s gentle pain,\nTo secrets kept with nowhere left to hide.\n\nI hold it to the glass, this fragile sheet,\nAnd wonder at the alchemy of print,\nHow silver halides captured what was sweet,\nBefore the world dissolved into the hint\nOf data streams and fleeting, flashing news,\nOf images that vanish on the breath,\nOf truth that now has lost its solid clues,\nAnd lingers only in the digital death.\n\nThis paper holds the weight of being real,\nA ghost that touches back when you press near,\nIt tells the story that the heart can feel,\nWithout the hum of servers or the fear\nOf format shifts or obsolescent drive,\nJust paper, ink, and time\u2019s unyielding toll,\nThe last bright shard of analog we have,\nBefore the light went out, before the soul\nWas stripped of texture, stripped of grain and fold,\nAnd left to float in infinite, cold code.",
+      "_user": "Write a poem about the last photograph ever printed on paper, found in an attic a hundred years from now. At least 25 lines."
+    }
+  ]
+}

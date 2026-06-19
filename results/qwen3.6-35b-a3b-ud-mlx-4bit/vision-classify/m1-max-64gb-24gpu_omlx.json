@@ -1,0 +1,134 @@
+{
+  "meta": {
+    "scenario": "vision-classify",
+    "mode": "single-shot",
+    "label": "m1-max-64gb-24gpu omlx",
+    "backend": "omlx",
+    "model_info": {
+      "name": "Qwen3.6-35B-A3B-UD-MLX-4bit"
+    },
+    "runs": 1,
+    "max_tokens": 500,
+    "cold": false,
+    "warm_up_time": 0.152,
+    "system": {
+      "os": "Darwin",
+      "os_version": "26.2",
+      "arch": "arm64",
+      "chip": "Apple M1 Max",
+      "memory_gb": 64,
+      "cpu_cores": 10,
+      "cpu_cores_performance": 8,
+      "cpu_cores_efficiency": 2,
+      "gpu_cores": 24,
+      "gpu_wired_limit_mb": 0
+    },
+    "timestamp": "2026-05-19T22:42:17"
+  },
+  "results": [
+    {
+      "turn": 1,
+      "run": 1,
+      "ctx_tokens_est": 1136,
+      "new_tokens_est": 1005,
+      "ttft": 5.331,
+      "gen_time": 1.789,
+      "gen_tps": 49.2,
+      "total": 7.12,
+      "output_tokens": 88,
+      "_response": "```json\n{\n  \"type\": \"invoice\",\n  \"date\": \"20.11.2025\",\n  \"correspondent\": \"Merle Arthur\",\n  \"title\": \"Anzahlungsrechnung\",\n  \"language\": \"de\",\n  \"total_amount\": \"\u20ac 480,00\",\n  \"currency\": \"EUR\"\n}\n```",
+      "_user": "Classify this document."
+    },
+    {
+      "turn": 2,
+      "run": 1,
+      "ctx_tokens_est": 1136,
+      "new_tokens_est": 1005,
+      "ttft": 9.887,
+      "gen_time": 1.84,
+      "gen_tps": 47.3,
+      "total": 11.728,
+      "output_tokens": 87,
+      "_response": "```json\n{\n  \"type\": \"receipt\",\n  \"date\": \"03.03.2026\",\n  \"correspondent\": \"Echo TankstellenGmbH\",\n  \"title\": \"Kundenbeleg\",\n  \"language\": \"de\",\n  \"total_amount\": \"50,07\",\n  \"currency\": \"EUR\"\n}\n```",
+      "_user": "Classify this document."
+    },
+    {
+      "turn": 3,
+      "run": 1,
+      "ctx_tokens_est": 1136,
+      "new_tokens_est": 1005,
+      "ttft": 5.795,
+      "gen_time": 1.804,
+      "gen_tps": 48.8,
+      "total": 7.598,
+      "output_tokens": 88,
+      "_response": "```json\n{\n  \"type\": \"receipt\",\n  \"date\": \"19.03.2026\",\n  \"correspondent\": \"Maria H\u00e4nsler Obst & Gem\u00fcse\",\n  \"title\": \"Quittung\",\n  \"language\": \"de\",\n  \"total_amount\": \"26,20\",\n  \"currency\": \"EUR\"\n}\n```",
+      "_user": "Classify this document."
+    },
+    {
+      "turn": 4,
+      "run": 1,
+      "ctx_tokens_est": 1136,
+      "new_tokens_est": 1005,
+      "ttft": 19.618,
+      "gen_time": 1.891,
+      "gen_tps": 46.5,
+      "total": 21.509,
+      "output_tokens": 88,
+      "_response": "```json\n{\n  \"type\": \"receipt\",\n  \"date\": \"19-03-2026\",\n  \"correspondent\": \"Naturk\u00e4serei Maucher GmbH\",\n  \"title\": \"Kassenbon\",\n  \"language\": \"de\",\n  \"total_amount\": \"10,58\",\n  \"currency\": \"EUR\"\n}\n```",
+      "_user": "Classify this document."
+    },
+    {
+      "turn": 5,
+      "run": 1,
+      "ctx_tokens_est": 1136,
+      "new_tokens_est": 1005,
+      "ttft": 3.067,
+      "gen_time": 1.582,
+      "gen_tps": 48.7,
+      "total": 4.649,
+      "output_tokens": 77,
+      "_response": "```json\n{\n  \"type\": \"recipe\",\n  \"date\": \"3/2012\",\n  \"correspondent\": \"LECKER\",\n  \"title\": \"Johannisbeer-Baiser-Kuchen\",\n  \"language\": \"de\",\n  \"total_amount\": null,\n  \"currency\": null\n}\n```",
+      "_user": "Classify this document."
+    },
+    {
+      "turn": 6,
+      "run": 1,
+      "ctx_tokens_est": 1136,
+      "new_tokens_est": 1005,
+      "ttft": 3.035,
+      "gen_time": 1.298,
+      "gen_tps": 48.5,
+      "total": 4.334,
+      "output_tokens": 63,
+      "_response": "```json\n{\n  \"type\": \"recipe\",\n  \"date\": null,\n  \"correspondent\": null,\n  \"title\": \"Lasagne\",\n  \"language\": \"de\",\n  \"total_amount\": null,\n  \"currency\": null\n}\n```",
+      "_user": "Classify this document."
+    },
+    {
+      "turn": 7,
+      "run": 1,
+      "ctx_tokens_est": 1136,
+      "new_tokens_est": 1005,
+      "ttft": 9.9,
+      "gen_time": 1.851,
+      "gen_tps": 47.6,
+      "total": 11.751,
+      "output_tokens": 88,
+      "_response": "```json\n{\n  \"type\": \"other\",\n  \"date\": \"16.05.2003\",\n  \"correspondent\": \"ECKHARD ALBRECHT\",\n  \"title\": \"WOHNFL\u00c4CHENBERECHNUNG\",\n  \"language\": \"de\",\n  \"total_amount\": null,\n  \"currency\": null\n}\n```",
+      "_user": "Classify this document."
+    },
+    {
+      "turn": 8,
+      "run": 1,
+      "ctx_tokens_est": 1136,
+      "new_tokens_est": 1005,
+      "ttft": 2.961,
+      "gen_time": 1.689,
+      "gen_tps": 48.6,
+      "total": 4.65,
+      "output_tokens": 82,
+      "_response": "```json\n{\n  \"type\": \"recipe\",\n  \"date\": null,\n  \"correspondent\": \"Gutes kann\",\n  \"title\": \"Fischrezept der Woche: Pangasiusfilet mit Spekulatiusruste\",\n  \"language\": \"de\",\n  \"total_amount\": null,\n  \"currency\": null\n}\n```",
+      "_user": "Classify this document."
+    }
+  ]
+}

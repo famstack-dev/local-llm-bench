@@ -58,6 +58,23 @@ Effective tok/s (**bold**) with generation tok/s in parentheses. Higher is bette
 | M3 Max (128GB, 40 GPU) | oMLX | MLX 4-bit | **71.3** (90.8) | **61.4** (93.8) | **22.6** (87.9) | **90.1** (94.3) |
 | M3 Max (128GB, 40 GPU) | LM Studio | MLX | **37.1** (83.5) | **22.5** (87.3) | **14.8** (85.8) | **59.0** (92.2) |
 
+<details>
+<summary>Visual comparison (ops-agent effective tok/s)</summary>
+
+```
+M3 Max 40GPU │ oMLX 4-bit       ████████████████████████████████████ 71.3
+M1 Max 24GPU │ oMLX fp16        ████████████████████████ 47.3
+M1 Max 24GPU │ oMLX 4-bit       ███████████████████ 37.5
+M3 Max 40GPU │ LM Studio MLX    ███████████████████ 37.1
+M1 Max 24GPU │ Rapid-MLX        ██████████████████ 35.6
+M1 Max 24GPU │ mlx-openai       █████████████ 26.2
+M1 Max 24GPU │ LM Studio GGUF   █████████ 17.6
+M2 Pro 19GPU │ LM Studio MLX    █████████ 17.6
+M1 Max 24GPU │ LM Studio MLX    █████████ 17.0
+```
+
+</details>
+
 [oMLX](https://github.com/jundot/omlx) wins every scenario thanks to its tiered KV cache. On M3 Max, effective throughput reaches **71 tok/s** in ops-agent — nearly 2x the M1 Max result. Generation speed is identical across MLX engines (~55-93 tok/s depending on hardware), but prefill speed varies dramatically: at 8K context, LM Studio MLX takes 49s to prefill while oMLX takes 1.7s (with its persistent SSD cache from a prior run — cold prefill is higher).
 
 <details>
@@ -91,6 +108,53 @@ python3 bench.py --model qwen3.5:35b-a3b \
 
 </details>
 
+### Qwen3.6-35B-A3B (VLM, thinking disabled)
+
+| Hardware | Backend | Format | ops-agent | doc-summary | prefill-test | creative-writing |
+|---|---|---|---:|---:|---:|---:|
+| M4 Max (128GB, 40 GPU) | LM Studio | MLX | **70.5** (85.5) | **56.6** (91.7) | **35.7** (85.5) | **86.6** (91.6) |
+| M1 Max (64GB, 24 GPU) | oMLX | UD-MLX 4-bit | **26.7** (49.3) | **25.7** (50.7) | **18.7** (47.5) | **49.1** (51.0) |
+
+<details>
+<summary>Visual comparison (ops-agent effective tok/s)</summary>
+
+```
+M4 Max 40GPU │ LM Studio MLX    ████████████████████████████████████ 70.5
+M1 Max 24GPU │ oMLX UD-4bit     ██████████████ 26.7
+```
+
+</details>
+
+Qwen3.6 adds vision capabilities (document classification, OCR extraction) while keeping the same MoE architecture. On M4 Max with LM Studio, performance is on par with Qwen3.5 on the same hardware. The Unsloth Dynamic (UD) quantization keeps 312 layers at 8-bit for better accuracy, at the cost of ~15% slower generation vs Qwen3.5. Vision benchmarks (vision-classify, vision-extract) are included in the results directory.
+
+> **bf16 and M1/M2:** The UD model ships with bf16 weights, which are software-emulated on M1/M2. Unlike standard MLX quantizations, the UD quant cannot be converted to fp16 — the conversion produces garbage output on vision tasks and likely degrades text quality. M3+ chips with native bf16 support will see significantly better prefill performance.
+
+<details>
+<summary>Run this benchmark</summary>
+
+**Prerequisites:** Disable thinking mode — Qwen3.6 supports `enable_thinking` natively via oMLX model settings (no template patching needed).
+
+```bash
+# oMLX — disable thinking via admin API, then run
+curl -X POST http://localhost:8888/admin/api/login \
+  -H "Content-Type: application/json" -d '{"api_key": "YOUR_KEY"}' -c /tmp/omlx.txt
+curl -X PUT http://localhost:8888/admin/api/models/Qwen3.6-35B-A3B-UD-MLX-4bit/settings \
+  -H "Content-Type: application/json" -b /tmp/omlx.txt \
+  -d '{"chat_template_kwargs": {"enable_thinking": false}}'
+
+export OPENAI_API_KEY=YOUR_KEY
+python3 bench.py --backend openai --backend-label omlx \
+  --base-url http://localhost:8888 --model Qwen3.6-35B-A3B-UD-MLX-4bit \
+  --model-label qwen3.6-35b-a3b-ud-mlx-4bit
+
+# Vision scenarios
+python3 bench.py --backend openai --backend-label omlx \
+  --base-url http://localhost:8888 --model Qwen3.6-35B-A3B-UD-MLX-4bit \
+  --model-label qwen3.6-35b-a3b-ud-mlx-4bit --vision-only
+```
+
+</details>
+
 ### Llama 3.1 8B
 
 | Hardware | Backend | Format | ops-agent | doc-summary | prefill-test | creative-writing |
@@ -100,6 +164,19 @@ python3 bench.py --model qwen3.5:35b-a3b \
 | M1 Max (64GB, 24 GPU) | Ollama | GGUF | **27.1** (33.4) | **18.9** (37.8) | **5.8** (30.7) | **38.6** (39.6) |
 | M3 Max (128GB, 40 GPU) | LM Studio | MLX | **57.6** (70.8) | **38.2** (76.0) | **14.4** (65.6) | **75.2** (78.5) |
 | M3 Max (128GB, 40 GPU) | oMLX | MLX | **53.3** (69.4) | **35.1** (71.1) | **14.5** (63.2) | **73.6** (76.9) |
+
+<details>
+<summary>Visual comparison (ops-agent effective tok/s)</summary>
+
+```
+M3 Max 40GPU │ LM Studio MLX    █████████████████████████████ 57.6
+M3 Max 40GPU │ oMLX MLX         ███████████████████████████ 53.3
+M1 Max 24GPU │ LM Studio MLX    ████████████████████ 40.7
+M1 Max 24GPU │ LM Studio GGUF   ████████████████ 30.6
+M1 Max 24GPU │ Ollama GGUF      ██████████████ 27.1
+```
+
+</details>
 
 MLX wins across the board. At 8B the model fits comfortably in memory, prefill stays fast, and the ~1.5x generation speed advantage dominates. On M3 Max, LM Studio MLX edges out oMLX thanks to lower TTFT overhead at this model size.
 
@@ -136,6 +213,16 @@ python3 bench.py --model llama3.1:8b \
 |---|---|---|---:|---:|---:|---:|
 | M2 Pro (32GB, 19 GPU) | oMLX | MLX 4-bit | **25.4** (36.7) | **15.3** (39.1) | **5.2** (34.3) | **40.9** (42.8) |
 | M2 Pro (32GB, 19 GPU) | LM Studio | MLX | **24.3** (38.5) | **16.4** (41.3) | **5.1** (35.4) | **41.4** (43.8) |
+
+<details>
+<summary>Visual comparison (ops-agent effective tok/s)</summary>
+
+```
+M2 Pro 19GPU │ oMLX 4-bit       █████████████ 25.4
+M2 Pro 19GPU │ LM Studio MLX    ████████████ 24.3
+```
+
+</details>
 
 <details>
 <summary>Run this benchmark</summary>
