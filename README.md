@@ -42,9 +42,26 @@ Results auto-save to `results/<model>/<scenario>/<chip>_<backend>.json`.
 
 ## Results
 
-Effective tok/s (**bold**) with generation tok/s in parentheses. Higher is better.
+Effective tok/s for the ops-agent scenario (8-turn agent conversation). Expand "Full results table" for all scenarios. Higher is better.
 
 ### Qwen3.5-35B-A3B (thinking disabled)
+
+```
+ops-agent effective tok/s — higher is better
+
+M3 Max 40GPU │ oMLX 4-bit       ████████████████████████████████████ 71.3
+M1 Max 24GPU │ oMLX fp16        ████████████████████████ 47.3
+M1 Max 24GPU │ oMLX 4-bit       ███████████████████ 37.5
+M3 Max 40GPU │ LM Studio MLX    ███████████████████ 37.1
+M1 Max 24GPU │ Rapid-MLX        ██████████████████ 35.6
+M1 Max 24GPU │ mlx-openai       █████████████ 26.2
+M1 Max 24GPU │ LM Studio GGUF   █████████ 17.6
+M2 Pro 19GPU │ LM Studio MLX    █████████ 17.6
+M1 Max 24GPU │ LM Studio MLX    █████████ 17.0
+```
+
+<details>
+<summary>Full results table</summary>
 
 | Hardware | Backend | Format | ops-agent | doc-summary | prefill-test | creative-writing |
 |---|---|---|---:|---:|---:|---:|
@@ -58,20 +75,7 @@ Effective tok/s (**bold**) with generation tok/s in parentheses. Higher is bette
 | M3 Max (128GB, 40 GPU) | oMLX | MLX 4-bit | **71.3** (90.8) | **61.4** (93.8) | **22.6** (87.9) | **90.1** (94.3) |
 | M3 Max (128GB, 40 GPU) | LM Studio | MLX | **37.1** (83.5) | **22.5** (87.3) | **14.8** (85.8) | **59.0** (92.2) |
 
-<details>
-<summary>Visual comparison (ops-agent effective tok/s)</summary>
-
-```
-M3 Max 40GPU │ oMLX 4-bit       ████████████████████████████████████ 71.3
-M1 Max 24GPU │ oMLX fp16        ████████████████████████ 47.3
-M1 Max 24GPU │ oMLX 4-bit       ███████████████████ 37.5
-M3 Max 40GPU │ LM Studio MLX    ███████████████████ 37.1
-M1 Max 24GPU │ Rapid-MLX        ██████████████████ 35.6
-M1 Max 24GPU │ mlx-openai       █████████████ 26.2
-M1 Max 24GPU │ LM Studio GGUF   █████████ 17.6
-M2 Pro 19GPU │ LM Studio MLX    █████████ 17.6
-M1 Max 24GPU │ LM Studio MLX    █████████ 17.0
-```
+Effective tok/s (**bold**) with generation tok/s in parentheses.
 
 </details>
 
@@ -110,18 +114,22 @@ python3 bench.py --model qwen3.5:35b-a3b \
 
 ### Qwen3.6-35B-A3B (VLM, thinking disabled)
 
+```
+ops-agent effective tok/s — higher is better
+
+M4 Max 40GPU │ LM Studio MLX    ████████████████████████████████████ 70.5
+M1 Max 24GPU │ oMLX UD-4bit     ██████████████ 26.7
+```
+
+<details>
+<summary>Full results table</summary>
+
 | Hardware | Backend | Format | ops-agent | doc-summary | prefill-test | creative-writing |
 |---|---|---|---:|---:|---:|---:|
 | M4 Max (128GB, 40 GPU) | LM Studio | MLX | **70.5** (85.5) | **56.6** (91.7) | **35.7** (85.5) | **86.6** (91.6) |
 | M1 Max (64GB, 24 GPU) | oMLX | UD-MLX 4-bit | **26.7** (49.3) | **25.7** (50.7) | **18.7** (47.5) | **49.1** (51.0) |
 
-<details>
-<summary>Visual comparison (ops-agent effective tok/s)</summary>
-
-```
-M4 Max 40GPU │ LM Studio MLX    ████████████████████████████████████ 70.5
-M1 Max 24GPU │ oMLX UD-4bit     ██████████████ 26.7
-```
+Effective tok/s (**bold**) with generation tok/s in parentheses.
 
 </details>
 
@@ -157,6 +165,19 @@ python3 bench.py --backend openai --backend-label omlx \
 
 ### Llama 3.1 8B
 
+```
+ops-agent effective tok/s — higher is better
+
+M3 Max 40GPU │ LM Studio MLX    █████████████████████████████ 57.6
+M3 Max 40GPU │ oMLX MLX         ███████████████████████████ 53.3
+M1 Max 24GPU │ LM Studio MLX    ████████████████████ 40.7
+M1 Max 24GPU │ LM Studio GGUF   ████████████████ 30.6
+M1 Max 24GPU │ Ollama GGUF      ██████████████ 27.1
+```
+
+<details>
+<summary>Full results table</summary>
+
 | Hardware | Backend | Format | ops-agent | doc-summary | prefill-test | creative-writing |
 |---|---|---|---:|---:|---:|---:|
 | M1 Max (64GB, 24 GPU) | LM Studio | MLX | **40.7** (55.0) | **21.9** (59.6) | **8.4** (51.8) | **58.9** (62.1) |
@@ -165,16 +186,7 @@ python3 bench.py --backend openai --backend-label omlx \
 | M3 Max (128GB, 40 GPU) | LM Studio | MLX | **57.6** (70.8) | **38.2** (76.0) | **14.4** (65.6) | **75.2** (78.5) |
 | M3 Max (128GB, 40 GPU) | oMLX | MLX | **53.3** (69.4) | **35.1** (71.1) | **14.5** (63.2) | **73.6** (76.9) |
 
-<details>
-<summary>Visual comparison (ops-agent effective tok/s)</summary>
-
-```
-M3 Max 40GPU │ LM Studio MLX    █████████████████████████████ 57.6
-M3 Max 40GPU │ oMLX MLX         ███████████████████████████ 53.3
-M1 Max 24GPU │ LM Studio MLX    ████████████████████ 40.7
-M1 Max 24GPU │ LM Studio GGUF   ████████████████ 30.6
-M1 Max 24GPU │ Ollama GGUF      ██████████████ 27.1
-```
+Effective tok/s (**bold**) with generation tok/s in parentheses.
 
 </details>
 
@@ -209,18 +221,22 @@ python3 bench.py --model llama3.1:8b \
 
 ### GLM-4.7-Flash
 
+```
+ops-agent effective tok/s — higher is better
+
+M2 Pro 19GPU │ oMLX 4-bit       █████████████ 25.4
+M2 Pro 19GPU │ LM Studio MLX    ████████████ 24.3
+```
+
+<details>
+<summary>Full results table</summary>
+
 | Hardware | Backend | Format | ops-agent | doc-summary | prefill-test | creative-writing |
 |---|---|---|---:|---:|---:|---:|
 | M2 Pro (32GB, 19 GPU) | oMLX | MLX 4-bit | **25.4** (36.7) | **15.3** (39.1) | **5.2** (34.3) | **40.9** (42.8) |
 | M2 Pro (32GB, 19 GPU) | LM Studio | MLX | **24.3** (38.5) | **16.4** (41.3) | **5.1** (35.4) | **41.4** (43.8) |
 
-<details>
-<summary>Visual comparison (ops-agent effective tok/s)</summary>
-
-```
-M2 Pro 19GPU │ oMLX 4-bit       █████████████ 25.4
-M2 Pro 19GPU │ LM Studio MLX    ████████████ 24.3
-```
+Effective tok/s (**bold**) with generation tok/s in parentheses.
 
 </details>
 
