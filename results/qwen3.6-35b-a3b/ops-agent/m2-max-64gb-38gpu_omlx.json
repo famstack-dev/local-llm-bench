@@ -1,0 +1,142 @@
+{
+  "meta": {
+    "scenario": "ops-agent",
+    "mode": "conversation",
+    "label": "m2-max-64gb-38gpu omlx",
+    "backend": "omlx",
+    "model_info": {
+      "name": "Qwen3.6-35B-A3B-UD-MLX-fp16",
+      "format": "mlx"
+    },
+    "runs": 1,
+    "max_tokens": 500,
+    "cold": false,
+    "system": {
+      "os": "Darwin",
+      "os_version": "26.5.2",
+      "arch": "arm64",
+      "chip": "Apple M2 Max",
+      "memory_gb": 64,
+      "cpu_cores": 12,
+      "cpu_cores_performance": 8,
+      "cpu_cores_efficiency": 4,
+      "gpu_cores": 38,
+      "gpu_wired_limit_mb": 59392
+    },
+    "timestamp": "2026-08-12T10:18:40"
+  },
+  "results": [
+    {
+      "turn": 1,
+      "run": 1,
+      "ctx_tokens_est": 575,
+      "new_tokens_est": 421,
+      "ttft": 6.422,
+      "gen_time": 1.404,
+      "gen_tps": 9.3,
+      "total": 7.826,
+      "output_tokens": 13,
+      "tool": "server_status",
+      "_response": "\n\nAll your services are currently running and healthy, but I spotted a resource hog:\n\n*   **High CPU/Memory Usage:** The `immich-ml` service (Immich Machine Learning) is using **45.2% CPU** and **8.2GB of RAM**. This is significantly higher than any other service on the server.\n*   **Overall Load:** Your memory usage is at ~74% (47.3GB used of 64GB). While not",
+      "_user": "Something feels off with the server. Can you check what's running?"
+    },
+    {
+      "turn": 2,
+      "run": 1,
+      "ctx_tokens_est": 901,
+      "new_tokens_est": 235,
+      "ttft": 1.268,
+      "gen_time": 1.743,
+      "gen_tps": 9.2,
+      "total": 3.011,
+      "output_tokens": 16,
+      "tool": "service_logs",
+      "_response": "\n\nThe logs show that `immich-ml` is currently processing a large batch of photos for **facial recognition** and **CLIP embeddings** (which enables search by description, like \"dog on beach\").\n\n*   **Status:** It's working through a queue (850/1203 batches complete).\n*   **Activity:** It just triggered a garbage collection cycle to free up memory because it was getting tight.\n*   **ETA:** It estimates about 45 minutes remaining for the current queue.\n\nThis explains the high CPU and memory usage\u2014it\u2019s doing heavy AI processing on your photo library. It should settle down once the queue is clear.",
+      "_user": "Immich ML is eating a lot of CPU. What's it doing?"
+    },
+    {
+      "turn": 3,
+      "run": 1,
+      "ctx_tokens_est": 1140,
+      "new_tokens_est": 89,
+      "ttft": 1.478,
+      "gen_time": 2.511,
+      "gen_tps": 8.8,
+      "total": 3.989,
+      "output_tokens": 22,
+      "tool": "docker_exec",
+      "_response": "\n\nIt should be fine, but it\u2019s close. Here\u2019s the breakdown:\n\n*   **Memory Headroom:** The container has a 12GB limit and is using ~68% of that. That leaves about **3.8GB free** within the container's limit, which is a comfortable buffer for AI processing spikes.\n*   **System Memory:** On the host Mac Studio, you still have ~16.7GB available out of 64GB total. Since the rest of your services are using very little CPU/Memory right now, you aren\u2019t at risk of the whole system swapping or crashing.\n\n**Recommendation:** Let it finish its current queue (ETA ~45 mins). Once the \"Processing batch\" logs stop, usage should drop significantly. If it hits the 12GB container limit again, we might need to increase that limit in your `docker-compose.yml`, but for now, it\u2019s handling the load.",
+      "_user": "Ah right, we uploaded vacation photos yesterday. Is it going to be OK memory-wise?"
+    },
+    {
+      "turn": 4,
+      "run": 1,
+      "ctx_tokens_est": 1551,
+      "new_tokens_est": 214,
+      "ttft": 1.914,
+      "gen_time": 3.057,
+      "gen_tps": 8.8,
+      "total": 4.971,
+      "output_tokens": 27,
+      "tool": "backup_status",
+      "_response": "\n\nThe last backup (March 7th) completed, but there were a couple of things to note:\n\n*   **Vacation Photos:** Since the backup ran at 2:00 AM and your photos were uploaded yesterday (presumably after that), they **were not included** in last night's backup. The 12.4GB transferred likely covers changes from the day before.\n*   **Warnings:** The job finished with two warnings:\n    1.  **\"Vault eject failed (non-fatal)\":** This usually means the external drive or backup volume didn't unmount cleanly. It\u2019s marked non-fatal, so the data is likely safe on disk, but it's good to check if the drive was physically unplugged or if there's a connection issue.\n    2.  **\"uchg flags applied successfully\":** This is just a metadata note about file attributes and isn't an error.\n\n**Action:** If those vacation photos are critical, you should trigger a manual backup now that they've been uploaded to Immich. Would you like me to kick off a manual backup for you?",
+      "_user": "Good. Check if last night's backup ran. I want to make sure the vacation photos are safe."
+    },
+    {
+      "turn": 5,
+      "run": 1,
+      "ctx_tokens_est": 2030,
+      "new_tokens_est": 239,
+      "ttft": 2.38,
+      "gen_time": 3.48,
+      "gen_tps": 8.6,
+      "total": 5.86,
+      "output_tokens": 30,
+      "tool": "disk_usage",
+      "_response": "\n\nHere is the disk space overview:\n\n*   **System Drive (`/`):** 33% used. Plenty of room for the OS and Docker containers.\n*   **Backup Vault (`/Volumes/backup-vault`):** 69% used (1.7TB free). This is where the backup failed to eject. It still has plenty of space for more data, but you may want to check why the unmount is failing\u2014it could be a permissions issue or the drive being busy with another process.\n*   **Time Machine (`/Volumes/time-machine`):** 75% used (1.4TB free). This is getting a bit fuller, but still has room for now.\n*   **Local Data (`~/server/data`):** 892GB total. \n    *   **Photos** make up the vast majority (634GB).\n    *   Documents and Messages are relatively small.\n\n**Summary:** You have plenty of storage space overall. The main issue is the \"vault eject failed\" warning from the backup logs, which might be related to the drive being busy or a permissions glitch. Since you have 1.7TB free on the backup vault, space isn't the problem\u2014just that unmount process.",
+      "_user": "The vault didn't eject again. How's disk space looking on all drives?"
+    },
+    {
+      "turn": 6,
+      "run": 1,
+      "ctx_tokens_est": 2529,
+      "new_tokens_est": 249,
+      "ttft": 5.734,
+      "gen_time": 2.035,
+      "gen_tps": 8.8,
+      "total": 7.769,
+      "output_tokens": 18,
+      "tool": "service_logs",
+      "_response": "\n\nYes, Paperless processed your documents this morning around 7:45 AM. It successfully handled three files, including the school ones you mentioned:\n\n*   **school-report-emma-2026.pdf:** Processed and classified as a \"School Report\" with tags `education` and `emma`.\n*   **swimming-certificate-max.pdf:** Processed and classified as a \"Certificate\" with tags `sports` and `max`.\n*   **electricity-bill-march-2026.pdf:** Also processed as an \"Invoice\" (utilities).\n\nAll OCR was completed with very high confidence (94\u201399%), and there were no errors. Your school documents are searchable now.",
+      "_user": "Time Machine is at 75%. Also did Paperless process the school documents I scanned this morning?"
+    },
+    {
+      "turn": 7,
+      "run": 1,
+      "ctx_tokens_est": 2775,
+      "new_tokens_est": 98,
+      "ttft": 8.77,
+      "gen_time": 0.0,
+      "gen_tps": 4788.0,
+      "total": 8.77,
+      "output_tokens": 1,
+      "tool": "docker_exec",
+      "_response": "\nThinking Process:\n\n1.  **Analyze the user's request:** The user wants to know the size of the Matrix database (Synapse) because it seems \"chatty\" lately.\n2.  **Review the tool result:** `docker_exec` returned a size of 2.1 GB total.\n    *   Largest tables: `state_groups_state` (845 MB), `event_json` (412 MB), `events` (298 MB).\n3.  **Contextualize the size:**\n    *   Total: 2.1 GB is relatively small for a database, but significant if the disk was tiny (which it isn't, based on previous checks).\n    *   \"Chatty\" implies high activity. The large `state_groups_state` and `events` tables suggest a lot of room state changes or history.\n4.  **Formulate the response:**\n    *   State the total size (2.1 GB).\n    *   Break down where the space is going (State groups and events are the main culprits).\n    *   Address the \"chatty\" comment: This size is normal for an active server, but if it keeps growing, `synapse` usually benefits from periodic database pruning/cleanup scripts to manage old state groups.\n5.  **Actionable advice:** Mention that Synapse has built-in pruning tools if the user wants to reclaim space later, but for now, 2.1 GB is manageable given the server's storage capacity (3.6TB root).\n\n*Self-Correction during drafting:* The user didn't ask *how to shrink it*, just \"How big is it?\". I should answer that directly first, then add context about the \"chatty\" part.\n\n*Drafting response:*\nThe Matrix (Synapse) database is currently **2.1 GB**.\n\nThe breakdown shows where the space is going:\n*   **State Groups:** ~845 MB (Room state history)\n*   **Event JSON:** ~412 MB (Message content/history)\n*   **Events:** ~298 MB\n\nThis size is actually quite reasonable for an active server. The \"chatty\" behavior you're seeing likely contributes to the `events` and `state_groups_state` tables growing over time. Since you have plenty of disk space (3.6TB on",
+      "_user": "Nice, it even picked up the electricity bill. How big is the Matrix database? It's been chatty lately."
+    },
+    {
+      "turn": 8,
+      "run": 1,
+      "ctx_tokens_est": 3431,
+      "new_tokens_est": 188,
+      "ttft": 8.139,
+      "gen_time": 1.028,
+      "gen_tps": 9.7,
+      "total": 9.166,
+      "output_tokens": 10,
+      "tool": "docker_exec",
+      "_response": "\n\nHere are the rooms ranked by event count, which is a good proxy for database size:\n\n1.  **`#server`**: ~12,847 events (4 members)\n    *   This is the biggest consumer. It likely contains automation logs, alerts, and system notifications.\n2.  **`#family`**: ~8,934 events (5",
+      "_user": "2.1GB for Matrix seems like a lot. Can we see which rooms take the most space?"
+    }
+  ]
+}
