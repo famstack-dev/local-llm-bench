@@ -168,6 +168,7 @@ python3 bench.py --backend openai --backend-label omlx \
 ```
 ops-agent effective tok/s — higher is better
 
+M5 Max 40GPU │ Ollama GGUF      ████████████████████████████████ 63.7
 M3 Max 40GPU │ LM Studio MLX    █████████████████████████████ 57.6
 M3 Max 40GPU │ oMLX MLX         ███████████████████████████ 53.3
 M1 Max 24GPU │ LM Studio MLX    ████████████████████ 40.7
@@ -185,12 +186,13 @@ M1 Max 24GPU │ Ollama GGUF      ██████████████ 27.
 | M1 Max (64GB, 24 GPU) | Ollama | GGUF | **27.1** (33.4) | **18.9** (37.8) | **5.8** (30.7) | **38.6** (39.6) |
 | M3 Max (128GB, 40 GPU) | LM Studio | MLX | **57.6** (70.8) | **38.2** (76.0) | **14.4** (65.6) | **75.2** (78.5) |
 | M3 Max (128GB, 40 GPU) | oMLX | MLX | **53.3** (69.4) | **35.1** (71.1) | **14.5** (63.2) | **73.6** (76.9) |
+| M5 Max (48GB, 40 GPU) | Ollama | GGUF | **63.7** (74.0) | **55.2** (82.7) | **22.1** (74.8) | **82.1** (85.2) |
 
 Effective tok/s (**bold**) with generation tok/s in parentheses.
 
 </details>
 
-MLX wins across the board. At 8B the model fits comfortably in memory, prefill stays fast, and the ~1.5x generation speed advantage dominates. On M3 Max, LM Studio MLX edges out oMLX thanks to lower TTFT overhead at this model size.
+On the same hardware, MLX wins across the board. At 8B the model fits comfortably in memory, prefill stays fast, and the ~1.5x generation speed advantage dominates. On M3 Max, LM Studio MLX edges out oMLX thanks to lower TTFT overhead at this model size. The M5 Max changes the picture across generations: plain Ollama GGUF on M5 Max beats every M3 Max MLX run and delivers 2.3x the effective throughput of the same Ollama setup on M1 Max, with prefill at 8K context over 4x faster (13s vs 58s).
 
 <details>
 <summary>Run this benchmark</summary>
@@ -267,6 +269,7 @@ python3 bench.py --backend openai --backend-label omlx \
 | M1 Max (64GB, 24 GPU) | Ollama | GGUF | **27.1** (33.4) | **18.9** (37.8) | **5.8** (30.7) | **38.6** (39.6) |
 | M2 Pro (32GB, 19 GPU) | LM Studio | MLX | **17.6** (58.4) | **14.3** (60.4) | **5.6** (57.9) | **42.9** (62.5) |
 | M3 Max (128GB, 40 GPU) | oMLX | MLX 4-bit | **71.3** (90.8) | **61.4** (93.8) | **22.6** (87.9) | **90.1** (94.3) |
+| M5 Max (48GB, 40 GPU) | Ollama | GGUF | **63.7** (74.0) | **55.2** (82.7) | **22.1** (74.8) | **82.1** (85.2) |
 | M4 / Pro / Max | | | | | | |
 
 ## Scenarios
