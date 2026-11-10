@@ -72,15 +72,22 @@ def stream_openai(base_url, model, messages, max_tokens=300, temperature=0.6, ti
       data: [DONE]
 
     Each "data:" line contains a JSON object with a delta (partial content).
-    We count each non-empty content delta as one token. This is approximate —
-    some deltas may contain multiple tokens or partial tokens — but it's
-    close enough for benchmarking purposes.
+
+    Output tokens come from the server's own count: the request sets
+    stream_options.include_usage, and the server sends a final chunk with
+    "usage" and an empty "choices" list. Reasoning tokens are subtracted,
+    because generation time starts at the first content token.
+
+    A server that sends no usage falls back to one token per content delta.
+    That count is too low when a server packs several tokens into one delta
+    (oMLX 0.7.3 sends about 8 per delta).
     """
     url = f"{base_url}/v1/chat/completions"
     data = {
         "model": model,
         "messages": messages,
         "stream": True,              # Enable SSE streaming
+        "stream_options": {"include_usage": True},  # Server token count in last chunk
         "max_tokens": max_tokens,    # Cap output length
         "temperature": temperature,  # Lower = more deterministic
     }
@@ -97,7 +104,8 @@ def stream_openai(base_url, model, messages, max_tokens=300, temperature=0.6, ti
     resp = urllib.request.urlopen(req, timeout=timeout)
 
     first_token_time = None   # When the first content token arrives
-    token_count = 0           # Number of content tokens received
+    token_count = 0           # Number of content deltas received
+    usage_tokens = None       # Content tokens as counted by the server
     full_response = []        # Accumulate the full response text
     saw_reasoning = False     # Whether we saw reasoning/thinking tokens
 
@@ -116,6 +124,12 @@ def stream_openai(base_url, model, messages, max_tokens=300, temperature=0.6, ti
 
         try:
             d = json.loads(chunk)
+            usage = d.get("usage")
+            if usage and usage.get("completion_tokens") is not None:
+                details = usage.get("completion_tokens_details") or {}
+                usage_tokens = usage["completion_tokens"] - (details.get("reasoning_tokens") or 0)
+            if not d.get("choices"):
+                continue
             delta = d["choices"][0]["delta"]
 
             # Detect thinking/reasoning tokens (used by GLM, DeepSeek, etc.)
@@ -134,6 +148,9 @@ def stream_openai(base_url, model, messages, max_tokens=300, temperature=0.6, ti
 
     # Stop the clock
     t_end = time.time()
+
+    if usage_tokens is not None:
+        token_count = usage_tokens
 
     # Calculate metrics
     ttft = first_token_time - t_start if first_token_time else t_end - t_start
